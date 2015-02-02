@@ -17,7 +17,7 @@ angular.module('app', [
 
 angular.module('app').constant('API_CONFIG', {
   baseUrl: 'http://localhost',
-  port: '8000'
+  port: '9000'
 });
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -32,7 +32,8 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     })
     .state('home.login', {
       url: '/login',
-      templateUrl: 'partials/login.html'
+      templateUrl: 'partials/login.html',
+      controller: 'LoginController'
     })
     .state('home.login.error', {
       url: '/error',
