@@ -17,26 +17,36 @@ angular.module('app', [
 
 angular.module('app').constant('API_CONFIG', {
   baseUrl: 'http://localhost',
-  port: '8000'
+  port: '9000'
 });
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/home/login');
 
   $stateProvider
-    .state('login', {
-      url: '/login',
-      templateUrl: 'partials/login.html'
+    .state('home', {
+      abstract: true,
+      url: '/home',
+      templateUrl: 'partials/home.html'
     })
-    .state('login.error', {
+    .state('home.login', {
+      url: '/login',
+      templateUrl: 'partials/login.html',
+      controller: 'LoginController'
+    })
+    .state('home.login.error', {
       url: '/error',
       templateUrl: 'partials/login.error.html',
       controller: 'LoginController'
     })
-    .state('register', {
+    .state('home.register', {
       url: '/register',
       templateUrl: 'partials/register.html'
+    })
+    .state('app', {
+      url: '/app',
+      templateUrl: 'partials/app.html'
     });
 
 }]);
