@@ -6,10 +6,21 @@
 
 angular.module('app', [
   'ui.router',
-  'util.version'
+  'util.version',
+  'services',
+  'controllers'
 ]);
 
-angular.module('app').config(function($stateProvider, $urlRouterProvider) {
+//angular.module('app').run(['api', function(api) {
+//  api.test('Hi');
+//}]);
+
+angular.module('app').constant('API_CONFIG', {
+  baseUrl: 'http://localhost',
+  port: '8000'
+});
+
+angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/login');
 
@@ -21,17 +32,11 @@ angular.module('app').config(function($stateProvider, $urlRouterProvider) {
     .state('login.error', {
       url: '/error',
       templateUrl: 'partials/login.error.html',
-      controller: function($scope) {
-        $scope.message = 'Error logging into account';
-      }
+      controller: 'LoginController'
     })
     .state('register', {
       url: '/register',
       templateUrl: 'partials/register.html'
     });
 
-});
-
-angular.module('app').controller('AppController', ['$scope', function($scope) {
-  $scope.version = '0.1.0';
 }]);
