@@ -1,1 +1,10 @@
 /* app css stylesheet */
+
+.version {
+    background: rgba(0, 0, 0, .5);
+    bottom: 0;
+    color: #FFF;
+    font-size: 10px;
+    position: absolute;
+    left: 0;
+}
