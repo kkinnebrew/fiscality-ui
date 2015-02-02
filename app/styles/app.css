@@ -1,5 +1,10 @@
 /* app css stylesheet */
 
+html, body, #app {
+    height: 100%;
+    width: 100%;
+}
+
 .version {
     background: rgba(0, 0, 0, .5);
     bottom: 0;
@@ -20,4 +25,11 @@
 .form-item label {
     display: inline-block;
     width: 160px;
+}
+
+.home-layout {
+    background: #48AA7D;
+    height: 100%;
+    overflow: auto;
+    width: 100%
 }
