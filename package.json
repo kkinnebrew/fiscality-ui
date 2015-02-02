@@ -3,8 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Powerful personal financial management",
-  "repository": "https://github.com/kkinnebrew/fiscality-ui",
-  "license": "MIT",
+  "homepage": "https://github.com/kkinnebrew/fiscality-ui",
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "^1.1.1",
