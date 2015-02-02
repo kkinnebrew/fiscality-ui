@@ -15,6 +15,11 @@ angular.module('app', [
 //  api.test('Hi');
 //}]);
 
+angular.module('app').constant('API_CONFIG', {
+  baseUrl: 'http://localhost',
+  port: '8000'
+});
+
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/login');
