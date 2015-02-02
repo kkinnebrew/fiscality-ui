@@ -1,10 +1,24 @@
 <div class="home-layout">
 
-    <div ui-view></div>
+    <div id="home-content" ui-view></div>
 
-    <nav class="main-nav">
-        <a ui-sref="home.login">Login</a>
-        <a ui-sref="home.register">Register</a>
-    </nav>
+    <footer id="footer">
+
+        <nav id="footer-nav">
+            <ul>
+                <li><a ui-sref="home.login">Login</a></li>
+                <li><a ui-sref="home.register">Register</a></li>
+            </ul>
+        </nav>
+
+        <div id="footer-brand">
+            <div class="logo-group">
+                <span class="title">Fiscality</span>
+                <div class="logo"></div>
+            </div>
+            <div class="copyright">Copyright &copy; 2015 Stack Trace LLC. All Rights Reserved.</div>
+        </div>
+
+    </footer>
 
 </div>

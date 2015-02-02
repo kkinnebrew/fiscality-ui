@@ -6,10 +6,12 @@ html, body, #app {
 }
 
 .version {
-    background: rgba(0, 0, 0, .5);
+    background: #000;
     bottom: 0;
     color: #FFF;
     font-size: 10px;
+    opacity: 0.3;
+    padding: 4px 8px;
     position: absolute;
     left: 0;
 }
@@ -28,8 +30,174 @@ html, body, #app {
 }
 
 .home-layout {
-    background: #48AA7D;
     height: 100%;
     overflow: auto;
     width: 100%
+}
+
+/* buttons */
+
+.btn {
+    background: #41B1E0;
+    border: none;
+    border-radius: 3px;
+    color: #FFF;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    padding: 8px 20px;
+    text-align: center;
+    -webkit-transition: background-color ease-in-out 100ms;
+}
+
+.btn:hover {
+    background: #3095C0;
+}
+
+hr {
+    border-color: #EEE;
+}
+
+/* home */
+
+#home-content {
+    background: #396DA1;
+    border-bottom: 5px solid #4374A5;
+    overflow: auto;
+    width: 100%;
+}
+
+#logo-group {
+    margin: 5rem auto 0 auto;
+    overflow: hidden;
+    width: 192px;
+}
+
+#logo {
+    background: url(../images/logo.png) center center no-repeat;
+    float: left;
+    height: 57px;
+    width: 57px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #logo {
+        background-image: url(../images/logo@2x.png);
+        background-size: 57px 57px;
+    }
+
+}
+
+#title {
+    color: #FFF;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    float: left;
+    letter-spacing: -0.5px;
+    line-height: 57px;
+    margin-left: 0.5rem;
+}
+
+/* login */
+
+#login-form {
+    background: #FFF;
+    height: 340px;
+    margin: 3rem auto 6rem auto;
+    padding: 30px;
+    position: relative;
+    width: 460px;
+}
+
+#login-form .shadow {
+    background: #C3C3C3;
+    bottom: -4px;
+    height: 4px;
+    left: 2px;
+    position: absolute;
+    width: 516px;
+}
+
+#register-message {
+    color: #697174;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 1rem;
+}
+
+/* footer */
+
+#footer {
+    background: #2A2A2A;
+    color: #FFF;
+    overflow: hidden;
+    padding: 3rem 0;
+    width: 100%
+}
+
+#footer-nav {
+    float: left;
+    margin-left: 3rem;
+}
+
+#footer-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#footer-nav a {
+    color: #FFF;
+    cursor: pointer;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+#footer-brand {
+    float: right;
+    margin-right: 3rem;
+}
+
+#footer-brand .logo-group {
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+#footer-brand .logo {
+    background: url(../images/footer-logo.png) center center no-repeat;
+    float: right;
+    height: 29px;
+    width: 29px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #footer-brand .logo {
+        background-image: url(../images/footer-logo@2x.png);
+        background-size: 29px 29px;
+    }
+
+}
+
+#footer-brand .title {
+    color: #FFF;
+    float: right;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    text-align: right;
+}
+
+#footer-brand .copyright {
+    color: #FFF;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: right;
 }
