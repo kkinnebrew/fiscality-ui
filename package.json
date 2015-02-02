@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "fiscality-ui",
   "private": true,
-  "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "version": "0.1.0",
+  "description": "Powerful personal financial management",
+  "repository": "https://github.com/kkinnebrew/fiscality-ui",
   "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",
