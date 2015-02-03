@@ -89,7 +89,15 @@ hr {
 /* home */
 
 #home-content {
-    background: #396DA1;
+    background: #2f5f8f;
+    background: -moz-linear-gradient(top,  #2f5f8f 0%, #396da1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2f5f8f), color-stop(100%,#396da1));
+    background: -webkit-linear-gradient(top,  #2f5f8f 0%,#396da1 100%);
+    background: -o-linear-gradient(top,  #2f5f8f 0%,#396da1 100%);
+    background: -ms-linear-gradient(top,  #2f5f8f 0%,#396da1 100%);
+    background: linear-gradient(to bottom,  #2f5f8f 0%,#396da1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f5f8f', endColorstr='#396da1',GradientType=0 );
+
     border-bottom: 5px solid #4374A5;
     overflow: auto;
     width: 100%;
