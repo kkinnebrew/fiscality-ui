@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Powerful personal financial management",
   "homepage": "https://github.com/kkinnebrew/fiscality-ui",
-  "devDependencies": {
+  "dependencies": {
     "karma": "~0.10",
     "protractor": "^1.1.1",
     "http-server": "^0.6.1",
