@@ -11,6 +11,15 @@ angular.module('services.auth').factory('auth', function($http, API_CONFIG) {
         email: email,
         password: password
       });
+    },
+
+    register: function(firstName, lastName, email, password) {
+      return $http.post(baseUrl + '/api/register', {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+      });
     }
 
   };
