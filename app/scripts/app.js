@@ -33,7 +33,13 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     .state('home.login', {
       url: '/login',
       templateUrl: 'partials/login.html',
-      controller: 'LoginController'
+      controller: 'LoginController',
+      onEnter: function() {
+        console.log('enter', arguments);
+      },
+      onExit: function() {
+        console.log('exit');
+      }
     })
     .state('home.login.error', {
       url: '/error',

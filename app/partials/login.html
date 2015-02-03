@@ -1,79 +1,29 @@
-<div id="logo-group">
-    <div class="logo"></div>
-    <span class="title">Fiscality</span>
+<div class="form-title">
+    <h2 class="title">Sign In</h2>
+    <div class="description">Welcome back. Login to start managing your finances.</div>
 </div>
 
-<div id="login-form">
+<div class="form-group">
 
-    <div class="form-title">
-        <h2 class="title">Sign In</h2>
-        <div class="description">Welcome back. Login to start managing your finances.</div>
+    <div class="field-group">
+        <label class="field-label">Enter your email</label>
+        <input class="text-field" type="text" placeholder="you@example.com" ng-model="email" spellcheck="false" />
     </div>
 
-    <div class="form-group">
-
-        <div class="field-group">
-            <label class="field-label">Enter your email</label>
-            <input class="text-field" type="text" placeholder="you@example.com" ng-model="email" spellcheck="false" />
-        </div>
-
-        <div class="field-group">
-            <label class="field-label">Enter your password</label>
-            <input class="text-field" type="password" placeholder="Password" ng-model="password" />
-        </div>
-
-        <input class="field-btn submit-btn" type="button" value="Login" ng-click="login(email, password)" />
-
+    <div class="field-group">
+        <label class="field-label">Enter your password</label>
+        <input class="text-field" type="password" placeholder="Password" ng-model="password" />
     </div>
 
-    <hr />
-
-    <div id="register-splash">
-        <span class="message">Don’t have an account yet?</span>
-        <button class="field-btn btn-dark" ui-sref="home.register">Register</button>
-    </div>
-
-    <div class="shadow"></div>
+    <input class="field-btn submit-btn" type="button" value="Login" ng-click="login(email, password)" />
 
 </div>
 
+<hr />
 
-<!--<h1 id="logo-group">-->
-    <!--<div id="logo"></div>-->
-    <!--<span id="title">Fiscality</span>-->
-<!--</h1>-->
+<div id="register-splash">
+    <span class="message">Don’t have an account yet?</span>
+    <button class="field-btn btn-dark" ui-sref="home.register">Register</button>
+</div>
 
-<!--<div id="login-form">-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="email">Email</label>-->
-        <!--<input id="email" type="text" placeholder="Email" ng-model="email" />-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<label for="password">Password</label>-->
-        <!--<input id="password" type="password" placeholder="Password" ng-model="password" />-->
-    <!--</div>-->
-
-    <!--<div class="form-group">-->
-        <!--<button id="login-btn" class="btn" ng-click="login(email, password)">Login</button>-->
-        <!--<span id="forgot-message"><a ui-sref="home.forgot">Forgot your password?</a></span>-->
-    <!--</div>-->
-
-    <!--<hr />-->
-
-    <!--<div class="form-group">-->
-        <!--<span id="register-message">Don’t have an account yet?</span>-->
-        <!--<button id="register-btn" class="btn btn-dark" ui-sref="home.register">Register</button>-->
-    <!--</div>-->
-
-    <!--<div class="shadow"></div>-->
-
-<!--</div>-->
-
-
-
-
-<!--<a ui-sref="app">Login</a>-->
-
-<!--<a ui-sref="home.login.error">Error</a>-->
+<div class="shadow"></div>

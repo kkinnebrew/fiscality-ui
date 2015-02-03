@@ -17,6 +17,7 @@
     linear-gradient(to bottom,  #2f5f8f 0%,#396da1 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f5f8f', endColorstr='#396da1',GradientType=0 );
     border-bottom: 5px solid #4374A5;
+    min-height: 90%;
     overflow: auto;
     width: 100%;
 }
@@ -35,6 +36,8 @@
     margin: 6rem auto 0 auto;
     overflow: hidden;
     width: 200px;
+    -webkit-transition: margin ease-in-out 150ms;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 #logo-group .logo {
@@ -53,6 +56,15 @@
 
 }
 
+@media screen and (min-height: 1200px) {
+
+    #logo-group {
+        margin-top: 8rem;
+        margin-bottom: 8rem;
+    }
+
+}
+
 #logo-group .title {
     color: #FFF;
     font-family: "proxima-nova", sans-serif;
@@ -63,9 +75,7 @@
     margin: 6px 0 0 1rem;
 }
 
-/* register page */
-
-#register-form {
+#home-form {
     background: #FFF;
     margin: 3rem auto 6rem auto;
     padding: 2rem 40px;
@@ -73,12 +83,12 @@
     width: 460px;
 }
 
-#register-form hr {
+#home-form hr {
     border-color: #E9EBEC;
     margin: 2rem 0;
 }
 
-#register-form .shadow {
+#home-form .shadow {
     background: #C3C3C3;
     bottom: -4px;
     height: 4px;
@@ -86,6 +96,8 @@
     position: absolute;
     width: 532px;
 }
+
+/* register page */
 
 #login-splash {
     margin: 0 auto;
@@ -106,27 +118,6 @@
 
 /* login page */
 
-#login-form {
-    background: #FFF;
-    margin: 3rem auto 6rem auto;
-    padding: 2rem 40px;
-    position: relative;
-    width: 460px;
-}
-
-#login-form hr {
-    border-color: #E9EBEC;
-    margin: 2rem 0;
-}
-
-#login-form .shadow {
-    background: #C3C3C3;
-    bottom: -4px;
-    height: 4px;
-    left: 4px;
-    position: absolute;
-    width: 532px;
-}
 
 #register-splash {
     margin: 0 auto;
