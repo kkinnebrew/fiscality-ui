@@ -11,10 +11,6 @@ angular.module('app', [
   'controllers'
 ]);
 
-//angular.module('app').run(['api', function(api) {
-//  api.test('Hi');
-//}]);
-
 angular.module('app').constant('API_CONFIG', {
   baseUrl: 'http://localhost',
   port: '9000'
@@ -33,13 +29,7 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     .state('home.login', {
       url: '/login',
       templateUrl: 'partials/login.html',
-      controller: 'LoginController',
-      onEnter: function() {
-        console.log('enter', arguments);
-      },
-      onExit: function() {
-        console.log('exit');
-      }
+      controller: 'LoginController'
     })
     .state('home.login.error', {
       url: '/error',
