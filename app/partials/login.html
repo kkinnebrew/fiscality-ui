@@ -15,7 +15,10 @@
         <input id="password" type="password" placeholder="Password" ng-model="password" />
     </div>
 
-    <button id="login-btn" class="btn" ng-click="login(email, password)">Login</button>
+    <div class="form-group">
+        <button id="login-btn" class="btn" ng-click="login(email, password)">Login</button>
+        <span id="forgot-message"><a ui-sref="home.forgot">Forgot your password?</a></span>
+    </div>
 
     <hr />
 
