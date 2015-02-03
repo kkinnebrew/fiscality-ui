@@ -6,7 +6,7 @@ angular.module('controllers.register').controller('RegisterController', ['$scope
 
   $scope.register = function(firstName, lastName, email, password) {
     auth.register(firstName, lastName, email, password).success(function(data, status) {
-      console.log(data, status)
+      console.log(data, status);
       $location.path('/app');
     }).error(function(data, status) {
       console.error(data, status);
