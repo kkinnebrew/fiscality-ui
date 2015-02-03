@@ -42,7 +42,8 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     })
     .state('home.register', {
       url: '/register',
-      templateUrl: 'partials/register.html'
+      templateUrl: 'partials/register.html',
+      controller: 'RegisterController'
     })
     .state('app', {
       url: '/app',
