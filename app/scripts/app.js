@@ -11,10 +11,6 @@ angular.module('app', [
   'controllers'
 ]);
 
-//angular.module('app').run(['api', function(api) {
-//  api.test('Hi');
-//}]);
-
 angular.module('app').constant('API_CONFIG', {
   baseUrl: 'http://localhost',
   port: '9000'
