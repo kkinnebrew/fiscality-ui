@@ -97,6 +97,15 @@
     width: 532px;
 }
 
+#forgot-password-link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#forgot-password-link:hover {
+    color: #666;
+}
+
 /* register page */
 
 #login-splash {
