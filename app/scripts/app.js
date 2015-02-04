@@ -37,9 +37,23 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
       controller: 'RegisterController'
     })
     .state('home.forgot', {
+      abstract: true,
       url: '/forgot',
       templateUrl: 'partials/forgot.html',
       controller: 'ForgotController'
+    })
+    .state('home.forgot.form', {
+      url: '/form',
+      templateUrl: 'partials/forgot.form.html',
+      controller: 'ForgotController'
+    })
+    .state('home.forgot.success', {
+      url: '/success',
+      templateUrl: 'partials/forgot.success.html'
+    })
+    .state('home.forgot.error', {
+      url: '/error',
+      templateUrl: 'partials/forgot.error.html'
     })
     .state('app', {
       url: '/app',
