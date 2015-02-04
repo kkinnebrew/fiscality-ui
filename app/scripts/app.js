@@ -31,15 +31,15 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
       templateUrl: 'partials/login.html',
       controller: 'LoginController'
     })
-    .state('home.login.error', {
-      url: '/error',
-      templateUrl: 'partials/login.error.html',
-      controller: 'LoginController'
-    })
     .state('home.register', {
       url: '/register',
       templateUrl: 'partials/register.html',
       controller: 'RegisterController'
+    })
+    .state('home.forgot', {
+      url: '/forgot',
+      templateUrl: 'partials/forgot.html',
+      controller: 'ForgotController'
     })
     .state('app', {
       url: '/app',
