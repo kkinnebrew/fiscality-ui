@@ -28,13 +28,24 @@ angular.module('controllers.home').controller('RegisterController', ['$scope', '
 
 angular.module('controllers.home').controller('ForgotController', ['$scope', '$location', 'auth', function($scope, $location, auth) {
 
-  $scope.resetPassword = function(email) {
-    auth.resetPassword(email).success(function(data, status) {
-      console.log(data, status);
-      console.log('123');
+  $scope.forgotPassword = function(email) {
+    auth.forgotPassword(email).success(function(data, status) {
       $location.path('/home/forgot/success');
     }).error(function(data, status) {
       $location.path('/home/forgot/error');
+    });
+  };
+
+}]);
+
+angular.module('controllers.home').controller('ResetController', ['$scope', '$location', 'auth', function($scope, $location, auth) {
+
+  $scope.resetPassword = function(password, confirm) {
+    auth.resetPassword(password, confirm).success(function(data, status) {
+      console.log(data, status);
+      $location.path('/home/reset/success');
+    }).error(function(data, status) {
+      $location.path('/home/reset/error');
     });
   };
 
