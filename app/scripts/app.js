@@ -55,6 +55,24 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
       url: '/error',
       templateUrl: 'partials/forgot.error.html'
     })
+    .state('home.reset', {
+      abstract: true,
+      url: '/reset',
+      templateUrl: 'partials/reset.html'
+    })
+    .state('home.reset.form', {
+      url: '/form',
+      templateUrl: 'partials/reset.form.html',
+      controller: 'ResetController'
+    })
+    .state('home.reset.success', {
+      url: '/form',
+      templateUrl: 'partials/reset.success.html'
+    })
+    .state('home.reset.error', {
+      url: '/form',
+      templateUrl: 'partials/reset.error.html'
+    })
     .state('app', {
       url: '/app',
       templateUrl: 'partials/app.html'
