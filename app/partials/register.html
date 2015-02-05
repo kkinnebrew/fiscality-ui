@@ -3,27 +3,31 @@
     <div class="description">Start managing your finances with Fiscality</div>
 </div>
 
-<div class="form-group">
+<form ng-submit="register(firstName, lastName, email, password)">
 
-    <div class="field-group">
-        <label class="field-label">Tell us your name</label>
-        <input class="text-field field-left" type="text" placeholder="ex. John" ng-model="firstName" spellcheck="false" />
-        <input class="text-field field-right" type="text" placeholder="ex. Smith" ng-model="lastName" spellcheck="false" />
+    <div class="form-group">
+
+        <div class="field-group">
+            <label class="field-label">Tell us your name</label>
+            <input class="text-field field-left" type="text" placeholder="ex. John" ng-model="firstName" spellcheck="false" />
+            <input class="text-field field-right" type="text" placeholder="ex. Smith" ng-model="lastName" spellcheck="false" />
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Enter your email</label>
+            <input class="text-field" type="text" placeholder="you@example.com" ng-model="email" spellcheck="false" />
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Choose a password</label>
+            <input class="text-field" type="password" placeholder="Password" ng-model="password" />
+        </div>
+
+        <input class="field-btn submit-btn" type="submit" value="Get Started" ng-click="register(firstName, lastName, email, password)" />
+
     </div>
 
-    <div class="field-group">
-        <label class="field-label">Enter your email</label>
-        <input class="text-field" type="text" placeholder="you@example.com" ng-model="email" spellcheck="false" />
-    </div>
-
-    <div class="field-group">
-        <label class="field-label">Choose a password</label>
-        <input class="text-field" type="password" placeholder="Password" ng-model="password" />
-    </div>
-
-    <input class="field-btn submit-btn" type="button" value="Get Started" ng-click="register(firstName, lastName, email, password)" />
-
-</div>
+</form>
 
 <hr />
 
