@@ -230,3 +230,29 @@ html, body, #app {
     font-weight: 500;
     text-align: right;
 }
+
+/* app */
+
+#app-header {
+    background: #2f5f8f;
+    border-bottom: 5px solid #4374A5;
+    height: 400px;
+    overflow: auto;
+    width: 100%;
+}
+
+#app-content {
+    background: #FFF;
+    min-height: 80%;
+    overflow: auto;
+    width: 100%;
+}
+
+#app-footer {
+    background: #2A2A2A;
+    color: #FFF;
+    min-height: 100px;
+    overflow: hidden;
+    padding: 3rem 0;
+    width: 100%
+}
