@@ -12,7 +12,7 @@ html, body, #app {
     font-size: 10px;
     opacity: 0.3;
     padding: 4px 8px;
-    position: absolute;
+    position: fixed;
     left: 0;
 }
 
@@ -234,11 +234,58 @@ html, body, #app {
 /* app */
 
 #app-header {
-    background: #2f5f8f;
-    border-bottom: 5px solid #4374A5;
-    height: 400px;
+    background: #FFF;
+    color: #2f5f8f;
+    height: 80px;
     overflow: auto;
     width: 100%;
+}
+
+#app-title {
+    float: left;
+    margin: 20px 20px auto 20px;
+    overflow: auto;
+}
+
+#app-title .logo {
+    background: url(../images/app-logo@2x.png) center center no-repeat;
+    float: left;
+    height: 38px;
+    width: 38px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #app-title .logo {
+        background-image: url(../images/app-logo@2x.png);
+        background-size: 38px 38px;
+    }
+
+}
+
+#app-title h2 {
+    float: left;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    line-height: 38px;
+    margin: 0 0 0 0.5rem;
+}
+
+#main-nav {
+    float: right;
+    margin-right: 30px;
+}
+
+#main-nav a {
+    color: #2F5F8F;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 80px;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 #app-content {
@@ -246,6 +293,13 @@ html, body, #app {
     min-height: 80%;
     overflow: auto;
     width: 100%;
+}
+
+#app-menu {
+    background: #2F5F8F;
+    color: #FFF;
+    height: 60px;
+
 }
 
 #app-footer {
