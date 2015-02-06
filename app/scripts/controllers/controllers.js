@@ -1,3 +1,4 @@
 angular.module('controllers', [
-  'controllers.home'
+  'controllers.home',
+  'controllers.app'
 ]);

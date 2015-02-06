@@ -5,6 +5,10 @@ html, body, #app {
     width: 100%;
 }
 
+h2 {
+    margin: 0;
+}
+
 .version {
     background: #000;
     bottom: 0;
@@ -286,6 +290,7 @@ html, body, #app {
     font-weight: 600;
     line-height: 80px;
     margin-right: 2rem;
+    outline: none;
     text-decoration: none;
     text-transform: uppercase;
     -webkit-transition: color ease-in-out 100ms;
@@ -372,6 +377,7 @@ html, body, #app {
 
 #app-menu .menu-item a {
     color: #FFF;
+    outline: none;
     text-decoration: none;
 }
 
