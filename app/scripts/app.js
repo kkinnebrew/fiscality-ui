@@ -74,8 +74,22 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
       templateUrl: 'partials/reset.error.html'
     })
     .state('app', {
+      abstract: true,
       url: '/app',
       templateUrl: 'partials/app.html'
+    })
+    .state('app.accounts', {
+      abstract: true,
+      url: '/accounts',
+      templateUrl: 'partials/app/accounts.html'
+    })
+    .state('app.accounts.banking', {
+      url: '/banking',
+      templateUrl: 'partials/app/accounts/banking.html'
+    })
+    .state('app.accounts.credit', {
+      url: '/credit',
+      templateUrl: 'partials/app/accounts/credit.html'
     });
 
 }]);

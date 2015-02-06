@@ -280,6 +280,7 @@ html, body, #app {
 
 #main-nav a {
     color: #97AFC7;
+    cursor: pointer;
     font-family: "proxima-nova", sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -342,18 +343,69 @@ html, body, #app {
 
 }
 
-#app-content {
-    background: #FFF;
-    min-height: 80%;
-    overflow: auto;
-    width: 100%;
-}
-
 #app-menu {
     background: #2F5F8F;
     color: #FFF;
-    height: 60px;
+}
 
+#app-menu .menu-list {
+    font-size: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#app-menu .menu-item {
+    color: #FFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin: 20px 0 20px 30px;
+    opacity: 0.6;
+    padding: 0;
+    text-transform: uppercase;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+#app-menu .menu-item a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+#app-menu .menu-item:first-child {
+    margin-left: 25px;
+}
+
+#app-menu .menu-item.active {
+    opacity: 1;
+}
+
+
+#app-menu .menu-item:hover {
+    opacity: 1;
+}
+
+#app-chart {
+    background: #3e6d9d;
+    background: -moz-linear-gradient(top,  #3e6d9d 0%, #275b90 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3e6d9d), color-stop(100%,#275b90));
+    background: -webkit-linear-gradient(top,  #3e6d9d 0%,#275b90 100%);
+    background: -o-linear-gradient(top,  #3e6d9d 0%,#275b90 100%);
+    background: -ms-linear-gradient(top,  #3e6d9d 0%,#275b90 100%);
+    background: linear-gradient(to bottom,  #3e6d9d 0%,#275b90 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3e6d9d', endColorstr='#275b90',GradientType=0 );
+    height: 400px;
+    width: 100%;
+}
+
+#app-content {
+    background: #FFF;
+    min-height: 600px;
+    overflow: auto;
+    width: 100%;
 }
 
 #app-footer {
