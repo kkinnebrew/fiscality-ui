@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "description": "Powerful personal financial management",
   "homepage": "https://github.com/kkinnebrew/fiscality-ui",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.9.x"
+  },
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "^1.1.1",
@@ -16,7 +20,8 @@
     "postinstall": "bower install",
 
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1",
+    "start": "node index.js",
+    "serve": "http-server -a localhost -p 8000 -c-1",
 
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
