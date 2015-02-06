@@ -6,8 +6,8 @@
     </div>
 
     <nav id="main-nav">
-        <a class="active">Accounts</a>
-        <a>Investments</a>
+        <a ng-class="{active: $state.includes('app.accounts')}" ui-sref="app.accounts.banking">Accounts</a>
+        <a ng-class="{active: $state.includes('app.investments')}" ui-sref="app.investments.positions">Investments</a>
         <a>Spending</a>
         <a>Taxes</a>
         <a>Advanced</a>
