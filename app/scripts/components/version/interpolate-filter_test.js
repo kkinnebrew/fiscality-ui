@@ -2,7 +2,7 @@
 
 describe('util.version module', function() {
 
-  beforeEach(module('myApp.version'));
+  beforeEach(module('util.version'));
 
   describe('interpolate filter', function() {
 

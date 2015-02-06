@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "description": "Powerful personal financial management",
   "homepage": "https://github.com/kkinnebrew/fiscality-ui",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.9.x"
+  },
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "^1.1.1",
@@ -16,7 +20,8 @@
     "postinstall": "bower install",
 
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1",
+    "start": "node index.js",
+    "serve": "http-server -a localhost -p 8000 -c-1",
 
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
@@ -29,5 +34,8 @@
     "protractor": "protractor e2e-tests/protractor.conf.js",
 
     "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
