@@ -16,10 +16,12 @@
     "shelljs": "^0.2.6",
     "karma-junit-reporter": "^0.2.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkinnebrew/fiscality-ui"
+  },
   "scripts": {
-    "postinstall": "bower install",
 
-    "prestart": "npm install",
     "start": "node server.js",
     "serve": "http-server -a localhost -p 8000 -c-1",
 
