@@ -370,6 +370,11 @@ html, body, #app {
     -webkit-transition: opacity ease-in-out 100ms;
 }
 
+#app-menu .menu-item a {
+    color: #FFF;
+    text-decoration: none;
+}
+
 #app-menu .menu-item:first-child {
     margin-left: 25px;
 }
@@ -398,7 +403,7 @@ html, body, #app {
 
 #app-content {
     background: #FFF;
-    min-height: 120%;
+    min-height: 600px;
     overflow: auto;
     width: 100%;
 }

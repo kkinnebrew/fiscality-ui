@@ -5,7 +5,7 @@ angular.module('controllers.home').controller('LoginController', ['$scope', '$lo
   $scope.login = function(email, password) {
     auth.login(email, password).success(function(data, status) {
       console.log(data, status)
-      $location.path('/app');
+      $location.path('/app/accounts/banking');
     }).error(function(data, status) {
       console.error(data, status);
     });
@@ -18,7 +18,7 @@ angular.module('controllers.home').controller('RegisterController', ['$scope', '
   $scope.register = function(firstName, lastName, email, password) {
     auth.register(firstName, lastName, email, password).success(function(data, status) {
       console.log(data, status);
-      $location.path('/app');
+      $location.path('/app/accounts/banking');
     }).error(function(data, status) {
       console.error(data, status);
     });
