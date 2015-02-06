@@ -20,7 +20,7 @@
     "postinstall": "bower install",
 
     "prestart": "npm install",
-    "start": "node index.js",
+    "start": "node server.js",
     "serve": "http-server -a localhost -p 8000 -c-1",
 
     "pretest": "npm install",
