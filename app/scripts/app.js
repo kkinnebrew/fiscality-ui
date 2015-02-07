@@ -12,8 +12,7 @@ angular.module('app', [
 ]);
 
 angular.module('app').constant('API_CONFIG', {
-  baseUrl: 'http://localhost',
-  port: '9000'
+  baseUrl: 'http://frozen-taiga-6444.herokuapp.com'
 });
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

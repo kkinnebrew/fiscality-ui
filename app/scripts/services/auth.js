@@ -2,7 +2,7 @@ angular.module('services.auth', []);
 
 angular.module('services.auth').factory('auth', function($http, API_CONFIG) {
 
-  var baseUrl = API_CONFIG.baseUrl + ':' + API_CONFIG.port;
+  var baseUrl = API_CONFIG.baseUrl;
 
   return {
 
