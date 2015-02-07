@@ -6,21 +6,23 @@
   "homepage": "https://github.com/kkinnebrew/fiscality-ui",
   "main": "server.js",
   "dependencies": {
-    "express": "~4.9.x"
+    "express": "~4.9.x",
+    "bower": "^1.3.1"
   },
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "^1.1.1",
     "http-server": "^0.6.1",
-    "bower": "^1.3.1",
     "shelljs": "^0.2.6",
     "karma-junit-reporter": "^0.2.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kkinnebrew/fiscality-ui"
+  },
   "scripts": {
-    "postinstall": "bower install",
 
-    "prestart": "npm install",
-    "start": "node index.js",
+    "start": "node server.js",
     "serve": "http-server -a localhost -p 8000 -c-1",
 
     "pretest": "npm install",
