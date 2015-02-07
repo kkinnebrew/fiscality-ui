@@ -12,8 +12,7 @@ angular.module('app', [
 ]);
 
 angular.module('app').constant('API_CONFIG', {
-  baseUrl: 'http://localhost',
-  port: '9000'
+  baseUrl: 'https://fiscality-api.herokuapp.com'
 });
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {

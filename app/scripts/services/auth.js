@@ -2,7 +2,7 @@ angular.module('services.auth', []);
 
 angular.module('services.auth').factory('auth', function($http, API_CONFIG) {
 
-  var baseUrl = API_CONFIG.baseUrl + ':' + API_CONFIG.port;
+  var baseUrl = API_CONFIG.baseUrl;
 
   return {
 
@@ -24,7 +24,7 @@ angular.module('services.auth').factory('auth', function($http, API_CONFIG) {
 
     forgotPassword: function(email) {
       return $http.post(baseUrl + '/api/forgotpassword', {
-        email: email,
+        email: email
       });
     },
 
