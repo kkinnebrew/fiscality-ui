@@ -6,7 +6,7 @@ angular.module('controllers.app').controller('AppController', ['$scope', '$state
 
   $scope.login = function (email, password) {
     auth.login(email, password).success(function (data, status) {
-      console.log(data, status)
+      console.log(data, status);
       $location.path('/app/accounts/banking');
     }).error(function (data, status) {
       console.error(data, status);

@@ -24,7 +24,7 @@ angular.module('services.auth').factory('auth', function($http, API_CONFIG) {
 
     forgotPassword: function(email) {
       return $http.post(baseUrl + '/api/forgotpassword', {
-        email: email,
+        email: email
       });
     },
 
