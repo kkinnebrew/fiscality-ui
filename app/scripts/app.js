@@ -12,7 +12,7 @@ angular.module('app', [
 ]);
 
 angular.module('app').constant('API_CONFIG', {
-  baseUrl: 'http://frozen-taiga-6444.herokuapp.com'
+  baseUrl: 'https://fiscality-api.herokuapp.com'
 });
 
 angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
