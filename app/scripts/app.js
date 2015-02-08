@@ -27,50 +27,50 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     })
     .state('home.login', {
       url: '/login',
-      templateUrl: 'partials/login.html',
+      templateUrl: 'partials/home/login.html',
       controller: 'LoginController'
     })
     .state('home.register', {
       url: '/register',
-      templateUrl: 'partials/register.html',
+      templateUrl: 'partials/home/register.html',
       controller: 'RegisterController'
     })
     .state('home.forgot', {
       abstract: true,
       url: '/forgot',
-      templateUrl: 'partials/forgot.html',
+      templateUrl: 'partials/home/forgot.html',
       controller: 'ForgotController'
     })
     .state('home.forgot.form', {
       url: '/form',
-      templateUrl: 'partials/forgot.form.html',
+      templateUrl: 'partials/home/forgot.form.html',
       controller: 'ForgotController'
     })
     .state('home.forgot.success', {
       url: '/success',
-      templateUrl: 'partials/forgot.success.html'
+      templateUrl: 'partials/home/forgot.success.html'
     })
     .state('home.forgot.error', {
       url: '/error',
-      templateUrl: 'partials/forgot.error.html'
+      templateUrl: 'partials/home/forgot.error.html'
     })
     .state('home.reset', {
       abstract: true,
       url: '/reset',
-      templateUrl: 'partials/reset.html'
+      templateUrl: 'partials/home/reset.html'
     })
     .state('home.reset.form', {
       url: '/form',
-      templateUrl: 'partials/reset.form.html',
+      templateUrl: 'partials/home/reset.form.html',
       controller: 'ResetController'
     })
     .state('home.reset.success', {
       url: '/form',
-      templateUrl: 'partials/reset.success.html'
+      templateUrl: 'partials/home/reset.success.html'
     })
     .state('home.reset.error', {
       url: '/form',
-      templateUrl: 'partials/reset.error.html'
+      templateUrl: 'partials/home/reset.error.html'
     })
     .state('app', {
       abstract: true,
