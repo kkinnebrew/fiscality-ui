@@ -1,6 +1,11 @@
 /* general ledger styles */
 /* TODO: abstract out table styles */
 
+#advanced-view {
+    background: #FFF;
+    min-height: 600px;
+}
+
 #ledger-toolbar {
     background: #FFF;
     border-bottom: 1px solid #E5E5E5;
@@ -50,6 +55,7 @@
 
 #ledger-table {
     padding: 0 25px;
+    min-height: 600px;
     width: 100%;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;

@@ -8,7 +8,6 @@ angular.module('controllers.app.advanced').controller('LedgerController', ['$sco
 
   $scope.getTransactions = function() {
     transactions.all().success(function (data, status) {
-      console.log(data, status);
       $scope.transactions = data;
     }).error(function (data, status) {
       console.error(data, status);
