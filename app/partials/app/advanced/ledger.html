@@ -1,3 +1,49 @@
-<div id="app-content">
-    <h2>General Ledger</h2>
+<div id="ledger-toolbar">
+
+    <input id="ledger-search" type="text" placeholder="Search" />
+
+    <input id="add-transaction-btn" type="button" value="Add Transaction" />
+
+</div>
+
+<div id="ledger-table">
+
+    <thead class="table-header">
+
+        <tr class="table-header-row">
+            <div class="table-header-cell table-header-cell-selected table-header-cell-desc">Date</div>
+            <div class="table-header-cell">Type</div>
+            <div class="table-header-cell">Description</div>
+            <div class="table-header-cell">Debit</div>
+            <div class="table-header-cell">Credit</div>
+        </tr>
+
+    </thead>
+
+    <tbody class="table-body">
+
+        <tr class="table-row transaction-header">
+            <td class="table-cell">Jan 20, 2015</td>
+            <td class="table-cell">Deposit</td>
+            <td class="table-cell" colspan="3">Transfer: Checking to Savings</td>
+            <td class="table-cell">Debit</td>
+            <td class="table-cell">Credit</td>
+        </tr>
+
+        <tr class="table-row transaction-line">
+            <td class="table-cell" colspan="2"></td>
+            <td class="table-cell">Bank of America Savings</td>
+            <td class="table-cell">2,400.50</td>
+            <td class="table-cell">-</td>
+        </tr>
+
+        <tr class="table-row transaction-line">
+            <td class="table-cell" colspan="2"></td>
+            <td class="table-cell transaction-line-indent">Bank of America Checking</td>
+            <td class="table-cell">-</td>
+            <td class="table-cell">2,400.50</td>
+        </tr>
+
+    </tbody>
+
 </div>
