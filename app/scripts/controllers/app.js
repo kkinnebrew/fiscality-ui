@@ -44,7 +44,8 @@ angular.module('app').config(['$stateProvider', function($stateProvider) {
     })
     .state('app.advanced.ledger', {
       url: '/ledger',
-      templateUrl: 'partials/app/advanced/ledger.html'
+      templateUrl: 'partials/app/advanced/ledger.html',
+      controller: 'LedgerController'
     });
 
 }]);
