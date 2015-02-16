@@ -20,7 +20,7 @@
 
     </thead>
 
-    <tbody class="table-body" ng-repeat="transaction in transactions">
+    <tbody class="table-body" ng-repeat="transaction in transactions" data-id="{{transaction.transactionId}}">
 
         <tr class="table-row transaction-header">
             <td class="table-cell">{{transaction.transactionDate | date }}</td>
