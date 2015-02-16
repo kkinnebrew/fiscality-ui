@@ -3,12 +3,10 @@
 
 #ledger-toolbar {
     background: #FFF;
+    border-bottom: 1px solid #E5E5E5;
     overflow: auto;
     padding: 20px 0;
     width: 100%;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-    -moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
 }
 
 #ledger-search {
@@ -48,4 +46,70 @@
 
 #add-transaction-btn:hover {
     background: #386695;
+}
+
+#ledger-table {
+    padding: 0 25px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+#ledger-table .table-header {
+    width: 100%;
+
+}
+
+#ledger-table .table-header-row {
+
+}
+
+#ledger-table .table-header-cell {
+    border-bottom: 1px solid #E5E5E5;
+    color: #A0A0A0;
+    cursor: pointer;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 16px 0 16px 25px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#ledger-table .table-header-cell.table-header-cell-selected {
+    color: #3F74A9;
+}
+
+#leader-table .table-header-cell.table-header-cell-selected.table-header-cell-desc {
+
+}
+
+#ledger-table .table-body {
+    width: 100%;
+}
+
+#leader-table .table-row {
+
+}
+
+#ledger-table .table-cell {
+    border-bottom: 1px solid #F4F4F4;
+    color: #646464;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    font-weight: inherit;
+    padding: 12px 0 12px 25px;
+}
+
+#ledger-table .transaction-header {
+    background: #FBFBFB;
+    font-weight: 600;
+}
+
+#ledger-table .transaction-line {
+    font-weight: 500;
+}
+
+#ledger-table .transaction-line-indent {
+    text-indent: 20px;
 }
