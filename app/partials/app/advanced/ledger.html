@@ -23,23 +23,16 @@
     <tbody class="table-body" ng-repeat="transaction in transactions">
 
         <tr class="table-row transaction-header">
-            <td class="table-cell">Jan 20, 2015</td>
+            <td class="table-cell">{{transaction.transactionDate | date }}</td>
             <td class="table-cell">Deposit</td>
-            <td class="table-cell" colspan="3">Transfer: Checking to Savings</td>
+            <td class="table-cell" colspan="3">{{transaction.description}}</td>
         </tr>
 
-        <tr class="table-row transaction-line">
+        <tr class="table-row transaction-line" ng-repeat="line in transaction.transactionLines | orderBy:sortColumn">
             <td class="table-cell" colspan="2"></td>
-            <td class="table-cell">Bank of America Savings</td>
-            <td class="table-cell">2,400.50</td>
-            <td class="table-cell">-</td>
-        </tr>
-
-        <tr class="table-row transaction-line">
-            <td class="table-cell" colspan="2"></td>
-            <td class="table-cell transaction-line-indent">Bank of America Checking</td>
-            <td class="table-cell">-</td>
-            <td class="table-cell">2,400.50</td>
+            <td class="table-cell" ng-class="{ 'transaction-line-indent': !$first }">Bank of America Savings</td>
+            <td class="table-cell">{{line.debitAmount | dashZero }}</td>
+            <td class="table-cell">{{line.creditAmount | dashZero }}</td>
         </tr>
 
     </tbody>

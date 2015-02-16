@@ -15,6 +15,24 @@ angular.module('controllers.app.advanced').controller('LedgerController', ['$sco
     });
   };
 
+  $scope.sortColumn = '-debitAmount';
+
   $scope.getTransactions();
 
 }]);
+
+angular.module('controllers.app.advanced').filter('date', function() {
+
+  return function(input) {
+    return Date.parse(input).toString('MMMM d, yyyy');
+  };
+
+});
+
+angular.module('controllers.app.advanced').filter('dashZero', function() {
+
+  return function(input) {
+    return (isNaN(input) || parseInt(input) === 0) ? '-' : input;
+  };
+
+});

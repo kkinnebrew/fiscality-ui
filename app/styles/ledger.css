@@ -109,3 +109,7 @@
 #ledger-table .transaction-line {
     font-weight: 500;
 }
+
+#ledger-table .transaction-line-indent {
+    text-indent: 20px;
+}
