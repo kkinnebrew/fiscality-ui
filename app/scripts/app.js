@@ -103,6 +103,19 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     .state('app.investments.activity', {
       url: '/activity',
       templateUrl: 'partials/app/investments/activity.html'
+    })
+    .state('app.advanced', {
+      abstract: true,
+      url: '/investments',
+      templateUrl: 'partials/app/advanced.html'
+    })
+    .state('app.advanced.balance', {
+      url: '/balance',
+      templateUrl: 'partials/app/advanced/balance.html'
+    })
+    .state('app.advanced.ledger', {
+      url: '/ledger',
+      templateUrl: 'partials/app/advanced/ledger.html'
     });
 
 }]);
