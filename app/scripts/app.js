@@ -71,7 +71,13 @@ angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($
     .state('home.reset.error', {
       url: '/form',
       templateUrl: 'partials/home/reset.error.html'
-    })
+    });
+
+}]);
+
+angular.module('app').config(['$stateProvider', function($stateProvider) {
+
+  $stateProvider
     .state('app', {
       abstract: true,
       url: '/app',
