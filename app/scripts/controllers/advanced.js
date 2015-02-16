@@ -29,10 +29,14 @@ angular.module('controllers.app.advanced').filter('date', function() {
 
 });
 
-angular.module('controllers.app.advanced').filter('dashZero', function() {
+angular.module('controllers.app.advanced').filter('currency', function() {
 
   return function(input) {
-    return (isNaN(input) || parseInt(input) === 0) ? '-' : input;
+    if (isNaN(input) || parseInt(input) === 0) {
+      return '-';
+    } else {
+      return parseInt(input).toFixed(2);
+    }
   };
 
 });

@@ -31,8 +31,8 @@
         <tr class="table-row transaction-line" ng-repeat="line in transaction.transactionLines | orderBy:sortColumn">
             <td class="table-cell" colspan="2"></td>
             <td class="table-cell" ng-class="{ 'transaction-line-indent': !$first }">Bank of America Savings</td>
-            <td class="table-cell">{{line.debitAmount | dashZero }}</td>
-            <td class="table-cell">{{line.creditAmount | dashZero }}</td>
+            <td class="table-cell">{{line.debitAmount | currency }}</td>
+            <td class="table-cell">{{line.creditAmount | currency }}</td>
         </tr>
 
     </tbody>
