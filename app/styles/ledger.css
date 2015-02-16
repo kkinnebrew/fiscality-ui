@@ -1,0 +1,51 @@
+/* general ledger styles */
+/* TODO: abstract out table styles */
+
+#ledger-toolbar {
+    background: #FFF;
+    overflow: auto;
+    padding: 20px 0;
+    width: 100%;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+#ledger-search {
+    background: #F6F6F6;
+    border: 1px solid #F1F1F1;
+    border-radius: 20px;
+    color: #B4B4B4;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    float: left;
+    outline: none;
+    padding: 6px 16px;
+    margin-left: 25px;
+    -webkit-transition: all ease-in 100ms;
+}
+
+#ledger-search:focus {
+    background: #FFF;
+    border: 1px solid #DDD;
+    color: #666;
+}
+
+#add-transaction-btn {
+    background: #3F74A9;
+    border: none;
+    border-radius: 3px;
+    color: #FFF;
+    float: right;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 25px;
+    padding: 8px 14px;
+    text-transform: uppercase;
+    -webkit-transition: all ease-in 100ms;
+}
+
+#add-transaction-btn:hover {
+    background: #386695;
+}
