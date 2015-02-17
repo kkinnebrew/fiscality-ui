@@ -1,3 +1,22 @@
+angular.module('app').config(['$stateProvider', function($stateProvider) {
+
+  $stateProvider
+    .state('app.advanced', {
+      abstract: true,
+      url: '/investments',
+      templateUrl: 'partials/app/advanced.html'
+    })
+    .state('app.advanced.balance', {
+      url: '/balance',
+      templateUrl: 'partials/app/advanced/balance.html'
+    })
+    .state('app.advanced.ledger', {
+      url: '/ledger',
+      templateUrl: 'partials/app/advanced/ledger.html',
+      controller: 'LedgerController'
+    });
+
+}]);
 
 angular.module('controllers.app.advanced', ['services']);
 
