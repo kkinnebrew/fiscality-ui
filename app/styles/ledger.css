@@ -25,6 +25,7 @@
     outline: none;
     padding: 6px 16px;
     margin-left: 25px;
+    width: 160px;
     -webkit-transition: all ease-in 100ms;
 }
 
@@ -77,18 +78,31 @@
     font-family: "proxima-nova", sans-serif;
     font-size: 12px;
     font-weight: 600;
-    padding: 16px 0 16px 25px;
+    padding: 16px 0 16px 36px;
     text-align: left;
     text-transform: uppercase;
+}
+
+#ledger-table .table-header-cell.cell-right {
+    padding: 16px 36px 16px 0;
+    text-align: right;
 }
 
 #ledger-table .table-header-cell.table-header-cell-selected {
     color: #3F74A9;
 }
 
-#leader-table .table-header-cell.table-header-cell-selected.table-header-cell-desc {
-
+#ledger-table .table-header-cell.cell-160 {
+    width: 160px;
 }
+
+#ledger-table .table-header-cell.cell-500{
+    width: 500px;
+}
+
+/*#leader-table .table-header-cell.table-header-cell-selected.table-header-cell-desc {*/
+
+/*}*/
 
 #ledger-table .table-body {
     width: 100%;
@@ -104,7 +118,24 @@
     font-family: "proxima-nova", sans-serif;
     font-size: 12px;
     font-weight: inherit;
-    padding: 12px 0 12px 25px;
+    padding: 0 0 0 25px;
+}
+
+/*#ledger-table .table-row .table-cell:last-child {*/
+    /*padding: 10px 25px 10px 25px;*/
+/*}*/
+
+/*#ledger-table .right-align {*/
+    /*text-align: right;*/
+/*}*/
+
+#ledger-table .table-cell .read-only {
+    display: inline-block;
+    padding: 12px 0 12px 11px;
+}
+
+#ledger-table .table-cell .editable {
+
 }
 
 #ledger-table .transaction-header {
@@ -116,6 +147,117 @@
     font-weight: 500;
 }
 
-#ledger-table .transaction-line-indent {
-    text-indent: 20px;
+#ledger-table .table-cell.transaction-line-indent .read-only {
+    margin-left: 20px;
+}
+
+#ledger-table .table-cell.transaction-line-indent .text-field {
+    margin-left: 20px;
+}
+
+#ledger-table .table-cell .text-field {
+    background: #FFF;
+    font-size: 12px;
+    font-weight: inherit;
+    margin: 5px 0;
+    padding: 6px 10px;
+    width: 120px;
+}
+
+#ledger-table .table-cell.cell-100 .text-field {
+    width: 100px;
+}
+
+/*#ledger-table .table-cell .read-only,*/
+/*#ledger-table .table-header-cell .read-only {*/
+    /*display: block;*/
+    /*padding: 7px 11px 6px 0;*/
+/*}*/
+
+/*#ledger-table .table-cell .editable,*/
+/*#ledger-table .table-header-cell .editable {*/
+    /*display: none;*/
+/*}*/
+
+/*#ledger-table .table-cell:hover .read-only,*/
+/*#ledger-table .table-header-cell:hover .read-only {*/
+    /*display: none;*/
+/*}*/
+
+/*#ledger-table .table-cell:hover .editable,*/
+/*#ledger-table .table-header-cell:hover .editable {*/
+    /*display: block;*/
+/*}*/
+
+/*#ledger-table .table-header-cell.cell-160 {*/
+    /*padding-right: 11px;*/
+    /*width: 160px;*/
+/*}*/
+
+/*#ledger-table .table-header-cell.cell-160:last-child {*/
+    /*padding-right: 36px;*/
+/*}*/
+
+/*#ledger-table .table-cell .text-field,*/
+/*#ledger-table .table-header-cell .text-field {*/
+    /*background: #FFF;*/
+    /*color: #697174;*/
+    /*font-size: 12px;*/
+    /*font-weight: 600;*/
+    /*padding: 6px 10px;*/
+    /*text-align: left;*/
+    /*width: 100px;*/
+/*}*/
+
+/*#ledger-table .transaction-line .table-cell .text-field {*/
+    /*float: right;*/
+/*}*/
+
+/*#ledger-table .transaction-line .text-field {*/
+    /*text-align: right;*/
+/*}*/
+
+/*#ledger-table .table-cell .text-field.field-100,*/
+/*#ledger-table .table-header-cell .text-field.field-100 {*/
+    /*width: 100px;*/
+/*}*/
+
+/*#ledger-table .table-cell .text-field.field-360,*/
+/*#ledger-table .table-header-cell .text-field.field-360{*/
+    /*width: 360px;*/
+/*}*/
+
+#ledger-table .table-cell.cell-right {
+    padding: 0 25px 0 0;
+    text-align: right;
+}
+
+#ledger-table .table-cell.cell-right .read-only {
+    padding: 12px 11px 12px 0;
+    text-align: right;
+}
+
+#ledger-table .table-cell.cell-right .text-field {
+    float: right;
+    text-align: right;
+}
+
+#ledger-table .table-cell .text-field.field-360 {
+    width: 360px;
+}
+
+#ledger-table .table-cell .editable {
+    display: none;
+}
+
+#ledger-table .table-cell:hover .read-only {
+    display: none;
+}
+
+#ledger-table .table-cell:hover .editable {
+    display: block;
+}
+
+#ledger-table .transaction-header .text-field {
+    color: #646464;
 }

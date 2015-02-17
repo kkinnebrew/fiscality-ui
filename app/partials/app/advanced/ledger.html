@@ -11,11 +11,11 @@
     <thead class="table-header">
 
         <tr class="table-header-row">
-            <th class="table-header-cell table-header-cell-selected table-header-cell-desc">Date</th>
+            <th class="table-header-cell cell-160 table-header-cell-selected table-header-cell-desc">Date</th>
             <th class="table-header-cell">Type</th>
-            <th class="table-header-cell">Description</th>
-            <th class="table-header-cell">Debit</th>
-            <th class="table-header-cell">Credit</th>
+            <th class="table-header-cell cell-500">Description</th>
+            <th class="table-header-cell cell-160 cell-right">Debit</th>
+            <th class="table-header-cell cell-160 cell-right">Credit</th>
         </tr>
 
     </thead>
@@ -23,16 +23,34 @@
     <tbody class="table-body" ng-repeat="transaction in transactions" data-id="{{transaction.transactionId}}">
 
         <tr class="table-row transaction-header">
-            <td class="table-cell">{{transaction.transactionDate | date }}</td>
-            <td class="table-cell">Deposit</td>
-            <td class="table-cell" colspan="3">{{transaction.description}}</td>
+            <td class="table-cell">
+                <span class="read-only">{{transaction.transactionDate | date }}</span>
+                <input class="text-field editable" type="text" value="{{transaction.transactionDate | date }}" />
+            </td>
+            <td class="table-cell">
+                <span class="read-only">Deposit</span>
+                <input class="text-field editable" type="text" value="Deposit" />
+            </td>
+            <td class="table-cell" colspan="3">
+                <span class="read-only">{{transaction.description}}</span>
+                <input class="text-field editable field-360" type="text" value="{{transaction.description}}" />
+            </td>
         </tr>
 
         <tr class="table-row transaction-line" ng-repeat="line in transaction.transactionLines | orderBy:sortColumn">
             <td class="table-cell" colspan="2"></td>
-            <td class="table-cell" ng-class="{ 'transaction-line-indent': !$first }">{{line.account.accountName}}</td>
-            <td class="table-cell">{{line.debitAmount | currency }}</td>
-            <td class="table-cell">{{line.creditAmount | currency }}</td>
+            <td class="table-cell" ng-class="{ 'transaction-line-indent': !$first }">
+                <span class="read-only">{{line.account.accountName}}</span>
+                <input class="text-field editable field-360" type="text" value="{{line.account.accountName}}" />
+            </td>
+            <td class="table-cell cell-right cell-100">
+                <span class="read-only">{{line.debitAmount | currency }}</span>
+                <input class="text-field editable" type="text" value="{{line.debitAmount | currency }}" />
+            </td>
+            <td class="table-cell cell-right cell-100">
+                <span class="read-only">{{line.creditAmount | currency }}</span>
+                <input class="text-field editable" type="text" value="{{line.creditAmount | currency }}" />
+            </td>
         </tr>
 
     </tbody>

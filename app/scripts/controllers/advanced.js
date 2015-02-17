@@ -4,11 +4,14 @@ angular.module('controllers.app.advanced', ['services']);
 angular.module('controllers.app.advanced').controller('LedgerController', ['$scope', '$state', 'transactions', function($scope, $state, transactions) {
 
   $scope.$state = $state;
-  $scope.transactions = [];
+  $scope.transactions = {};
 
   $scope.getTransactions = function() {
     transactions.all().success(function (data, status) {
-      $scope.transactions = data;
+      $scope.transactions = {};
+      for (var i in data) {
+        $scope.transactions[data[i].transactionId] = data[i];
+      }
     }).error(function (data, status) {
       console.error(data, status);
     });
@@ -17,6 +20,12 @@ angular.module('controllers.app.advanced').controller('LedgerController', ['$sco
   $scope.sortColumn = '-debitAmount';
 
   $scope.getTransactions();
+
+  $scope.toggleEdit = function(transactionId) {
+    if ($scope.transactions.hasOwnProperty(transactionId)) {
+      $scope.transactions[transactionId].editable = !$scope.transactions[transactionId].editable;
+    }
+  };
 
 }]);
 
