@@ -40,10 +40,10 @@ angular.module('controllers.app.advanced').filter('date', function() {
 angular.module('controllers.app.advanced').filter('currency', function() {
 
   return function(input) {
-    if (isNaN(input) || parseInt(input) === 0) {
+    if (isNaN(input) || parseFloat(input) === 0) {
       return '-';
     } else {
-      return parseInt(input).toFixed(2);
+      return parseFloat(input).toFixed(2);
     }
   };
 

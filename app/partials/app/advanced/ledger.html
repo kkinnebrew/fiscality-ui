@@ -33,7 +33,7 @@
             </td>
             <td class="table-cell" colspan="3">
                 <span class="read-only">{{transaction.description}}</span>
-                <input class="text-field editable field-360" type="text" value="{{transaction.description}}" />
+                <input class="text-field editable field-360" ng-model="transaction.description" type="text" />
             </td>
         </tr>
 
@@ -41,15 +41,15 @@
             <td class="table-cell" colspan="2"></td>
             <td class="table-cell" ng-class="{ 'transaction-line-indent': !$first }">
                 <span class="read-only">{{line.account.accountName}}</span>
-                <input class="text-field editable field-360" type="text" value="{{line.account.accountName}}" />
+                <input class="text-field editable field-360" type="text" ng-model="line.account.accountName" />
             </td>
             <td class="table-cell cell-right cell-100">
-                <span class="read-only">{{line.debitAmount | currency }}</span>
-                <input class="text-field editable" type="text" value="{{line.debitAmount | currency }}" />
+                <span class="read-only">{{line.debitAmount | currency}}</span>
+                <input class="text-field editable" type="text" ng-model="line.debitAmount" />
             </td>
             <td class="table-cell cell-right cell-100">
-                <span class="read-only">{{line.creditAmount | currency }}</span>
-                <input class="text-field editable" type="text" value="{{line.creditAmount | currency }}" />
+                <span class="read-only">{{line.creditAmount | currency}}</span>
+                <input class="text-field editable" type="text" ng-model="line.creditAmount" />
             </td>
         </tr>
 
