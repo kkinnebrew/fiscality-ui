@@ -46,6 +46,14 @@ angular.module('controllers.app.advanced').controller('LedgerController', ['$sco
     }
   };
 
+  $scope.$watch('transactions', function() {
+    console.log('something changed', arguments);
+  }, true);
+
+  $scope.$watchCollection('transactions', function() {
+    console.log('something in the college changed', arguments);
+  }, true);
+
 }]);
 
 angular.module('controllers.app.advanced').filter('date', function() {

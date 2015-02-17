@@ -242,6 +242,7 @@ h2 {
     color: #2f5f8f;
     height: 80px;
     overflow: auto;
+    position: absolute;
     width: 100%;
 }
 
@@ -351,6 +352,8 @@ h2 {
 #app-menu {
     background: #2F5F8F;
     color: #FFF;
+    position: absolute;
+    width: 100%;
 }
 
 #app-menu .menu-list {
@@ -408,9 +411,17 @@ h2 {
 }
 
 #app-content {
-    background: #FFF;
-    min-height: 600px;
-    overflow: auto;
+    bottom: 0;
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+
+#app-view {
+    bottom: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 55px;
     width: 100%;
 }
 
