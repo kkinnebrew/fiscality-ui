@@ -46,6 +46,7 @@
     font-weight: 600;
     margin-right: 25px;
     padding: 8px 14px;
+    outline: none;
     text-transform: uppercase;
     -webkit-transition: all ease-in 100ms;
 }
