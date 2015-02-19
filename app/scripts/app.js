@@ -41,11 +41,23 @@ var $ = require('jquery');
   console.log('binding');
 
   var states = {
-    'hello': 1,
-    'hello.test': 2,
-    'hello.food': 3,
-    'goodbye': 4
+    'hello': {
+      template: require('../templates/hello.html')
+    },
+    'hello.test': {
+      template: require('../templates/hello.test.html')
+    },
+    'hello.food': {
+      template: require('../templates/hello.food.html')
+    },
+    'hello.food.old': {
+      template: require('../templates/hello.food.old.html')
+    },
+    'goodbye': {
+      template: require('../templates/goodbye.html')
+    }
   };
+
 
   function renderPage(route) {
 
@@ -53,10 +65,9 @@ var $ = require('jquery');
 
     console.log('URL', parts);
 
-    var val = '', key;
+    var output, key;
 
     for (var i = 0; i < parts.length; i++) {
-      console.log(parts[i]);
       if (!key) {
         key = parts[i];
       } else {
@@ -65,11 +76,19 @@ var $ = require('jquery');
       if (!states.hasOwnProperty(key)) {
         console.error('Missing route: ' + key);
       } else {
-        val += states[key];
+        var template = states[key].template;
+        if (!output) {
+          console.log(1);
+          output = $('<div></div>').html(template);
+        } else {
+          var outlet = $(output).find('[data-outlet]');
+          outlet.html(template);
+          outlet.removeAttr('data-outlet');
+        }
       }
     }
 
-    $('#message').text(val);
+    $('#message').empty().append(output);
 
   }
 
