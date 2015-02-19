@@ -16,6 +16,7 @@ var connect = require('gulp-connect');
 var rimraf = require('gulp-rimraf');
 var livereload = require('gulp-livereload');
 var stringify = require('stringify');
+var gutil = require('gulp-util');
 
 var hbsfy = require('hbsfy').configure({
   extensions: ['hbs']
@@ -93,7 +94,7 @@ gulp.task('scripts', function() {
       basedir: './app',
       entries: ['./scripts/app.js'],
       debug: true
-    });
+    }).on('error', gutil.log);
 
     for (var pkg in dependencies) {
       bundler.external(pkg);

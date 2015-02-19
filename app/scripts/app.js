@@ -38,11 +38,10 @@ var $ = require('jquery');
 
 (function(window) {
 
-  console.log('binding');
-
   var states = {
     'home': {
       abstract: true,
+      redirect: 'home/login',
       template: require('../templates/home.html')
     },
     'home.login': {
@@ -53,6 +52,7 @@ var $ = require('jquery');
     },
     'home.forgot': {
       abstract: true,
+      redirect: 'home/forgot/form',
       template: require('../templates/home/forgot.html')
     },
     'home.forgot.form': {
@@ -63,6 +63,7 @@ var $ = require('jquery');
     },
     'home.reset': {
       abstract: true,
+      redirect: 'home/reset/form',
       template: require('../templates/home/reset.html')
     },
     'home.reset.form': {
@@ -73,8 +74,43 @@ var $ = require('jquery');
     },
     'app': {
       abstract: true,
+      redirect: 'app/accounts/banking',
       template: require('../templates/app.html')
+    },
+    'app.accounts': {
+      abstract: true,
+      redirect: 'app/accounts/banking',
+      template: require('../templates/app/accounts.html')
+    },
+    'app.accounts.banking': {
+      template: require('../templates/app/accounts/banking.html')
+    },
+    'app.accounts.credit': {
+      template: require('../templates/app/accounts/credit.html')
+    },
+    'app.investments': {
+      abstract: true,
+      redirect: 'app/investments/positions',
+      template: require('../templates/app/investments.html')
+    },
+    'app.investments.positions': {
+      template: require('../templates/app/investments/positions.html')
+    },
+    'app.investments.activity': {
+      template: require('../templates/app/investments/activity.html')
+    },
+    'app.advanced': {
+      abstract: true,
+      redirect: 'app/advanced/ledger',
+      template: require('../templates/app/advanced.html')
+    },
+    'app.advanced.ledger': {
+      template: require('../templates/app/advanced/ledger.html')
+    },
+    'app.advanced.balance': {
+      template: require('../templates/app/advanced/balance.html')
     }
+
   };
 
   function redirectToDefault() {
@@ -103,7 +139,6 @@ var $ = require('jquery');
       } else {
         var template = states[key].template;
         if (!output) {
-          console.log(1);
           output = $('<div></div>').html(template);
         } else {
           var outlet = $(output).find('[ui-view]');
@@ -113,8 +148,13 @@ var $ = require('jquery');
       }
     }
 
+    
     if (states.hasOwnProperty(key) && states[key].abstract) {
-      redirectToDefault();
+      if (states[key].redirect) {
+        location.hash = '#/' + states[key].redirect;
+      } else {
+        redirectToDefault();
+      }
     }
 
     $('[ui-view]').empty().append(output);
@@ -126,7 +166,6 @@ var $ = require('jquery');
   $(window).on('hashchange', function() {
 
     route = location.hash;
-    console.log(route);
 
     renderPage(route);
 

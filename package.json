@@ -43,7 +43,8 @@
     "gulp-connect": "~2.2.0",
     "handlebars": "~3.0.0",
     "gulp-livereload": "~3.7.0",
-    "stringify": "~3.1.0"
+    "stringify": "~3.1.0",
+    "gulp-util": "~3.0.3"
   },
   "scripts": {
     "start": "gulp server",
