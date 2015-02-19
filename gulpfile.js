@@ -29,7 +29,7 @@ var dependencies = require('./bower.json').dependencies;
 
 gulp.task('images', function() {
   return gulp.src(['./app/images/**/*'])
-    .pipe(gulp.dest('build/assets'))
+    .pipe(gulp.dest('build/images'))
     .pipe(livereload());
 });
 
@@ -43,20 +43,26 @@ gulp.task('styles:scss', function() {
 });
 
 gulp.task('styles:css', function() {
-  return gulp.src(['./app/styles/**/*.css'])
+  return gulp.src(['./app/styles/*.css'])
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('tmp/css'));
 });
 
+gulp.task('styles:vendor', function() {
+  return gulp.src(['./app/styles/vendor/*.css'])
+    .pipe(concat('vendor.css'))
+    .pipe(gulp.dest('tmp/css'));
+});
+
 gulp.task('styles:concat', function() {
-  return gulp.src('./tmp/css/**/*.css')
+  return gulp.src(['./tmp/css/vendor.css', './tmp/css/styles.sass.css', './tmp/css/styles.css'])
     .pipe(concat('styles.min.css'))
     .pipe(gulp.dest('build/'))
     .pipe(livereload());
 });
 
 gulp.task('styles', function(callback) {
-  sequence(['styles:scss', 'styles:css'], 'styles:concat', callback);
+  sequence(['styles:scss', 'styles:css', 'styles:vendor'], 'styles:concat', callback);
 });
 
 // scripts

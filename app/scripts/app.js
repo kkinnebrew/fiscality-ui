@@ -41,54 +41,83 @@ var $ = require('jquery');
   console.log('binding');
 
   var states = {
-    'hello': {
-      template: require('../templates/hello.html')
+    'home': {
+      abstract: true,
+      template: require('../templates/home.html')
     },
-    'hello.test': {
-      template: require('../templates/hello.test.html')
+    'home.login': {
+      template: require('../templates/home/login.html')
     },
-    'hello.food': {
-      template: require('../templates/hello.food.html')
+    'home.register': {
+      template: require('../templates/home/register.html')
     },
-    'hello.food.old': {
-      template: require('../templates/hello.food.old.html')
+    'home.forgot': {
+      abstract: true,
+      template: require('../templates/home/forgot.html')
     },
-    'goodbye': {
-      template: require('../templates/goodbye.html')
+    'home.forgot.form': {
+      template: require('../templates/home/forgot.form.html')
+    },
+    'home.forgot.error': {
+      template: require('../templates/home/forgot.error.html')
+    },
+    'home.reset': {
+      abstract: true,
+      template: require('../templates/home/reset.html')
+    },
+    'home.reset.form': {
+      template: require('../templates/home/reset.form.html')
+    },
+    'home.reset.error': {
+      template: require('../templates/home/reset.error.html')
+    },
+    'app': {
+      abstract: true,
+      template: require('../templates/app.html')
     }
   };
 
+  function redirectToDefault() {
+    location.hash = '#/home/login';
+  };
 
   function renderPage(route) {
 
-    var parts = route.replace('#', '').split('/');
+    var parts = route.replace('#/', '').split('/');
+
+    if (parts[0].length === 0) parts.shift();
 
     console.log('URL', parts);
 
     var output, key;
 
     for (var i = 0; i < parts.length; i++) {
+      if (parts[i] === "") continue;
       if (!key) {
         key = parts[i];
       } else {
         key += '.' + parts[i];
       }
       if (!states.hasOwnProperty(key)) {
-        console.error('Missing route: ' + key);
+        redirectToDefault();
       } else {
         var template = states[key].template;
         if (!output) {
           console.log(1);
           output = $('<div></div>').html(template);
         } else {
-          var outlet = $(output).find('[data-outlet]');
+          var outlet = $(output).find('[ui-view]');
           outlet.html(template);
-          outlet.removeAttr('data-outlet');
+          outlet.removeAttr('ui-view');
         }
       }
     }
 
-    $('#message').empty().append(output);
+    if (states.hasOwnProperty(key) && states[key].abstract) {
+      redirectToDefault();
+    }
+
+    $('[ui-view]').empty().append(output);
 
   }
 
@@ -104,7 +133,7 @@ var $ = require('jquery');
   });
 
   if (!location.hash) {
-    location.hash = '#hello';
+    redirectToDefault();
   } else {
     route = location.hash;
     renderPage(route);
