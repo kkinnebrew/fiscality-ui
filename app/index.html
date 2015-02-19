@@ -11,48 +11,28 @@
     <title>Fiscality | Easy Personal Finance</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
-    <!-- build:css -->
-    <link rel="stylesheet" href="styles/app.css">
-    <link rel="stylesheet" href="styles/home.css">
-    <link rel="stylesheet" href="styles/ledger.css">
-    <!-- endbuild -->
-    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="styles.min.css" />
     <script src="//use.typekit.net/yco1mwv.js"></script>
     <script>try{Typekit.load();}catch(e){}</script>
 </head>
 
-    <body>
+<body>
 
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
 
-    <div ui-view id="app"></div>
+<div id="app"></div>
 
-    <div class="version">Fiscality: Development Version <span app-version></span></div>
+<div class="version">Fiscality: Development Version <span app-version></span></div>
 
-    <!-- In production use:
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-    -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/datejs/build/production/date.min.js"></script>
-    <!-- build:js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/services/services.js"></script>
-    <script src="scripts/services/auth.js"></script>
-    <script src="scripts/services/transactions.js"></script>
-    <script src="scripts/controllers/home.js"></script>
-    <script src="scripts/controllers/app.js"></script>
-    <script src="scripts/controllers/advanced.js"></script>
-    <script src="scripts/controllers/controllers.js"></script>
-    <script src="scripts/components/version/version.js"></script>
-    <script src="scripts/components/version/version-directive.js"></script>
-    <script src="scripts/components/version/interpolate-filter.js"></script>
-    <!-- endbuild -->
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
 
-    </body>
+<script type="text/javascript" src="vendor.min.js"></script>
+<script type="text/javascript" src="app.min.js"></script>
+
+</body>
 
 </html>
