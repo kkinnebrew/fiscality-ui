@@ -159,6 +159,7 @@ gulp.task('watch', function() {
   livereload.listen();
   gulp.watch('app/images/**/*', ['images']);
   gulp.watch('app/scripts/**/*', ['scripts']);
+  gulp.watch('app/templates/**/*', ['scripts']);
   gulp.watch('app/styles/**/*', ['styles']);
   gulp.watch('app/*.html', ['html']);
 });

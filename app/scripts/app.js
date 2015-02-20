@@ -148,7 +148,7 @@ var $ = require('jquery');
       }
     }
 
-    
+
     if (states.hasOwnProperty(key) && states[key].abstract) {
       if (states[key].redirect) {
         location.hash = '#/' + states[key].redirect;
