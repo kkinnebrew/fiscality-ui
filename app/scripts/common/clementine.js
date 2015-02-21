@@ -18,9 +18,20 @@ Application.prototype.render = function(el) {
 
 function View(template) {
 
+  this.$el = $('<div></div>');
+
+  if (typeof template === 'string') {
+    this.$el.html(template);
+  }
+
+  this.$subview = this.$el.find('[ui-view]');
+
 }
 
-View.prototype.render = function(el) {
+View.prototype.render = function($el) {
+
+  this.$el.children().appendTo($el);
+
 
 };
 
@@ -32,5 +43,11 @@ View.prototype.unbind = function() {
 
 };
 
-module.exports = Application;
-module.exports = View;
+View.prototype.getSubview = function() {
+
+  return this.$subview;
+
+};
+
+module.exports.Application = Application;
+module.exports.View = View;

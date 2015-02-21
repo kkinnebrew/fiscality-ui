@@ -5,6 +5,7 @@
  */
 
 var $ = require('jquery');
+var View = require('./common/clementine').View;
 
 (function(window) {
 
@@ -125,7 +126,7 @@ var $ = require('jquery');
 
     console.log('URL', parts);
 
-    var output, key;
+    var output, last, key;
 
     for (var i = 0; i < parts.length; i++) {
       if (parts[i] === "") continue;
@@ -139,11 +140,11 @@ var $ = require('jquery');
       } else {
         var template = states[key].template;
         if (!output) {
-          output = $('<div></div>').html(template);
+          output = last = new View(template);
         } else {
-          var outlet = $(output).find('[ui-view]');
-          outlet.html(template);
-          outlet.removeAttr('ui-view');
+          var outlet = last.getSubview();
+          last = new View(template);
+          last.render(outlet);
         }
       }
     }
@@ -156,8 +157,8 @@ var $ = require('jquery');
         redirectToDefault();
       }
     }
-
-    $('[ui-view]').empty().append(output);
+    $('#app').empty();
+    output.render($('#app'));
 
   }
 
