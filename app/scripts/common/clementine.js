@@ -16,4 +16,21 @@ Application.prototype.render = function(el) {
   }
 };
 
+function View(template) {
+
+}
+
+View.prototype.render = function(el) {
+
+};
+
+View.prototype.bind = function() {
+
+};
+
+View.prototype.unbind = function() {
+
+};
+
 module.exports = Application;
+module.exports = View;
