@@ -18,6 +18,8 @@ Application.prototype.render = function(el) {
 
 function View(template) {
 
+  this.template = template;
+
   this.$el = $('<div></div>');
 
   if (typeof template === 'string') {
@@ -32,6 +34,13 @@ View.prototype.render = function($el) {
 
   this.$el.children().appendTo($el);
 
+  this.bind();
+
+};
+
+View.prototype.remove = function() {
+
+  this.unbind();
 
 };
 
