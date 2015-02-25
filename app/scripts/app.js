@@ -4,74 +4,193 @@
  * @date 2.1.2015
  */
 
-angular.module('app', [
-  'ui.router',
-  'util.version',
-  'services',
-  'controllers'
-]);
+var $ = require('jquery');
+var View = require('./common/clementine').View;
+var ViewModel = require('./common/clementine').ViewModel;
+var Controller = require('./common/clementine').Controller;
 
-angular.module('app').constant('API_CONFIG', {
-  //baseUrl: 'http://localhost:9000'
-  baseUrl: 'https://fiscality-api.herokuapp.com'
-});
+(function(window) {
 
-angular.module('app').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  // exit if the browser implements that event
+  if ( "onhashchange" in window.document.body ) { return; }
 
-  $urlRouterProvider.otherwise('/home/login');
+  var location = window.location,
+    oldURL = location.href,
+    oldHash = location.hash;
 
-  $stateProvider
-    .state('home', {
+  // check the location hash on a 100ms interval
+  setInterval(function() {
+    var newURL = location.href,
+      newHash = location.hash;
+
+    // if the hash has changed and a handler has been bound...
+    if ( newHash != oldHash && typeof window.onhashchange === "function" ) {
+      // execute the handler
+      window.onhashchange({
+        type: "hashchange",
+        oldURL: oldURL,
+        newURL: newURL
+      });
+
+      oldURL = newURL;
+      oldHash = newHash;
+    }
+  }, 100);
+
+})(window);
+
+(function(window) {
+
+  var states = {
+    'home': {
       abstract: true,
-      url: '/home',
-      templateUrl: 'partials/home.html'
-    })
-    .state('home.login', {
-      url: '/login',
-      templateUrl: 'partials/home/login.html',
-      controller: 'LoginController'
-    })
-    .state('home.register', {
-      url: '/register',
-      templateUrl: 'partials/home/register.html',
-      controller: 'RegisterController'
-    })
-    .state('home.forgot', {
+      redirect: 'home/login',
+      template: require('../templates/home.html'),
+      view: require('./views/home')
+    },
+    'home.login': {
+      template: require('../templates/home/login.html'),
+      viewModel: require('./viewmodels/login')
+    },
+    'home.register': {
+      template: require('../templates/home/register.html'),
+      viewModel: require('./viewmodels/register')
+    },
+    'home.forgot': {
       abstract: true,
-      url: '/forgot',
-      templateUrl: 'partials/home/forgot.html',
-      controller: 'ForgotController'
-    })
-    .state('home.forgot.form', {
-      url: '/form',
-      templateUrl: 'partials/home/forgot.form.html',
-      controller: 'ForgotController'
-    })
-    .state('home.forgot.success', {
-      url: '/success',
-      templateUrl: 'partials/home/forgot.success.html'
-    })
-    .state('home.forgot.error', {
-      url: '/error',
-      templateUrl: 'partials/home/forgot.error.html'
-    })
-    .state('home.reset', {
+      redirect: 'home/forgot/form',
+      template: require('../templates/home/forgot.html')
+    },
+    'home.forgot.form': {
+      template: require('../templates/home/forgot.form.html')
+    },
+    'home.forgot.error': {
+      template: require('../templates/home/forgot.error.html')
+    },
+    'home.reset': {
       abstract: true,
-      url: '/reset',
-      templateUrl: 'partials/home/reset.html'
-    })
-    .state('home.reset.form', {
-      url: '/form',
-      templateUrl: 'partials/home/reset.form.html',
-      controller: 'ResetController'
-    })
-    .state('home.reset.success', {
-      url: '/form',
-      templateUrl: 'partials/home/reset.success.html'
-    })
-    .state('home.reset.error', {
-      url: '/form',
-      templateUrl: 'partials/home/reset.error.html'
-    });
+      redirect: 'home/reset/form',
+      template: require('../templates/home/reset.html')
+    },
+    'home.reset.form': {
+      template: require('../templates/home/reset.form.html')
+    },
+    'home.reset.error': {
+      template: require('../templates/home/reset.error.html')
+    },
+    'app': {
+      abstract: true,
+      redirect: 'app/accounts/banking',
+      template: require('../templates/app.html')
+    },
+    'app.accounts': {
+      abstract: true,
+      redirect: 'app/accounts/banking',
+      template: require('../templates/app/accounts.html')
+    },
+    'app.accounts.banking': {
+      template: require('../templates/app/accounts/banking.html')
+    },
+    'app.accounts.credit': {
+      template: require('../templates/app/accounts/credit.html')
+    },
+    'app.investments': {
+      abstract: true,
+      redirect: 'app/investments/positions',
+      template: require('../templates/app/investments.html')
+    },
+    'app.investments.positions': {
+      template: require('../templates/app/investments/positions.html')
+    },
+    'app.investments.activity': {
+      template: require('../templates/app/investments/activity.html')
+    },
+    'app.advanced': {
+      abstract: true,
+      redirect: 'app/advanced/ledger',
+      template: require('../templates/app/advanced.html')
+    },
+    'app.advanced.ledger': {
+      template: require('../templates/app/advanced/ledger.html')
+    },
+    'app.advanced.balance': {
+      template: require('../templates/app/advanced/balance.html')
+    }
 
-}]);
+  };
+
+  function redirectToDefault() {
+    location.hash = '#/home/login';
+  };
+
+  function renderPage(route) {
+
+    var parts = route.replace('#/', '').split('/');
+
+    if (parts[0].length === 0) parts.shift();
+
+    console.log('URL', parts);
+
+    var parent = null, vm = null, vw = null, key;
+
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i] === "") continue;
+      if (!key) {
+        key = parts[i];
+      } else {
+        key += '.' + parts[i];
+      }
+      if (!states.hasOwnProperty(key)) {
+        redirectToDefault();
+      } else {
+        var template = states[key].template;
+        var view = states[key].view || View;
+        var viewModel = states[key].viewModel;
+        if (!parent) {
+          parent = new view(template);
+          if (viewModel) {
+            vm = new viewModel();
+            new Controller(vm, parent);
+          }
+        } else {
+          vw = new view(template);
+          parent.renderSubview(vw);
+          if (viewModel) {
+            vm = new viewModel();
+            new Controller(vm, vw);
+          }
+        }
+      }
+    }
+
+
+    if (states.hasOwnProperty(key) && states[key].abstract) {
+      if (states[key].redirect) {
+        location.hash = '#/' + states[key].redirect;
+      } else {
+        redirectToDefault();
+      }
+    }
+    $('#app').empty();
+    parent.render($('#app'));
+
+  }
+
+  var route;
+
+  $(window).on('hashchange', function() {
+
+    route = location.hash;
+
+    renderPage(route);
+
+  });
+
+  if (!location.hash) {
+    redirectToDefault();
+  } else {
+    route = location.hash;
+    renderPage(route);
+  }
+
+})(window);

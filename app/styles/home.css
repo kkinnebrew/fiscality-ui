@@ -164,3 +164,17 @@
 .forgot-message a:hover {
     color: #444;
 }
+
+/* animations */
+
+[ui-view].hidden {
+    display: block !important;
+    opacity: 0;
+}
+
+[ui-view] {
+    display: block !important;
+    opacity: 1;
+    -webkit-transition: opacity ease-in-out 150ms;
+}
+

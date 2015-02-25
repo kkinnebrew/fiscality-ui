@@ -1,41 +1,33 @@
-angular.module('services.auth', []);
+var $ = require('jquery');
 
-angular.module('services.auth').factory('auth', function($http, API_CONFIG) {
+var baseUrl = 'http://fiscality-api.herokuapp.com';
 
-  var baseUrl = API_CONFIG.baseUrl;
+module.exports = {
 
-  return {
-
-    login: function(email, password) {
-      return $http.post(baseUrl + '/api/login', {
+  login: function(email, password) {
+    return $.ajax({
+      type: 'POST',
+      url: baseUrl + '/api/login',
+      data: JSON.stringify({
         email: email,
         password: password
-      });
-    },
+      }),
+      contentType: 'application/json;charset=UTF-8'
+    });
+  },
 
-    register: function(firstName, lastName, email, password) {
-      return $http.post(baseUrl + '/api/register', {
+  register: function(firstName, lastName, email, password) {
+    return $.ajax({
+      type: 'POST',
+      url: baseUrl + '/api/register',
+      data: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password
-      });
-    },
+      }),
+      contentType: 'application/json;charset=UTF-8'
+    });
+  }
 
-    forgotPassword: function(email) {
-      return $http.post(baseUrl + '/api/forgotpassword', {
-        email: email
-      });
-    },
-
-    resetPassword: function(password, confirm) {
-      return $http.post(baseUrl + '/api/changepassword', {
-        resetCode: 'abc',
-        password: password,
-        confirmPassword: confirm
-      });
-    }
-
-  };
-
-});
+};
