@@ -363,9 +363,10 @@ var View = Class.extend({
       var model = $(this).attr('data-model');
       var tag = $(this).prop('tagName');
 
-      switch(tag) {
+      switch(tag.toLowerCase()) {
         case 'input':
-          $(this).on('keypress', function() {
+          console.log('bound keyup');
+          $(this).on('keyup', function() {
             that.fire('change', {
               key: model,
               value: $(this).val()
@@ -405,27 +406,17 @@ var View = Class.extend({
 
     });
 
-    this.$target.find('[data-model]:not([data-bound])').each(function() {
+    this.$target.find('[data-bound]').each(function() {
 
       var model = $(this).attr('data-model');
       var tag = $(this).prop('tagName');
 
-      switch(tag) {
+      switch(tag.toLowerCase()) {
         case 'input':
-          $(this).on('keypress', function() {
-            that.fire('change', {
-              key: model,
-              value: $(this).val()
-            });
-          });
+          $(this).off('keyup');
           break;
         case 'select':
-          $(this).on('change', function() {
-            that.fire('change', {
-              key: model,
-              value: $(this).val()
-            });
-          });
+          $(this).off('change');
           break;
       }
 
@@ -452,7 +443,7 @@ var View = Class.extend({
       var key = $(this).attr('ng-model');
       var tag = $(this).prop('tagName');
       var val = null;
-      switch(tag) {
+      switch(tag.toLowerCase()) {
         case 'div':
           val = $(this).text();
           break;
@@ -482,7 +473,7 @@ var View = Class.extend({
       var val = data[key];
 
       if (el.length) {
-        switch(tag) {
+        switch(tag.toLowerCase()) {
           case 'div':
             val = $(this).text(val);
             break;
@@ -541,16 +532,23 @@ var ViewModel = Class.extend({
 
     console.log('initialize view model');
 
-
   },
 
   execute: function(message) {
     console.log('executing', message);
 
     this[message].call(this);
+  },
+
+  update: function(key, value) {
+
+    this[key] = value;
+
+    console.log('view model updated', key, value);
   }
 
 });
+
 
 module.exports.Application = Application;
 module.exports.View = View;

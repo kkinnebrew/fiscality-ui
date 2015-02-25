@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-var baseUrl = 'https://fiscality-api.herokuapp.com';
+var baseUrl = 'http://localhost:9000';
 
 module.exports = {
 
@@ -11,7 +11,9 @@ module.exports = {
       data: {
         email: email,
         password: password
-      }
+      },
+      contentType: 'application/json;charset=UTF-8',
+      dataType: 'json'
     });
   }
 
