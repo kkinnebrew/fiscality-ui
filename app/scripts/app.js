@@ -43,7 +43,8 @@ var View = require('./common/clementine').View;
     'home': {
       abstract: true,
       redirect: 'home/login',
-      template: require('../templates/home.html')
+      template: require('../templates/home.html'),
+      view: require('./views/home')
     },
     'home.login': {
       template: require('../templates/home/login.html')
@@ -126,7 +127,7 @@ var View = require('./common/clementine').View;
 
     console.log('URL', parts);
 
-    var output, last, key;
+    var parent = null, key;
 
     for (var i = 0; i < parts.length; i++) {
       if (parts[i] === "") continue;
@@ -139,12 +140,11 @@ var View = require('./common/clementine').View;
         redirectToDefault();
       } else {
         var template = states[key].template;
-        if (!output) {
-          output = last = new View(template);
+        var view = states[key].view || View;
+        if (!parent) {
+          parent = new view(template);
         } else {
-          var outlet = last.getSubview();
-          last = new View(template);
-          last.render(outlet);
+          parent.renderSubview(new view(template));
         }
       }
     }
@@ -158,7 +158,7 @@ var View = require('./common/clementine').View;
       }
     }
     $('#app').empty();
-    output.render($('#app'));
+    parent.render($('#app'));
 
   }
 
