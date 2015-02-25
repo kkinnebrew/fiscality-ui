@@ -57,26 +57,12 @@ var Controller = require('./common/clementine').Controller;
       viewModel: require('./viewmodels/register')
     },
     'home.forgot': {
-      abstract: true,
-      redirect: 'home/forgot/form',
-      template: require('../templates/home/forgot.html')
-    },
-    'home.forgot.form': {
-      template: require('../templates/home/forgot.form.html')
-    },
-    'home.forgot.error': {
-      template: require('../templates/home/forgot.error.html')
+      template: require('../templates/home/forgot.html'),
+      viewModel: require('./viewmodels/forgot')
     },
     'home.reset': {
-      abstract: true,
-      redirect: 'home/reset/form',
-      template: require('../templates/home/reset.html')
-    },
-    'home.reset.form': {
-      template: require('../templates/home/reset.form.html')
-    },
-    'home.reset.error': {
-      template: require('../templates/home/reset.error.html')
+      template: require('../templates/home/reset.html'),
+      viewModel: require('./viewmodels/reset')
     },
     'app': {
       abstract: true,

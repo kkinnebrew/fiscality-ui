@@ -343,6 +343,10 @@ var View = Class.extend({
 
       var parts = pattern.split(':');
 
+      if (parts.length !== 2) {
+        return console.error('Invalid data-bind pattern', pattern);
+      }
+
       var event = parts[0];
       var message = parts[1].replace(/[()]/g, '');
 
