@@ -6,6 +6,8 @@
 
 var $ = require('jquery');
 var View = require('./common/clementine').View;
+var ViewModel = require('./common/clementine').ViewModel;
+var Controller = require('./common/clementine').Controller;
 
 (function(window) {
 
@@ -47,7 +49,8 @@ var View = require('./common/clementine').View;
       view: require('./views/home')
     },
     'home.login': {
-      template: require('../templates/home/login.html')
+      template: require('../templates/home/login.html'),
+      viewModel: require('./viewmodels/login')
     },
     'home.register': {
       template: require('../templates/home/register.html')
@@ -127,7 +130,7 @@ var View = require('./common/clementine').View;
 
     console.log('URL', parts);
 
-    var parent = null, key;
+    var parent = null, vm = null, vw = null, key;
 
     for (var i = 0; i < parts.length; i++) {
       if (parts[i] === "") continue;
@@ -141,10 +144,20 @@ var View = require('./common/clementine').View;
       } else {
         var template = states[key].template;
         var view = states[key].view || View;
+        var viewModel = states[key].viewModel;
         if (!parent) {
           parent = new view(template);
+          if (viewModel) {
+            vm = new viewModel();
+            new Controller(vm, parent);
+          }
         } else {
-          parent.renderSubview(new view(template));
+          vw = new view(template);
+          parent.renderSubview(vw);
+          if (viewModel) {
+            vm = new viewModel();
+            new Controller(vm, vw);
+          }
         }
       }
     }
