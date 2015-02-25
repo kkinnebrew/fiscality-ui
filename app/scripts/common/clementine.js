@@ -358,7 +358,7 @@ var View = Class.extend({
 
     });
 
-    this.$target.find('[data-model]:not([data-bound])').each(function() {
+    this.$target.find('[data-model]:not([data-live])').each(function() {
 
       var model = $(this).attr('data-model');
       var tag = $(this).prop('tagName');
@@ -366,11 +366,14 @@ var View = Class.extend({
       switch(tag.toLowerCase()) {
         case 'input':
           console.log('bound keyup');
-          $(this).on('keyup', function() {
-            that.fire('change', {
-              key: model,
-              value: $(this).val()
-            });
+          $(this).on('keyup', function(e) {
+            if (e.which <= 90 && e.which >= 48) {
+              that.fire('change', {
+                key: model,
+                value: $(this).val()
+              });
+            }
+
           });
           break;
         case 'select':
@@ -385,7 +388,7 @@ var View = Class.extend({
 
       console.log('live-bound:', model);
 
-      $(this).attr('data-bound', '');
+      $(this).attr('data-live', '');
 
     });
 
@@ -422,7 +425,7 @@ var View = Class.extend({
 
       console.log('live-bound:', model);
 
-      $(this).attr('data-bound', '');
+      $(this).removeAttr('data-live');
 
     });
 
