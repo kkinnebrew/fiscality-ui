@@ -53,7 +53,8 @@ var Controller = require('./common/clementine').Controller;
       viewModel: require('./viewmodels/login')
     },
     'home.register': {
-      template: require('../templates/home/register.html')
+      template: require('../templates/home/register.html'),
+      viewModel: require('./viewmodels/register')
     },
     'home.forgot': {
       abstract: true,

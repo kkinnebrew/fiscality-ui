@@ -537,7 +537,13 @@ var ViewModel = Class.extend({
   execute: function(message) {
     console.log('executing', message);
 
-    this[message].call(this);
+    console.log(this[message]);
+
+    if (typeof this[message] === 'function') {
+      this[message].call(this);
+    } else {
+      console.warn('No method ' + message + ' found on view model');
+    }
   },
 
   update: function(key, value) {

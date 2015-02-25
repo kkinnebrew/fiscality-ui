@@ -14,6 +14,20 @@ module.exports = {
       }),
       contentType: 'application/json;charset=UTF-8'
     });
+  },
+
+  register: function(firstName, lastName, email, password) {
+    return $.ajax({
+      type: 'POST',
+      url: baseUrl + '/api/register',
+      data: JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+      }),
+      contentType: 'application/json;charset=UTF-8'
+    });
   }
 
 };
