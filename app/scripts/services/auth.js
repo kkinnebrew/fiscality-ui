@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-var baseUrl = 'http://localhost:9000';
+var baseUrl = 'http://fiscality-api.herokuapp.com';
 
 module.exports = {
 
@@ -8,12 +8,11 @@ module.exports = {
     return $.ajax({
       type: 'POST',
       url: baseUrl + '/api/login',
-      data: {
+      data: JSON.stringify({
         email: email,
         password: password
-      },
-      contentType: 'application/json;charset=UTF-8',
-      dataType: 'json'
+      }),
+      contentType: 'application/json;charset=UTF-8'
     });
   }
 
