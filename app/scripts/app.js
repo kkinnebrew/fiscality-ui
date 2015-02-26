@@ -50,19 +50,19 @@ var Controller = require('./common/clementine').Controller;
     },
     'home.login': {
       template: require('../templates/home/login.html'),
-      viewModel: require('./viewmodels/login')
+      viewModel: require('./viewmodels/home/login')
     },
     'home.register': {
       template: require('../templates/home/register.html'),
-      viewModel: require('./viewmodels/register')
+      viewModel: require('./viewmodels/home/register')
     },
     'home.forgot': {
       template: require('../templates/home/forgot.html'),
-      viewModel: require('./viewmodels/forgot')
+      viewModel: require('./viewmodels/home/forgot')
     },
     'home.reset': {
       template: require('../templates/home/reset.html'),
-      viewModel: require('./viewmodels/reset')
+      viewModel: require('./viewmodels/home/reset')
     },
     'app': {
       abstract: true,
@@ -97,7 +97,8 @@ var Controller = require('./common/clementine').Controller;
       template: require('../templates/app/advanced.html')
     },
     'app.advanced.ledger': {
-      template: require('../templates/app/advanced/ledger.html')
+      template: require('../templates/app/advanced/ledger.html'),
+      viewModel: require('./viewmodels/app/ledger')
     },
     'app.advanced.balance': {
       template: require('../templates/app/advanced/balance.html')
@@ -117,7 +118,7 @@ var Controller = require('./common/clementine').Controller;
 
     console.log('URL', parts);
 
-    var parent = null, vm = null, vw = null, key;
+    var rootView, parent = null, vm = null, vw = null, key;
 
     for (var i = 0; i < parts.length; i++) {
       if (parts[i] === "") continue;
@@ -133,18 +134,18 @@ var Controller = require('./common/clementine').Controller;
         var view = states[key].view || View;
         var viewModel = states[key].viewModel;
         if (!parent) {
-          parent = new view(template);
+          rootView = parent = new view(template);
           if (viewModel) {
             vm = new viewModel();
             new Controller(vm, parent);
           }
         } else {
           vw = new view(template);
-          parent.renderSubview(vw);
           if (viewModel) {
             vm = new viewModel();
             new Controller(vm, vw);
           }
+          parent.renderSubview(vw);
         }
       }
     }
@@ -158,7 +159,7 @@ var Controller = require('./common/clementine').Controller;
       }
     }
     $('#app').empty();
-    parent.render($('#app'));
+    rootView.render($('#app'));
 
   }
 
