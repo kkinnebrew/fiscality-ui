@@ -3,4 +3,22 @@
     <div class="description">Reset your Fiscality password now.</div>
 </div>
 
-<div ui-view></div>
+<form>
+
+    <div class="form-group">
+
+        <div class="field-group">
+            <label class="field-label">Enter a new password</label>
+            <input class="text-field" type="password" placeholder="Password" data-model="password" spellcheck="false" />
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Confirm your password</label>
+            <input class="text-field" type="password" placeholder="Confirm Password" data-model="confirm" spellcheck="false" />
+        </div>
+
+        <input class="field-btn submit-btn" type="submit" value="Reset Password" data-bind="click:resetPassword()" />
+
+    </div>
+
+</form>

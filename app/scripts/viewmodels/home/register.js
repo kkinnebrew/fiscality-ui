@@ -1,5 +1,5 @@
-var ViewModel = require('../common/clementine').ViewModel;
-var auth = require('../services/auth');
+var ViewModel = require('../../common/clementine').ViewModel;
+var auth = require('../../services/auth');
 
 var RegisterViewModel = ViewModel.extend({
 

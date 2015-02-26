@@ -315,9 +315,90 @@ var View = Class.extend({
 
   },
 
+  preprocess: function(data) {
+
+    console.log(this.data);
+
+    data = data || {};
+
+    this.$el.find('[data-repeat]').each(function() {
+
+      var pattern = $(this).attr('data-repeat');
+
+      var parts = pattern.match(/([A-Za-z_]+)\sin\s([A-Za-z_]+)/i);
+
+      if (!parts) {
+        return console.error('Invalid data-repeat pattern');
+      }
+
+      var key = parts[1];
+      var item = parts[2];
+
+      console.log(data[item]);
+
+      if (!data.hasOwnProperty(item) || data[item].length === 0) {
+        return console.error('Model for data-repeat not found');
+      }
+
+      var repeat = null, last = $(this), current = null;
+
+      var template = $(this).html();
+
+      var list = data[item];
+
+      for (var i = 0; i < list.length; i++) {
+
+        repeat = $($(this).get(0).cloneNode(false));
+
+        repeat.removeAttr('data-repeat');
+
+        current = template;
+
+        var matches = current.match(/\{\{([A-Za-z.]+)\}\}/g);
+
+        var value = '';
+
+        if (matches) {
+          for (var j = 0; j < matches.length; j++) {
+            console.log(matches[j]);
+            if (data.hasOwnProperty(matches[j])) {
+              value = data[matches[j]];
+            } else if (matches[j].match('.')) {
+              var parts = matches[j].replace(/[\{\}]/g, '').split('.');
+              if (parts.length == 2 && parts[0] === key) {
+                value = list[i][parts[1]];
+              }
+            }
+            current = current.replace(matches[j], value);
+          }
+        }
+
+        console.log(current);
+
+        //current.replace(/\{\{([A-Za-z.]+)\}\}/i, function(match) {
+        //  console.log(match);
+        //});
+
+        repeat.html(current);
+
+        last.after(repeat);
+        last = repeat;
+
+      }
+
+      $(this).remove();
+
+      console.log('repeat', key, item);
+
+    });
+
+  },
+
   render: function($el) {
 
     this.$target = $el;
+
+    this.preprocess(this.data);
 
     this.$el.children().appendTo($el);
 
@@ -343,6 +424,10 @@ var View = Class.extend({
 
       var parts = pattern.split(':');
 
+      if (parts.length !== 2) {
+        return console.error('Invalid data-bind pattern', pattern);
+      }
+
       var event = parts[0];
       var message = parts[1].replace(/[()]/g, '');
 
@@ -358,7 +443,7 @@ var View = Class.extend({
 
     });
 
-    this.$target.find('[data-model]:not([data-bound])').each(function() {
+    this.$target.find('[data-model]:not([data-live])').each(function() {
 
       var model = $(this).attr('data-model');
       var tag = $(this).prop('tagName');
@@ -366,11 +451,14 @@ var View = Class.extend({
       switch(tag.toLowerCase()) {
         case 'input':
           console.log('bound keyup');
-          $(this).on('keyup', function() {
-            that.fire('change', {
-              key: model,
-              value: $(this).val()
-            });
+          $(this).on('keyup', function(e) {
+            if (e.which <= 90 && e.which >= 48) {
+              that.fire('change', {
+                key: model,
+                value: $(this).val()
+              });
+            }
+
           });
           break;
         case 'select':
@@ -385,7 +473,7 @@ var View = Class.extend({
 
       console.log('live-bound:', model);
 
-      $(this).attr('data-bound', '');
+      $(this).attr('data-live', '');
 
     });
 
@@ -422,7 +510,7 @@ var View = Class.extend({
 
       console.log('live-bound:', model);
 
-      $(this).attr('data-bound', '');
+      $(this).removeAttr('data-live');
 
     });
 
@@ -439,26 +527,26 @@ var View = Class.extend({
 
     var data = {};
 
-    this.$el.find('[ng-model]').each(function() {
-      var key = $(this).attr('ng-model');
-      var tag = $(this).prop('tagName');
-      var val = null;
-      switch(tag.toLowerCase()) {
-        case 'div':
-          val = $(this).text();
-          break;
-        case 'span':
-          val = $(this).text();
-          break;
-        case 'input':
-          val = $(this).val();
-          break;
-        case 'select':
-          val = $(this).val();
-          break;
-      }
-      data[key] = val;
-    });
+    //this.$el.find('[ng-model]').each(function() {
+    //  var key = $(this).attr('ng-model');
+    //  var tag = $(this).prop('tagName');
+    //  var val = null;
+    //  switch(tag.toLowerCase()) {
+    //    case 'div':
+    //      val = $(this).text();
+    //      break;
+    //    case 'span':
+    //      val = $(this).text();
+    //      break;
+    //    case 'input':
+    //      val = $(this).val();
+    //      break;
+    //    case 'select':
+    //      val = $(this).val();
+    //      break;
+    //  }
+    //  data[key] = val;
+    //});
 
     return data;
 
@@ -466,30 +554,32 @@ var View = Class.extend({
 
   setData: function(data) {
 
-    for (var key in data) {
+    this.data = data;
 
-      var el = this.$el.find('[ng-model="' + key + '"]');
-      var tag = $(this).prop('tagName');
-      var val = data[key];
-
-      if (el.length) {
-        switch(tag.toLowerCase()) {
-          case 'div':
-            val = $(this).text(val);
-            break;
-          case 'span':
-            val = $(this).text(val);
-            break;
-          case 'input':
-            val = $(this).val(val);
-            break;
-          case 'select':
-            val = $(this).val(val);
-            break;
-        }
-      }
-
-    }
+    //for (var key in data) {
+    //
+    //  var el = this.$el.find('[ng-model="' + key + '"]');
+    //  var tag = $(this).prop('tagName');
+    //  var val = data[key];
+    //
+    //  if (el.length) {
+    //    switch(tag.toLowerCase()) {
+    //      case 'div':
+    //        val = $(this).text(val);
+    //        break;
+    //      case 'span':
+    //        val = $(this).text(val);
+    //        break;
+    //      case 'input':
+    //        val = $(this).val(val);
+    //        break;
+    //      case 'select':
+    //        val = $(this).val(val);
+    //        break;
+    //    }
+    //  }
+    //
+    //}
 
   }
 
@@ -504,6 +594,8 @@ var Controller = Class.extend({
 
     this.view = view;
     this.viewModel = viewModel;
+
+    this.view.setData(viewModel.getData());
 
     var that = this;
 
@@ -520,6 +612,10 @@ var Controller = Class.extend({
     this.viewModel.on('change', function(e) {
       console.log('viewModel changed', e.data.key, e.data.value);
       that.view.update(e.data.key, e.data.value);
+    });
+
+    this.viewModel.on('refresh', function(e) {
+      that.view.render(that.viewModel.getData());
     });
 
   }
@@ -551,6 +647,19 @@ var ViewModel = Class.extend({
     this[key] = value;
 
     console.log('view model updated', key, value);
+  },
+
+  getData: function() {
+
+    var data = {};
+
+    for (var prop in this) {
+      if (typeof this[prop] !== 'function') {
+        data[prop] = this[prop];
+      }
+    }
+
+    return data;
   }
 
 });
