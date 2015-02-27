@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-var baseUrl = 'http://fiscality-api.herokuapp.com';
+var baseUrl = 'https://fiscality-api.herokuapp.com';
 //var baseUrl = 'http://localhost:9000';
 
 module.exports = {
