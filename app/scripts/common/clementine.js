@@ -664,6 +664,22 @@ var ViewModel = Class.extend({
 
 });
 
+$.fn.childrenTo = function(selector) {
+  var childList = [];
+  var that = this;
+  this.find(selector).each(function() {
+    var include = false, parent = $(this).parent();
+    while (parent.length !== 0 && !include) {
+      if ($(parent).not($(that)).length === 0) {
+        include = true; break;
+      } else if ($(parent).not('[data-control]').length === 0) {
+        include = false; break;
+      } parent = $(parent).parent();
+    }
+    if (include) { childList.push($(this)); }
+  });
+  return childList;
+}
 
 module.exports.Application = Application;
 module.exports.View = View;
