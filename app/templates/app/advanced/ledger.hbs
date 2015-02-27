@@ -18,11 +18,13 @@
 
     <div class="table-body">
 
-        <div class="transaction" data-repeat="transaction in transactions">
+        {{#each transactions}}
+
+        <div class="transaction">
 
             <div class="table-row transaction-header">
                 <div class="table-cell cell-sm">
-                    <span class="text-label">{{transaction.transactionDate}}</span>
+                    <span class="text-label">{{transactionDate}}</span>
                     <input class="text-field editable field-sm" type="text" />
                 </div>
                 <div class="table-cell cell-sm">
@@ -30,29 +32,35 @@
                     <input class="text-field editable field-sm" type="text" value="Deposit" />
                 </div>
                 <div class="table-cell cell-lg">
-                    <span class="text-label">{{transaction.description}}</span>
+                    <span class="text-label">{{description}}</span>
                     <input class="text-field editable field-lg" type="text" />
                 </div>
             </div>
+
+            {{#each transactionLines}}
 
             <div class="table-row transaction-line">
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-lg" ng-class="{ 'transaction-line-indent': !$first }">
-                    <span class="text-label"></span>
+                    <span class="text-label">{{account.accountName}}</span>
                     <input class="text-field editable field-lg" type="text" />
                 </div>
                 <div class="table-cell cell-xsm cell-right">
-                    <span class="text-label">{{transaction.debitAmount}}</span>
+                    <span class="text-label">{{debitAmount}}</span>
                     <input class="text-field editable field-xsm" type="text" />
                 </div>
                 <div class="table-cell cell-xsm cell-right">
-                    <span class="text-label">{{transaction.creditAmount}}</span>
+                    <span class="text-label">{{creditAmount}}</span>
                     <input class="text-field editable field-xsm" type="text" />
                 </div>
             </div>
 
+            {{/each}}
+
         </div>
+
+        {{/each}}
 
     </div>
 

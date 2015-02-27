@@ -7,6 +7,8 @@ var View = Class.extend({
 
     // store properties
 
+    console.log(viewModel);
+
     this.template = template;
     this.viewModel = viewModel;
 
@@ -78,6 +80,8 @@ var View = Class.extend({
   },
 
   refresh: function($target) {
+
+    console.log('refresh received', this.viewModel.transactions);
 
     if (!this.rendered) {
       return;

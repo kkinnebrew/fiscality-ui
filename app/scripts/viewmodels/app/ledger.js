@@ -1,32 +1,24 @@
 var ViewModel = require('../../common/clementine').ViewModel;
+var transactions = require('../../services/transactions');
 
 var LedgerViewModel = ViewModel.extend({
 
   initialize: function() {
 
-    this.transactions = [{
-      transactionDate: '2014-10-01',
-      description: 'Bought a car',
-      debitAmount: 1409.33,
-      creditAmount: 0
-    }, {
-      transactionDate: '2014-10-01',
-      description: 'Bought a car',
-      debitAmount: 1409.33,
-      creditAmount: 0
-    }, {
-      transactionDate: '2014-10-01',
-      description: 'Bought a car',
-      debitAmount: 0,
-      creditAmount: 500.61
-    }, {
-      transactionDate: '2014-10-01',
-      description: 'Bought a car',
-      debitAmount: 0,
-      creditAmount: 690.12
-    }];
+    var that = this;
+
+    this.transactions = [];
+
+    transactions.transactions().then(function(data) {
+      that.transactions = data;
+      console.log('refreshing');
+      that.fire('refresh');
+    }, function() {
+      console.log('error');
+    });
 
   }
+
 
 });
 

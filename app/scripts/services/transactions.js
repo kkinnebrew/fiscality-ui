@@ -1,15 +1,16 @@
-angular.module('services.transactions', []);
+var $ = require('jquery');
 
-angular.module('services.transactions').factory('transactions', function($http, API_CONFIG) {
+var baseUrl = 'http://fiscality-api.herokuapp.com';
+//var baseUrl = 'http://localhost:9000';
 
-  var baseUrl = API_CONFIG.baseUrl;
+module.exports = {
 
-  return {
+  transactions: function() {
+    return $.ajax({
+      type: 'GET',
+      url: baseUrl + '/api/transactions',
+      contentType: 'application/json;charset=UTF-8'
+    });
+  }
 
-    all: function() {
-      return $http.get(baseUrl + '/api/transactions', {});
-    }
-
-  };
-
-});
+};
