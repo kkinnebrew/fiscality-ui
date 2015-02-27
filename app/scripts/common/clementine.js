@@ -631,9 +631,9 @@ var ViewModel = Class.extend({
   },
 
   execute: function(message) {
-    console.log('executing', message);
-
-    console.log(this[message]);
+    //console.log('executing', message);
+    //
+    //console.log(this[message]);
 
     if (typeof this[message] === 'function') {
       this[message].call(this);

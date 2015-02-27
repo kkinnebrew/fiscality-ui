@@ -8,6 +8,7 @@ var LedgerViewModel = ViewModel.extend({
     var that = this;
 
     this.transactions = [];
+    this.hasEditor = false;
 
     transactions.transactions().then(function(data) {
       that.transactions = data;
@@ -16,6 +17,26 @@ var LedgerViewModel = ViewModel.extend({
     }, function() {
       console.log('error');
     });
+
+  },
+
+  addTransaction: function() {
+
+    console.log('123');
+
+    this.hasEditor = !this.hasEditor;
+
+    this.fire('refresh');
+
+  },
+
+  saveTransaction: function() {
+
+    console.log('123');
+
+    this.hasEditor = false;
+
+    this.fire('refresh');
 
   }
 

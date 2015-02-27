@@ -2,7 +2,7 @@
 
     <input id="ledger-search" type="search" placeholder="Search" />
 
-    <input id="add-transaction-btn" type="button" value="Add Transaction" />
+    <input id="add-transaction-btn" type="button" value="Add Transaction" data-bind="click:addTransaction()" />
 
 </div>
 
@@ -17,6 +17,54 @@
     </div>
 
     <div class="table-body">
+
+        {{#if hasEditor}}
+
+        <div class="transaction editor">
+
+            <div class="table-row transaction-header">
+                <div class="table-cell cell-sm">
+                    <input class="text-field editable field-sm" type="text" placeholder="02/27/2015" />
+                </div>
+                <div class="table-cell cell-sm">
+                    <input class="text-field editable field-sm" type="text" placeholder="Transaction Type" />
+                </div>
+                <div class="table-cell cell-lg">
+                    <input class="text-field editable field-lg" type="text" placeholder="Description" />
+                </div>
+            </div>
+
+            <div class="table-row transaction-line">
+                <div class="table-cell cell-sm"></div>
+                <div class="table-cell cell-sm"></div>
+                <div class="table-cell cell-lg">
+                    <input class="text-field editable field-lg" type="text" placeholder="Account" />
+                </div>
+                <div class="table-cell cell-xsm cell-right">
+                    <input class="text-field editable field-xsm" type="text" placeholder="0.00" />
+                </div>
+                <div class="table-cell cell-xsm cell-right">
+                    <input class="text-field editable field-xsm" type="text" placeholder="0.00" />
+                </div>
+            </div>
+
+            <div class="table-row transaction-line">
+                <div class="table-cell cell-sm"></div>
+                <div class="table-cell cell-sm"></div>
+                <div class="table-cell cell-lg">
+                    <input class="text-field editable field-lg" type="text" placeholder="Account" />
+                </div>
+                <div class="table-cell cell-xsm cell-right">
+                    <input class="text-field editable field-xsm" type="text" placeholder="0.00" />
+                </div>
+                <div class="table-cell cell-xsm cell-right">
+                    <input class="text-field editable field-xsm" type="text" placeholder="0.00" />
+                </div>
+            </div>
+
+        </div>
+
+        {{/if}}
 
         {{#each transactions}}
 
@@ -42,7 +90,7 @@
             <div class="table-row transaction-line">
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-sm"></div>
-                <div class="table-cell cell-lg" ng-class="{ 'transaction-line-indent': !$first }">
+                <div class="table-cell cell-lg">
                     <span class="text-label">{{account.accountName}}</span>
                     <input class="text-field editable field-lg" type="text" value="{{account.accountName}}" />
                 </div>
