@@ -45,8 +45,8 @@ var Controller = require('./common/clementine').Controller;
     'home': {
       abstract: true,
       redirect: 'home/login',
-      template: require('../templates/home.html')
-      //view: require('./views/home')
+      template: require('../templates/home.html'),
+      view: require('./views/home')
     },
     'home.login': {
       template: require('../templates/home/login.html'),

@@ -12,8 +12,6 @@ var HomeView = View.extend({
 
   renderSubviews: function() {
 
-    var that = this;
-
     for (var name in this.$registrations) {
 
       var view = this.$registrations[name];
@@ -25,7 +23,7 @@ var HomeView = View.extend({
         view.render(this.$subviews[name]);
 
         setTimeout(function() {
-          that.$subviews[name].removeClass('hidden');
+          this.$subviews[name].removeClass('hidden');
         }, 0);
 
       }
