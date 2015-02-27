@@ -38,7 +38,11 @@
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-lg">
-                    <input class="text-field editable field-lg" type="text" placeholder="Account" />
+                    <select class="text-field select-field editable field-lg">
+                        {{#each accounts}}
+                            <option value="{{accountId}}">{{accountName}}</option>
+                        {{/each}}
+                    </select>
                 </div>
                 <div class="table-cell cell-xsm cell-right">
                     <input class="text-field editable field-xsm" type="text" placeholder="0.00" />
@@ -52,7 +56,11 @@
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-sm"></div>
                 <div class="table-cell cell-lg">
-                    <input class="text-field editable field-lg" type="text" placeholder="Account" />
+                    <select class="text-field select-field editable field-lg">
+                        {{#each accounts}}
+                            <option value="{{accountId}}">{{accountName}}</option>
+                        {{/each}}
+                    </select>
                 </div>
                 <div class="table-cell cell-xsm cell-right">
                     <input class="text-field editable field-xsm" type="text" placeholder="0.00" />
