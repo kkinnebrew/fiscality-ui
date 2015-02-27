@@ -67,7 +67,8 @@ var Controller = require('./common/clementine').Controller;
     'app': {
       abstract: true,
       redirect: 'app/accounts/banking',
-      template: require('../templates/app.html')
+      template: require('../templates/app.hbs'),
+      viewModel: require('./viewmodels/app')
     },
     'app.accounts': {
       abstract: true,
