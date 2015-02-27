@@ -45,8 +45,8 @@ var Controller = require('./common/clementine').Controller;
     'home': {
       abstract: true,
       redirect: 'home/login',
-      template: require('../templates/home.html')
-      //view: require('./views/home')
+      template: require('../templates/home.html'),
+      view: require('./views/home')
     },
     'home.login': {
       template: require('../templates/home/login.html'),
@@ -67,12 +67,14 @@ var Controller = require('./common/clementine').Controller;
     'app': {
       abstract: true,
       redirect: 'app/accounts/banking',
-      template: require('../templates/app.html')
+      template: require('../templates/app.hbs'),
+      viewModel: require('./viewmodels/app')
     },
     'app.accounts': {
       abstract: true,
       redirect: 'app/accounts/banking',
-      template: require('../templates/app/accounts.html')
+      template: require('../templates/app/accounts.hbs'),
+      viewModel: require('./viewmodels/app/accounts')
     },
     'app.accounts.banking': {
       template: require('../templates/app/accounts/banking.html')
@@ -83,7 +85,8 @@ var Controller = require('./common/clementine').Controller;
     'app.investments': {
       abstract: true,
       redirect: 'app/investments/positions',
-      template: require('../templates/app/investments.html')
+      template: require('../templates/app/investments.hbs'),
+      viewModel: require('./viewmodels/app/investments')
     },
     'app.investments.positions': {
       template: require('../templates/app/investments/positions.html')
@@ -94,11 +97,12 @@ var Controller = require('./common/clementine').Controller;
     'app.advanced': {
       abstract: true,
       redirect: 'app/advanced/ledger',
-      template: require('../templates/app/advanced.html')
+      template: require('../templates/app/advanced.hbs'),
+      viewModel: require('./viewmodels/app/advanced')
     },
     'app.advanced.ledger': {
       template: require('../templates/app/advanced/ledger.hbs'),
-      viewModel: require('./viewmodels/app/ledger')
+      viewModel: require('./viewmodels/app/advanced/ledger')
     },
     'app.advanced.balance': {
       template: require('../templates/app/advanced/balance.html')

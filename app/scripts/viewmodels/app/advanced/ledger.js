@@ -1,5 +1,5 @@
-var ViewModel = require('../../common/clementine').ViewModel;
-var transactions = require('../../services/transactions');
+var ViewModel = require('../../../common/clementine').ViewModel;
+var transactions = require('../../../services/transactions');
 
 var LedgerViewModel = ViewModel.extend({
 

@@ -1,0 +1,42 @@
+<div id="app-header">
+
+    <div id="app-title">
+        <div class="logo"></div>
+        <h2>Fiscality</h2>
+    </div>
+
+    <nav id="main-nav">
+        {{#if isAccounts}}
+            <a href="#/app/accounts" class="active">Accounts</a>
+        {{else}}
+            <a href="#/app/accounts">Accounts</a>
+        {{/if}}
+        {{#if isInvestments}}
+            <a href="#/app/investments" class="active">Investments</a>
+        {{else}}
+            <a href="#/app/investments">Investments</a>
+        {{/if}}
+        {{#if isSpending}}
+            <a class="active">Spending</a>
+        {{else}}
+            <a>Spending</a>
+        {{/if}}
+        {{#if isTaxes}}
+            <a class="active">Taxes</a>
+        {{else}}
+            <a>Taxes</a>
+        {{/if}}
+        {{#if isAdvanced}}
+            <a href="#/app/advanced" class="active">Advanced</a>
+        {{else}}
+            <a href="#/app/advanced">Advanced</a>
+        {{/if}}
+    </nav>
+
+    <a class="logout-btn" href="#/home/login"></a>
+
+    <a class="settings-btn"></a>
+
+</div>
+
+<div id="app-content" ui-view></div>

@@ -1,0 +1,28 @@
+<div id="app-menu">
+
+    <ul class="menu-list">
+        {{#if isLedger}}
+        <li class="menu-item active"><a href="#/app/advanced/ledger">General Ledger</a></li>
+        {{else}}
+        <li class="menu-item"><a href="#/app/advanced/ledger">General Ledger</a></li>
+        {{/if}}
+        {{#if isBalance}}
+            <li class="menu-item active"><a href="#/app/advanced/balance">Balance Sheet</a></li>
+        {{else}}
+            <li class="menu-item"><a href="#/app/advanced/balance">Balance Sheet</a></li>
+        {{/if}}
+        {{#if isIncome}}
+            <li class="menu-item active"><a>Income Statement</a></li>
+        {{else}}
+            <li class="menu-item"><a>Income Statement</a></li>
+        {{/if}}
+        {{#if isCash}}
+            <li class="menu-item active"><a >Cash Flow</a></li>
+        {{else}}
+            <li class="menu-item"><a>Cash Flow</a></li>
+        {{/if}}
+    </ul>
+
+</div>
+
+<div ui-view id="app-view"></div>

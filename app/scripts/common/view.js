@@ -7,8 +7,6 @@ var View = Class.extend({
 
     // store properties
 
-    console.log(viewModel);
-
     this.template = template;
     this.viewModel = viewModel;
 

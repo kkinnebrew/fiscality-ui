@@ -1,4 +1,4 @@
-var View = require('../common/clementine').View;
+var View = require('../common/view');
 
 var HomeView = View.extend({
 
@@ -10,19 +10,27 @@ var HomeView = View.extend({
 
   },
 
-  renderSubview: function(view) {
+  renderSubviews: function() {
 
     var that = this;
 
-    console.log('Rendering subview');
+    for (var name in this.$registrations) {
 
-    this.$subview.addClass('hidden');
+      var view = this.$registrations[name];
 
-    this._super(view);
+      if (this.$subviews.hasOwnProperty(name)) {
 
-    setTimeout(function() {
-      that.$subview.removeClass('hidden');
-    }, 0);
+        this.$subviews[name].addClass('hidden');
+
+        view.render(this.$subviews[name]);
+
+        setTimeout(function() {
+          that.$subviews[name].removeClass('hidden');
+        }, 0);
+
+      }
+
+    }
 
   }
 
