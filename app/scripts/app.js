@@ -5,7 +5,7 @@
  */
 
 var $ = require('jquery');
-var View = require('./common/clementine').View;
+var View = require('./common/view');
 var ViewModel = require('./common/clementine').ViewModel;
 var Controller = require('./common/clementine').Controller;
 
@@ -45,8 +45,8 @@ var Controller = require('./common/clementine').Controller;
     'home': {
       abstract: true,
       redirect: 'home/login',
-      template: require('../templates/home.html'),
-      view: require('./views/home')
+      template: require('../templates/home.html')
+      //view: require('./views/home')
     },
     'home.login': {
       template: require('../templates/home/login.html'),
@@ -97,7 +97,7 @@ var Controller = require('./common/clementine').Controller;
       template: require('../templates/app/advanced.html')
     },
     'app.advanced.ledger': {
-      template: require('../templates/app/advanced/ledger.html'),
+      template: require('../templates/app/advanced/ledger.hbs'),
       viewModel: require('./viewmodels/app/ledger')
     },
     'app.advanced.balance': {
@@ -134,18 +134,23 @@ var Controller = require('./common/clementine').Controller;
         var view = states[key].view || View;
         var viewModel = states[key].viewModel;
         if (!parent) {
-          rootView = parent = new view(template);
           if (viewModel) {
             vm = new viewModel();
+          }
+          rootView = parent = new view(template, vm);
+          if (viewModel) {
             new Controller(vm, parent);
           }
         } else {
-          vw = new view(template);
           if (viewModel) {
             vm = new viewModel();
+          }
+          vw = new view(template, vm);
+          if (viewModel) {
             new Controller(vm, vw);
           }
-          parent.renderSubview(vw);
+          parent.registerSubview(vw);
+          parent = vw;
         }
       }
     }

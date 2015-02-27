@@ -297,293 +297,293 @@ Application.prototype.render = function(el) {
     console.error('No root view found');
   }
 };
-
-var View = Class.extend({
-
-  initialize: function(template) {
-
-    this.template = template;
-
-    this.$el = $('<div></div>');
-    this.$target = null;
-
-    if (typeof template === 'string') {
-      this.$el.html(template);
-    }
-
-    this.$subview = this.$el.find('[ui-view]');
-
-  },
-
-  preprocess: function(data) {
-
-    console.log(this.data);
-
-    data = data || {};
-
-    this.$el.find('[data-repeat]').each(function() {
-
-      var pattern = $(this).attr('data-repeat');
-
-      var parts = pattern.match(/([A-Za-z_]+)\sin\s([A-Za-z_]+)/i);
-
-      if (!parts) {
-        return console.error('Invalid data-repeat pattern');
-      }
-
-      var key = parts[1];
-      var item = parts[2];
-
-      console.log(data[item]);
-
-      if (!data.hasOwnProperty(item) || data[item].length === 0) {
-        return console.error('Model for data-repeat not found');
-      }
-
-      var repeat = null, last = $(this), current = null;
-
-      var template = $(this).html();
-
-      var list = data[item];
-
-      for (var i = 0; i < list.length; i++) {
-
-        repeat = $($(this).get(0).cloneNode(false));
-
-        repeat.removeAttr('data-repeat');
-
-        current = template;
-
-        var matches = current.match(/\{\{([A-Za-z.]+)\}\}/g);
-
-        var value = '';
-
-        if (matches) {
-          for (var j = 0; j < matches.length; j++) {
-            console.log(matches[j]);
-            if (data.hasOwnProperty(matches[j])) {
-              value = data[matches[j]];
-            } else if (matches[j].match('.')) {
-              var parts = matches[j].replace(/[\{\}]/g, '').split('.');
-              if (parts.length == 2 && parts[0] === key) {
-                value = list[i][parts[1]];
-              }
-            }
-            current = current.replace(matches[j], value);
-          }
-        }
-
-        console.log(current);
-
-        //current.replace(/\{\{([A-Za-z.]+)\}\}/i, function(match) {
-        //  console.log(match);
-        //});
-
-        repeat.html(current);
-
-        last.after(repeat);
-        last = repeat;
-
-      }
-
-      $(this).remove();
-
-      console.log('repeat', key, item);
-
-    });
-
-  },
-
-  render: function($el) {
-
-    this.$target = $el;
-
-    this.preprocess(this.data);
-
-    this.$el.children().appendTo($el);
-
-    this.bind();
-
-  },
-
-  remove: function() {
-
-    this.unbind();
-
-  },
-
-  bind: function() {
-
-    var that = this;
-
-    console.log('binding');
-
-    this.$target.find('[data-bind]').each(function() {
-
-      var pattern = $(this).attr('data-bind');
-
-      var parts = pattern.split(':');
-
-      if (parts.length !== 2) {
-        return console.error('Invalid data-bind pattern', pattern);
-      }
-
-      var event = parts[0];
-      var message = parts[1].replace(/[()]/g, '');
-
-      console.log('bound:', event, message);
-
-      $(this).on(event, function() {
-        that.fire('message', message);
-        console.log('firing: ', pattern);
-      });
-
-      $(this).attr('data-bound', pattern);
-      $(this).removeAttr('data-bind');
-
-    });
-
-    this.$target.find('[data-model]:not([data-live])').each(function() {
-
-      var model = $(this).attr('data-model');
-      var tag = $(this).prop('tagName');
-
-      switch(tag.toLowerCase()) {
-        case 'input':
-          console.log('bound keyup');
-          $(this).on('keyup', function(e) {
-            if (e.which <= 90 && e.which >= 48) {
-              that.fire('change', {
-                key: model,
-                value: $(this).val()
-              });
-            }
-
-          });
-          break;
-        case 'select':
-          $(this).on('change', function() {
-            that.fire('change', {
-              key: model,
-              value: $(this).val()
-            });
-          });
-          break;
-      }
-
-      console.log('live-bound:', model);
-
-      $(this).attr('data-live', '');
-
-    });
-
-  },
-
-  unbind: function() {
-
-    this.$el.find('[data-bound]').each(function() {
-
-      var pattern = $(this).attr('data-bound');
-      var parts = pattern.split(':');
-      var event = parts[0];
-
-      $(this).off(event);
-
-      $(this).attr('data-bind', pattern);
-      $(this).removeAttr('data-bound');
-
-    });
-
-    this.$target.find('[data-bound]').each(function() {
-
-      var model = $(this).attr('data-model');
-      var tag = $(this).prop('tagName');
-
-      switch(tag.toLowerCase()) {
-        case 'input':
-          $(this).off('keyup');
-          break;
-        case 'select':
-          $(this).off('change');
-          break;
-      }
-
-      console.log('live-bound:', model);
-
-      $(this).removeAttr('data-live');
-
-    });
-
-  },
-
-  renderSubview: function(view) {
-
-    view.render(this.$subview);
-
-  },
-
-
-  getData: function() {
-
-    var data = {};
-
-    //this.$el.find('[ng-model]').each(function() {
-    //  var key = $(this).attr('ng-model');
-    //  var tag = $(this).prop('tagName');
-    //  var val = null;
-    //  switch(tag.toLowerCase()) {
-    //    case 'div':
-    //      val = $(this).text();
-    //      break;
-    //    case 'span':
-    //      val = $(this).text();
-    //      break;
-    //    case 'input':
-    //      val = $(this).val();
-    //      break;
-    //    case 'select':
-    //      val = $(this).val();
-    //      break;
-    //  }
-    //  data[key] = val;
-    //});
-
-    return data;
-
-  },
-
-  setData: function(data) {
-
-    this.data = data;
-
-    //for (var key in data) {
-    //
-    //  var el = this.$el.find('[ng-model="' + key + '"]');
-    //  var tag = $(this).prop('tagName');
-    //  var val = data[key];
-    //
-    //  if (el.length) {
-    //    switch(tag.toLowerCase()) {
-    //      case 'div':
-    //        val = $(this).text(val);
-    //        break;
-    //      case 'span':
-    //        val = $(this).text(val);
-    //        break;
-    //      case 'input':
-    //        val = $(this).val(val);
-    //        break;
-    //      case 'select':
-    //        val = $(this).val(val);
-    //        break;
-    //    }
-    //  }
-    //
-    //}
-
-  }
-
-});
+//
+//var View = Class.extend({
+//
+//  initialize: function(template) {
+//
+//    this.template = template;
+//
+//    this.$el = $('<div></div>');
+//    this.$target = null;
+//
+//    if (typeof template === 'string') {
+//      this.$el.html(template);
+//    }
+//
+//    this.$subview = this.$el.find('[ui-view]');
+//
+//  },
+//
+//  preprocess: function(data) {
+//
+//    console.log(this.data);
+//
+//    data = data || {};
+//
+//    this.$el.find('[data-repeat]').each(function() {
+//
+//      var pattern = $(this).attr('data-repeat');
+//
+//      var parts = pattern.match(/([A-Za-z_]+)\sin\s([A-Za-z_]+)/i);
+//
+//      if (!parts) {
+//        return console.error('Invalid data-repeat pattern');
+//      }
+//
+//      var key = parts[1];
+//      var item = parts[2];
+//
+//      console.log(data[item]);
+//
+//      if (!data.hasOwnProperty(item) || data[item].length === 0) {
+//        return console.error('Model for data-repeat not found');
+//      }
+//
+//      var repeat = null, last = $(this), current = null;
+//
+//      var template = $(this).html();
+//
+//      var list = data[item];
+//
+//      for (var i = 0; i < list.length; i++) {
+//
+//        repeat = $($(this).get(0).cloneNode(false));
+//
+//        repeat.removeAttr('data-repeat');
+//
+//        current = template;
+//
+//        var matches = current.match(/\{\{([A-Za-z.]+)\}\}/g);
+//
+//        var value = '';
+//
+//        if (matches) {
+//          for (var j = 0; j < matches.length; j++) {
+//            console.log(matches[j]);
+//            if (data.hasOwnProperty(matches[j])) {
+//              value = data[matches[j]];
+//            } else if (matches[j].match('.')) {
+//              var parts = matches[j].replace(/[\{\}]/g, '').split('.');
+//              if (parts.length == 2 && parts[0] === key) {
+//                value = list[i][parts[1]];
+//              }
+//            }
+//            current = current.replace(matches[j], value);
+//          }
+//        }
+//
+//        console.log(current);
+//
+//        //current.replace(/\{\{([A-Za-z.]+)\}\}/i, function(match) {
+//        //  console.log(match);
+//        //});
+//
+//        repeat.html(current);
+//
+//        last.after(repeat);
+//        last = repeat;
+//
+//      }
+//
+//      $(this).remove();
+//
+//      console.log('repeat', key, item);
+//
+//    });
+//
+//  },
+//
+//  render: function($el) {
+//
+//    this.$target = $el;
+//
+//    this.preprocess(this.data);
+//
+//    this.$el.children().appendTo($el);
+//
+//    this.bind();
+//
+//  },
+//
+//  remove: function() {
+//
+//    this.unbind();
+//
+//  },
+//
+//  bind: function() {
+//
+//    var that = this;
+//
+//    console.log('binding');
+//
+//    this.$target.find('[data-bind]').each(function() {
+//
+//      var pattern = $(this).attr('data-bind');
+//
+//      var parts = pattern.split(':');
+//
+//      if (parts.length !== 2) {
+//        return console.error('Invalid data-bind pattern', pattern);
+//      }
+//
+//      var event = parts[0];
+//      var message = parts[1].replace(/[()]/g, '');
+//
+//      console.log('bound:', event, message);
+//
+//      $(this).on(event, function() {
+//        that.fire('message', message);
+//        console.log('firing: ', pattern);
+//      });
+//
+//      $(this).attr('data-bound', pattern);
+//      $(this).removeAttr('data-bind');
+//
+//    });
+//
+//    this.$target.find('[data-model]:not([data-live])').each(function() {
+//
+//      var model = $(this).attr('data-model');
+//      var tag = $(this).prop('tagName');
+//
+//      switch(tag.toLowerCase()) {
+//        case 'input':
+//          console.log('bound keyup');
+//          $(this).on('keyup', function(e) {
+//            if (e.which <= 90 && e.which >= 48) {
+//              that.fire('change', {
+//                key: model,
+//                value: $(this).val()
+//              });
+//            }
+//
+//          });
+//          break;
+//        case 'select':
+//          $(this).on('change', function() {
+//            that.fire('change', {
+//              key: model,
+//              value: $(this).val()
+//            });
+//          });
+//          break;
+//      }
+//
+//      console.log('live-bound:', model);
+//
+//      $(this).attr('data-live', '');
+//
+//    });
+//
+//  },
+//
+//  unbind: function() {
+//
+//    this.$el.find('[data-bound]').each(function() {
+//
+//      var pattern = $(this).attr('data-bound');
+//      var parts = pattern.split(':');
+//      var event = parts[0];
+//
+//      $(this).off(event);
+//
+//      $(this).attr('data-bind', pattern);
+//      $(this).removeAttr('data-bound');
+//
+//    });
+//
+//    this.$target.find('[data-bound]').each(function() {
+//
+//      var model = $(this).attr('data-model');
+//      var tag = $(this).prop('tagName');
+//
+//      switch(tag.toLowerCase()) {
+//        case 'input':
+//          $(this).off('keyup');
+//          break;
+//        case 'select':
+//          $(this).off('change');
+//          break;
+//      }
+//
+//      console.log('live-bound:', model);
+//
+//      $(this).removeAttr('data-live');
+//
+//    });
+//
+//  },
+//
+//  renderSubview: function(view) {
+//
+//    view.render(this.$subview);
+//
+//  },
+//
+//
+//  getData: function() {
+//
+//    var data = {};
+//
+//    //this.$el.find('[ng-model]').each(function() {
+//    //  var key = $(this).attr('ng-model');
+//    //  var tag = $(this).prop('tagName');
+//    //  var val = null;
+//    //  switch(tag.toLowerCase()) {
+//    //    case 'div':
+//    //      val = $(this).text();
+//    //      break;
+//    //    case 'span':
+//    //      val = $(this).text();
+//    //      break;
+//    //    case 'input':
+//    //      val = $(this).val();
+//    //      break;
+//    //    case 'select':
+//    //      val = $(this).val();
+//    //      break;
+//    //  }
+//    //  data[key] = val;
+//    //});
+//
+//    return data;
+//
+//  },
+//
+//  setData: function(data) {
+//
+//    this.data = data;
+//
+//    //for (var key in data) {
+//    //
+//    //  var el = this.$el.find('[ng-model="' + key + '"]');
+//    //  var tag = $(this).prop('tagName');
+//    //  var val = data[key];
+//    //
+//    //  if (el.length) {
+//    //    switch(tag.toLowerCase()) {
+//    //      case 'div':
+//    //        val = $(this).text(val);
+//    //        break;
+//    //      case 'span':
+//    //        val = $(this).text(val);
+//    //        break;
+//    //      case 'input':
+//    //        val = $(this).val(val);
+//    //        break;
+//    //      case 'select':
+//    //        val = $(this).val(val);
+//    //        break;
+//    //    }
+//    //  }
+//    //
+//    //}
+//
+//  }
+//
+//});
 
 
 var Controller = Class.extend({
@@ -595,13 +595,13 @@ var Controller = Class.extend({
     this.view = view;
     this.viewModel = viewModel;
 
-    this.view.setData(viewModel.getData());
+    //this.view.setData(viewModel.getData());
 
     var that = this;
 
     this.view.on('message', function(e) {
       console.log(e.data);
-      that.viewModel.execute(e.data);
+      that.viewModel.execute(e.data.message);
     });
 
     this.view.on('change', function(e) {
@@ -615,7 +615,7 @@ var Controller = Class.extend({
     });
 
     this.viewModel.on('refresh', function(e) {
-      that.view.render(that.viewModel.getData());
+      that.view.refresh();
     });
 
   }
@@ -664,8 +664,25 @@ var ViewModel = Class.extend({
 
 });
 
+$.fn.childrenTo = function(selector) {
+  var childList = [];
+  var that = this;
+  this.find(selector).each(function() {
+    var include = false, parent = $(this).parent();
+    while (parent.length !== 0 && !include) {
+      if ($(parent).not($(that)).length === 0) {
+        include = true; break;
+      } else if ($(parent).not('[data-control]').length === 0) {
+        include = false; break;
+      } parent = $(parent).parent();
+    }
+    if (include) { childList.push($(this)); }
+  });
+  return childList;
+}
 
 module.exports.Application = Application;
-module.exports.View = View;
+//module.exports.View = View;
 module.exports.Controller = Controller;
 module.exports.ViewModel = ViewModel;
+module.exports.Class = Class;
