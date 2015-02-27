@@ -33,7 +33,7 @@ var LedgerViewModel = ViewModel.extend({
     });
 
     $.when(transactionsRequest, accountsRequest).then(function() {
-      console.log('refreshing');
+      //console.log('refreshing');
       that.fire('refresh');
     }, function() {
       console.error('Error fetching data');
@@ -43,8 +43,6 @@ var LedgerViewModel = ViewModel.extend({
 
   addTransaction: function() {
 
-    console.log('123');
-
     this.hasEditor = !this.hasEditor;
 
     this.fire('refresh');
@@ -52,8 +50,6 @@ var LedgerViewModel = ViewModel.extend({
   },
 
   saveTransaction: function() {
-
-    console.log('123');
 
     this.hasEditor = false;
 
