@@ -102,7 +102,9 @@ var Controller = require('./common/clementine').Controller;
     },
     'app.advanced.ledger': {
       template: require('../templates/app/advanced/ledger.hbs'),
-      viewModel: require('./viewmodels/app/advanced/ledger')
+      viewModel: require('./viewmodels/app/advanced/ledger'),
+      view: require('./views/app/advanced/ledger')
+
     },
     'app.advanced.balance': {
       template: require('../templates/app/advanced/balance.html')

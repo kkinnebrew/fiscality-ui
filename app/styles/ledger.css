@@ -190,6 +190,10 @@
     width: 120px;
 }
 
+#ledger-table .select-field {
+    margin: 10px 0;
+}
+
 #ledger-table .text-field.field-xsm {
     width: 100px;
 }

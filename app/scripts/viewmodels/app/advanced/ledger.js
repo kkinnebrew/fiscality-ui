@@ -1,5 +1,6 @@
 var ViewModel = require('../../../common/clementine').ViewModel;
 var transactions = require('../../../services/transactions');
+var $ = require('jquery');
 
 var LedgerViewModel = ViewModel.extend({
 
@@ -8,15 +9,35 @@ var LedgerViewModel = ViewModel.extend({
     var that = this;
 
     this.transactions = [];
+    //this.transactionTypes = [];
+    this.accounts = [];
+
     this.hasEditor = false;
 
-    transactions.transactions().then(function(data) {
+    var transactionsRequest = transactions.transactions().then(function(data) {
       that.transactions = data;
-      console.log('refreshing');
-      that.fire('refresh');
     }, function() {
       console.log('error');
     });
+
+    //var typesRequest = transactions.types().then(function(data) {
+    //  that.transactionTypes = data;
+    //}, function() {
+    //  console.log('error');
+    //});
+
+    var accountsRequest = transactions.accounts().then(function(data) {
+      that.accounts = data;
+    }, function() {
+      console.log('error');
+    });
+
+    $.when(transactionsRequest, accountsRequest).then(function() {
+      console.log('refreshing');
+      that.fire('refresh');
+    }, function() {
+      console.error('Error fetching data');
+    })
 
   },
 
