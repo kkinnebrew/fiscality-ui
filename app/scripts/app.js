@@ -73,7 +73,8 @@ var Controller = require('./common/clementine').Controller;
     'app.accounts': {
       abstract: true,
       redirect: 'app/accounts/banking',
-      template: require('../templates/app/accounts.html')
+      template: require('../templates/app/accounts.hbs'),
+      viewModel: require('./viewmodels/app/accounts')
     },
     'app.accounts.banking': {
       template: require('../templates/app/accounts/banking.html')
@@ -84,7 +85,8 @@ var Controller = require('./common/clementine').Controller;
     'app.investments': {
       abstract: true,
       redirect: 'app/investments/positions',
-      template: require('../templates/app/investments.html')
+      template: require('../templates/app/investments.hbs'),
+      viewModel: require('./viewmodels/app/investments')
     },
     'app.investments.positions': {
       template: require('../templates/app/investments/positions.html')
