@@ -95,11 +95,12 @@ var Controller = require('./common/clementine').Controller;
     'app.advanced': {
       abstract: true,
       redirect: 'app/advanced/ledger',
-      template: require('../templates/app/advanced.html')
+      template: require('../templates/app/advanced.hbs'),
+      viewModel: require('./viewmodels/app/advanced')
     },
     'app.advanced.ledger': {
       template: require('../templates/app/advanced/ledger.hbs'),
-      viewModel: require('./viewmodels/app/ledger')
+      viewModel: require('./viewmodels/app/advanced/ledger')
     },
     'app.advanced.balance': {
       template: require('../templates/app/advanced/balance.html')
