@@ -4,5 +4,4 @@ node_modules/
 tmp
 .DS_Store
 .idea
-build/
 app/bower_components/
