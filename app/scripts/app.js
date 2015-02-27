@@ -5,7 +5,7 @@
  */
 
 var $ = require('jquery');
-var View = require('./common/clementine').View;
+var View = require('./common/view');
 var ViewModel = require('./common/clementine').ViewModel;
 var Controller = require('./common/clementine').Controller;
 
@@ -46,7 +46,7 @@ var Controller = require('./common/clementine').Controller;
       abstract: true,
       redirect: 'home/login',
       template: require('../templates/home.html'),
-      view: require('./views/home')
+      //view: require('./views/home')
     },
     'home.login': {
       template: require('../templates/home/login.html'),
@@ -145,7 +145,8 @@ var Controller = require('./common/clementine').Controller;
             vm = new viewModel();
             new Controller(vm, vw);
           }
-          parent.renderSubview(vw);
+          parent.registerSubview(vw);
+          parent = vw;
         }
       }
     }

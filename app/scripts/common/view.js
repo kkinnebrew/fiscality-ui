@@ -1,4 +1,5 @@
 var Class = require('./clementine').Class;
+var $ = require('jquery');
 
 var View = Class.extend({
 
@@ -17,6 +18,8 @@ var View = Class.extend({
 
     this.$el = null;
     this.$target = null;
+    this.$subviews = {};
+    this.$registrations = {};
 
     // prepare template
 
@@ -68,11 +71,17 @@ var View = Class.extend({
 
     this.bind();
 
+    this.renderSubviews();
+
     this.rendered = true;
 
   },
 
-  refresh: function() {
+  refresh: function($target) {
+
+    if (!this.rendered) {
+      return;
+    }
 
     this.unbind();
 
@@ -80,19 +89,53 @@ var View = Class.extend({
 
     this.$target.empty();
 
+    if ($target) {
+      this.$target = $target;
+    }
+
     this.$el.children().appendTo(this.$target);
 
     this.bind();
 
+    this.refreshSubviews(); // wut?
+
   },
 
-  renderSubview: function(view, name) {
+  renderSubviews: function() {
 
-    if (!name && this.$subviews.hasOwnProperty('default')) {
-      view.render(this.$subviews['default']);
-    } else {
-      view.render(this.$subviews[name]);
+    for (var name in this.$registrations) {
+
+      var view = this.$registrations[name];
+
+      if (this.$subviews.hasOwnProperty(name)) {
+        view.render(this.$subviews[name]);
+      }
+
     }
+
+  },
+
+  refreshSubviews: function() {
+
+    for (var name in this.$registrations) {
+
+      var view = this.$registrations[name];
+
+      if (this.$subviews.hasOwnProperty(name)) {
+        view.refresh(this.$subviews[name]);
+      }
+
+    }
+
+  },
+
+  registerSubview: function(view, name) {
+
+    if (!name) {
+      name = 'default';
+    }
+
+    this.$registrations[name] = view;
 
   },
 
@@ -112,7 +155,7 @@ var View = Class.extend({
 
         var event = pattern.match(/([^:]+)/)[1];
         var message = pattern.match(/:(.+)\(/)[1];
-        var argumentsString = test.match(/\((.+)\)/);
+        var argumentsString = pattern.match(/\((.+)\)/);
         var arguments = argumentsString ? argumentsString[1].replace(' ', '').split(',') : [];
 
         $(this).on(event, function() {
@@ -123,7 +166,7 @@ var View = Class.extend({
         });
 
       } catch(e) {
-        console.error('Invalid [data-bind] pattern', pattern);
+        console.error('Invalid [data-bind] pattern', pattern, e);
       }
 
     });
