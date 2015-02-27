@@ -239,3 +239,9 @@
     background: #FBFBFB;
     font-weight: 600;
 }
+
+/* css editor */
+
+#ledger-table .transaction.editor .text-field {
+    display: inline-block;
+}
