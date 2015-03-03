@@ -1,5 +1,6 @@
 var Class = require('./clementine').Class;
 var $ = require('jquery');
+var Binding = require('./binding');
 
 var View = Class.extend({
 
@@ -158,13 +159,11 @@ var View = Class.extend({
         var event = pattern.match(/([^:]+)/)[1];
         var message = pattern.match(/:(.+)\(/)[1];
         var argumentsString = pattern.match(/\((.+)\)/);
-        var arguments = argumentsString ? argumentsString[1].replace(' ', '').split(',') : [];
+        var args = argumentsString ? argumentsString[1].replace(' ', '').split(',') : [];
 
-        $(this).on(event, function() {
-          that.fire('message', {
-            message: message,
-            arguments: arguments
-          });
+        $(this).on(event, function(e) {
+          var payload = Binding.handle(e, event, message, args);
+          that.fire('message', payload);
         });
 
       } catch(e) {
