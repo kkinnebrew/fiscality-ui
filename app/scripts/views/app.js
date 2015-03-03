@@ -8,9 +8,7 @@ var AppView = View.extend({
 
     console.log('Initialize: AppView');
 
-  },
-
-
+  }
 
 });
 
