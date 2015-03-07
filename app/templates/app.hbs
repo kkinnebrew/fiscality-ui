@@ -1,42 +1,20 @@
-<div id="app-header">
+<div id="menu">
 
-    <div id="app-title">
-        <div class="logo"></div>
-        <h2>Fiscality</h2>
+    <div id="header">
+        <h1 id="app-logo" title="Fiscality"></h1>
+        <div class="logout-button"></div>
     </div>
 
-    <nav id="main-nav">
-        {{#if isAccounts}}
-            <a href="#/app/accounts" class="active">Accounts</a>
-        {{else}}
-            <a href="#/app/accounts">Accounts</a>
-        {{/if}}
-        {{#if isInvestments}}
-            <a href="#/app/investments" class="active">Investments</a>
-        {{else}}
-            <a href="#/app/investments">Investments</a>
-        {{/if}}
-        {{#if isSpending}}
-            <a class="active">Spending</a>
-        {{else}}
-            <a>Spending</a>
-        {{/if}}
-        {{#if isTaxes}}
-            <a class="active">Taxes</a>
-        {{else}}
-            <a>Taxes</a>
-        {{/if}}
-        {{#if isAdvanced}}
-            <a href="#/app/advanced" class="active">Advanced</a>
-        {{else}}
-            <a href="#/app/advanced">Advanced</a>
-        {{/if}}
-    </nav>
+    <ul id="nav">
+        <li class="nav-list-item active" title="Accounts" onclick="location.hash = '#/app/accounts'"></li>
+        <li class="nav-list-item" title="Investments" onclick="location.hash = '#/app/investments'"></li>
+        <li class="nav-list-item" title="Spending"></li>
+        <li class="nav-list-item" title="Taxes"></li>
+        <li class="nav-list-item" title="Settings"></li>
+    </ul>
 
-    <a class="logout-btn" href="#/home/login"></a>
-
-    <a class="settings-btn"></a>
+    <div id="subnav" ui-view="subnav"></div>
 
 </div>
 
-<div id="app-content" ui-view></div>
+<div id="content" ui-view="content"></div>

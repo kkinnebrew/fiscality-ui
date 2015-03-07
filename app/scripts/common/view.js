@@ -50,7 +50,7 @@ var View = Class.extend({
       that.$subviews['default'] = subviews;
     } else {
       this.$el.find('[ui-view]').each(function() {
-        var name = this.attr('ui-view');
+        var name = $(this).attr('ui-view');
         if (name === 'default') return;
         that.$subviews[name] = $(this);
       });
@@ -79,8 +79,6 @@ var View = Class.extend({
   },
 
   refresh: function($target) {
-
-    //console.log('refresh received', this.viewModel.transactions);
 
     if (!this.rendered) {
       return;
