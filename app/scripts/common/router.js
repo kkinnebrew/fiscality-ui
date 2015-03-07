@@ -9,13 +9,10 @@ var Router = Class.extend({
     // initialize vars
 
     this.defaultState = null;
-    this.notFoundState = null;
+    this.notFound = null;
 
     // store render tree config
     this.states = {};
-
-    // store render tree objects
-    this.cache = {};
 
     // route element
     this.root = null;
@@ -44,25 +41,51 @@ var Router = Class.extend({
   },
 
   registerDefault: function(state) {
-    this.defaultState = state.replace(/^\//, '');
+    this.defaultState = state.replace(/(^\/)|(\/$)/, '');
   },
 
   register404: function(config) {
-    this.notFoundState = config;
+    this.notFound = config;
   },
 
   onHashChange: function() {
     this.render()
   },
 
+  render404: function() {
+
+    // setup view
+
+    this.root = {
+      view: new View(this.notFound.template)
+    };
+
+    var $el = $('body').find('[ui-view]');
+
+    $el.empty();
+
+    // render into document
+
+    this.root.view.render($el);
+
+  },
+
   render: function() {
+
+    console.log('render');
 
     var hash = location.hash.replace(/(^#\/?)|(\/$)/g, '');
 
     // handle empty hashes
 
     if (!hash || hash === '') {
-      hash = this.defaultState || this.notFoundState;
+
+      if (this.defaultState) {
+        return location.hash = '#/' + this.defaultState;
+      } else if (this.notFound) {
+        return this.renderNotFound();
+      }
+
     }
 
     // handle lack of default hashes
@@ -71,11 +94,62 @@ var Router = Class.extend({
       console.error('State for 404 route not defined');
     }
 
+    function RouterNode(obj) {
+      this.view = obj instanceof View ? obj : null;
+      this.views = obj instanceof View ? null : obj;
+    }
+
+    RouterNode.prototype.registerSubview = function(view, name) {
+      if (this.view) {
+        this.view.registerSubview(view, name);
+      } else {
+        throw new Error('Cannot register subview for multipart view parent. Use absolute instead.');
+      }
+    };
+
+    RouterNode.prototype.render = function($el) {
+      if (this.view) {
+        this.view.render($el.find('[ui-view]'));
+      } else {
+        for (var view in this.views) {
+          var $view = $el.find('[ui-view="' + view + '"]');
+          this.views[view].view.render($view);
+        }
+      }
+    };
+
+    function setupView(config, last, name) {
+      var view = new View(config.template);
+      if (last && last instanceof RouterNode) {
+        last.registerSubview(view, name || undefined);
+      }
+      return new RouterNode(view);
+    }
+
+    function setupViews(config, last) {
+      var views = {};
+      for (var name in config.views) {
+        if (!name.match(/@/)) {
+          views[name] = setupView(config.views[name], last, name);
+        }
+      }
+      for (var name in config.views) {
+        if (name.match(/@/)) {
+          var parts = name.split('@');
+          var target = parts[0];
+          var context = parts[1];
+          if (views.hasOwnProperty(context)) {
+            views[name] = setupView(config.views[name], views[context], target);
+          }
+        }
+      }
+      return new RouterNode(views);
+    }
+
     var parts = hash.split('/');
     var state = null;
-    var config = null;
-    var current = null;
     var last = null;
+
 
     console.log(parts);
 
@@ -85,128 +159,21 @@ var Router = Class.extend({
 
       if (!this.states.hasOwnProperty(state)) {
         console.error('State ' + state + ' is not defined');
-      }
-
-      config = this.states[state];
-
-      if (config.views) {
-
-        current = {
-          state: state,
-          views: {}
-        };
-
-        for (var view in config.views) {
-
-          //if (!view.match(/@/)) {
-
-            var conf = config.views[view];
-
-            console.log(view, typeof conf.template);
-
-            current.views[view] = {
-              view: conf.view ? new conf.view(conf.template) : new View(conf.template)
-            };
-
-          //}
-
-        }
-
-        if (last) {
-
-          // append to prior view
-          for (var view in current.views) {
-            if (!view.match(/@/)) {
-              last.view.registerSubview(current.views[view].view, view);
-            } else {
-              var absparts = view.split('@');
-              var name = absparts[0];
-              var context = absparts[1];
-              if (current.views.hasOwnProperty(context)) {
-                current.views[context].view.registerSubview(current.views[view].view, name);
-              }
-            }
-          }
-
-        }
-
-        this.cache[state] = current;
-
-        last = current;
-
+        return this.render404();
       } else {
-
-        current = {
-          state: state,
-          view: config.view ? new config.view(config.template) : new View(config.template)
-        };
-
-        if (!this.root) {
-
-          // store root reference
-          this.root = current;
-
+        if (!last) {
+          this.root = last = !this.states[state].views ? setupView(this.states[state]) : setupViews(this.states[state]);
         } else {
-
-          // append to prior view
-          last.registerSubview(current.view);
-
+          last = !this.states[state].views ? setupView(this.states[state], last) : setupViews(this.states[state], last);
         }
-
-        this.cache[state] = current;
-
-        last = current;
-
       }
-
     }
 
-    // check if abstract
+    // render into body
 
-    var lastConf = this.states[last.state];
+    $('body').find('[ui-view]').empty();
+    this.root.render($('body'));
 
-    if (lastConf.abstract) {
-
-      if (lastConf.redirect) {
-        location.hash = '#/' + lastConf.redirect.replace(/(^#\/?)|(\/$)/g, '');
-      } else if (this.notFoundState) {
-        // handle state
-        console.error('Route not defined - TODO');
-      } else {
-        console.error('Route not defined');
-      }
-
-    }
-
-    // append root view
-
-    var $el = null;
-
-    if (this.root.view) {
-
-      // get reference
-
-      $el = $('body').find('[ui-view]');
-
-      // render into document
-
-      this.root.view.render($el);
-
-    } else if (this.root.views) {
-
-      for (var view in this.root.views) {
-
-        // get reference
-
-        $el = $('body').find('[ui-view="' + view + '"]');
-
-        // render into document
-
-        this.root.views[view].view.render($el);
-
-      }
-
-    }
 
   }
 

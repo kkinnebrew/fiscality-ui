@@ -80,8 +80,6 @@ var View = Class.extend({
 
   refresh: function($target) {
 
-    //console.log('refresh received', this.viewModel.transactions);
-
     if (!this.rendered) {
       return;
     }
