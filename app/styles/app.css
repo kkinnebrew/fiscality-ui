@@ -1,6 +1,7 @@
 /* app css stylesheet */
 
 html, body, #app {
+    font-family: "proxima-nova";
     height: 100%;
     margin: 0;
     padding: 0;
@@ -78,6 +79,52 @@ ul {
         background-size: 97px 29px;
     }
 
+}
+
+/* navigation */
+
+.nav-list-item {
+    background: url(../images/accounts-icon.png) center center no-repeat;
+    cursor: pointer;
+    height: 68px;
+    margin: 1px;
+    width: 68px;
+    -webkit-transition: all ease-in-out 150ms;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .nav-list-item {
+        background-image: url(../images/accounts-icon@2x.png);
+        -webkit-background-size: 19px 21px;
+        -moz-background-size: 19px 21px;
+        background-size: 19px 21px;
+    }
+
+}
+
+.nav-list-item.active {
+    background-color: #25353E;
+    border-left: 3px solid #53B7FB;
+    width: 65px;
+    -webkit-transition: all ease-in-out 150ms;
+}
+
+.nav-list-item:hover {
+    background-color: #25353E;
+    -webkit-transition: all ease-in-out 150ms;
+}
+
+/* subnav */
+
+.sub-nav-header {
+    background: #23333F;
+    color: #91999F;
+    font-size: 11px;
+    font-weight: 600;
+    height: 14px;
+    padding: 10px 0 8px 12px;
+    text-transform: uppercase;
 }
 
 /* accounts page */
