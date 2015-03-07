@@ -24,6 +24,8 @@ ul {
     color: #FFF;
     height: 100%;
     position: absolute;
+    -webkit-user-select: none;
+    user-select: none;
     width: 300px;
 }
 
@@ -40,7 +42,7 @@ ul {
     background: #274E69;
     color: #FFF;
     height: 70px;
-    overflow: auto;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -70,6 +72,21 @@ ul {
     width: 97px;
 }
 
+.logout-button {
+    background: url(../images/logout-icon.png) center center no-repeat;
+    cursor: pointer;
+    height: 18px;
+    top: 26px;
+    right: 16px;
+    position: absolute;
+    width: 18px;
+    -webkit-transition: opacity ease-out 100ms;
+}
+
+.logout-button:hover {
+    opacity: 0.5;
+}
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
     #app-logo {
@@ -77,6 +94,13 @@ ul {
         -webkit-background-size: 97px 29px;
         -moz-background-size: 97px 29px;
         background-size: 97px 29px;
+    }
+
+    .logout-button {
+        background-image: url(../images/logout-icon@2x.png);
+        -webkit-background-size: 18px 18px;
+        -moz-background-size: 18px 18px;
+        background-size: 18px 18px;
     }
 
 }
@@ -127,6 +151,45 @@ ul {
     text-transform: uppercase;
 }
 
+.sub-nav-item {
+    background: #283947 url(../images/line-arrow.png) center right no-repeat;
+    border-bottom: 1px solid #324350;
+    cursor: pointer;
+    height: 60px;
+    -webkit-transition: all ease-in-out 100ms;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .sub-nav-item {
+        background-image: url(../images/line-arrow@2x.png);
+        -webkit-background-size: 24px 15px;
+        -moz-background-size: 24px 15px;
+        background-size: 24px 15px;
+    }
+
+}
+
+.sub-nav-item:hover {
+    background-color: #233542;
+}
+
+.sub-nav-item .sub-nav-title {
+    color: #E8E8E8;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 15px 0 0 18px;
+}
+
+.sub-nav-item .sub-nav-subtitle {
+    color: #B7B7B7;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 1px 0 0 18px;
+    text-transform: uppercase;
+}
+
+
 /* accounts page */
 
 #accounts-chart {
@@ -138,12 +201,24 @@ ul {
     background: linear-gradient(135deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
     color: #FFF;
+    font-weight: 300;
     height: 380px;
     width: 100%;
+}
+
+#accounts-chart h2 {
+    font-weight: inherit;
+    padding: 16px 0 0 20px;
 }
 
 #transactions {
     background: #FFF;
     color: #000;
+    font-weight: 300;
     min-height: 1000px;
+    padding: 16px 0 0 20px;
+}
+
+#transactions h2 {
+    font-weight: inherit;
 }
