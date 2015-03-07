@@ -12,7 +12,6 @@ var router = new Router();
 router.registerDefault('/app/accounts');
 
 router.register404({
-  url: '/not-found',
   template: require('../templates/404.hbs')
 });
 
@@ -50,6 +49,19 @@ router.register('app.accounts', {
     }
   }
 });
+
+router.register('app.investments', {
+  url: '/app/investments',
+  views: {
+    'subnav': {
+      template: require('../templates/app/investments/subnav.hbs')
+    },
+    'content': {
+      template: require('../templates/app/investments/content.hbs')
+    }
+  }
+});
+
 
 $(document).ready(function() {
   router.listen();
