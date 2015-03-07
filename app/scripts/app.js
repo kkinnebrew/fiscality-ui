@@ -9,7 +9,7 @@ var Router = require('./common/router');
 
 var router = new Router();
 
-router.registerDefault('app.accounts');
+router.registerDefault('/app/accounts');
 
 router.register404({
   url: '/not-found',

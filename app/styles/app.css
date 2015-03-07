@@ -11,6 +11,12 @@ h1, h2 {
     margin: 0;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 /* menu */
 
 #menu {
@@ -33,6 +39,7 @@ h1, h2 {
     background: #274E69;
     color: #FFF;
     height: 70px;
+    overflow: auto;
     width: 100%;
 }
 
@@ -53,6 +60,24 @@ h1, h2 {
     right: 0;
     top: 70px;
     width: 230px;
+}
+
+#app-logo {
+    background: url(../images/app-logo.png) center center no-repeat;
+    height: 29px;
+    margin: 22px;
+    width: 97px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #app-logo {
+        background-image: url(../images/app-logo@2x.png);
+        -webkit-background-size: 97px 29px;
+        -moz-background-size: 97px 29px;
+        background-size: 97px 29px;
+    }
+
 }
 
 /* accounts page */

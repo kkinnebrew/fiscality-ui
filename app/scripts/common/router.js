@@ -44,7 +44,7 @@ var Router = Class.extend({
   },
 
   registerDefault: function(state) {
-    this.defaultState = state;
+    this.defaultState = state.replace(/^\//, '');
   },
 
   register404: function(config) {
