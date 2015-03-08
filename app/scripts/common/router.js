@@ -178,8 +178,9 @@ var Router = Class.extend({
 
     // render into body
 
-    $('body').find('[ui-view]').empty();
-    this.root.render($('body'));
+    var body = $('body');
+    body.find('[ui-view]').empty();
+    this.root.render(body);
 
   }
 
