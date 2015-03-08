@@ -19,7 +19,8 @@ router.register('app', {
   abstract: true,
   url: '/app',
   redirect: 'app/accounts',
-  template: require('../templates/app.hbs')
+  template: require('../templates/app.hbs'),
+  view: require('./views/app')
 });
 
 router.register('app.accounts', {

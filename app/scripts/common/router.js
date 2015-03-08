@@ -117,7 +117,7 @@ var Router = Class.extend({
     };
 
     function setupView(config, last, name) {
-      var view = new View(config.template);
+      var view = config.view ? new config.view(config.template) : new View(config.template);
       if (last && last instanceof RouterNode) {
         last.registerSubview(view, name || undefined);
       }
