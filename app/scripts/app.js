@@ -19,6 +19,26 @@ router.register('app', {
   template: require('../templates/app.hbs')
 });
 
+router.register('app.accounts', {
+  views: {
+    'subnav': {
+      template: require('../templates/app/accounts/subnav.hbs')
+    },
+    'content': {
+      template: require('../templates/app/accounts/content.hbs')
+    }
+    //'chart@content': {
+    //  template: require('../templates/app/accounts/chart.hbs'),
+    //  view: require('./views/app/accounts/chart')
+    //},
+    //'transactions@content': {
+    //  template: require('../templates/app/accounts/transactions.hbs'),
+    //  view: require('./views/app/accounts/transactions')
+    //}
+  }
+});
+
+
 router.register('home', {
   template: require('../templates/home.hbs')
 });

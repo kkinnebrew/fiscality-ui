@@ -26,9 +26,13 @@ View.prototype.destroy = function() {
 
 };
 
-View.prototype.getSubview = function() {
+View.prototype.getSubview = function(name) {
 
-  return this.$el.find('[ui-view]');
+  if (name) {
+    return this.$el.find('[ui-view="' + name + '"]');
+  } else {
+    return this.$el.find('[ui-view]');
+  }
 
 };
 
@@ -77,11 +81,23 @@ Router.prototype.render = function() {
 
     for (var j = i; j < this.queue.length; j++) {
 
-      console.log('Destroying state: ' + this.queue[j].state);
+      console.log('Purging remaining state: ' + this.queue[j].state);
 
       // destroy existing view
 
-      this.queue[j].view.destroy();
+      if (this.queue[j].views) {
+
+        for (var viewNew in this.queue[j].views) {
+
+          this.queue[j].views[viewNew].view.destroy();
+
+        }
+
+      } else {
+
+        this.queue[j].view.destroy();
+
+      }
 
     }
 
@@ -97,38 +113,113 @@ Router.prototype.renderState = function(state, cacheIndex) {
 
   var config = this.config[state];
 
-  var view = new View(config.template);
+  if (config.views) {
 
-  if (cacheIndex === 0) {
+    var views = {};
 
-    var $el = $('body').find('[ui-view]');
+    for (var viewName in config.views) {
+
+      var conf = config.views[viewName];
+
+      var view = new View(conf.template);
+
+      if (cacheIndex === 0) {
+
+        var $el = $('body').find('[ui-view="' + viewName + '"]');
+
+      } else {
+
+        var prior = this.queue[cacheIndex-1];
+
+        var $el = prior.view.getSubview(viewName);
+
+      }
+
+      if (this.queue[cacheIndex]) {
+
+        console.log('Destroying state: ' + this.queue[cacheIndex].state);
+
+        // destroy existing view
+
+        if (this.queue[cacheIndex].views) {
+
+          for (var viewNew in this.queue[cacheIndex].views) {
+
+            this.queue[cacheIndex].views[viewNew].view.destroy();
+
+          }
+
+        } else {
+
+          this.queue[cacheIndex].view.destroy();
+
+        }
+
+      }
+
+      console.log('Rendering partial state: ' + state + ':' + viewName);
+
+      view.render($el);
+
+      views[viewName] = {
+        view: view
+      };
+
+    }
+
+    this.queue[cacheIndex] = {
+      state: state,
+      views: views
+    };
 
   } else {
 
-    var prior = this.queue[cacheIndex-1];
+    var view = new View(config.template);
 
-    var $el = prior.view.getSubview();
+    if (cacheIndex === 0) {
+
+      var $el = $('body').find('[ui-view]');
+
+    } else {
+
+      var prior = this.queue[cacheIndex-1];
+
+      var $el = prior.view.getSubview();
+
+    }
+
+    if (this.queue[cacheIndex]) {
+
+      console.log('Destroying state: ' + this.queue[cacheIndex].state);
+
+      // destroy existing view
+
+      if (this.queue[cacheIndex].views) {
+
+        for (var viewNew in this.queue[cacheIndex].views) {
+
+          this.queue[cacheIndex].views[viewNew].view.destroy();
+
+        }
+
+      } else {
+
+        this.queue[cacheIndex].view.destroy();
+
+      }
+
+    }
+
+    console.log('Rendering state: ' + state);
+
+    view.render($el);
+
+    this.queue[cacheIndex] = {
+      state: state,
+      view: view
+    };
 
   }
-
-  if (this.queue[cacheIndex]) {
-
-    console.log('Destroying state: ' + this.queue[cacheIndex].state);
-
-    // destroy existing view
-
-    this.queue[cacheIndex].view.destroy();
-
-  }
-
-  console.log('Rendering state: ' + state);
-
-  view.render($el);
-
-  this.queue[cacheIndex] = {
-    state: state,
-    view: view
-  };
 
 };
 
