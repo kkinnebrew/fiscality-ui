@@ -85,19 +85,7 @@ Router.prototype.render = function() {
 
       // destroy existing view
 
-      if (this.queue[j].views) {
-
-        for (var viewNew in this.queue[j].views) {
-
-          this.queue[j].views[viewNew].view.destroy();
-
-        }
-
-      } else {
-
-        this.queue[j].view.destroy();
-
-      }
+      this.destroyState(j);
 
     }
 
@@ -117,53 +105,15 @@ Router.prototype.renderState = function(state, cacheIndex) {
 
     var views = {};
 
-    for (var viewName in config.views) {
+    if (this.queue[cacheIndex]) {
 
-      var conf = config.views[viewName];
+      this.destroyState(cacheIndex);
 
-      var view = new View(conf.template);
+    }
 
-      if (cacheIndex === 0) {
-
-        var $el = $('body').find('[ui-view="' + viewName + '"]');
-
-      } else {
-
-        var prior = this.queue[cacheIndex-1];
-
-        var $el = prior.view.getSubview(viewName);
-
-      }
-
-      if (this.queue[cacheIndex]) {
-
-        console.log('Destroying state: ' + this.queue[cacheIndex].state);
-
-        // destroy existing view
-
-        if (this.queue[cacheIndex].views) {
-
-          for (var viewNew in this.queue[cacheIndex].views) {
-
-            this.queue[cacheIndex].views[viewNew].view.destroy();
-
-          }
-
-        } else {
-
-          this.queue[cacheIndex].view.destroy();
-
-        }
-
-      }
-
-      console.log('Rendering partial state: ' + state + ':' + viewName);
-
-      view.render($el);
-
-      views[viewName] = {
-        view: view
-      };
+    for (var name in config.views) {
+      views[name] = this.renderView(config.views[name], cacheIndex, name);
+      console.log('Rendering partial state: ' + state + ':' + name);
 
     }
 
@@ -174,53 +124,64 @@ Router.prototype.renderState = function(state, cacheIndex) {
 
   } else {
 
-    var view = new View(config.template);
-
-    if (cacheIndex === 0) {
-
-      var $el = $('body').find('[ui-view]');
-
-    } else {
-
-      var prior = this.queue[cacheIndex-1];
-
-      var $el = prior.view.getSubview();
-
-    }
-
-    if (this.queue[cacheIndex]) {
-
-      console.log('Destroying state: ' + this.queue[cacheIndex].state);
-
-      // destroy existing view
-
-      if (this.queue[cacheIndex].views) {
-
-        for (var viewNew in this.queue[cacheIndex].views) {
-
-          this.queue[cacheIndex].views[viewNew].view.destroy();
-
-        }
-
-      } else {
-
-        this.queue[cacheIndex].view.destroy();
-
-      }
-
-    }
+    this.queue[cacheIndex] = this.renderView(config, cacheIndex);
+    this.queue[cacheIndex].state = state;
 
     console.log('Rendering state: ' + state);
 
-    view.render($el);
-
-    this.queue[cacheIndex] = {
-      state: state,
-      view: view
-    };
 
   }
 
 };
+
+Router.prototype.renderView = function(config, cacheIndex, name) {
+
+  var view = new View(config.template);
+
+  if (cacheIndex === 0) {
+
+    var $el = $('body').find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
+
+  } else {
+
+    var prior = this.queue[cacheIndex-1];
+
+    var $el = prior.view.getSubview(name || undefined);
+
+  }
+
+  view.render($el);
+
+  return {
+    view: view
+  };
+
+};
+
+Router.prototype.destroyState = function(cacheIndex) {
+
+  console.log('Destroying state: ' + this.queue[cacheIndex].state);
+
+  // store reference
+
+  var item = this.queue[cacheIndex];
+
+  // destroy existing view
+
+  if (item.views) {
+
+    for (var name in item.views) {
+
+      item.views[name].view.destroy();
+
+    }
+
+  } else {
+
+    item.view.destroy();
+
+  }
+
+}
 
 module.exports = Router;
