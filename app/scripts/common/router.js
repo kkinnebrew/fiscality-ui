@@ -176,6 +176,8 @@ var Router = Class.extend({
       }
     }
 
+    // TODO: Render as processing occurs, not afterwards
+
     // render into body
 
     var body = $('body');
