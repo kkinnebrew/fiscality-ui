@@ -5,54 +5,52 @@
  */
 
 var $ = require('jquery');
-var Router = require('./common/router');
+var Router = require('./common/router1');
 
 var router = new Router();
 
-router.registerDefault('/app/accounts');
+//router.registerDefault('/app/accounts');
+//
+//router.register404({
+//  template: require('../templates/404.hbs')
+//});
 
-router.register404({
-  template: require('../templates/404.hbs')
+router.register('home', {
+  abstract: true,
+  redirect: 'home/login',
+  template: require('../templates/home.hbs')
+});
+
+router.register('home.login', {
+  template: require('../templates/home/login.html')
 });
 
 router.register('app', {
   abstract: true,
-  url: '/app',
   redirect: 'app/accounts',
-  template: require('../templates/app.hbs'),
-  view: require('./views/app')
+  template: require('../templates/app.hbs')
 });
 
 router.register('app.accounts', {
-  url: '/app/accounts/:accountId',
   views: {
     'subnav': {
       template: require('../templates/app/accounts/subnav.hbs')
     },
     'content': {
       template: require('../templates/app/accounts/content.hbs')
-    },
-    'chart@content': {
-      template: require('../templates/app/accounts/chart.hbs'),
-      view: require('./views/app/accounts/chart')
-      //viewModel: function(accountId) {
-      //  var ViewModel = require('viewmodels/app/accounts/chart');
-      //  return new ViewModel(accountId);
-      //}
-    },
-    'transactions@content': {
-      template: require('../templates/app/accounts/transactions.hbs'),
-      view: require('./views/app/accounts/transactions')
-      //viewModel: function(accountId) {
-      //  var ViewModel = require('viewmodels/app/accounts/transactions');
-      //  return new ViewModel(accountId);
-      //}
     }
+    //'chart@content': {
+    //  template: require('../templates/app/accounts/chart.hbs'),
+    //  view: require('./views/app/accounts/chart')
+    //},
+    //'transactions@content': {
+    //  template: require('../templates/app/accounts/transactions.hbs'),
+    //  view: require('./views/app/accounts/transactions')
+    //}
   }
 });
 
 router.register('app.investments', {
-  url: '/app/investments',
   views: {
     'subnav': {
       template: require('../templates/app/investments/subnav.hbs')
@@ -62,6 +60,44 @@ router.register('app.investments', {
     }
   }
 });
+
+//router.register('app', {
+//  abstract: true,
+//  url: '/app',
+//  redirect: 'app/accounts',
+//  template: require('../templates/app.hbs'),
+//  view: require('./views/app')
+//});
+//
+//router.register('app.accounts', {
+//  url: '/app/accounts/:accountId',
+//  views: {
+//    'subnav': {
+//      template: require('../templates/app/accounts/subnav.hbs')
+//    },
+//    'content': {
+//      template: require('../templates/app/accounts/content.hbs')
+//    },
+//    'chart@content': {
+//      template: require('../templates/app/accounts/chart.hbs'),
+//      view: require('./views/app/accounts/chart')
+//      //viewModel: function(accountId) {
+//      //  var ViewModel = require('viewmodels/app/accounts/chart');
+//      //  return new ViewModel(accountId);
+//      //}
+//    },
+//    'transactions@content': {
+//      template: require('../templates/app/accounts/transactions.hbs'),
+//      view: require('./views/app/accounts/transactions')
+//      //viewModel: function(accountId) {
+//      //  var ViewModel = require('viewmodels/app/accounts/transactions');
+//      //  return new ViewModel(accountId);
+//      //}
+//    }
+//  }
+//});
+//
+
 
 
 $(document).ready(function() {
