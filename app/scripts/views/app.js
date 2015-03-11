@@ -1,4 +1,4 @@
-var View = require('../common/view1');
+var View = require('../common/view');
 var $ = require('jquery');
 
 function AppView() {

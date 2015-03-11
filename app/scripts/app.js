@@ -5,7 +5,7 @@
  */
 
 var $ = require('jquery');
-var Router = require('./common/router1');
+var Router = require('./common/router');
 
 var router = new Router($('body'));
 
@@ -36,10 +36,6 @@ router.register('app', {
 
 router.register('app.accounts', {
   views: {
-    'testnav': {
-      template: require('../templates/test.hbs'),
-      view: require('./views/test.js')
-    },
     'subnav': {
       template: require('../templates/app/accounts/subnav.hbs')
     },
