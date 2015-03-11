@@ -15,7 +15,19 @@ var router = new Router();
 //  template: require('../templates/404.hbs')
 //});
 
+router.register('home', {
+  abstract: true,
+  redirect: 'home/login',
+  template: require('../templates/home.hbs')
+});
+
+router.register('home.login', {
+  template: require('../templates/home/login.html')
+});
+
 router.register('app', {
+  abstract: true,
+  redirect: 'app/accounts',
   template: require('../templates/app.hbs')
 });
 
@@ -38,13 +50,15 @@ router.register('app.accounts', {
   }
 });
 
-
-router.register('home', {
-  template: require('../templates/home.hbs')
-});
-
-router.register('home.login', {
-  template: require('../templates/home/login.html')
+router.register('app.investments', {
+  views: {
+    'subnav': {
+      template: require('../templates/app/investments/subnav.hbs')
+    },
+    'content': {
+      template: require('../templates/app/investments/content.hbs')
+    }
+  }
 });
 
 //router.register('app', {
@@ -83,17 +97,7 @@ router.register('home.login', {
 //  }
 //});
 //
-//router.register('app.investments', {
-//  url: '/app/investments',
-//  views: {
-//    'subnav': {
-//      template: require('../templates/app/investments/subnav.hbs')
-//    },
-//    'content': {
-//      template: require('../templates/app/investments/content.hbs')
-//    }
-//  }
-//});
+
 
 
 $(document).ready(function() {
