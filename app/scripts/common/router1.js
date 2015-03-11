@@ -155,15 +155,23 @@ Router.prototype._renderState = function(state, cacheIndex) {
     }
 
     for (var name in config.views) {
-      views[name] = this._renderView(config.views[name], cacheIndex, name);
-      console.log('Rendering partial state: ' + state + ':' + name);
-
+      if (!name.match(/@/)) {
+        views[name] = this._renderView(config.views[name], cacheIndex, name);
+        console.log('Rendering partial state: ' + state + ':' + name);
+      }
     }
 
     this.queue[cacheIndex] = {
       state: state,
       views: views
     };
+
+    for (var name in config.views) {
+      if (name.match(/@/)) {
+        views[name] = this._renderAbsoluteView(config.views[name], cacheIndex, name);
+        console.log('Rendering absolute state: ' + state + ':' + name);
+      }
+    }
 
   } else {
 
@@ -207,6 +215,36 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
     $el = prior.view.getSubview(name || undefined);
 
   }
+
+  view.render($el);
+
+  return {
+    view: view
+  };
+
+};
+
+Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
+
+  var view = null;
+
+  if (config.view) {
+    view = new config.view(config.template);
+  } else {
+    view = new View(config.template);
+  }
+
+  var parts = name.split('@');
+  var target = parts[0];
+  var context = parts[1];
+
+  var cacheItem = this.queue[cacheIndex];
+  
+  if (!cacheItem.views.hasOwnProperty(context)) {
+    return console.error('Absolute view context "' + context + '" not defined');
+  }
+
+  var $el = cacheItem.views[context].view.getSubview(target);
 
   view.render($el);
 
