@@ -65,6 +65,20 @@ Router.prototype.render = function() {
   var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
   var state = '';
 
+  var path = parts.join('.');
+
+  if (this.config.hasOwnProperty(path) && this.config[path].abstract) {
+
+    if (this.config[path].redirect) {
+      var redirect = this.config[path].redirect.replace(/(^#\/?)|(\/$)/g, '');
+      console.log('Redirecting to path: ' + redirect);
+      location.hash = '#/' + redirect;
+    } else {
+      return console.error('Abstract state ' + path + ' cannot be rendered');
+    }
+
+  }
+
   for (var i = 0; i < parts.length; i++) {
 
     state = state + (state !== '' ? '.' : '') + parts[i];
@@ -138,15 +152,17 @@ Router.prototype.renderView = function(config, cacheIndex, name) {
 
   var view = new View(config.template);
 
+  var $el = null;
+
   if (cacheIndex === 0) {
 
-    var $el = $('body').find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
+    $el = $('body').find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
 
   } else {
 
     var prior = this.queue[cacheIndex-1];
 
-    var $el = prior.view.getSubview(name || undefined);
+    $el = prior.view.getSubview(name || undefined);
 
   }
 
