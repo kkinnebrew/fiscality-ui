@@ -7,13 +7,15 @@
 var $ = require('jquery');
 var Router = require('./common/router1');
 
-var router = new Router();
+var router = new Router($('body'));
 
 //router.registerDefault('/app/accounts');
 //
 //router.register404({
 //  template: require('../templates/404.hbs')
 //});
+
+router.otherwise('/home/login');
 
 router.register('home', {
   abstract: true,
