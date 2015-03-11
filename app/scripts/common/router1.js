@@ -224,6 +224,14 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
 
 };
 
+/**
+ * renders an absolute view in the router hierarchy
+ * @param config
+ * @param cacheIndex
+ * @param name
+ * @returns {{view: View}}
+ * @private
+ */
 Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
 
   var view = null;
@@ -239,7 +247,7 @@ Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
   var context = parts[1];
 
   var cacheItem = this.queue[cacheIndex];
-  
+
   if (!cacheItem.views.hasOwnProperty(context)) {
     return console.error('Absolute view context "' + context + '" not defined');
   }

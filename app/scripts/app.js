@@ -36,6 +36,10 @@ router.register('app', {
 
 router.register('app.accounts', {
   views: {
+    'testnav': {
+      template: require('../templates/test.hbs'),
+      view: require('./views/test.js')
+    },
     'subnav': {
       template: require('../templates/app/accounts/subnav.hbs')
     },
