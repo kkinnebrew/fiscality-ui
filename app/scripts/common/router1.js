@@ -1,55 +1,61 @@
 var $ = require('jquery');
+var View = require('./view1');
 
-function View(template) {
+function Router($root) {
 
-  this.template = template;
+  /**
+   * stores reference to root element of document
+   * @type {jQuery}
+   */
+  this.$root = $root;
 
-  this.$el = null;
-
-}
-
-View.prototype.render = function($el) {
-
-  this.$el = $el;
-
-  var html = typeof this.template === 'function' ? this.template() : this.template;
-
-  this.$el.html(html);
-
-};
-
-View.prototype.destroy = function() {
-
-  this.$el.empty();
-
-  this.$el = null;
-
-};
-
-View.prototype.getSubview = function(name) {
-
-  if (name) {
-    return this.$el.find('[ui-view="' + name + '"]');
-  } else {
-    return this.$el.find('[ui-view]');
-  }
-
-};
-
-function Router() {
-
+  /**
+   * stores route registrations
+   * @type {Object}
+   */
   this.config = {};
 
+  /**
+   * caches rendered nodes in the view hierarchy for reuse
+   * @type {Array}
+   */
   this.queue = [];
+
+  /**
+   * stores the state to render if the hash is empty
+   * @type {string}
+   */
+  this.defaultState = null;
 
 }
 
+/**
+ * register the state to render if an empty hash is passed
+ * @method otherwise
+ * @param state
+ */
+Router.prototype.otherwise = function(state) {
+
+  this.defaultState = state.replace(/(^\/?)|(\/$)/g, '');
+
+};
+
+/**
+ * registers a state along with it's configuration values
+ * @method register
+ * @param state
+ * @param config
+ */
 Router.prototype.register = function(state, config) {
 
   this.config[state] = config;
 
 };
 
+/**
+ * activates the router to begin listening for hash changes
+ * @method listen
+ */
 Router.prototype.listen = function() {
 
   $(window).on('hashchange', $.proxy(this.render, this));
@@ -58,12 +64,29 @@ Router.prototype.listen = function() {
 
 };
 
+/**
+ * renders the overall hash path using cached views when available
+ * @method render
+ */
 Router.prototype.render = function() {
 
   // split into parts
 
   var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
   var state = '';
+
+  // check if exists
+
+  if (parts.length === 1 && parts[0] === '' && this.defaultState) {
+
+    // redirect to default state
+
+    console.log('Redirecting to path: ' + this.defaultState);
+    return location.hash = '#/' + this.defaultState;
+
+  }
+
+  // check if abstract
 
   var path = parts.join('.');
 
@@ -72,7 +95,7 @@ Router.prototype.render = function() {
     if (this.config[path].redirect) {
       var redirect = this.config[path].redirect.replace(/(^#\/?)|(\/$)/g, '');
       console.log('Redirecting to path: ' + redirect);
-      location.hash = '#/' + redirect;
+      return location.hash = '#/' + redirect;
     } else {
       return console.error('Abstract state ' + path + ' cannot be rendered');
     }
@@ -85,7 +108,7 @@ Router.prototype.render = function() {
 
     if (!this.queue[i] || (this.queue[i] && this.queue[i].state !== state)) {
 
-      this.renderState(state, i);
+      this._renderState(state, i);
 
     }
 
@@ -99,7 +122,7 @@ Router.prototype.render = function() {
 
       // destroy existing view
 
-      this.destroyState(j);
+      this._destroyState(j);
 
     }
 
@@ -109,7 +132,13 @@ Router.prototype.render = function() {
 
 };
 
-Router.prototype.renderState = function(state, cacheIndex) {
+/**
+ * @private
+ * @param state
+ * @param cacheIndex
+ * @returns {*}
+ */
+Router.prototype._renderState = function(state, cacheIndex) {
 
   if (!this.config.hasOwnProperty(state)) return console.error('Invalid: State ' + state + ' not defined');
 
@@ -121,14 +150,15 @@ Router.prototype.renderState = function(state, cacheIndex) {
 
     if (this.queue[cacheIndex]) {
 
-      this.destroyState(cacheIndex);
+      this._destroyState(cacheIndex);
 
     }
 
     for (var name in config.views) {
-      views[name] = this.renderView(config.views[name], cacheIndex, name);
-      console.log('Rendering partial state: ' + state + ':' + name);
-
+      if (!name.match(/@/)) {
+        views[name] = this._renderView(config.views[name], cacheIndex, name);
+        console.log('Rendering partial state: ' + state + ':' + name);
+      }
     }
 
     this.queue[cacheIndex] = {
@@ -136,9 +166,16 @@ Router.prototype.renderState = function(state, cacheIndex) {
       views: views
     };
 
+    for (var name in config.views) {
+      if (name.match(/@/)) {
+        views[name] = this._renderAbsoluteView(config.views[name], cacheIndex, name);
+        console.log('Rendering absolute state: ' + state + ':' + name);
+      }
+    }
+
   } else {
 
-    this.queue[cacheIndex] = this.renderView(config, cacheIndex);
+    this.queue[cacheIndex] = this._renderView(config, cacheIndex);
     this.queue[cacheIndex].state = state;
 
     console.log('Rendering state: ' + state);
@@ -148,15 +185,28 @@ Router.prototype.renderState = function(state, cacheIndex) {
 
 };
 
-Router.prototype.renderView = function(config, cacheIndex, name) {
+/**
+ * @private
+ * @param config
+ * @param cacheIndex
+ * @param [name]
+ * @returns {{view: View}}
+ */
+Router.prototype._renderView = function(config, cacheIndex, name) {
 
-  var view = new View(config.template);
+  var view = null;
+
+  if (config.view) {
+    view = new config.view(config.template);
+  } else {
+    view = new View(config.template);
+  }
 
   var $el = null;
 
   if (cacheIndex === 0) {
 
-    $el = $('body').find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
+    $el = this.$root.find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
 
   } else {
 
@@ -174,7 +224,41 @@ Router.prototype.renderView = function(config, cacheIndex, name) {
 
 };
 
-Router.prototype.destroyState = function(cacheIndex) {
+Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
+
+  var view = null;
+
+  if (config.view) {
+    view = new config.view(config.template);
+  } else {
+    view = new View(config.template);
+  }
+
+  var parts = name.split('@');
+  var target = parts[0];
+  var context = parts[1];
+
+  var cacheItem = this.queue[cacheIndex];
+  
+  if (!cacheItem.views.hasOwnProperty(context)) {
+    return console.error('Absolute view context "' + context + '" not defined');
+  }
+
+  var $el = cacheItem.views[context].view.getSubview(target);
+
+  view.render($el);
+
+  return {
+    view: view
+  };
+
+};
+
+/**
+ * @private
+ * @param cacheIndex
+ */
+Router.prototype._destroyState = function(cacheIndex) {
 
   console.log('Destroying state: ' + this.queue[cacheIndex].state);
 
@@ -198,6 +282,6 @@ Router.prototype.destroyState = function(cacheIndex) {
 
   }
 
-}
+};
 
 module.exports = Router;

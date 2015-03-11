@@ -1,15 +1,30 @@
-var View = require('../common/view');
+var View = require('../common/view1');
+var $ = require('jquery');
 
-var AppView = View.extend({
+function AppView() {
 
-  initialize: function() {
+  View.prototype.constructor.apply(this, arguments);
 
-    this._super.apply(this, arguments);
+}
 
-    console.log('Initialize: AppView');
+AppView.prototype = new View();
 
-  }
+AppView.prototype.constructor = AppView;
 
-});
+AppView.prototype.bind = function() {
+
+  var that = this;
+
+  this.$el.on('click', '[data-link]', function() {
+
+    that.$el.find('[data-link]').removeClass('active');
+    var link = $(this).attr('data-link');
+    $(this).addClass('active');
+    location.hash = link;
+
+  });
+
+};
 
 module.exports = AppView;
+

@@ -7,13 +7,15 @@
 var $ = require('jquery');
 var Router = require('./common/router1');
 
-var router = new Router();
+var router = new Router($('body'));
 
 //router.registerDefault('/app/accounts');
 //
 //router.register404({
 //  template: require('../templates/404.hbs')
 //});
+
+router.otherwise('/home/login');
 
 router.register('home', {
   abstract: true,
@@ -28,7 +30,8 @@ router.register('home.login', {
 router.register('app', {
   abstract: true,
   redirect: 'app/accounts',
-  template: require('../templates/app.hbs')
+  template: require('../templates/app.hbs'),
+  view: require('./views/app.js')
 });
 
 router.register('app.accounts', {
@@ -38,15 +41,15 @@ router.register('app.accounts', {
     },
     'content': {
       template: require('../templates/app/accounts/content.hbs')
+    },
+    'chart@content': {
+      template: require('../templates/app/accounts/chart.hbs')
+      //view: require('./views/app/accounts/chart')
+    },
+    'transactions@content': {
+      template: require('../templates/app/accounts/transactions.hbs')
+      //view: require('./views/app/accounts/transactions')
     }
-    //'chart@content': {
-    //  template: require('../templates/app/accounts/chart.hbs'),
-    //  view: require('./views/app/accounts/chart')
-    //},
-    //'transactions@content': {
-    //  template: require('../templates/app/accounts/transactions.hbs'),
-    //  view: require('./views/app/accounts/transactions')
-    //}
   }
 });
 
