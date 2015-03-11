@@ -186,7 +186,13 @@ Router.prototype._renderState = function(state, cacheIndex) {
  */
 Router.prototype._renderView = function(config, cacheIndex, name) {
 
-  var view = new View(config.template);
+  var view = null;
+
+  if (config.view) {
+    view = new config.view(config.template);
+  } else {
+    view = new View(config.template);
+  }
 
   var $el = null;
 

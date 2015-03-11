@@ -30,7 +30,8 @@ router.register('home.login', {
 router.register('app', {
   abstract: true,
   redirect: 'app/accounts',
-  template: require('../templates/app.hbs')
+  template: require('../templates/app.hbs'),
+  view: require('./views/app.js')
 });
 
 router.register('app.accounts', {
