@@ -864,8 +864,7 @@ ul {
 
 .nav-list-item.active {
     background-color: #25353E;
-    border-left: 3px solid #53B7FB;
-    width: 65px;
+    width: 68px;
     -webkit-transition: all ease-in-out 150ms;
 }
 
