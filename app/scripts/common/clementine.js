@@ -283,99 +283,6 @@ Events = {
 
 Class.mixin(Events);
 
-function Application(config) {
-  this.config = config;
-}
-
-Application.prototype.render = function(el) {
-  var root = $('[ui-view]');
-  if (el !== undefined) {
-    this.$el = el;
-  } else if (root.length === 1) {
-    this.$el = root;
-  } else {
-    console.error('No root view found');
-  }
-};
-
-var Controller = Class.extend({
-
-  initialize: function(viewModel, view) {
-
-    //console.log('initialize controller');
-
-    this.view = view;
-    this.viewModel = viewModel;
-
-    //this.view.setData(viewModel.getData());
-
-    var that = this;
-
-    this.view.on('message', function(e) {
-      //console.log(e.data);
-      that.viewModel.execute(e.data.message);
-    });
-
-    this.view.on('change', function(e) {
-      //console.log('view changed', e.data.key, e.data.value);
-      that.viewModel.update(e.data.key, e.data.value);
-    });
-
-    this.viewModel.on('change', function(e) {
-      //console.log('viewModel changed', e.data.key, e.data.value);
-      that.view.update(e.data.key, e.data.value);
-    });
-
-    this.viewModel.on('refresh', function(e) {
-      that.view.refresh();
-    });
-
-  }
-
-});
-
-var ViewModel = Class.extend({
-
-  initialize: function() {
-
-    //console.log('initialize view model');
-
-  },
-
-  execute: function(message) {
-    //console.log('executing', message);
-    //
-    //console.log(this[message]);
-
-    if (typeof this[message] === 'function') {
-      this[message].call(this);
-    } else {
-      console.warn('No method ' + message + ' found on view model');
-    }
-  },
-
-  update: function(key, value) {
-
-    this[key] = value;
-
-    console.log('view model updated', key, value);
-  },
-
-  getData: function() {
-
-    var data = {};
-
-    for (var prop in this) {
-      if (typeof this[prop] !== 'function') {
-        data[prop] = this[prop];
-      }
-    }
-
-    return data;
-  }
-
-});
-
 $.fn.childrenTo = function(selector) {
   var childList = [];
   var that = this;
@@ -391,11 +298,6 @@ $.fn.childrenTo = function(selector) {
     if (include) { childList.push($(this)); }
   });
   return childList;
-}
+};
 
-module.exports.Application = Application;
-//module.exports.View = View;
-module.exports.Controller = Controller;
-module.exports.ViewModel = ViewModel;
 module.exports.Class = Class;
-module.exports.Events = Events;
