@@ -26,7 +26,8 @@ ul {
     position: absolute;
     -webkit-user-select: none;
     user-select: none;
-    width: 300px;
+    -webkit-transition: all ease-out 150ms;
+    transform: translate3d(0,0,0);
 }
 
 #content {
@@ -36,6 +37,8 @@ ul {
     overflow-y: scroll;
     position: absolute;
     right: 0;
+    -webkit-transition: all ease-out 150ms;
+    transform: translate3d(0,0,0);
 }
 
 #header {
@@ -58,11 +61,11 @@ ul {
 #subnav {
     background: #283947;
     bottom: 0;
+    left: 70px;
     margin: 0;
     position: absolute;
     right: 0;
     top: 70px;
-    width: 230px;
 }
 
 #app-logo {
@@ -195,6 +198,23 @@ ul {
     -webkit-font-smoothing: antialiased;
 }
 
+/* nav width adjustment */
+
+#app.accounts #menu {
+    width: 480px;
+}
+
+#app.accounts #content {
+    left: 480px;
+}
+
+#app.investments #menu {
+    width: 300px;
+}
+
+#app.investments #content {
+    left: 300px;
+}
 
 /* accounts page */
 
