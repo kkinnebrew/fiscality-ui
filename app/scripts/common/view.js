@@ -120,7 +120,7 @@ View.prototype.refresh = function() {
   this.$el.find('[ui-view]').on('click', function(e) {
     e.stopPropagation();
   });
-  
+
 };
 
 /**
@@ -180,6 +180,25 @@ View.prototype.getSubview = function(name) {
   }
 
   return subview;
+
+};
+
+
+View.prototype.renderSubview = function(name, view) {
+
+  var $subview = null;
+
+  if (name) {
+    $subview = this.$el.find('[ui-view="' + name + '"]');
+  } else {
+    $subview = this.$el.find('[ui-view]');
+  }
+
+  if ($subview.length === 0) {
+    console.error('Subview' + (name ? ' with name "' + name  + '"' : '')  + ' not found');
+  }
+
+  view.render($subview);
 
 };
 

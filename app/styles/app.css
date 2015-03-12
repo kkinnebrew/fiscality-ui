@@ -257,6 +257,7 @@ ul {
 }
 
 .range-picker-item {
+    border: 1px solid transparent;
     cursor: pointer;
     display: inline-block;
     font-family: "proxima-nova", sans-serif;
@@ -267,7 +268,7 @@ ul {
     padding: 3px 5px 1px 6px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    -webkit-transition: opacity ease-in-out 100ms;
+    -webkit-transition: all ease-in-out 100ms;
     -webkit-font-smoothing: antialiased;
 }
 

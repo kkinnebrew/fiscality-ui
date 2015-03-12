@@ -213,15 +213,15 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
 
     $el = this.$root.find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
 
+    view.render($el);
+
   } else {
 
     var prior = this.queue[cacheIndex-1];
 
-    $el = prior.view.getSubview(name || undefined);
+    prior.view.renderSubview(name || undefined, view);
 
   }
-
-  view.render($el);
 
   var node = {
     view: view
@@ -263,9 +263,7 @@ Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
     return console.error('Absolute view context "' + context + '" not defined');
   }
 
-  var $el = cacheItem.views[context].view.getSubview(target);
-
-  view.render($el);
+  cacheItem.views[context].view.renderSubview(target, view);
 
   return {
     view: view
