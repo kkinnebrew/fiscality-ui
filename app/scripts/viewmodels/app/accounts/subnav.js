@@ -1,5 +1,6 @@
 var transactionsAPI = require('../../../services/transactions');
 var ViewModel = require('../../../common/viewmodel');
+var _ = require('underscore');
 
 var SubNavViewModel = ViewModel.extend({
 
@@ -10,7 +11,6 @@ var SubNavViewModel = ViewModel.extend({
     this.accounts = [];
 
     transactionsAPI.accounts().then(function(data) {
-      console.log('accounts', data);
       that.accounts = data;
       that.fire('refresh');
     }, function() {
