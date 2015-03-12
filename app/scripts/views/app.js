@@ -26,5 +26,21 @@ AppView.prototype.bind = function() {
 
 };
 
+AppView.prototype.renderSubview = function(name, view) {
+
+  View.prototype.renderSubview.call(this, name, view);
+
+  if (view.code) {
+
+    if (view.code === 'investments') {
+      this.$el.addClass('investments').removeClass('accounts');
+    } else if (view.code === 'accounts') {
+      this.$el.addClass('accounts').removeClass('investments');
+    }
+
+  }
+
+};
+
 module.exports = AppView;
 

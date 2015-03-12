@@ -26,7 +26,8 @@ ul {
     position: absolute;
     -webkit-user-select: none;
     user-select: none;
-    width: 300px;
+    -webkit-transition: all ease-out 150ms;
+    transform: translate3d(0,0,0);
 }
 
 #content {
@@ -36,6 +37,8 @@ ul {
     overflow-y: scroll;
     position: absolute;
     right: 0;
+    -webkit-transition: all ease-out 150ms;
+    transform: translate3d(0,0,0);
 }
 
 #header {
@@ -58,11 +61,11 @@ ul {
 #subnav {
     background: #283947;
     bottom: 0;
+    left: 70px;
     margin: 0;
     position: absolute;
     right: 0;
     top: 70px;
-    width: 230px;
 }
 
 #app-logo {
@@ -129,8 +132,7 @@ ul {
 
 .nav-list-item.active {
     background-color: #25353E;
-    border-left: 3px solid #53B7FB;
-    width: 65px;
+    width: 68px;
     -webkit-transition: all ease-in-out 150ms;
 }
 
@@ -195,6 +197,23 @@ ul {
     -webkit-font-smoothing: antialiased;
 }
 
+/* nav width adjustment */
+
+#app.accounts #menu {
+    width: 480px;
+}
+
+#app.accounts #content {
+    left: 480px;
+}
+
+#app.investments #menu {
+    width: 300px;
+}
+
+#app.investments #content {
+    left: 300px;
+}
 
 /* accounts page */
 
@@ -257,6 +276,7 @@ ul {
 }
 
 .range-picker-item {
+    border: 1px solid transparent;
     cursor: pointer;
     display: inline-block;
     font-family: "proxima-nova", sans-serif;
@@ -267,7 +287,7 @@ ul {
     padding: 3px 5px 1px 6px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    -webkit-transition: opacity ease-in-out 100ms;
+    -webkit-transition: all ease-in-out 100ms;
     -webkit-font-smoothing: antialiased;
 }
 
