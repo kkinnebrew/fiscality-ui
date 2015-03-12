@@ -120,9 +120,7 @@ View.prototype.refresh = function() {
   this.$el.find('[ui-view]').on('click', function(e) {
     e.stopPropagation();
   });
-
-  console.log('View refreshed');
-
+  
 };
 
 /**
