@@ -78,7 +78,7 @@ View.prototype.refresh = function() {
   }
 
   var that = this;
-  
+
   // unbind event handlers
 
   this.unbind();
