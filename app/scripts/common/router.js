@@ -1,191 +1,306 @@
-var Class = require('./clementine').Class;
-var View = require('./view');
 var $ = require('jquery');
+var View = require('./view');
 
-var Router = Class.extend({
+function Router($root) {
 
-  initialize: function() {
+  /**
+   * stores reference to root element of document
+   * @type {jQuery}
+   */
+  this.$root = $root;
 
-    // initialize vars
+  /**
+   * stores route registrations
+   * @type {Object}
+   */
+  this.config = {};
 
-    this.defaultState = null;
-    this.notFound = null;
+  /**
+   * caches rendered nodes in the view hierarchy for reuse
+   * @type {Array}
+   */
+  this.queue = [];
 
-    // store render tree config
-    this.states = {};
+  /**
+   * stores the state to render if the hash is empty
+   * @type {string}
+   */
+  this.defaultState = null;
 
-    // route element
-    this.root = null;
+}
 
-  },
+/**
+ * register the state to render if an empty hash is passed
+ * @method otherwise
+ * @param state
+ */
+Router.prototype.otherwise = function(state) {
 
-  listen: function() {
+  this.defaultState = state.replace(/(^\/?)|(\/$)/g, '');
 
-    // bind hash change
+};
 
-    $(window).on('hashchange', $.proxy(this.onHashChange, this));
+/**
+ * registers a state along with it's configuration values
+ * @method register
+ * @param state
+ * @param config
+ */
+Router.prototype.register = function(state, config) {
 
-    // force first render
-    this.render();
+  this.config[state] = config;
 
-  },
+};
 
-  register: function(state, config) {
+/**
+ * activates the router to begin listening for hash changes
+ * @method listen
+ */
+Router.prototype.listen = function() {
 
-    if (!this.states.hasOwnProperty(state)) {
-      this.states[state] = config;
-    } else {
-      console.error('State ' + state + ' has already been defined');
-    }
+  $(window).on('hashchange', $.proxy(this.render, this));
 
-  },
+  this.render();
 
-  registerDefault: function(state) {
-    this.defaultState = state.replace(/(^\/)|(\/$)/, '');
-  },
+};
 
-  register404: function(config) {
-    this.notFound = config;
-  },
+/**
+ * renders the overall hash path using cached views when available
+ * @method render
+ */
+Router.prototype.render = function() {
 
-  onHashChange: function() {
-    this.render()
-  },
+  // split into parts
 
-  render404: function() {
+  var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
+  var state = '';
 
-    // setup view
+  // check if exists
 
-    this.root = {
-      view: new View(this.notFound.template)
-    };
+  if (parts.length === 1 && parts[0] === '' && this.defaultState) {
 
-    var $el = $('body').find('[ui-view]');
+    // redirect to default state
 
-    $el.empty();
-
-    // render into document
-
-    this.root.view.render($el);
-
-  },
-
-  render: function() {
-
-    var hash = location.hash.replace(/(^#\/?)|(\/$)/g, '');
-
-    // handle empty hashes
-
-    if (!hash || hash === '') {
-
-      if (this.defaultState) {
-        return location.hash = '#/' + this.defaultState;
-      } else if (this.notFound) {
-        return this.render404();
-      }
-
-    }
-
-    // handle lack of default hashes
-
-    if (!hash) {
-      console.error('State for 404 route not defined');
-    }
-
-    function RouterNode(obj) {
-      this.view = obj instanceof View ? obj : null;
-      this.views = obj instanceof View ? null : obj;
-    }
-
-    RouterNode.prototype.registerSubview = function(view, name) {
-      if (this.view) {
-        this.view.registerSubview(view, name);
-      } else {
-        throw new Error('Cannot register subview for multipart view parent. Use absolute instead.');
-      }
-    };
-
-    RouterNode.prototype.render = function($el) {
-      if (this.view) {
-        this.view.render($el.find('[ui-view]'));
-      } else {
-        for (var view in this.views) {
-          var $view = $el.find('[ui-view="' + view + '"]');
-          this.views[view].view.render($view);
-        }
-      }
-    };
-
-    function setupView(config, last, name) {
-      var view = config.view ? new config.view(config.template) : new View(config.template);
-      if (last && last instanceof RouterNode) {
-        last.registerSubview(view, name || undefined);
-      }
-      return new RouterNode(view);
-    }
-
-    function setupViews(config, last) {
-      var views = {};
-      for (var name in config.views) {
-        if (!name.match(/@/)) {
-          views[name] = setupView(config.views[name], last, name);
-        }
-      }
-      for (var name in config.views) {
-        if (name.match(/@/)) {
-          var parts = name.split('@');
-          var target = parts[0];
-          var context = parts[1];
-          if (views.hasOwnProperty(context)) {
-            views[name] = setupView(config.views[name], views[context], target);
-          }
-        }
-      }
-      return new RouterNode(views);
-    }
-
-    var parts = hash.split('/');
-    var state = null;
-    var last = null;
-    var config = null;
-
-    console.log('Rendering', parts);
-
-    for (var i = 0; i < parts.length; i++) {
-
-      state = (state ? state + '.' : '') + parts[i];
-
-      if (!this.states.hasOwnProperty(state)) {
-        console.error('State ' + state + ' is not defined');
-        return this.render404();
-      } else {
-        config = this.states[state];
-        if (!last) {
-          this.root = last = !config.views ? setupView(config) : setupViews(config);
-        } else {
-          last = !config.views ? setupView(config, last) : setupViews(config, last);
-        }
-      }
-      if (i === parts.length - 1 && config.abstract) {
-        if (config.redirect) {
-          location.hash = '#/' + config.redirect.replace(/(^#\/?)|(\/$)/g, '');
-        } else {
-          console.error('No redirect for abstract state ' + state + ' defined');
-          return this.render404();
-        }
-      }
-    }
-
-    // TODO: Render as processing occurs, not afterwards
-
-    // render into body
-
-    var body = $('body');
-    body.find('[ui-view]').empty();
-    this.root.render(body);
+    console.log('Redirecting to path: ' + this.defaultState);
+    return location.hash = '#/' + this.defaultState;
 
   }
 
-});
+  // check if abstract
+
+  var path = parts.join('.');
+
+  if (this.config.hasOwnProperty(path) && this.config[path].abstract) {
+
+    if (this.config[path].redirect) {
+      var redirect = this.config[path].redirect.replace(/(^#\/?)|(\/$)/g, '');
+      console.log('Redirecting to path: ' + redirect);
+      return location.hash = '#/' + redirect;
+    } else {
+      return console.error('Abstract state ' + path + ' cannot be rendered');
+    }
+
+  }
+
+  for (var i = 0; i < parts.length; i++) {
+
+    state = state + (state !== '' ? '.' : '') + parts[i];
+
+    if (!this.queue[i] || (this.queue[i] && this.queue[i].state !== state)) {
+
+      this._renderState(state, i);
+
+    }
+
+  }
+
+  if (this.queue.length > i) {
+
+    for (var j = i; j < this.queue.length; j++) {
+
+      console.log('Purging remaining state: ' + this.queue[j].state);
+
+      // destroy existing view
+
+      this._destroyState(j);
+
+    }
+
+    this.queue.splice(i);
+
+  }
+
+};
+
+/**
+ * @private
+ * @param state
+ * @param cacheIndex
+ * @returns {*}
+ */
+Router.prototype._renderState = function(state, cacheIndex) {
+
+  if (!this.config.hasOwnProperty(state)) return console.error('Invalid: State ' + state + ' not defined');
+
+  var config = this.config[state];
+
+  if (config.views) {
+
+    var views = {};
+
+    if (this.queue[cacheIndex]) {
+
+      this._destroyState(cacheIndex);
+
+    }
+
+    for (var name in config.views) {
+      if (!name.match(/@/)) {
+        views[name] = this._renderView(config.views[name], cacheIndex, name);
+        console.log('Rendering partial state: ' + state + ':' + name);
+      }
+    }
+
+    this.queue[cacheIndex] = {
+      state: state,
+      views: views
+    };
+
+    for (var name in config.views) {
+      if (name.match(/@/)) {
+        views[name] = this._renderAbsoluteView(config.views[name], cacheIndex, name);
+        console.log('Rendering absolute state: ' + state + ':' + name);
+      }
+    }
+
+  } else {
+
+    this.queue[cacheIndex] = this._renderView(config, cacheIndex);
+    this.queue[cacheIndex].state = state;
+
+    console.log('Rendering state: ' + state);
+
+
+  }
+
+};
+
+/**
+ * @private
+ * @param config
+ * @param cacheIndex
+ * @param [name]
+ * @returns {{view: View}}
+ */
+Router.prototype._renderView = function(config, cacheIndex, name) {
+
+  var view = null;
+  var viewModel = null;
+
+  if (config.viewModel) {
+    viewModel = new config.viewModel();
+  }
+
+  if (config.view) {
+    view = new config.view(config.template, viewModel || undefined);
+  } else {
+    view = new View(config.template, viewModel || undefined);
+  }
+
+  var $el = null;
+
+  if (cacheIndex === 0) {
+
+    $el = this.$root.find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
+
+  } else {
+
+    var prior = this.queue[cacheIndex-1];
+
+    $el = prior.view.getSubview(name || undefined);
+
+  }
+
+  view.render($el);
+
+  var node = {
+    view: view
+  };
+
+  if (viewModel) {
+    node.viewModel = viewModel;
+  }
+
+  return node;
+
+};
+
+/**
+ * renders an absolute view in the router hierarchy
+ * @param config
+ * @param cacheIndex
+ * @param name
+ * @returns {{view: View}}
+ * @private
+ */
+Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
+
+  var view = null;
+
+  if (config.view) {
+    view = new config.view(config.template);
+  } else {
+    view = new View(config.template);
+  }
+
+  var parts = name.split('@');
+  var target = parts[0];
+  var context = parts[1];
+
+  var cacheItem = this.queue[cacheIndex];
+
+  if (!cacheItem.views.hasOwnProperty(context)) {
+    return console.error('Absolute view context "' + context + '" not defined');
+  }
+
+  var $el = cacheItem.views[context].view.getSubview(target);
+
+  view.render($el);
+
+  return {
+    view: view
+  };
+
+};
+
+/**
+ * @private
+ * @param cacheIndex
+ */
+Router.prototype._destroyState = function(cacheIndex) {
+
+  console.log('Destroying state: ' + this.queue[cacheIndex].state);
+
+  // store reference
+
+  var item = this.queue[cacheIndex];
+
+  // destroy existing view
+
+  if (item.views) {
+
+    for (var name in item.views) {
+
+      item.views[name].view.destroy();
+
+    }
+
+  } else {
+
+    item.view.destroy();
+
+  }
+
+};
 
 module.exports = Router;

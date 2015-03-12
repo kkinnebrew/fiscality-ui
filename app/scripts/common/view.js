@@ -1,247 +1,186 @@
-var Class = require('./clementine').Class;
 var $ = require('jquery');
-var Binding = require('./binding');
 
-var View = Class.extend({
+function View(template, viewModel) {
 
-  initialize: function(template, viewModel) {
+  /**
+   * stores a copy of the template provided to the view
+   * @param {Function|string}
+   */
+  this.template = template;
 
-    // store properties
+  /**
+   * holds a reference to where the view is rendered into the DOM
+   * @type {jQuery}
+   */
+  this.$el = null;
 
-    this.template = template;
-    this.viewModel = viewModel;
+  /**
+   * whether or not the view has been rendered
+   * @type {boolean}
+   */
+  this.rendered = false;
 
-    // states
+  /**
+   * stores the view model if one is defined
+   * @type {ViewModel}
+   */
+  this.viewModel = viewModel || null;
 
-    this.rendered = false;
+}
 
-    // create dom references
+/**
+ * renders the view directly into a given element
+ * @method render
+ * @param $el
+ */
+View.prototype.render = function($el) {
 
-    this.$el = null;
-    this.$target = null;
-    this.$subviews = {};
-    this.$registrations = {};
+  // check if rendered
 
-    // prepare template
+  if (this.rendered) {
+    return console.warn('View is already rendered');
+  }
 
-    this.prepare();
+  // store reference to DOM
 
-  },
+  this.$el = $el;
 
-  prepare: function() {
+  // render the template
 
-    var that = this;
+  var html = typeof this.template === 'function' ? this.template(this.viewModel || {}) : this.template;
 
-    // parse template
+  this.$el.html(html);
 
-    if (typeof this.template === 'string') {
-      this.$el = $('<div></div>').html(this.template);
-    } else {
-      this.$el = $('<div></div>').html(this.template(this.viewModel));
-    }
+  this.rendered = true;
 
-    // parse subviews
+  // bind event handlers TODO: handle all propagating events
 
-    this.$subviews = {};
+  this.$el.find('[ui-view]').on('click', function(e) {
+    e.stopPropagation();
+  });
 
-    var subviews = this.$el.find('[ui-view]');
+  this.bind();
 
-    if (subviews.length === 1) {
-      that.$subviews['default'] = subviews;
-    } else {
-      this.$el.find('[ui-view]').each(function() {
-        var name = $(this).attr('ui-view');
-        if (name === 'default') return;
-        that.$subviews[name] = $(this);
-      });
-    }
+  // bind view model refresh
 
-  },
+  if (this.viewModel) {
 
-  render: function($el) {
-
-    if (this.rendered) {
-      return;
-    }
-
-    // render into main view
-
-    this.$target = $el;
-
-    this.$el.children().appendTo(this.$target);
-
-    this.bind();
-
-    this.renderSubviews();
-
-    this.rendered = true;
-
-  },
-
-  refresh: function($target) {
-
-    if (!this.rendered) {
-      return;
-    }
-
-    this.unbind();
-
-    this.prepare();
-
-    this.$target.empty();
-
-    if ($target) {
-      this.$target = $target;
-    }
-
-    this.$el.children().appendTo(this.$target);
-
-    this.bind();
-
-    this.refreshSubviews(); // wut?
-
-  },
-
-  renderSubviews: function() {
-
-    for (var name in this.$registrations) {
-
-      var view = this.$registrations[name];
-
-      if (this.$subviews.hasOwnProperty(name)) {
-        view.render(this.$subviews[name]);
-      }
-
-    }
-
-  },
-
-  refreshSubviews: function() {
-
-    for (var name in this.$registrations) {
-
-      var view = this.$registrations[name];
-
-      if (this.$subviews.hasOwnProperty(name)) {
-        view.refresh(this.$subviews[name]);
-      }
-
-    }
-
-  },
-
-  registerSubview: function(view, name) {
-
-    if (!name) {
-      name = 'default';
-    }
-
-    this.$registrations[name] = view;
-
-  },
-
-  bind: function() {
-
-    var that = this;
-
-    // find all event bindings
-
-    this.$target.find('[data-bind]').each(function() {
-
-      // parse binding
-
-      var pattern = $(this).attr('data-bind');
-
-      try {
-
-        var event = pattern.match(/([^:]+)/)[1];
-        var message = pattern.match(/:(.+)\(/)[1];
-        var argumentsString = pattern.match(/\((.+)\)/);
-        var args = argumentsString ? argumentsString[1].replace(' ', '').split(',') : [];
-
-        $(this).on(event, function(e) {
-          var payload = Binding.handle(e, event, message, args);
-          that.fire('message', payload);
-        });
-
-      } catch(e) {
-        console.error('Invalid [data-bind] pattern', pattern, e);
-      }
-
-    });
-
-    // find live model bindings
-
-    this.$target.find('[data-model]').each(function() {
-
-      var model = $(this).attr('data-model');
-      var tag = $(this).prop('tagName');
-
-      switch (tag.toLowerCase()) {
-        case 'input':
-          $(this).on('keyup', function(e) {
-            if (e.which <= 90 && e.which >= 48) {
-              that.fire('change', {
-                key: model,
-                value: $(this).val()
-              });
-            }
-
-          });
-          break;
-        case 'select':
-          $(this).on('change', function() {
-            that.fire('change', {
-              key: model,
-              value: $(this).val()
-            });
-          });
-          break;
-      }
-
-    });
-
-  },
-
-  unbind: function() {
-
-    // remove all event bindings
-
-    this.$target.find('[data-bind]').each(function() {
-
-      // parse binding
-
-      var pattern = $(this).attr('data-bind');
-
-      try {
-        var event = pattern.match(/([^:]+)/)[1];
-      } catch(e) {
-        console.error('Invalid [data-bind] pattern', pattern);
-      }
-
-      $(this).off(event);
-
-    });
-
-    // remove live model bindings
-
-    this.$target.find('[data-model]').each(function() {
-
-      var tag = $(this).prop('tagName');
-
-      switch (tag.toLowerCase()) {
-        case 'input':
-          $(this).off('keyup');
-          break;
-        case 'select':
-          $(this).off('change');
-          break;
-      }
-
-    });
+    this.viewModel.on('refresh', $.proxy(this.refresh, this));
 
   }
 
-});
+};
+
+View.prototype.refresh = function() {
+
+  if (!this.rendered) {
+    return console.warn('Cannot refreshed unrendered view');
+  }
+
+  var that = this;
+
+  // unbind event handlers
+
+  this.unbind();
+
+  // remove propagation stops
+
+  this.$el.find('[ui-view]').off('click');
+
+  // store references to subviews
+
+  var $subviews = this.$el.find('[ui-view]');
+
+  // remove views
+
+  this.$el.empty();
+
+  // rerender view
+
+  var html = typeof this.template === 'function' ? this.template(this.viewModel || {}) : this.template;
+
+  this.$el.html(html);
+
+  // bind events
+
+  this.bind();
+
+  // repopulate subviews
+
+  $subviews.each(function() {
+
+    var name = $(this).attr('ui-view');
+
+    that.$el.find('[ui-view="' + name + '"]').replaceWith(this);
+
+  });
+
+  // bind prop stops
+
+  this.$el.find('[ui-view]').on('click', function(e) {
+    e.stopPropagation();
+  });
+  
+};
+
+/**
+ * method called after rendering when events should be bound
+ * @method bind
+ */
+View.prototype.bind = function() {
+
+};
+
+/**
+ * method called prior to destroying all DOM references, when events should be unbound
+ * @method unbind
+ */
+View.prototype.unbind = function() {
+
+};
+
+/**
+ * destroys the currently rendered view and returns it to its unrendered state
+ * @method destroy
+ */
+View.prototype.destroy = function() {
+
+  if (!this.rendered) {
+    return console.warn('Unrendered view cannot be destroyed');
+  }
+
+  this.$el.find('[ui-view]').off('click');
+
+  this.unbind();
+
+  this.$el.empty();
+
+  this.$el = null;
+
+};
+
+/**
+ * returns a view reference to a subview
+ * @method getSubview
+ * @param name
+ * @returns {*}
+ */
+View.prototype.getSubview = function(name) {
+
+  var subview = null;
+
+  if (name) {
+    subview = this.$el.find('[ui-view="' + name + '"]');
+  } else {
+    subview = this.$el.find('[ui-view]');
+  }
+
+  if (subview.length === 0) {
+    console.error('Subview' + (name ? ' with name "' + name  + '"' : '')  + ' not found');
+  }
+
+  return subview;
+
+};
 
 module.exports = View;
