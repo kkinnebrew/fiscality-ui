@@ -5,10 +5,10 @@ var baseUrl = 'https://fiscality-api.herokuapp.com';
 
 module.exports = {
 
-  transactions: function() {
+  transactions: function(accountId) {
     return $.ajax({
       type: 'GET',
-      url: baseUrl + '/api/transactions',
+      url: baseUrl + '/api/accounts/' + accountId + '/transactions',
       contentType: 'application/json;charset=UTF-8'
     });
   },

@@ -195,11 +195,16 @@ Router.prototype._renderState = function(state, cacheIndex) {
 Router.prototype._renderView = function(config, cacheIndex, name) {
 
   var view = null;
+  var viewModel = null;
+
+  if (config.viewModel) {
+    viewModel = new config.viewModel();
+  }
 
   if (config.view) {
-    view = new config.view(config.template);
+    view = new config.view(config.template, viewModel || undefined);
   } else {
-    view = new View(config.template);
+    view = new View(config.template, viewModel || undefined);
   }
 
   var $el = null;
@@ -218,9 +223,15 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
 
   view.render($el);
 
-  return {
+  var node = {
     view: view
   };
+
+  if (viewModel) {
+    node.viewModel = viewModel;
+  }
+
+  return node;
 
 };
 
@@ -253,6 +264,10 @@ Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
   }
 
   var $el = cacheItem.views[context].view.getSubview(target);
+
+  console.log($el.attr('ui-view'))
+
+  console.log('Rendering into', name,  $el.length, config.template());
 
   view.render($el);
 
