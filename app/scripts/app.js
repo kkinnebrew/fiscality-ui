@@ -44,8 +44,8 @@ router.register('app.accounts', {
       template: require('../templates/app/accounts/content.hbs')
     },
     'chart@content': {
-      template: require('../templates/app/accounts/chart.hbs')
-      //view: require('./views/app/accounts/chart')
+      template: require('../templates/app/accounts/chart.hbs'),
+      view: require('./views/app/accounts/chart')
     },
     'transactions@content': {
       template: require('../templates/app/accounts/transactions.hbs')
