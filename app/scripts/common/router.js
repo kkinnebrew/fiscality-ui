@@ -265,10 +265,6 @@ Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
 
   var $el = cacheItem.views[context].view.getSubview(target);
 
-  console.log($el.attr('ui-view'))
-
-  console.log('Rendering into', name,  $el.length, config.template());
-
   view.render($el);
 
   return {
