@@ -186,17 +186,7 @@ View.prototype.getSubview = function(name) {
 
 View.prototype.renderSubview = function(name, view) {
 
-  var $subview = null;
-
-  if (name) {
-    $subview = this.$el.find('[ui-view="' + name + '"]');
-  } else {
-    $subview = this.$el.find('[ui-view]');
-  }
-
-  if ($subview.length === 0) {
-    console.error('Subview' + (name ? ' with name "' + name  + '"' : '')  + ' not found');
-  }
+  var $subview = this.getSubview(name);
 
   view.render($subview);
 
