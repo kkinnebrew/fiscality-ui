@@ -398,3 +398,4 @@ module.exports.Application = Application;
 module.exports.Controller = Controller;
 module.exports.ViewModel = ViewModel;
 module.exports.Class = Class;
+module.exports.Events = Events;

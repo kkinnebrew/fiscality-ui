@@ -1,6 +1,6 @@
 var $ = require('jquery');
 
-function View(template) {
+function View(template, viewModel) {
 
   /**
    * stores a copy of the template provided to the view
@@ -19,6 +19,12 @@ function View(template) {
    * @type {boolean}
    */
   this.rendered = false;
+
+  /**
+   * stores the view model if one is defined
+   * @type {ViewModel}
+   */
+  this.viewModel = viewModel || null;
 
 }
 
@@ -41,7 +47,7 @@ View.prototype.render = function($el) {
 
   // render the template
 
-  var html = typeof this.template === 'function' ? this.template() : this.template;
+  var html = typeof this.template === 'function' ? this.template(this.viewModel || {}) : this.template;
 
   this.$el.html(html);
 
@@ -54,6 +60,68 @@ View.prototype.render = function($el) {
   });
 
   this.bind();
+
+  // bind view model refresh
+
+  if (this.viewModel) {
+
+    this.viewModel.on('refresh', $.proxy(this.refresh, this));
+
+  }
+
+};
+
+View.prototype.refresh = function() {
+
+  if (!this.rendered) {
+    return console.warn('Cannot refreshed unrendered view');
+  }
+
+  var that = this;
+  
+  // unbind event handlers
+
+  this.unbind();
+
+  // remove propagation stops
+
+  this.$el.find('[ui-view]').off('click');
+
+  // store references to subviews
+
+  var $subviews = this.$el.find('[ui-view]');
+
+  // remove views
+
+  this.$el.empty();
+
+  // rerender view
+
+  var html = typeof this.template === 'function' ? this.template(this.viewModel || {}) : this.template;
+
+  this.$el.html(html);
+
+  // bind events
+
+  this.bind();
+
+  // repopulate subviews
+
+  $subviews.each(function() {
+
+    var name = $(this).attr('ui-view');
+
+    that.$el.find('[ui-view="' + name + '"]').replaceWith(this);
+
+  });
+
+  // bind prop stops
+
+  this.$el.find('[ui-view]').on('click', function(e) {
+    e.stopPropagation();
+  });
+
+  console.log('View refreshed');
 
 };
 

@@ -135,8 +135,8 @@ ul {
 }
 
 .nav-list-item:hover {
-    background-color: #25353E;
-    -webkit-transition: all ease-in-out 150ms;
+    background-color: #303030;
+    -webkit-transition: all ease-in-out 100ms;
 }
 
 /* subnav */
@@ -145,10 +145,11 @@ ul {
     background: #23333F;
     color: #91999F;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     height: 14px;
     padding: 10px 0 8px 12px;
     text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
 }
 
 .sub-nav-item {
@@ -179,6 +180,7 @@ ul {
     font-size: 13px;
     font-weight: 600;
     padding: 15px 0 0 18px;
+    -webkit-font-smoothing: antialiased;
 }
 
 .sub-nav-item .sub-nav-subtitle {
@@ -187,6 +189,7 @@ ul {
     font-weight: 600;
     padding: 1px 0 0 18px;
     text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -207,28 +210,45 @@ ul {
     width: 100%;
 }
 
-#accounts-chart h2 {
-    font-weight: inherit;
-    padding: 16px 0 0 20px;
-}
-
 #transactions {
     background: #FFF;
     color: #000;
     font-weight: 300;
     min-height: 1000px;
-    padding: 16px 0 0 20px;
 }
 
 #transactions h2 {
     font-weight: inherit;
 }
 
+/* account info */
+
+.account-info {
+    left: 28px;
+    position: absolute;
+    top: 24px;
+}
+
+.account-info h2 {
+    font-size: 24px;
+    font-weight: 200;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.account-info .balance {
+    font-size: 24px;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+}
+
 /* range picker */
 
 .range-picker {
-    right: 64px;
-    top: 22px;
+    right: 72px;
+    top: 25px;
     position: absolute;
     list-style: none;
 }
@@ -239,12 +259,13 @@ ul {
     font-family: "proxima-nova", sans-serif;
     font-size: 9px;
     font-weight: 600;
-    margin: 0 2px 0 2px;
+    margin: 0 3px 0 3px;
     opacity: 0.5;
     padding: 3px 5px 1px 6px;
     letter-spacing: 2px;
     text-transform: uppercase;
     -webkit-transition: opacity ease-in-out 100ms;
+    -webkit-font-smoothing: antialiased;
 }
 
 .range-picker-item:hover {
@@ -261,11 +282,18 @@ ul {
 
 .chart-settings-button {
     background: url(../images/settings-button.png) center center no-repeat;
+    cursor: pointer;
     height: 18px;
+    opacity: 0.5;
     position: absolute;
-    right: 26px;
-    top: 26px;
+    right: 30px;
+    top: 28px;
     width: 18px;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+.chart-settings-button:hover {
+    opacity: 1;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -278,4 +306,29 @@ ul {
 
     }
 
+}
+
+/* table header */
+
+.transaction-header {
+    background: rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    height: 48px;
+    position: absolute;
+    width: 100%;
+}
+
+.transaction-subheader {
+    background: #F7F7F7;
+    color: #8F8F8F;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+}
+
+.transaction-row {
+    height: 60px;
+    width: 100%;
 }
