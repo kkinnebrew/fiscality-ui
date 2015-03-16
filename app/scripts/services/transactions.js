@@ -13,7 +13,7 @@ module.exports = {
   transactions: function(accountId) {
     if (cache.transactions[accountId]) {
       var deferred = $.Deferred();
-      console.log('cache load');
+      //console.log('cache load');
       deferred.resolve(cache.transactions[accountId]);
       return deferred;
     } else {
@@ -22,7 +22,7 @@ module.exports = {
         url: baseUrl + '/api/accounts/' + accountId + '/transactions',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          console.log('ajax load');
+          //console.log('ajax load');
           cache.transactions[accountId] = data;
         }
       });
@@ -40,7 +40,7 @@ module.exports = {
   accounts: function() {
     if (cache.accounts) {
       var deferred = $.Deferred();
-      console.log('cache load');
+      //console.log('cache load');
       deferred.resolve(cache.accounts);
       return deferred;
     } else {
@@ -49,7 +49,7 @@ module.exports = {
         url: baseUrl + '/api/accounts',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          console.log('ajax load');
+          //console.log('ajax load');
           cache.accounts = data;
         }
       });

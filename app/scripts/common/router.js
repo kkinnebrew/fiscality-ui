@@ -48,7 +48,48 @@ Router.prototype.otherwise = function(state) {
  */
 Router.prototype.register = function(state, config) {
 
-  this.config[state] = config;
+  var parts = state.split('.');
+  var last = null;
+  var part = null;
+
+  while (parts.length) {
+
+    part = parts.shift();
+
+    if (!last) {
+      last = this.config;
+    }
+
+    if (parts.length == 0) {
+
+      if (last.hasOwnProperty(part)) {
+        console.warn('Overriding existing route ' + state);
+      }
+
+      config.params = [];
+
+      if (config.url) {
+
+        config.params = config.url.match(/:(\w+)/g) || [];
+
+      }
+
+      last[part] = {
+        config: config,
+        children: {}
+      };
+
+    } else {
+
+      if (!last.hasOwnProperty(part)) {
+        return console.error('Parent route not defined');
+      }
+
+      last = last[part].children;
+
+    }
+
+  }
 
 };
 
@@ -65,17 +106,46 @@ Router.prototype.listen = function() {
 };
 
 /**
+ * REturns the configuration option for a given state, or null
+ * @param state
+ * @returns {*}
+ */
+Router.prototype.getConfig = function(state) {
+
+  var parts = state.split('.');
+
+  var part = null;
+  var last = null;
+
+  while (parts.length) {
+
+    part = parts.shift();
+
+    if (!last) {
+      last = this.config;
+    }
+
+    if (!last.hasOwnProperty(part)) {
+      return console.error('State ' + state + ' not defined');
+    }
+
+    if (parts.length == 0) {
+      return last[part].config;
+    } else {
+      last = last[part].children;
+    }
+
+  }
+
+};
+
+/**
  * renders the overall hash path using cached views when available
  * @method render
  */
 Router.prototype.render = function() {
 
-  // split into parts
-
   var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
-  var state = '';
-
-  // check if exists
 
   if (parts.length === 1 && parts[0] === '' && this.defaultState) {
 
@@ -86,39 +156,54 @@ Router.prototype.render = function() {
 
   }
 
-  // check if abstract
+  var part = null;
+  var state = null;
+  var config = null;
+  var params = null;
+  var depth = 0;
 
-  var path = parts.join('.');
+  while (parts.length) {
 
-  if (this.config.hasOwnProperty(path) && this.config[path].abstract) {
+    part = parts.shift();
 
-    if (this.config[path].redirect) {
-      var redirect = this.config[path].redirect.replace(/(^#\/?)|(\/$)/g, '');
-      console.log('Redirecting to path: ' + redirect);
-      return location.hash = '#/' + redirect;
-    } else {
-      return console.error('Abstract state ' + path + ' cannot be rendered');
+    state = state ? state + '.' + part : part;
+
+    config = this.getConfig(state);
+
+    if (!config) {
+      return console.error('Invalid route ' + state);
     }
+
+    if (config.params) {
+      params = {};
+      for (var i = 0; i < config.params.length; i++) {
+        params[config.params[i].replace(':', '')] = parts.shift();
+      }
+    }
+
+    if (!this.queue[depth] || this.queue[depth].state !== state) {
+      this.renderState(state, config, depth, params);
+    }
+
+    depth++;
+
+  }
+  
+  if (config.redirect) {
+
+    var redirect = config.redirect.replace(/(^#?\/?)|(\/$)/g, '');
+
+    console.log('Redirecting to path: ' + redirect);
+
+    return location.hash = '#/' + redirect;
 
   }
 
-  for (var i = 0; i < parts.length; i++) {
+  if (this.queue.length > depth) {
 
-    state = state + (state !== '' ? '.' : '') + parts[i];
+    for (var j = depth; j < this.queue.length; j++) {
 
-    if (!this.queue[i] || (this.queue[i] && this.queue[i].state !== state)) {
-
-      this._renderState(state, i);
-
-    }
-
-  }
-
-  if (this.queue.length > i) {
-
-    for (var j = i; j < this.queue.length; j++) {
-
-      console.log('Purging remaining state: ' + this.queue[j].state);
+      //console.log('Purging remaining state: ' + this.queue[j].state);
 
       // destroy existing view
 
@@ -126,79 +211,80 @@ Router.prototype.render = function() {
 
     }
 
-    this.queue.splice(i);
+    this.queue.splice(depth);
 
   }
+
 
 };
 
 /**
- * @private
+ * renders a given state based on it's configuration
  * @param state
- * @param cacheIndex
- * @returns {*}
+ * @param config
+ * @param depth
+ * @param [params]
  */
-Router.prototype._renderState = function(state, cacheIndex) {
-
-  if (!this.config.hasOwnProperty(state)) return console.error('Invalid: State ' + state + ' not defined');
-
-  var config = this.config[state];
+Router.prototype.renderState = function(state, config, depth, params) {
 
   if (config.views) {
 
     var views = {};
 
-    if (this.queue[cacheIndex]) {
-
-      this._destroyState(cacheIndex);
-
+    if (this.queue[depth]) {
+      this._destroyState(depth);
     }
 
     for (var name in config.views) {
       if (!name.match(/@/)) {
-        views[name] = this._renderView(config.views[name], cacheIndex, name);
+        views[name] = this._renderView(config.views[name], depth, name, params);
         console.log('Rendering partial state: ' + state + ':' + name);
       }
     }
 
-    this.queue[cacheIndex] = {
+    this.queue[depth] = {
       state: state,
       views: views
     };
 
     for (var name in config.views) {
       if (name.match(/@/)) {
-        views[name] = this._renderAbsoluteView(config.views[name], cacheIndex, name);
+        views[name] = this._renderAbsoluteView(config.views[name], depth, name, params);
         console.log('Rendering absolute state: ' + state + ':' + name);
       }
     }
 
   } else {
 
-    this.queue[cacheIndex] = this._renderView(config, cacheIndex);
-    this.queue[cacheIndex].state = state;
+    if (this.queue[depth]) {
+      this._destroyState(depth);
+    }
+
+    this.queue[depth] = this._renderView(config, depth, undefined, params);
+    this.queue[depth].state = state;
 
     console.log('Rendering state: ' + state);
-
 
   }
 
 };
 
+
 /**
  * @private
  * @param config
- * @param cacheIndex
+ * @param depth
  * @param [name]
+ * @param params
  * @returns {{view: View}}
  */
-Router.prototype._renderView = function(config, cacheIndex, name) {
+Router.prototype._renderView = function(config, depth, name, params) {
 
   var view = null;
   var viewModel = null;
 
   if (config.viewModel) {
-    viewModel = new config.viewModel();
+    viewModel = new config.viewModel(params);
   }
 
   if (config.view) {
@@ -209,7 +295,7 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
 
   var $el = null;
 
-  if (cacheIndex === 0) {
+  if (depth === 0) {
 
     $el = this.$root.find(name ? '[ui-view="' + name + '"]' : '[ui-view]');
 
@@ -217,7 +303,7 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
 
   } else {
 
-    var prior = this.queue[cacheIndex-1];
+    var prior = this.queue[depth-1];
 
     prior.view.renderSubview(name || undefined, view);
 
@@ -238,36 +324,48 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
 /**
  * renders an absolute view in the router hierarchy
  * @param config
- * @param cacheIndex
+ * @param depth
  * @param name
+ * @param params
  * @returns {{view: View}}
  * @private
  */
-Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
+Router.prototype._renderAbsoluteView = function(config, depth, name, params) {
 
   var view = null;
+  var viewModel = null;
+
+  if (config.viewModel) {
+    viewModel = new config.viewModel(params);
+  }
 
   if (config.view) {
-    view = new config.view(config.template);
+    view = new config.view(config.template, viewModel || undefined);
   } else {
-    view = new View(config.template);
+    view = new View(config.template, viewModel || undefined);
   }
 
   var parts = name.split('@');
   var target = parts[0];
   var context = parts[1];
 
-  var cacheItem = this.queue[cacheIndex];
+  var queueItem = this.queue[depth];
 
-  if (!cacheItem.views.hasOwnProperty(context)) {
+  if (!queueItem.views.hasOwnProperty(context)) {
     return console.error('Absolute view context "' + context + '" not defined');
   }
 
-  cacheItem.views[context].view.renderSubview(target, view);
+  queueItem.views[context].view.renderSubview(target, view);
 
-  return {
+  var node = {
     view: view
   };
+
+  if (viewModel) {
+    node.viewModel = viewModel;
+  }
+
+  return node;
 
 };
 
@@ -275,13 +373,13 @@ Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
  * @private
  * @param cacheIndex
  */
-Router.prototype._destroyState = function(cacheIndex) {
+Router.prototype._destroyState = function(depth) {
 
-  console.log('Destroying state: ' + this.queue[cacheIndex].state);
+  console.log('Destroying state: ' + this.queue[depth].state);
 
   // store reference
 
-  var item = this.queue[cacheIndex];
+  var item = this.queue[depth];
 
   // destroy existing view
 

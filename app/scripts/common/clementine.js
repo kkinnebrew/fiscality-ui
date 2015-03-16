@@ -235,7 +235,7 @@ Events = {
         listeners[i].call(this, ev, data);
       }
     }
-    
+
     if (parent != null && ev.bubbles && evName[0] !== '_') {
       ev.currentTarget = this._parent;
       parent.fire.call(parent, ev, data);
