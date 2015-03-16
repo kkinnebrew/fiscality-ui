@@ -6,6 +6,40 @@ var ViewModel = Class.extend({
 
     this.fire('refresh');
 
+  },
+
+  setValue: function(name, value) {
+
+    if (!this[name] || this[name] !== value) {
+
+      this[name] = value;
+
+      this.fire('refresh');
+
+    }
+
+  },
+
+  setValues: function(values) {
+
+    var changed = false;
+
+    for (var name in values) {
+
+      if (!this[name] || this[name] !== values[name]) {
+
+        this[name] = values[name];
+
+        changed = true;
+
+      }
+
+    }
+
+    if (changed) {
+      this.fire('refresh');
+    }
+    
   }
 
 });
