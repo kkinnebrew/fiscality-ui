@@ -4,9 +4,11 @@ var _ = require('underscore');
 
 var SubNavViewModel = ViewModel.extend({
 
-  initialize: function() {
+  initialize: function(params) {
 
     var that = this;
+
+    this.accountId = params.accountId || 'Hello';
 
     this.accounts = [];
 

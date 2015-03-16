@@ -183,12 +183,22 @@ Router.prototype.render = function() {
 
     if (!this.queue[depth] || this.queue[depth].state !== state) {
       this.renderState(state, config, depth, params);
+    } else if (this.queue[depth] && this.queue[depth].viewModel) {
+      this.queue[depth].viewModel.setValues(params);
+    } else if (this.queue[depth] && this.queue[depth].views) {
+      var views = this.queue[depth].views;
+      for (var view in views) {
+        if (views[view].viewModel) {
+          views[view].viewModel.setValues(params);
+        }
+      }
     }
+
 
     depth++;
 
   }
-  
+
   if (config.redirect) {
 
     var redirect = config.redirect.replace(/(^#?\/?)|(\/$)/g, '');
@@ -202,8 +212,6 @@ Router.prototype.render = function() {
   if (this.queue.length > depth) {
 
     for (var j = depth; j < this.queue.length; j++) {
-
-      //console.log('Purging remaining state: ' + this.queue[j].state);
 
       // destroy existing view
 
