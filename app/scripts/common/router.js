@@ -144,6 +144,15 @@ Router.prototype._renderState = function(state, cacheIndex) {
 
   var config = this.config[state];
 
+  if (config.url) {
+
+    // process url from hash
+    var hash = location.hash.replace(/(^#\/?)|(\/$)/g, '');
+
+    console.log(123, hash, config.url);
+
+  }
+
   if (config.views) {
 
     var views = {};
@@ -190,9 +199,10 @@ Router.prototype._renderState = function(state, cacheIndex) {
  * @param config
  * @param cacheIndex
  * @param [name]
+ * @param [url]
  * @returns {{view: View}}
  */
-Router.prototype._renderView = function(config, cacheIndex, name) {
+Router.prototype._renderView = function(config, cacheIndex, name, url) {
 
   var view = null;
   var viewModel = null;
@@ -240,10 +250,11 @@ Router.prototype._renderView = function(config, cacheIndex, name) {
  * @param config
  * @param cacheIndex
  * @param name
+ * @param [url]
  * @returns {{view: View}}
  * @private
  */
-Router.prototype._renderAbsoluteView = function(config, cacheIndex, name) {
+Router.prototype._renderAbsoluteView = function(config, cacheIndex, name, url) {
 
   var view = null;
 
