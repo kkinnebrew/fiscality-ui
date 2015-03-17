@@ -15,7 +15,7 @@ function numberWithCommas(x) {
 }
 
 HandlebarsCompiler.registerHelper('currency', function(d) {
-  if (!d) return '';
+  if (d === undefined || d === null) return '';
   return d >= 0 ? ('$' + numberWithCommas(d.toFixed(2))) : ('-$' + numberWithCommas(Math.abs(d).toFixed(2)));
 });
 
