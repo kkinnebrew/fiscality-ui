@@ -8,18 +8,39 @@ var ChartViewModel = ViewModel.extend({
   initialize: function(params) {
 
     this.accountId = params.accountId || 'null';
+    this.account = null;
+    this.balance = null;
+
+    this._super();
+
+  },
+
+
+  refresh: function() {
 
     var that = this;
 
-    transactionsAPI.accounts().then(function(data) {
+    if (this.accountId && this.oldAccountId !== this.accountId) {
+      this.oldAccountId = this.accountId;
+      transactionsAPI.account(that.accountId).then(function(account) {
+        transactionsAPI.balance(that.accountId).then(function(balance) {
+          if (account) {
+            that.setValues({
+              account: account,
+              balance: '$' + balance.toFixed(2)
+            });
+          }
+        }, function() {
+          console.log('Error');
+        });
 
-      if (data.length) {
-        that.setValue('accountId', data[0].accountId);
-      }
+      }, function () {
+        console.log('Error');
+      });
+    } else {
+      this.fire('refresh');
+    }
 
-    }, function() {
-      console.log('Error');
-    });
   }
 
 });
