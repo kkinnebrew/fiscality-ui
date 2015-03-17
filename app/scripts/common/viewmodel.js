@@ -18,7 +18,6 @@ var ViewModel = Class.extend({
     if (this.hasOwnProperty(name) && this[name] !== value) {
 
       this[name] = value;
-      console.log('refreshing');
 
       this.fire('refresh');
 
@@ -47,7 +46,6 @@ var ViewModel = Class.extend({
     }
 
     if (changed) {
-      console.log('refreshing');
       this.fire('refresh');
     }
 
