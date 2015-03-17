@@ -27,7 +27,7 @@ var ChartViewModel = ViewModel.extend({
           if (account) {
             that.setValues({
               account: account,
-              balance: '$' + balance.toFixed(2)
+              balance: balance
             });
           }
         }, function() {
