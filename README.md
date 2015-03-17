@@ -1,2 +1,2 @@
 # fiscality-ui
-Powerful personal financial management
+Personal financial management
