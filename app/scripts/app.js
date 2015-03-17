@@ -43,7 +43,8 @@ router.register('app.accounts', {
       viewModel: require('./viewmodels/app/accounts/chart')
     },
     'transactions@content': {
-      template: require('../templates/app/accounts/transactions.hbs')
+      template: require('../templates/app/accounts/transactions.hbs'),
+      viewModel: require('./viewmodels/app/accounts/transactions')
       //view: require('./views/app/accounts/transactions')
     }
   }

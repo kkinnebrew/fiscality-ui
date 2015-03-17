@@ -4,7 +4,7 @@ var ViewModel = Class.extend({
 
   initialize: function() {
 
-    this.fire('refresh');
+    this.refresh();
 
   },
 
@@ -19,7 +19,7 @@ var ViewModel = Class.extend({
 
       this[name] = value;
 
-      this.fire('refresh');
+      this.refresh();
 
     }
 
@@ -46,9 +46,13 @@ var ViewModel = Class.extend({
     }
 
     if (changed) {
-      this.fire('refresh');
+      this.refresh();
     }
 
+  },
+
+  refresh: function() {
+    this.fire('refresh');
   }
 
 });
