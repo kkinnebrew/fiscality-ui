@@ -15,9 +15,10 @@ var ViewModel = Class.extend({
    */
   setValue: function(name, value) {
 
-    if (!this[name] || this[name] !== value) {
+    if (this.hasOwnProperty(name) && this[name] !== value) {
 
       this[name] = value;
+      console.log('refreshing');
 
       this.fire('refresh');
 
@@ -35,7 +36,7 @@ var ViewModel = Class.extend({
 
     for (var name in values) {
 
-      if (!this[name] || this[name] !== values[name]) {
+      if (this.hasOwnProperty(name) && this[name] !== values[name]) {
 
         this[name] = values[name];
 
@@ -46,6 +47,7 @@ var ViewModel = Class.extend({
     }
 
     if (changed) {
+      console.log('refreshing');
       this.fire('refresh');
     }
 
