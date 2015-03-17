@@ -200,11 +200,11 @@ ul {
 /* nav width adjustment */
 
 #app.accounts #menu {
-    width: 480px;
+    width: 380px;
 }
 
 #app.accounts #content {
-    left: 480px;
+    left: 380px;
 }
 
 #app.investments #menu {

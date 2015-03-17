@@ -6,6 +6,18 @@
 
 var $ = require('jquery');
 var Router = require('./common/router');
+var HandlebarsCompiler = require('hbsfy/runtime');
+
+function numberWithCommas(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
+
+HandlebarsCompiler.registerHelper('currency', function(d) {
+  if (!d) return '';
+  return d >= 0 ? ('$' + numberWithCommas(d.toFixed(2))) : ('-$' + numberWithCommas(Math.abs(d).toFixed(2)));
+});
 
 var router = new Router($('body'));
 
