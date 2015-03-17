@@ -12,7 +12,7 @@ var SubNavViewModel = ViewModel.extend({
 
     transactionsAPI.accounts().then(function(data) {
       that.accounts = data;
-      that.fire('refresh');
+      that.refresh();
     }, function() {
       console.log('Error');
     });

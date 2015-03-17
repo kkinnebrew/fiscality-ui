@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
-var baseUrl = 'https://fiscality-api.herokuapp.com';
-//var baseUrl = 'http://localhost:9000';
+//var baseUrl = 'https://fiscality-api.herokuapp.com';
+var baseUrl = 'http://localhost:9000';
 
 var cache = {
   transactions: {},
