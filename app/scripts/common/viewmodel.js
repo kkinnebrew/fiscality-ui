@@ -8,9 +8,14 @@ var ViewModel = Class.extend({
 
   },
 
+  /**
+   * sets an individual value on the view model and refresh if necessary
+   * @param name
+   * @param value
+   */
   setValue: function(name, value) {
 
-    if (!this[name] || this[name] !== value) {
+    if (this.hasOwnProperty(name) && this[name] !== value) {
 
       this[name] = value;
 
@@ -20,13 +25,17 @@ var ViewModel = Class.extend({
 
   },
 
+  /**
+   * sets multiple values on the view model refreshing if necessary after all are set
+   * @param values
+   */
   setValues: function(values) {
 
     var changed = false;
 
     for (var name in values) {
 
-      if (!this[name] || this[name] !== values[name]) {
+      if (this.hasOwnProperty(name) && this[name] !== values[name]) {
 
         this[name] = values[name];
 
@@ -39,7 +48,7 @@ var ViewModel = Class.extend({
     if (changed) {
       this.fire('refresh');
     }
-    
+
   }
 
 });
