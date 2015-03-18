@@ -1,21 +1,25 @@
-<div class="transaction-row" data-id="">
+{{#each transactions}}
+
+<div class="transaction-row" data-id="{{transactionLineId}}">
 
     <div class="column-sm column-left">
         <div class="reconciliation"></div>
     </div>
 
     <div class="column-md column-left transaction-info">
-        <div class="date">8/11/2015</div>
+        <div class="date">{{dateFormat transactionDate 'M/d/yyyy'}}</div>
         <div class="transaction-type">Deposit</div>
     </div>
 
     <div class="column-lg column-left description">
-        <div class="description-text">My Transaction</div>
-        <div class="account-text">Bank of America</div>
+        <div class="description-text">{{description}}</div>
+        <div class="account-text">{{accountId}}</div>
     </div>
 
-    <div class="column-md column-right balance">100.00</div>
+    <div class="column-md column-right balance">{{currency balance}}</div>
 
-    <div class="column-md column-right amount">1,290.00</div>
+    <div class="column-md column-right amount">{{currency amount}}</div>
 
 </div>
+
+{{/each}}
