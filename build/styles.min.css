@@ -851,10 +851,33 @@ ul {
     -webkit-transition: all ease-in-out 150ms;
 }
 
+.nav-list-item.accounts {
+    background: url(../images/accounts-icon.png) center center no-repeat;
+}
+
+.nav-list-item.investments {
+    background: url(../images/investments-icon.png) center center no-repeat;
+}
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
     .nav-list-item {
         background-image: url(../images/accounts-icon@2x.png);
+        -webkit-background-size: 19px 21px;
+        -moz-background-size: 19px 21px;
+        background-size: 19px 21px;
+    }
+
+
+    .nav-list-item.accounts {
+        background-image: url(../images/accounts-icon@2x.png);
+        -webkit-background-size: 19px 21px;
+        -moz-background-size: 19px 21px;
+        background-size: 19px 21px;
+    }
+
+    .nav-list-item.investments {
+        background-image: url(../images/investments-icon@2x.png);
         -webkit-background-size: 19px 21px;
         -moz-background-size: 19px 21px;
         background-size: 19px 21px;
