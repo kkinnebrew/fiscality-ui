@@ -341,6 +341,51 @@ ul {
     width: 100%;
 }
 
+.transaction-header-item {
+    color: #C0D7DB;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    height: 48px;
+    line-height: 50px;
+    text-transform: uppercase;
+}
+
+.transaction-header-item.active {
+    color: #FFF;
+}
+
+.transaction-header-item.column-sm {
+    width: 56px;
+}
+
+.transaction-header-item.column-md {
+    width: 160px;
+}
+
+.transaction-header-item.column-lg {
+    width: 360px;
+}
+
+.transaction-header-item.column-left {
+    float: left;
+}
+
+.transaction-header-item.column-right {
+    float: right;
+    padding-right: 24px;
+    text-align: right;
+}
+
+.reconciled-header-button {
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    height: 6px;
+    margin-left: 24px;
+    margin-top: 20px;
+    width: 6px;
+}
+
 .transaction-subheader {
     background: #F7F7F7;
     color: #8F8F8F;
