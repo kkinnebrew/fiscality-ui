@@ -40,6 +40,18 @@ router.register('home.login', {
   template: require('../templates/home/login.html')
 });
 
+router.register('home.register', {
+  template: require('../templates/home/register.html')
+});
+
+router.register('home.forgot', {
+  template: require('../templates/home/forgot.html')
+});
+
+router.register('home.reset', {
+  template: require('../templates/home/reset.html')
+});
+
 router.register('app', {
   redirect: '/app/accounts',
   template: require('../templates/app.hbs'),
