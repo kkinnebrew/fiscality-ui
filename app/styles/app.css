@@ -342,6 +342,7 @@ ul {
 }
 
 .transaction-header-item {
+    cursor: pointer;
     color: #C0D7DB;
     font-family: "proxima-nova", sans-serif;
     font-size: 11px;
@@ -355,25 +356,28 @@ ul {
     color: #FFF;
 }
 
-.transaction-header-item.column-sm {
+.column-sm {
+    height: 100%;
     width: 56px;
 }
 
-.transaction-header-item.column-md {
+.column-md {
+    height: 100%;
     width: 160px;
 }
 
-.transaction-header-item.column-lg {
+.column-lg {
+    height: 100%;
     width: 360px;
 }
 
-.transaction-header-item.column-left {
+.column-left {
     float: left;
 }
 
-.transaction-header-item.column-right {
+.column-right {
     float: right;
-    padding-right: 24px;
+    padding-right: 25px;
     text-align: right;
 }
 
@@ -397,6 +401,68 @@ ul {
 }
 
 .transaction-row {
-    height: 60px;
+    border-bottom: 1px solid #EDEDED;
+    height: 68px;
+    overflow: hidden;
     width: 100%;
+}
+
+.transaction-row .reconciliation {
+    border: 1px solid #1A6FAA;
+    border-radius: 10px;
+    height: 6px;
+    margin-left: 24px;
+    margin-top: 32px;
+    width: 6px;
+}
+
+.transaction-row .date {
+    color: #272727;
+    font-weight: 500;
+    font-size: 16px;
+    padding-bottom: 1px;
+    padding-top: 16px;
+}
+
+.transaction-row .transaction-type {
+     color: #797979;
+     font-family: "proxima-nova", sans-serif;
+     font-size: 10px;
+     font-weight: 600;
+     letter-spacing: 1px;
+     text-transform: uppercase;
+ }
+
+
+.transaction-row .description-text {
+    color: #272727;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding-bottom: 0;
+    padding-top: 16px;
+}
+
+.transaction-row .account-text {
+    color: #797979;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.transaction-row .balance {
+    color: #B8B8B8;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 26px;
+    letter-spacing: 1px;
+}
+
+.transaction-row .amount {
+    color: #494949;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 26px;
+    letter-spacing: 1px;
 }
