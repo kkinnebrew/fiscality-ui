@@ -7,6 +7,7 @@
 var $ = require('jquery');
 var Router = require('./common/router');
 var HandlebarsCompiler = require('hbsfy/runtime');
+require('datejs');
 
 function numberWithCommas(x) {
   var parts = x.toString().split(".");
@@ -14,10 +15,17 @@ function numberWithCommas(x) {
   return parts.join(".");
 }
 
-HandlebarsCompiler.registerHelper('currency', function(d) {
-  if (!d) return '';
-  return d >= 0 ? ('$' + numberWithCommas(d.toFixed(2))) : ('-$' + numberWithCommas(Math.abs(d).toFixed(2)));
+HandlebarsCompiler.registerHelper('currency', function(d, sign) {
+  sign = typeof sign === 'string' ? sign : '';
+  if (d === undefined || d === null) return '';
+  return d >= 0 ? (sign + numberWithCommas(d.toFixed(2))) : ('-' + sign + numberWithCommas(Math.abs(d).toFixed(2)));
 });
+
+HandlebarsCompiler.registerHelper('dateFormat', function(d, f) {
+  if (d === undefined || d === null) return '';
+  return Date.parse(d).toString(f);
+});
+
 
 var router = new Router($('body'));
 

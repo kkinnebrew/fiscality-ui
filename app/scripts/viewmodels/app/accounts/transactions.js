@@ -22,10 +22,15 @@ var TransactionsViewModel = ViewModel.extend({
 
     if (this.accountId && this.oldAccountId !== this.accountId) {
       this.oldAccountId = this.accountId;
-      //console.log('getting transactions for ', this.accountId);
       transactionsAPI.transactions(this.accountId).then(function (data) {
-        that.transactions = data;
-        //console.log(data.length);
+        var balance = 0;
+        that.transactions = _.sortBy(data, 'transactionDate');
+        that.transactions = _.map(that.transactions, function(item) {
+          item.amount = item.debitAmount - item.creditAmount;
+          item.balance = balance = balance + item.debitAmount - item.creditAmount;
+          return item;
+        });
+        that.transactions.reverse();
         that.refresh();
       }, function () {
         console.log('Error');

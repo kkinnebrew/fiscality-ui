@@ -1,6 +1,6 @@
 <div class="account-info">
     <h2>{{account.accountName}}</h2>
-    <div class="balance">{{currency balance}}</div>
+    <div class="balance">{{currency balance '$'}}</div>
 </div>
 
 <ul class="range-picker">
@@ -16,4 +16,12 @@
 
 <div class="chart-settings-button"></div>
 
-<div class="transaction-header"></div>
+<div class="transaction-header">
+    <div class="transaction-header-item column-left column-sm">
+        <div class="reconciled-header-button"></div>
+    </div>
+    <div class="transaction-header-item column-left column-md active">Date</div>
+    <div class="transaction-header-item column-left column-lg">Description</div>
+    <div class="transaction-header-item column-right column-md">Balance</div>
+    <div class="transaction-header-item column-right column-md">Amount</div>
+</div>
