@@ -47,11 +47,13 @@ router.register('home.register', {
 });
 
 router.register('home.forgot', {
-  template: require('../templates/home/forgot.html')
+  template: require('../templates/home/forgot.html'),
+  viewModel: require('./viewmodels/home/forgot')
 });
 
 router.register('home.reset', {
-  template: require('../templates/home/reset.html')
+  template: require('../templates/home/reset.html'),
+  viewModel: require('./viewmodels/home/reset')
 });
 
 router.register('app', {

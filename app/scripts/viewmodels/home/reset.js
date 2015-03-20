@@ -1,18 +1,18 @@
-var ViewModel = require('../../common/clementine').ViewModel;
+var ViewModel = require('../../common/viewmodel');
 var auth = require('../../services/auth');
 
 var ResetViewModel = ViewModel.extend({
 
-  resetPassword: function() {
+  resetPassword: function(password, confirm) {
 
-    console.log('forgot', this.password, this.confirm);
+    console.log('forgot', password, confirm);
 
-    if (!this.password || !this.confirm || this.password !== this.confirm) {
+    if (!password || !confirm || password !== confirm) {
       return console.warn('Invalid password');
     }
 
-    auth.resetPassword(this.password, this.confirm).then(function() {
-      location.hash = '#/home/login'
+    auth.resetPassword(password, confirm).then(function() {
+      window.App.goto('home.login');
     }, function() {
       console.log('Error');
     });
