@@ -29,6 +29,26 @@ function Router($root) {
 
 }
 
+Router.prototype.goto = function(state) {
+
+  console.log('going to: '  + state);
+
+  var parts = state.split('.');
+
+  var config = this.getConfig(state);
+
+  if (config) {
+    if (config.url) {
+      location.hash = '#' + config.url;
+    } else {
+      location.hash = '#' + state.replace('.', '/');
+    }
+  } else {
+    console.error('Invalid state specified: ' + state);
+  }
+
+};
+
 /**
  * register the state to render if an empty hash is passed
  * @method otherwise
@@ -99,9 +119,9 @@ Router.prototype.register = function(state, config) {
  */
 Router.prototype.listen = function() {
 
-  $(window).on('hashchange', $.proxy(this.render, this));
+  $(window).on('hashchange', $.proxy(this.renderUrl, this));
 
-  this.render();
+  this.renderUrl();
 
 };
 
@@ -139,13 +159,19 @@ Router.prototype.getConfig = function(state) {
 
 };
 
+Router.prototype.renderUrl = function() {
+
+  var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
+
+  this.render(parts);
+
+};
+
 /**
  * renders the overall hash path using cached views when available
  * @method render
  */
-Router.prototype.render = function() {
-
-  var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
+Router.prototype.render = function(parts) {
 
   if (parts.length === 1 && parts[0] === '' && this.defaultState) {
 

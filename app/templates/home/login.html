@@ -3,7 +3,7 @@
     <div class="description">Welcome back. Login to start managing your finances.</div>
 </div>
 
-<form data-bind="submit:login()">
+<form data-bind="submit:login(email, password)">
 
     <div class="form-group">
 
@@ -15,10 +15,10 @@
         <div class="field-group">
             <label class="field-label">Enter your password</label>
             <input class="text-field" type="password" placeholder="Password" data-model="password" />
-            <a id="forgot-password-link" class="field-subtitle" href="#/home/forgot">Forgot your password?</a>
+            <a id="forgot-password-link" class="field-subtitle" data-link="home.forgot">Forgot your password?</a>
         </div>
 
-        <input class="field-btn submit-btn" type="submit" value="Login" onclick="location.hash='#/app'" />
+        <input class="field-btn submit-btn" type="submit" value="Login" />
 
     </div>
 
@@ -28,7 +28,7 @@
 
 <div id="register-splash">
     <span class="message">Don’t have an account yet?</span>
-    <button class="field-btn btn-dark" onclick="location.hash='#/home/register'">Register</button>
+    <button class="field-btn btn-dark" data-link="home.register">Register</button>
 </div>
 
 <div class="shadow"></div>

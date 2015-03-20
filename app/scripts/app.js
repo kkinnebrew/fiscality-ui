@@ -97,3 +97,5 @@ router.register('app.investments', {
 $(document).ready(function() {
   router.listen();
 });
+
+window.App = router;

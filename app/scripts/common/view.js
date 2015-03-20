@@ -59,6 +59,8 @@ View.prototype.render = function($el) {
     e.stopPropagation();
   });
 
+  this.preprocess();
+
   this.bind();
 
   // bind view model refresh
@@ -101,6 +103,10 @@ View.prototype.refresh = function() {
 
   this.$el.html(html);
 
+  // preprocess template
+
+  this.preprocess();
+
   // bind events
 
   this.bind();
@@ -119,6 +125,32 @@ View.prototype.refresh = function() {
 
   this.$el.find('[ui-view]').on('click', function(e) {
     e.stopPropagation();
+  });
+
+};
+
+View.prototype.preprocess = function() {
+
+  this.$el.find('[data-bind]').each(function() {
+
+    var bind = $(this).attr('data-bind');
+
+    var parts = bind.match(/(.+):(.+)\((.*)\)/);
+    var event = parts[1];
+    var method = parts[2];
+    var args = parts[3] ? parts[3].replace(' ', '').split(',') : [];
+
+    console.log(event, method, args);
+
+  });
+
+  this.$el.find('[data-link]').each(function() {
+
+    $(this).on('click', function() {
+      var link = $(this).attr('data-link');
+      window.App.goto(link);
+    });
+
   });
 
 };
