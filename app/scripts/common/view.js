@@ -137,6 +137,31 @@ View.prototype.preprocess = function() {
 
   var that = this;
 
+  this.$el.find('[data-model]').each(function() {
+
+    var model = $(this).attr('data-model');
+    var tagName = $(this).prop('tagName').toLowerCase();
+
+    if (tagName === 'input' || tagName === 'textarea' || tagName === 'select') {
+      that.viewModel[model] = $(this).val();
+    }
+
+    if (tagName === 'input' || tagName === 'textarea') {
+      $(this).on('keyup', function() {
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+    }
+
+    if (tagName === 'select') {
+      $(this).on('change', function() {
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+    }
+
+  });
+
   this.$el.find('[data-bind]').each(function() {
 
     var bind = $(this).attr('data-bind');
@@ -145,7 +170,7 @@ View.prototype.preprocess = function() {
     var event = parts[1];
     var method = parts[2];
     var args = parts[3] ? parts[3].replace(' ', '').split(',') : [];
-    
+
     if (that.viewModel) {
 
       $(this).on(event, function (e) {
@@ -172,6 +197,32 @@ View.prototype.postprocess = function() {
 
   this.$el.find('[data-link]').each(function() {
     $(this).off('click');
+  });
+
+  this.$el.find('[data-bind]').each(function() {
+
+    var bind = $(this).attr('data-bind');
+
+    var parts = bind.match(/(.+):(.+)\((.*)\)/);
+    var event = parts[1];
+
+    $(this).off(event);
+
+  });
+
+  this.$el.find('[data-model]').each(function() {
+
+    var model = $(this).attr('data-model');
+    var tagName = $(this).prop('tagName').toLowerCase();
+
+    if (tagName === 'input' || tagName === 'textarea') {
+      $(this).off('keyup');
+    }
+
+    if (tagName === 'select') {
+      $(this).off('change');
+    }
+
   });
 
 };

@@ -56,7 +56,23 @@ var ViewModel = Class.extend({
   },
 
   execute: function(method, args) {
-    console.log('execute', method, args);
+
+    if (typeof this[method] !== 'function') {
+      console.error('Unknown method on viewmodel: ' + method);
+    }
+
+    var values = [];
+
+    for (var i = 0; i < args.length; i++) {
+      if (!this.hasOwnProperty(args[i])) {
+        console.error('Unknown property on viewmodel: ' + args[i]);
+      } else {
+        values.push(this[args[i]]);
+      }
+    }
+
+    this[method].apply(this, values);
+
   }
 
 });
