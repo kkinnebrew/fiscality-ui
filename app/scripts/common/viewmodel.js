@@ -53,6 +53,10 @@ var ViewModel = Class.extend({
 
   refresh: function() {
     this.fire('refresh');
+  },
+
+  execute: function(method, args) {
+    console.log('execute', method, args);
   }
 
 });

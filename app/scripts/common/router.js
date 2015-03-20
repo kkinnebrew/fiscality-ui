@@ -31,10 +31,6 @@ function Router($root) {
 
 Router.prototype.goto = function(state) {
 
-  console.log('going to: '  + state);
-
-  var parts = state.split('.');
-
   var config = this.getConfig(state);
 
   if (config) {
@@ -119,9 +115,9 @@ Router.prototype.register = function(state, config) {
  */
 Router.prototype.listen = function() {
 
-  $(window).on('hashchange', $.proxy(this.renderUrl, this));
+  $(window).on('hashchange', $.proxy(this.render, this));
 
-  this.renderUrl();
+  this.render();
 
 };
 
@@ -159,19 +155,14 @@ Router.prototype.getConfig = function(state) {
 
 };
 
-Router.prototype.renderUrl = function() {
-
-  var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
-
-  this.render(parts);
-
-};
 
 /**
  * renders the overall hash path using cached views when available
  * @method render
  */
-Router.prototype.render = function(parts) {
+Router.prototype.render = function() {
+
+  var parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/');
 
   if (parts.length === 1 && parts[0] === '' && this.defaultState) {
 

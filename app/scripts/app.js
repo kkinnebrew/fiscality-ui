@@ -37,7 +37,8 @@ router.register('home', {
 });
 
 router.register('home.login', {
-  template: require('../templates/home/login.html')
+  template: require('../templates/home/login.html'),
+  viewModel: require('./viewmodels/home/login')
 });
 
 router.register('home.register', {

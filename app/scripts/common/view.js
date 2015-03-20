@@ -85,6 +85,10 @@ View.prototype.refresh = function() {
 
   this.unbind();
 
+  // remove preprocess handlers
+
+  this.postprocess();
+
   // remove propagation stops
 
   this.$el.find('[ui-view]').off('click');
@@ -131,6 +135,8 @@ View.prototype.refresh = function() {
 
 View.prototype.preprocess = function() {
 
+  var that = this;
+
   this.$el.find('[data-bind]').each(function() {
 
     var bind = $(this).attr('data-bind');
@@ -139,8 +145,15 @@ View.prototype.preprocess = function() {
     var event = parts[1];
     var method = parts[2];
     var args = parts[3] ? parts[3].replace(' ', '').split(',') : [];
+    
+    if (that.viewModel) {
 
-    console.log(event, method, args);
+      $(this).on(event, function (e) {
+        e.preventDefault(); // TODO temporary
+        that.viewModel.execute(method, args);
+      });
+
+    }
 
   });
 
@@ -151,6 +164,14 @@ View.prototype.preprocess = function() {
       window.App.goto(link);
     });
 
+  });
+
+};
+
+View.prototype.postprocess = function() {
+
+  this.$el.find('[data-link]').each(function() {
+    $(this).off('click');
   });
 
 };
@@ -184,6 +205,8 @@ View.prototype.destroy = function() {
   this.$el.find('[ui-view]').off('click');
 
   this.unbind();
+
+  this.postprocess();
 
   this.$el.empty();
 
