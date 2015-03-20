@@ -7,6 +7,8 @@ var LoginViewModel = ViewModel.extend({
 
     console.log('logging in', this.email, this.password);
 
+    this.fire('pull');
+    
     if (!this.email || !this.password) {
       return console.warn('Invalid credentials');
     }

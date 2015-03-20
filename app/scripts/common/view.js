@@ -68,6 +68,7 @@ View.prototype.render = function($el) {
   if (this.viewModel) {
 
     this.viewModel.on('refresh', $.proxy(this.refresh, this));
+    this.viewModel.on('pull', $.proxy(this.pull, this));
 
   }
 
@@ -133,6 +134,23 @@ View.prototype.refresh = function() {
 
 };
 
+View.prototype.pull = function() {
+
+  var that = this;
+
+  this.$el.find('[data-model]').each(function() {
+
+    var model = $(this).attr('data-model');
+    var tagName = $(this).prop('tagName').toLowerCase();
+
+    if (tagName === 'input' || tagName === 'textarea' || tagName === 'select') {
+      that.viewModel[model] = $(this).val();
+    }
+
+  });
+
+};
+
 View.prototype.preprocess = function() {
 
   var that = this;
@@ -148,14 +166,14 @@ View.prototype.preprocess = function() {
 
     if (tagName === 'input' || tagName === 'textarea') {
       $(this).on('keyup', function() {
-        console.log('update', $(this).val());
+        //console.log('update', $(this).val());
         that.viewModel[model] = $(this).val();
       });
     }
 
     if (tagName === 'select') {
       $(this).on('change', function() {
-        console.log('update', $(this).val());
+        //console.log('update', $(this).val());
         that.viewModel[model] = $(this).val();
       });
     }
