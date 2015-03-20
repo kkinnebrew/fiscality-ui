@@ -68,7 +68,6 @@ View.prototype.render = function($el) {
   if (this.viewModel) {
 
     this.viewModel.on('refresh', $.proxy(this.refresh, this));
-    this.viewModel.on('pull', $.proxy(this.pull, this));
 
   }
 
@@ -134,7 +133,7 @@ View.prototype.refresh = function() {
 
 };
 
-View.prototype.pull = function() {
+View.prototype.sync = function() {
 
   var that = this;
 
@@ -162,18 +161,27 @@ View.prototype.preprocess = function() {
 
     if (tagName === 'input' || tagName === 'textarea' || tagName === 'select') {
       that.viewModel[model] = $(this).val();
+      console.log('registering model:', model);
     }
 
     if (tagName === 'input' || tagName === 'textarea') {
       $(this).on('keyup', function() {
-        //console.log('update', $(this).val());
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+      $(this).on('blur', function() {
+        console.log('update', $(this).val());
         that.viewModel[model] = $(this).val();
       });
     }
 
     if (tagName === 'select') {
       $(this).on('change', function() {
-        //console.log('update', $(this).val());
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+      $(this).on('blur', function() {
+        console.log('update', $(this).val());
         that.viewModel[model] = $(this).val();
       });
     }
@@ -187,12 +195,17 @@ View.prototype.preprocess = function() {
     var parts = bind.match(/(.+):(.+)\((.*)\)/);
     var event = parts[1];
     var method = parts[2];
-    var args = parts[3] ? parts[3].replace(' ', '').split(',') : [];
+    console.log(parts[3].replace(' ', ''));
+    var args = parts[3] ? parts[3].replace(/\s/g, '').split(',') : [];
 
     if (that.viewModel) {
 
+      console.log('binding:', event, method, args);
+
       $(this).on(event, function (e) {
+        console.log('fire');
         e.preventDefault(); // TODO temporary
+        that.sync();
         that.viewModel.execute(method, args);
       });
 
@@ -235,10 +248,12 @@ View.prototype.postprocess = function() {
 
     if (tagName === 'input' || tagName === 'textarea') {
       $(this).off('keyup');
+      $(this).off('blur');
     }
 
     if (tagName === 'select') {
       $(this).off('change');
+      $(this).off('blur');
     }
 
   });

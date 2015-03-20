@@ -42,7 +42,8 @@ router.register('home.login', {
 });
 
 router.register('home.register', {
-  template: require('../templates/home/register.html')
+  template: require('../templates/home/register.html'),
+  viewModel: require('./viewmodels/home/register')
 });
 
 router.register('home.forgot', {

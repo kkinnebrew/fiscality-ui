@@ -3,17 +3,15 @@ var auth = require('../../services/auth');
 
 var LoginViewModel = ViewModel.extend({
 
-  login: function() {
+  login: function(email, password) {
 
-    console.log('logging in', this.email, this.password);
+    console.log('logging in', email, password);
 
-    this.fire('pull');
-    
-    if (!this.email || !this.password) {
+    if (!email || !password) {
       return console.warn('Invalid credentials');
     }
 
-    auth.login(this.email, this.password).then(function() {
+    auth.login(email, password).then(function() {
       location.hash = '#/app'
     }, function() {
       console.log('Error');
