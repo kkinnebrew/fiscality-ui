@@ -29,6 +29,22 @@ function Router($root) {
 
 }
 
+Router.prototype.goto = function(state) {
+
+  var config = this.getConfig(state);
+
+  if (config) {
+    if (config.url) {
+      location.hash = '#' + config.url;
+    } else {
+      location.hash = '#' + state.replace('.', '/');
+    }
+  } else {
+    console.error('Invalid state specified: ' + state);
+  }
+
+};
+
 /**
  * register the state to render if an empty hash is passed
  * @method otherwise
@@ -138,6 +154,7 @@ Router.prototype.getConfig = function(state) {
   }
 
 };
+
 
 /**
  * renders the overall hash path using cached views when available

@@ -59,6 +59,8 @@ View.prototype.render = function($el) {
     e.stopPropagation();
   });
 
+  this.preprocess();
+
   this.bind();
 
   // bind view model refresh
@@ -83,6 +85,10 @@ View.prototype.refresh = function() {
 
   this.unbind();
 
+  // remove preprocess handlers
+
+  this.postprocess();
+
   // remove propagation stops
 
   this.$el.find('[ui-view]').off('click');
@@ -100,6 +106,10 @@ View.prototype.refresh = function() {
   var html = typeof this.template === 'function' ? this.template(this.viewModel || {}) : this.template;
 
   this.$el.html(html);
+
+  // preprocess template
+
+  this.preprocess();
 
   // bind events
 
@@ -119,6 +129,133 @@ View.prototype.refresh = function() {
 
   this.$el.find('[ui-view]').on('click', function(e) {
     e.stopPropagation();
+  });
+
+};
+
+View.prototype.sync = function() {
+
+  var that = this;
+
+  this.$el.find('[data-model]').each(function() {
+
+    var model = $(this).attr('data-model');
+    var tagName = $(this).prop('tagName').toLowerCase();
+
+    if (tagName === 'input' || tagName === 'textarea' || tagName === 'select') {
+      that.viewModel[model] = $(this).val();
+    }
+
+  });
+
+};
+
+View.prototype.preprocess = function() {
+
+  var that = this;
+
+  this.$el.find('[data-model]').each(function() {
+
+    var model = $(this).attr('data-model');
+    var tagName = $(this).prop('tagName').toLowerCase();
+
+    if (tagName === 'input' || tagName === 'textarea' || tagName === 'select') {
+      that.viewModel[model] = $(this).val();
+      console.log('registering model:', model);
+    }
+
+    if (tagName === 'input' || tagName === 'textarea') {
+      $(this).on('keyup', function() {
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+      $(this).on('blur', function() {
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+    }
+
+    if (tagName === 'select') {
+      $(this).on('change', function() {
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+      $(this).on('blur', function() {
+        console.log('update', $(this).val());
+        that.viewModel[model] = $(this).val();
+      });
+    }
+
+  });
+
+  this.$el.find('[data-bind]').each(function() {
+
+    var bind = $(this).attr('data-bind');
+
+    var parts = bind.match(/(.+):(.+)\((.*)\)/);
+    var event = parts[1];
+    var method = parts[2];
+    console.log(parts[3].replace(' ', ''));
+    var args = parts[3] ? parts[3].replace(/\s/g, '').split(',') : [];
+
+    if (that.viewModel) {
+
+      console.log('binding:', event, method, args);
+
+      $(this).on(event, function (e) {
+        console.log('fire');
+        e.preventDefault(); // TODO temporary
+        that.sync();
+        that.viewModel.execute(method, args);
+      });
+
+    }
+
+  });
+
+  this.$el.find('[data-link]').each(function() {
+
+    $(this).on('click', function() {
+      var link = $(this).attr('data-link');
+      window.App.goto(link);
+    });
+
+  });
+
+};
+
+View.prototype.postprocess = function() {
+
+  this.$el.find('[data-link]').each(function() {
+    $(this).off('click');
+  });
+
+  this.$el.find('[data-bind]').each(function() {
+
+    var bind = $(this).attr('data-bind');
+
+    var parts = bind.match(/(.+):(.+)\((.*)\)/);
+    var event = parts[1];
+
+    $(this).off(event);
+
+  });
+
+  this.$el.find('[data-model]').each(function() {
+
+    var model = $(this).attr('data-model');
+    var tagName = $(this).prop('tagName').toLowerCase();
+
+    if (tagName === 'input' || tagName === 'textarea') {
+      $(this).off('keyup');
+      $(this).off('blur');
+    }
+
+    if (tagName === 'select') {
+      $(this).off('change');
+      $(this).off('blur');
+    }
+
   });
 
 };
@@ -152,6 +289,8 @@ View.prototype.destroy = function() {
   this.$el.find('[ui-view]').off('click');
 
   this.unbind();
+
+  this.postprocess();
 
   this.$el.empty();
 

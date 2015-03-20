@@ -1,18 +1,18 @@
-var ViewModel = require('../../common/clementine').ViewModel;
+var ViewModel = require('../../common/viewmodel');
 var auth = require('../../services/auth');
 
 var RegisterViewModel = ViewModel.extend({
 
-  register: function() {
+  register: function(firstName, lastName, email, password) {
 
-    console.log('register in', this.firstName, this.lastName, this.email, this.password);
+    console.log('register in', firstName, lastName, email, password);
 
-    if (!this.firstName || !this.lastName || !this.email || !this.password) {
+    if (!firstName || !lastName || !email || !password) {
       return console.warn('Invalid form');
     }
 
-    auth.register(this.firstName, this.lastName, this.email, this.password).then(function() {
-      location.hash = '#/home/login'
+    auth.register(firstName, lastName, email, password).then(function() {
+      window.App.goto('home.login');
     }, function() {
       console.log('Error');
     });

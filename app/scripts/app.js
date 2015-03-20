@@ -37,19 +37,23 @@ router.register('home', {
 });
 
 router.register('home.login', {
-  template: require('../templates/home/login.html')
+  template: require('../templates/home/login.html'),
+  viewModel: require('./viewmodels/home/login')
 });
 
 router.register('home.register', {
-  template: require('../templates/home/register.html')
+  template: require('../templates/home/register.html'),
+  viewModel: require('./viewmodels/home/register')
 });
 
 router.register('home.forgot', {
-  template: require('../templates/home/forgot.html')
+  template: require('../templates/home/forgot.html'),
+  viewModel: require('./viewmodels/home/forgot')
 });
 
 router.register('home.reset', {
-  template: require('../templates/home/reset.html')
+  template: require('../templates/home/reset.html'),
+  viewModel: require('./viewmodels/home/reset')
 });
 
 router.register('app', {
@@ -97,3 +101,5 @@ router.register('app.investments', {
 $(document).ready(function() {
   router.listen();
 });
+
+window.App = router;

@@ -3,7 +3,7 @@
     <div class="description">Start managing your finances with Fiscality</div>
 </div>
 
-<form>
+<form data-bind="submit:register(firstName, lastName, email, password)">
 
     <div class="form-group">
 
@@ -23,7 +23,7 @@
             <input class="text-field" type="password" placeholder="Password" data-model="password" />
         </div>
 
-        <input class="field-btn submit-btn" type="button" value="Get Started" data-bind="click:register()" />
+        <input class="field-btn submit-btn" type="submit" value="Get Started" />
 
     </div>
 

@@ -1,18 +1,18 @@
-var ViewModel = require('../../common/clementine').ViewModel;
+var ViewModel = require('../../common/viewmodel');
 var auth = require('../../services/auth');
 
 var ForgotViewModel = ViewModel.extend({
 
-  forgotPassword: function() {
+  forgotPassword: function(email) {
 
-    console.log('forgot', this.email);
+    console.log('forgot', email);
 
-    if (!this.email) {
+    if (!email) {
       return console.warn('Invalid email');
     }
 
-    auth.forgotPassword(this.email).then(function() {
-      location.hash = '#/home/login'
+    auth.forgotPassword(email).then(function() {
+      window.App.goto('home.login');
     }, function() {
       console.log('Error');
     });
