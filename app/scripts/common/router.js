@@ -185,6 +185,7 @@ Router.prototype.render = function() {
   var config = null;
   var params = null;
   var depth = 0;
+  var param = null;
 
   while (parts.length) {
 
@@ -201,7 +202,13 @@ Router.prototype.render = function() {
     if (config.params) {
       params = {};
       for (var i = 0; i < config.params.length; i++) {
-        params[config.params[i].replace(':', '')] = parts.shift();
+        param = parts.shift();
+        if (param) {
+          params[config.params[i].replace(':', '')] = param;
+        } else if (typeof config.defaultParams === 'function') {
+          param = config.defaultParams();
+          params[config.params[i].replace(':', '')] = param ? param[config.params[i].replace(':', '')] : null;
+        }
       }
     }
 

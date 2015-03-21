@@ -210,7 +210,6 @@ View.prototype.preprocess = function() {
       var link = $(this).attr('data-link');
       console.log('Redirect to: ' + link);
       location.hash = '#' + link;
-      //window.App.goto(link);
     });
 
   });

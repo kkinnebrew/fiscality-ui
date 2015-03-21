@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var transactionsAPI = require('./transactions');
 
 var baseUrl = require('./config').getBaseUrl();
 
@@ -7,7 +8,12 @@ function getAuthToken() {
   var authToken = localStorage.getItem('authToken');
 
   if (!authToken) {
-    alert('unauthorized');
+    localStorage.removeItem('accountId');
+    window.cache = {
+      transactions: {},
+      balances: {},
+      accounts: null
+    };
     location.hash = '#/home/login';
   }
 
@@ -18,7 +24,8 @@ function getAuthToken() {
 module.exports = {
 
   login: function(email, password) {
-    return $.ajax({
+    var deferred = $.Deferred();
+    $.ajax({
       type: 'POST',
       url: baseUrl + '/api/login',
       data: JSON.stringify({
@@ -27,10 +34,23 @@ module.exports = {
       }),
       contentType: 'application/json;charset=UTF-8',
       success: function(user) {
-        console.log('setting token: ', user.sessionId);
         localStorage.setItem('authToken', user.sessionId);
+        transactionsAPI.accounts().then(function(data) {
+          data.reverse();
+          if (data && data.length > 0) {
+            localStorage.setItem('accountId', data[0].accountId);
+          }
+          deferred.resolve(user);
+        }, function() {
+          deferred.reject();
+        });
+
+      },
+      error: function() {
+        deferred.reject();
       }
     });
+    return deferred;
   },
 
   register: function(firstName, lastName, email, password) {
@@ -79,8 +99,9 @@ module.exports = {
         'X-Auth-Token': getAuthToken()
       },
       contentType: 'application/json;charset=UTF-8',
-      success: function(user) {
+      success: function() {
         localStorage.removeItem('authToken');
+        localStorage.removeItem('accountId');
         window.cache = {
           transactions: {},
           balances: {},
