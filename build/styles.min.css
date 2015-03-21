@@ -1234,6 +1234,23 @@ ul {
     margin-left: -12px;
 }
 
+/* default state */
+
+.no-account-label {
+    color: #FFF;
+    font-size: 28px;
+    font-weight: 400;
+    height: 24px;
+    left: 50%;
+    margin-top: -12px;
+    margin-left: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 200px;
+    -webkit-font-smoothing: antialiased;
+}
+
 
 /* form */
 

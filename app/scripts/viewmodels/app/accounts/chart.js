@@ -42,10 +42,14 @@ var ChartViewModel = ViewModel.extend({
 
     } else {
 
-      this.account = null;
-      this.balance = null;
+      setTimeout(function() {
 
-      ViewModel.prototype.refresh.call(this);
+        that.account = null;
+        that.balance = null;
+
+        ViewModel.prototype.refresh.call(that);
+
+      }, 0);
 
     }
 

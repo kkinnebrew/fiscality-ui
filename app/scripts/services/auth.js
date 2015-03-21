@@ -1,7 +1,6 @@
 var $ = require('jquery');
 
-//var baseUrl = 'https://fiscality-api.herokuapp.com';
-var baseUrl = 'http://localhost:9000';
+var baseUrl = require('./config').getBaseUrl();
 
 function getAuthToken() {
 
@@ -82,6 +81,11 @@ module.exports = {
       contentType: 'application/json;charset=UTF-8',
       success: function(user) {
         localStorage.removeItem('authToken');
+        window.cache = {
+          transactions: {},
+          balances: {},
+          accounts: null
+        };
       }
     });
   }

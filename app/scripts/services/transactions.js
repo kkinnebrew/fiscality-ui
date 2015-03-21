@@ -1,10 +1,9 @@
 var $ = require('jquery');
 var _ = require('underscore');
 
-//var baseUrl = 'https://fiscality-api.herokuapp.com';
-var baseUrl = 'http://localhost:9000';
+var baseUrl = require('./config').getBaseUrl();
 
-var cache = {
+window.cache = {
   transactions: {},
   balances: {},
   accounts: null
@@ -28,6 +27,12 @@ function handleError(xhr) {
   if (xhr.status == 401) {
     alert('unauthorized');
     location.hash = '#/home/login';
+    window.cache = {
+      transactions: {},
+      balances: {},
+      accounts: null
+    };
+
   }
 
 }

@@ -8,6 +8,8 @@ var SubNavViewModel = ViewModel.extend({
 
     var that = this;
 
+    console.log('initialize subnav');
+
     this.accounts = [];
     this.accountId = params.accountId || null;
 
