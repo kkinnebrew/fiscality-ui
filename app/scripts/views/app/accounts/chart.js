@@ -38,7 +38,7 @@ ChartView.prototype.render = function() {
 ChartView.prototype.startLoading = function() {
 
   if (this.loading) return;
-
+  
   this.loading = true;
 
   this.$el.find('.account-info').css('opacity', 0.5);

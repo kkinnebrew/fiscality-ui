@@ -1,3 +1,5 @@
+{{#if accountId}}
+
 <div class="account-info">
     <h2>{{account.accountName}}</h2>
     <div class="balance">{{currency balance '$'}}</div>
@@ -27,3 +29,11 @@
 </div>
 
 <div class="progress"></div>
+
+{{/if}}
+
+{{#unless accountId}}
+
+    <div class="no-account-label">No Accounts</div>
+
+{{/unless}}
