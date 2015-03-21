@@ -41,6 +41,8 @@ ChartView.prototype.startLoading = function() {
 
   this.loading = true;
 
+  this.$el.find('.account-info').css('opacity', 0.5);
+
   this.$el.find('.progress').show().circleProgress({
     value: 1,
     size: 24,
@@ -55,6 +57,8 @@ ChartView.prototype.startLoading = function() {
 ChartView.prototype.stopLoading = function() {
 
   if (!this.loading) return;
+
+  this.$el.find('.account-info').css('opacity', 1);
 
   this.$el.find('.progress').hide();
 
