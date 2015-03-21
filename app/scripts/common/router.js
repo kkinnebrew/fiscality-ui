@@ -208,6 +208,17 @@ Router.prototype.render = function() {
         } else if (typeof config.defaultParams === 'function') {
           param = config.defaultParams();
           params[config.params[i].replace(':', '')] = param ? param[config.params[i].replace(':', '')] : null;
+
+          function updateHash(params) {
+            var hash = config.url;
+            for (var p in params) {
+              hash = hash.replace(':' + p, params[p]);
+            }
+            history.replaceState('', '', '#' + hash);
+          }
+
+          updateHash(params);
+
         }
       }
     }

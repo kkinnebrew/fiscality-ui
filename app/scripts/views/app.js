@@ -11,19 +11,6 @@ AppView.prototype = new View();
 
 AppView.prototype.constructor = AppView;
 
-AppView.prototype.bind = function() {
-
-  var that = this;
-
-  this.$el.on('click', '[data-link]', function() {
-
-    var link = $(this).attr('data-link');
-    location.hash = link;
-
-  });
-
-};
-
 AppView.prototype.renderSubview = function(name, view) {
 
   View.prototype.renderSubview.call(this, name, view);

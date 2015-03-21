@@ -48,7 +48,9 @@ module.exports = {
     }
 
     if (cache.transactions[accountId]) {
-      deferred.resolve(cache.transactions[accountId]);
+      setTimeout(function () {
+        deferred.resolve(cache.transactions[accountId]);
+      }, 0);
       return deferred;
     } else {
       return $.ajax({
@@ -80,7 +82,7 @@ module.exports = {
       var deferred = $.Deferred();
       setTimeout(function () {
         deferred.resolve(cache.accounts);
-      }, 200);
+      }, 0);
       return deferred;
     } else {
       return $.ajax({
@@ -112,7 +114,9 @@ module.exports = {
       var account = _.find(cache.accounts, function (account) {
         return account.accountId === accountId;
       });
-      deferred.resolve(account);
+      setTimeout(function () {
+        deferred.resolve(account);
+      }, 0);
       return deferred;
     } else {
       return $.ajax({
@@ -138,7 +142,9 @@ module.exports = {
     }
 
     if (cache.balances.hasOwnProperty(accountId)) {
-      deferred.resolve(cache.balances[accountId]);
+      setTimeout(function () {
+        deferred.resolve(cache.balances[accountId]);
+      }, 0);
       return deferred;
     } else {
       return $.ajax({
