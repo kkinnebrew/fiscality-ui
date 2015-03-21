@@ -1,8 +1,7 @@
 var $ = require('jquery');
 var _ = require('underscore');
 
-//var baseUrl = 'https://fiscality-api.herokuapp.com';
-var baseUrl = 'http://localhost:9000';
+var baseUrl = require('./config').getBaseUrl();
 
 window.cache = {
   transactions: {},
