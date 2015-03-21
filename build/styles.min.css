@@ -1123,7 +1123,7 @@ ul {
 
 .column-lg {
     height: 100%;
-    width: 300px;
+    width: 480px;
 }
 
 .column-left {
@@ -1196,6 +1196,7 @@ ul {
     letter-spacing: 1px;
     padding-bottom: 0;
     padding-top: 16px;
+    width: 100%;
 }
 
 .transaction-row .account-text {
@@ -1204,6 +1205,7 @@ ul {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
+    width: 100%;
 }
 
 .transaction-row .balance {
