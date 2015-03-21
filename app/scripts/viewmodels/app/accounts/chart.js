@@ -7,7 +7,7 @@ var ChartViewModel = ViewModel.extend({
 
   initialize: function(params) {
 
-    this.accountId = params.accountId || 'null';
+    this.accountId = params.accountId || null;
     this.account = null;
     this.balance = null;
 

@@ -59,7 +59,8 @@ router.register('home.reset', {
 router.register('app', {
   redirect: '/app/accounts',
   template: require('../templates/app.hbs'),
-  view: require('./views/app.js')
+  view: require('./views/app.js'),
+  viewModel: require('./viewmodels/app')
 });
 
 router.register('app.accounts', {
