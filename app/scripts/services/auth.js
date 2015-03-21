@@ -3,6 +3,19 @@ var $ = require('jquery');
 //var baseUrl = 'https://fiscality-api.herokuapp.com';
 var baseUrl = 'http://localhost:9000';
 
+function getAuthToken() {
+
+  var authToken = localStorage.getItem('authToken');
+
+  if (!authToken) {
+    alert('unauthorized');
+    location.hash = '#/home/login';
+  }
+
+  return authToken;
+
+}
+
 module.exports = {
 
   login: function(email, password) {
@@ -13,7 +26,11 @@ module.exports = {
         email: email,
         password: password
       }),
-      contentType: 'application/json;charset=UTF-8'
+      contentType: 'application/json;charset=UTF-8',
+      success: function(user) {
+        console.log('setting token: ', user.sessionId);
+        localStorage.setItem('authToken', user.sessionId);
+      }
     });
   },
 
@@ -52,6 +69,20 @@ module.exports = {
         confirm: confirm
       }),
       contentType: 'application/json;charset=UTF-8'
+    });
+  },
+
+  logout: function() {
+    return $.ajax({
+      type: 'GET',
+      url: baseUrl + '/api/logout',
+      headers: {
+        'X-Auth-Token': getAuthToken()
+      },
+      contentType: 'application/json;charset=UTF-8',
+      success: function(user) {
+        localStorage.removeItem('authToken');
+      }
     });
   }
 

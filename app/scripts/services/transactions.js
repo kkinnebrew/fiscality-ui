@@ -10,9 +10,38 @@ var cache = {
   accounts: null
 };
 
+function getAuthToken() {
+
+  var authToken = localStorage.getItem('authToken');
+
+  if (!authToken) {
+    alert('unauthorized');
+    location.hash = '#/home/login';
+  }
+
+  return authToken;
+
+}
+
+function handleError(xhr) {
+
+  if (xhr.status == 401) {
+    alert('unauthorized');
+    location.hash = '#/home/login';
+  }
+
+}
+
 module.exports = {
 
   transactions: function(accountId) {
+
+    if (!accountId) {
+      var deferred = $.Deferred();
+      deferred.reject();
+      return deferred;
+    }
+
     if (cache.transactions[accountId]) {
       var deferred = $.Deferred();
       //console.log('cache load');
@@ -23,10 +52,14 @@ module.exports = {
         type: 'GET',
         url: baseUrl + '/api/accounts/' + accountId + '/transactions',
         contentType: 'application/json;charset=UTF-8',
+        headers: {
+          'X-Auth-Token': getAuthToken()
+        },
         success: function(data) {
           //console.log('ajax load');
           cache.transactions[accountId] = data;
-        }
+        },
+        error: handleError
       });
     }
   },
@@ -50,16 +83,26 @@ module.exports = {
         type: 'GET',
         url: baseUrl + '/api/accounts',
         contentType: 'application/json;charset=UTF-8',
+        headers: {
+          'X-Auth-Token': getAuthToken()
+        },
         success: function(data) {
           //console.log('ajax load');
           cache.accounts = data;
-        }
+        },
+        error: handleError
       });
     }
 
   },
 
   account: function(accountId) {
+    if (!accountId) {
+      var deferred = $.Deferred();
+      deferred.reject();
+      return deferred;
+    }
+
     if (cache.accounts) {
       var deferred = $.Deferred();
       //console.log('cache load');
@@ -73,16 +116,26 @@ module.exports = {
         type: 'GET',
         url: baseUrl + '/api/accounts/' + accountId,
         contentType: 'application/json;charset=UTF-8',
+        headers: {
+          'X-Auth-Token': getAuthToken()
+        },
         success: function(data) {
           //console.log('ajax load');
           //cache.accounts = data;
-        }
+        },
+        error: handleError
       });
     }
 
   },
 
   balance: function(accountId) {
+    if (!accountId) {
+      var deferred = $.Deferred();
+      deferred.reject();
+      return deferred;
+    }
+
     if (cache.balances.hasOwnProperty(accountId)) {
       var deferred = $.Deferred();
       //console.log('cache load');
@@ -93,10 +146,14 @@ module.exports = {
         type: 'GET',
         url: baseUrl + '/api/accounts/' + accountId + '/balance',
         contentType: 'application/json;charset=UTF-8',
+        headers: {
+          'X-Auth-Token': getAuthToken()
+        },
         success: function(data) {
           //console.log('ajax load', data);
           cache.balances[accountId] = data;
-        }
+        },
+        error: handleError
       });
     }
 
