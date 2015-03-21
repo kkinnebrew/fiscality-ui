@@ -82,6 +82,11 @@ module.exports = {
       contentType: 'application/json;charset=UTF-8',
       success: function(user) {
         localStorage.removeItem('authToken');
+        window.cache = {
+          transactions: {},
+          balances: {},
+          accounts: null
+        };
       }
     });
   }
