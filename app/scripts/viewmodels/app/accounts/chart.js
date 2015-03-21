@@ -15,21 +15,21 @@ var ChartViewModel = ViewModel.extend({
 
   },
 
-
   refresh: function() {
 
     var that = this;
 
-    if (this.accountId && this.oldAccountId !== this.accountId) {
-      this.oldAccountId = this.accountId;
-      transactionsAPI.account(that.accountId).then(function(account) {
+    if (this.accountId) {
+
+      transactionsAPI.account(this.accountId).then(function(account) {
+
         transactionsAPI.balance(that.accountId).then(function(balance) {
-          if (account) {
-            that.setValues({
-              account: account,
-              balance: balance || 0
-            });
-          }
+
+          that.account = account;
+          that.balance = balance || 0;
+
+          ViewModel.prototype.refresh.call(that);
+
         }, function() {
           console.log('Error');
         });
@@ -37,8 +37,14 @@ var ChartViewModel = ViewModel.extend({
       }, function () {
         console.log('Error');
       });
+
     } else {
-      this.fire('refresh');
+
+      this.account = null;
+      this.balance = null;
+
+      ViewModel.prototype.refresh.call(this);
+
     }
 
   }

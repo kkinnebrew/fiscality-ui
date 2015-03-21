@@ -3,6 +3,14 @@ var auth = require('../services/auth');
 
 var AppViewModel = ViewModel.extend({
 
+  initialize: function() {
+
+    this.name = 'AppViewModel';
+
+    this._super();
+
+  },
+
   logout: function() {
 
     auth.logout().then(function() {

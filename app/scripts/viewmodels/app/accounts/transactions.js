@@ -6,10 +6,7 @@ var TransactionsViewModel = ViewModel.extend({
 
   initialize: function(params) {
 
-    this.oldAccountId = -1;
-
     this.accountId = params.accountId || null;
-
     this.transactions = [];
 
     this._super();
@@ -20,23 +17,33 @@ var TransactionsViewModel = ViewModel.extend({
 
     var that = this;
 
-    if (this.accountId && this.oldAccountId !== this.accountId) {
-      this.oldAccountId = this.accountId;
+    if (this.accountId) {
+
       transactionsAPI.transactions(this.accountId).then(function (data) {
+
         var balance = 0;
+
         that.transactions = _.sortBy(data, 'transactionDate');
         that.transactions = _.map(that.transactions, function(item) {
           item.amount = item.debitAmount - item.creditAmount;
           item.balance = balance = balance + item.debitAmount - item.creditAmount;
           return item;
         });
+
         that.transactions.reverse();
-        that.refresh();
+
+        ViewModel.prototype.refresh.call(that);
+
       }, function () {
         console.log('Error');
       });
+
     } else {
-      this.fire('refresh');
+
+      this.transactions = [];
+
+      ViewModel.prototype.refresh.call(that);
+
     }
 
   }
