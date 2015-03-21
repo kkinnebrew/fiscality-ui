@@ -23,6 +23,8 @@ var ChartViewModel = ViewModel.extend({
 
     if (this.accountId) {
 
+      localStorage.setItem('accountId', this.accountId);
+
       transactionsAPI.account(this.accountId).then(function(account) {
 
         transactionsAPI.balance(that.accountId).then(function(balance) {

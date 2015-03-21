@@ -14,7 +14,7 @@ var SubNavViewModel = ViewModel.extend({
     this.fire('prefresh');
 
     transactionsAPI.accounts().then(function(data) {
-      that.accounts = data.reverse();
+      that.accounts = data;
       that.refresh();
     }, function() {
       console.log('Error');
