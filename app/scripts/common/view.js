@@ -87,9 +87,7 @@ View.prototype.refresh = function() {
 
   // remove preprocess handlers
 
-  if (this.$el) {
-    this.postprocess();
-  }
+  this.postprocess();
 
   // remove propagation stops
 
@@ -286,6 +284,8 @@ View.prototype.destroy = function() {
   this.$el.empty();
 
   this.$el = null;
+
+  this.rendered = false;
 
 };
 
