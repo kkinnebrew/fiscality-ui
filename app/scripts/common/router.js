@@ -212,7 +212,7 @@ Router.prototype.render = function() {
           function updateHash(params) {
             var hash = config.url;
             for (var p in params) {
-              hash = hash.replace(':' + p, params[p]);
+              hash = hash.replace(':' + p, params[p] || '');
             }
             history.replaceState('', '', '#' + hash);
           }
