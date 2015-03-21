@@ -29,13 +29,20 @@ function Router($root) {
 
 }
 
-Router.prototype.goto = function(state) {
+Router.prototype.goto = function(state, params) {
 
   var config = this.getConfig(state);
 
   if (config) {
     if (config.url) {
-      location.hash = '#' + config.url;
+      var replacedUrl = config.url;
+      if (params && Object.keys(params).length > 0) {
+        for (var param in params) {
+          replacedUrl = replacedUrl.replace(':' + param, params[param]);
+          console.log(replacedUrl);
+        }
+      }
+      location.hash = '#' + replacedUrl;
     } else {
       location.hash = '#' + state.replace('.', '/');
     }
@@ -210,7 +217,6 @@ Router.prototype.render = function() {
         }
       }
     }
-
 
     depth++;
 

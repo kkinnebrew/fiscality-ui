@@ -49,6 +49,7 @@ var ViewModel = Class.extend({
       this.refresh();
     }
 
+
   },
 
   refresh: function() {

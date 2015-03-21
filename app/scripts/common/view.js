@@ -208,7 +208,9 @@ View.prototype.preprocess = function() {
 
     $(this).on('click', function() {
       var link = $(this).attr('data-link');
-      window.App.goto(link);
+      console.log('Redirect to: ' + link);
+      location.hash = '#' + link;
+      //window.App.goto(link);
     });
 
   });

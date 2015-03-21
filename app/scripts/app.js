@@ -82,7 +82,6 @@ router.register('app.accounts', {
     'transactions@content': {
       template: require('../templates/app/accounts/transactions.hbs'),
       viewModel: require('./viewmodels/app/accounts/transactions')
-      //view: require('./views/app/accounts/transactions')
     }
   }
 });
