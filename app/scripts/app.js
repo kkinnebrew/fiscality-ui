@@ -29,7 +29,7 @@ HandlebarsCompiler.registerHelper('dateFormat', function(d, f) {
 
 var router = new Router($('body'));
 
-router.otherwise('/app/accounts');
+router.otherwise('/home/login');
 
 router.register('home', {
   redirect: '/home/login',

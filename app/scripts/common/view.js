@@ -87,7 +87,9 @@ View.prototype.refresh = function() {
 
   // remove preprocess handlers
 
-  this.postprocess();
+  if (this.$el) {
+    this.postprocess();
+  }
 
   // remove propagation stops
 
@@ -280,8 +282,6 @@ View.prototype.destroy = function() {
   this.$el.find('[ui-view]').off('click');
 
   this.unbind();
-
-  this.postprocess();
 
   this.$el.empty();
 
