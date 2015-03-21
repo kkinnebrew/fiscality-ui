@@ -25,7 +25,6 @@ function getAuthToken() {
 function handleError(xhr) {
 
   if (xhr.status == 401) {
-    alert('unauthorized');
     location.hash = '#/home/login';
     window.cache = {
       transactions: {},
@@ -39,17 +38,16 @@ function handleError(xhr) {
 
 module.exports = {
 
-  transactions: function(accountId) {
+  transactions: function (accountId) {
+
+    var deferred = $.Deferred();
 
     if (!accountId) {
-      var deferred = $.Deferred();
       deferred.reject();
       return deferred;
     }
 
     if (cache.transactions[accountId]) {
-      var deferred = $.Deferred();
-      //console.log('cache load');
       deferred.resolve(cache.transactions[accountId]);
       return deferred;
     } else {
@@ -60,8 +58,7 @@ module.exports = {
         headers: {
           'X-Auth-Token': getAuthToken()
         },
-        success: function(data) {
-          //console.log('ajax load');
+        success: function (data) {
           cache.transactions[accountId] = data;
         },
         error: handleError
@@ -77,11 +74,13 @@ module.exports = {
   //  });
   //},
 
-  accounts: function() {
+  accounts: function () {
+
     if (cache.accounts) {
       var deferred = $.Deferred();
-      //console.log('cache load');
-      deferred.resolve(cache.accounts);
+      setTimeout(function () {
+        deferred.resolve(cache.accounts);
+      }, 200);
       return deferred;
     } else {
       return $.ajax({
@@ -91,8 +90,7 @@ module.exports = {
         headers: {
           'X-Auth-Token': getAuthToken()
         },
-        success: function(data) {
-          //console.log('ajax load');
+        success: function (data) {
           cache.accounts = data;
         },
         error: handleError
@@ -101,17 +99,17 @@ module.exports = {
 
   },
 
-  account: function(accountId) {
+  account: function (accountId) {
+
+    var deferred = $.Deferred();
+
     if (!accountId) {
-      var deferred = $.Deferred();
       deferred.reject();
       return deferred;
     }
 
     if (cache.accounts) {
-      var deferred = $.Deferred();
-      //console.log('cache load');
-      var account = _.find(cache.accounts, function(account) {
+      var account = _.find(cache.accounts, function (account) {
         return account.accountId === accountId;
       });
       deferred.resolve(account);
@@ -124,26 +122,22 @@ module.exports = {
         headers: {
           'X-Auth-Token': getAuthToken()
         },
-        success: function(data) {
-          //console.log('ajax load');
-          //cache.accounts = data;
-        },
         error: handleError
       });
     }
 
   },
 
-  balance: function(accountId) {
+  balance: function (accountId) {
+
+    var deferred = $.Deferred();
+
     if (!accountId) {
-      var deferred = $.Deferred();
       deferred.reject();
       return deferred;
     }
 
     if (cache.balances.hasOwnProperty(accountId)) {
-      var deferred = $.Deferred();
-      //console.log('cache load');
       deferred.resolve(cache.balances[accountId]);
       return deferred;
     } else {
@@ -154,8 +148,7 @@ module.exports = {
         headers: {
           'X-Auth-Token': getAuthToken()
         },
-        success: function(data) {
-          //console.log('ajax load', data);
+        success: function (data) {
           cache.balances[accountId] = data;
         },
         error: handleError

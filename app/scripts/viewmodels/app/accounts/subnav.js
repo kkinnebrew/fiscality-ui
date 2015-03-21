@@ -8,10 +8,10 @@ var SubNavViewModel = ViewModel.extend({
 
     var that = this;
 
-    console.log('initialize subnav');
-
     this.accounts = [];
     this.accountId = params.accountId || null;
+
+    this.fire('prefresh');
 
     transactionsAPI.accounts().then(function(data) {
       that.accounts = data.reverse();
@@ -19,16 +19,6 @@ var SubNavViewModel = ViewModel.extend({
     }, function() {
       console.log('Error');
     });
-
-  },
-
-  refresh: function() {
-
-    if (!this.accountId && this.accounts.length > 0) {
-      window.App.goto('app.accounts', { accountId: this.accounts[0].accountId });
-    }
-
-    this._super();
 
   }
 

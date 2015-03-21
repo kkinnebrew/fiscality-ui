@@ -67,6 +67,16 @@ router.register('app', {
 
 router.register('app.accounts', {
   url: '/app/accounts/:accountId',
+  defaultParams: function() {
+    var accountId = localStorage.getItem('accountId');
+    if (accountId) {
+      return {
+        'accountId': accountId
+      }
+    } else {
+      return null;
+    }
+  },
   views: {
     'subnav': {
       template: require('../templates/app/accounts/subnav.hbs'),
