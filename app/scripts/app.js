@@ -7,6 +7,8 @@
 var $ = require('jquery');
 var Router = require('./common/router');
 var HandlebarsCompiler = require('hbsfy/runtime');
+window.jQuery = $;
+require('jquery-circle-progress');
 require('datejs');
 
 function numberWithCommas(x) {
