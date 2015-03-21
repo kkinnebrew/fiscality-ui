@@ -281,11 +281,11 @@ View.prototype.destroy = function() {
 
   this.unbind();
 
-  this.postprocess();
-
   this.$el.empty();
 
   this.$el = null;
+
+  this.rendered = false;
 
 };
 
