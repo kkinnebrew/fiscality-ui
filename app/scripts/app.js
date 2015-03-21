@@ -7,6 +7,8 @@
 var $ = require('jquery');
 var Router = require('./common/router');
 var HandlebarsCompiler = require('hbsfy/runtime');
+window.jQuery = $;
+require('jquery-circle-progress');
 require('datejs');
 
 function numberWithCommas(x) {
@@ -81,6 +83,7 @@ router.register('app.accounts', {
     },
     'transactions@content': {
       template: require('../templates/app/accounts/transactions.hbs'),
+      view: require('./views/app/accounts/transactions'),
       viewModel: require('./viewmodels/app/accounts/transactions')
     }
   }

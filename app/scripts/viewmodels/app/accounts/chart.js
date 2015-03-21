@@ -17,6 +17,8 @@ var ChartViewModel = ViewModel.extend({
 
   refresh: function() {
 
+    this.fire('prefresh');
+
     var that = this;
 
     if (this.accountId) {
