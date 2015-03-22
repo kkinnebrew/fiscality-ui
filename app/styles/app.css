@@ -407,12 +407,17 @@ ul {
 .transaction-row-details .line-description {
     border-bottom: 1px solid #EEE;
     color: #797979;
+    cursor: pointer;
     font-family: "proxima-nova", sans-serif;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
     padding: 3px 0;
     margin-left: 16px;
+}
+
+.transaction-row-details .line-description:hover {
+    color: #666;
 }
 
 .transaction-row-details:last-child .line-description {
