@@ -29,6 +29,9 @@ var TransactionsViewModel = ViewModel.extend({
         that.transactions = _.map(that.transactions, function(item) {
           item.amount = item.debitAmount - item.creditAmount;
           item.balance = balance = balance + item.debitAmount - item.creditAmount;
+          _.each(item.otherLines, function(line) {
+            line.amount = line.creditAmount - line.debitAmount;
+          });
           return item;
         });
 
