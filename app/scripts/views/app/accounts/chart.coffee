@@ -49,4 +49,5 @@ class ChartView extends View
 
     @loading = false
 
+
 module.exports = ChartView

@@ -53,7 +53,7 @@ module.exports = {
       }, 0);
       return deferred;
     } else {
-      return $.ajax({
+      $.ajax({
         type: 'GET',
         url: baseUrl + '/api/accounts/' + accountId + '/transactions',
         contentType: 'application/json;charset=UTF-8',
@@ -61,10 +61,15 @@ module.exports = {
           'X-Auth-Token': getAuthToken()
         },
         success: function (data) {
+          _.each(data, function(item) {
+            item.accountNames = _.pluck(item.otherLines, 'accountName').join(', ');
+          });
           cache.transactions[accountId] = data;
+          deferred.resolve(data);
         },
         error: handleError
       });
+      return deferred;
     }
   },
 
