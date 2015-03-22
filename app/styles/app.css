@@ -518,3 +518,42 @@ ul {
     width: 200px;
     -webkit-font-smoothing: antialiased;
 }
+
+.no-account-splash {
+    cursor: pointer;
+    height: 300px;
+    opacity: 0.5;
+    overflow: auto;
+    width: 100%;
+    -webkit-transition: all ease-in-out 150ms;
+}
+
+.no-account-splash:hover {
+    opacity: 1;
+}
+
+.no-account-splash .splash-icon {
+    background: url(../images/no-accounts-icon.png) center center no-repeat;
+    height: 56px;
+    margin: 80px auto 40px auto;
+    width: 56px;
+}
+
+.no-account-splash .splash-label {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .no-account-splash .splash-icon {
+        background-image: url(../images/no-accounts-icon@2x.png);
+        -webkit-background-size: 56px 56px;
+        -moz-background-size: 56px 56px;
+        background-size: 56px 56px;
+
+    }
+
+}
