@@ -1165,8 +1165,22 @@ ul {
 }
 
 .transaction-row .account-names {
+    background: url(../images/transaction-line-expand-icon.png) left center no-repeat;
     cursor: pointer;
     display: block;
+    text-indent: 12px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .transaction-row .account-names {
+        background-image: url(../images/transaction-line-expand-icon@2x.png);
+        -webkit-background-size: 6px 7px;
+        -moz-background-size: 6px 7px;
+        background-size: 6px 7px;
+
+    }
+
 }
 
 .transaction-row .account-names:hover {
@@ -1174,13 +1188,28 @@ ul {
 }
 
 .transaction-row .collapse-btn {
+    background: url(../images/transaction-line-collapse-icon.png) left center no-repeat;
     color: #AAA;
     cursor: pointer;
     display: none;
+    text-indent: 12px;
+}
+
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .transaction-row .collapse-btn {
+        background-image: url(../images/transaction-line-collapse-icon@2x.png);
+        -webkit-background-size: 8px 7px;
+        -moz-background-size: 8px 7px;
+        background-size: 8px 7px;
+
+    }
+
 }
 
 .transaction-row .collapse-btn:hover {
-    color: #666;
+    color: #999;
 }
 
 .transaction-row-details:last-child .line-amount {
