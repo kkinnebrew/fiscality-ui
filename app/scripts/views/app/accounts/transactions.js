@@ -24,6 +24,25 @@ TransactionsView.prototype.render = function() {
 
 };
 
+TransactionsView.prototype.bind = function() {
+
+  this.$el.on('click', '.collapse-btn', function() {
+    $(this).closest('.transaction-row').removeClass('expand');
+  });
+
+  this.$el.on('click', '.account-names', function() {
+    $(this).closest('.transaction-row').addClass('expand');
+  });
+
+};
+
+TransactionsView.prototype.unbind = function() {
+
+  this.$el.off('click', '.collapse-btn');
+  this.$el.off('click', '.account-names');
+
+};
+
 TransactionsView.prototype.startLoading = function() {
 
   if (this.loading) return;
