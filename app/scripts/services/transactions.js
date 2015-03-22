@@ -14,7 +14,12 @@ function getAuthToken() {
   var authToken = localStorage.getItem('authToken');
 
   if (!authToken) {
-    alert('unauthorized');
+    window.cache = {
+      transactions: {},
+      balances: {},
+      accounts: null
+    };
+    localStorage.removeItem('accountId');
     location.hash = '#/home/login';
   }
 
@@ -25,13 +30,13 @@ function getAuthToken() {
 function handleError(xhr) {
 
   if (xhr.status == 401) {
-    location.hash = '#/home/login';
     window.cache = {
       transactions: {},
       balances: {},
       accounts: null
     };
-
+    localStorage.removeItem('accountId');
+    location.hash = '#/home/login';
   }
 
 }
