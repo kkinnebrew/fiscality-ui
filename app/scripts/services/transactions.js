@@ -14,7 +14,12 @@ function getAuthToken() {
   var authToken = localStorage.getItem('authToken');
 
   if (!authToken) {
-    alert('unauthorized');
+    window.cache = {
+      transactions: {},
+      balances: {},
+      accounts: null
+    };
+    localStorage.removeItem('accountId');
     location.hash = '#/home/login';
   }
 
@@ -25,13 +30,13 @@ function getAuthToken() {
 function handleError(xhr) {
 
   if (xhr.status == 401) {
-    location.hash = '#/home/login';
     window.cache = {
       transactions: {},
       balances: {},
       accounts: null
     };
-
+    localStorage.removeItem('accountId');
+    location.hash = '#/home/login';
   }
 
 }
@@ -53,7 +58,7 @@ module.exports = {
       }, 0);
       return deferred;
     } else {
-      return $.ajax({
+      $.ajax({
         type: 'GET',
         url: baseUrl + '/api/accounts/' + accountId + '/transactions',
         contentType: 'application/json;charset=UTF-8',
@@ -61,10 +66,15 @@ module.exports = {
           'X-Auth-Token': getAuthToken()
         },
         success: function (data) {
+          _.each(data, function(item) {
+            item.accountNames = _.pluck(item.otherLines, 'accountName').join(', ');
+          });
           cache.transactions[accountId] = data;
+          deferred.resolve(data);
         },
         error: handleError
       });
+      return deferred;
     }
   },
 

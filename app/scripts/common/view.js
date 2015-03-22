@@ -26,7 +26,20 @@ function View(template, viewModel) {
    */
   this.viewModel = viewModel || null;
 
+  /**
+   * call setup
+   */
+  this.setup();
+
 }
+
+/**
+ * override to do something at the end of the view's constructor
+ * @method setup
+ */
+View.prototype.setup = function() {
+
+};
 
 /**
  * renders the view directly into a given element
