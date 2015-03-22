@@ -88,7 +88,7 @@ router.register('app.accounts', {
     },
     'chart@content': {
       template: require('../templates/app/accounts/chart.hbs'),
-      view: require('./views/app/accounts/chart'),
+      view: require('./views/app/accounts/chart.coffee'),
       viewModel: require('./viewmodels/app/accounts/chart')
     },
     'transactions@content': {
