@@ -1111,9 +1111,14 @@ ul {
     color: #FFF;
 }
 
-.column-sm {
+.column-xsm {
     height: 100%;
     width: 56px;
+}
+
+.column-sm {
+    height: 100%;
+    width: 90px;
 }
 
 .column-md {
@@ -1123,7 +1128,7 @@ ul {
 
 .column-lg {
     height: 100%;
-    width: 480px;
+    width: 400px;
 }
 
 .column-left {
