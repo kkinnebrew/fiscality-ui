@@ -1,1 +1,19 @@
 <h2 style="color: #F00">My Portfolio {{portfolioId}}</h2>
+
+<div>
+
+    {{#each holdings}}
+
+    <div class="holdings-row">
+        <div class="holdings-column column-xsm column-left">{{security.symbol}}</div>
+        <div class="holdings-column column-md column-left">{{security.name}}</div>
+        <div class="holdings-column column-sm column-left">{{currency dayChange}}</div>
+        <div class="holdings-column column-sm column-left">{{dayPercentageChange}}%</div>
+        <div class="holdings-column column-sm column-left">{{unrealizedQuantity}}</div>
+        <div class="holdings-column column-sm column-left">{{currency marketValue}}</div>
+        <div class="holdings-column column-sm column-left">{{currency unrealizedGainLoss}}</div>
+    </div>
+
+    {{/each}}
+
+</div>

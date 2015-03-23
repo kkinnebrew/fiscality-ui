@@ -1,5 +1,6 @@
 $ = require('jquery');
 transactionsAPI = require('./transactions.coffee');
+investmentsAPI = require('./investments.coffee');
 cache = require('../common/cache');
 Service = require('../common/service');
 
@@ -24,10 +25,15 @@ class AuthService extends Service
     deferred = $.Deferred()
 
     success = (user) ->
-      cache.setPersistentItem('authToken', user.sessionId);
-      transactionsAPI.accounts().then((data) ->
-        data.reverse();
-        if data && data.length > 0 then cache.setPersistentItem('accountId', data[0].accountId)
+      cache.setPersistentItem('authToken', user.sessionId)
+      accountsRequest = transactionsAPI.accounts()
+      portfoliosRequest = investmentsAPI.portfolios()
+      $.when(accountsRequest, portfoliosRequest).then((accounts, portfolios) ->
+        if accounts && accounts.length > 0
+          accounts.reverse()
+          cache.setPersistentItem('accountId', accounts[0].accountId)
+        if portfolios && portfolios.length > 0
+          cache.setPersistentItem('portfolioId', portfolios[0].portfolioId)
         deferred.resolve(user)
       , -> deferred.reject())
 

@@ -120,7 +120,7 @@ router.register('app.investments', {
     },
     'content': {
       template: require('../templates/app/investments/content.hbs'),
-      viewModel: require('./viewmodels/app/investments/positions')
+      viewModel: require('./viewmodels/app/investments/holdings')
     }
   }
 });

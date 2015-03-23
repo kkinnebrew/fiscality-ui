@@ -689,3 +689,17 @@ ul {
     }
 
 }
+
+/* holdings rows */
+
+.holdings {
+    min-height: 600px;
+    width: 100%;
+}
+
+.holdings-row {
+    color: #333;
+    border-bottom: 1px solid #CCC;
+    height: 60px;
+    width: 100%;
+}
