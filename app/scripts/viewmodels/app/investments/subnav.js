@@ -1,4 +1,4 @@
-var transactionsAPI = require('../../../services/transactions.coffee');
+var investmentsAPI = require('../../../services/investments');
 var ViewModel = require('../../../common/viewmodel');
 var _ = require('underscore');
 
@@ -8,13 +8,13 @@ var SubNavViewModel = ViewModel.extend({
 
     var that = this;
 
-    this.accounts = [];
-    this.accountId = params.accountId || null;
+    this.portfolios = [];
+    this.portfolioId = params.portfolioId || null;
 
     this.fire('prefresh');
 
-    transactionsAPI.accounts().then(function(data) {
-      that.accounts = data;
+    investmentsAPI.portfolios().then(function(data) {
+      that.portfolios = data;
       that.refresh();
     }, function() {
       console.log('Error');

@@ -1,5 +1,5 @@
 var ViewModel = require('../../common/viewmodel');
-var auth = require('../../services/auth');
+var auth = require('../../services/auth.coffee');
 
 var ResetViewModel = ViewModel.extend({
 
