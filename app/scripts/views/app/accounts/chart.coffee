@@ -20,7 +20,7 @@ class ChartView extends View
 
     that = this;
 
-    that.$el.on 'click', '.range-picker-item', =>
+    that.$el.on 'click', '.range-picker-item', ->
       that.$el.find('.range-picker-item').removeClass('active')
       $(this).addClass('active');
 
