@@ -81,7 +81,7 @@ router.register('app.accounts', {
   views: {
     'subnav': {
       template: require('../templates/app/accounts/subnav.hbs'),
-      view: require('./views/app/accounts/subnav'),
+      view: require('./views/app/accounts/subnav.coffee'),
       viewModel: require('./viewmodels/app/accounts/subnav')
     },
     'content': {
@@ -94,7 +94,7 @@ router.register('app.accounts', {
     },
     'transactions@content': {
       template: require('../templates/app/accounts/transactions.hbs'),
-      view: require('./views/app/accounts/transactions'),
+      view: require('./views/app/accounts/transactions.coffee'),
       viewModel: require('./viewmodels/app/accounts/transactions')
     }
   }
