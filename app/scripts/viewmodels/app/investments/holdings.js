@@ -1,13 +1,13 @@
-var investmentsAPI = require('../../../services/investments');
+var investmentsAPI = require('../../../services/investments.coffee');
 var ViewModel = require('../../../common/viewmodel');
 var _ = require('underscore');
 
-var PositionsViewModel = ViewModel.extend({
+var HoldingsViewModel = ViewModel.extend({
 
   initialize: function(params) {
 
     this.portfolioId = params.portfolioId || null;
-    this.positions = [];
+    this.holdings = [];
 
     this._super();
 
@@ -21,9 +21,14 @@ var PositionsViewModel = ViewModel.extend({
 
     if (this.portfolioId) {
 
-      investmentsAPI.positions(this.portfolioId).then(function (data) {
+      investmentsAPI.holdings(this.portfolioId).then(function (data) {
 
-        that.positions = data;
+        that.holdings = _.sortBy(_.filter(data, function(holding) {
+          return holding.marketValue !== 0 && holding.marketValue;
+        }), function(holding) {
+          return holding.security.symbol;
+
+        });
 
         ViewModel.prototype.refresh.call(that);
 
@@ -33,7 +38,7 @@ var PositionsViewModel = ViewModel.extend({
 
     } else {
 
-      this.positions = [];
+      this.holdings = [];
 
       ViewModel.prototype.refresh.call(that);
 
@@ -43,4 +48,4 @@ var PositionsViewModel = ViewModel.extend({
 
 });
 
-module.exports = PositionsViewModel;
+module.exports = HoldingsViewModel;

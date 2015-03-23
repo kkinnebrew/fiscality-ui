@@ -1,4 +1,4 @@
-var investmentsAPI = require('../../../services/investments');
+var investmentsAPI = require('../../../services/investments.coffee');
 var ViewModel = require('../../../common/viewmodel');
 var _ = require('underscore');
 
