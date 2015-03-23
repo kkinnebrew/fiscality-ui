@@ -11,7 +11,9 @@ PROGRESS_CONFIG =
 
 class ChartView extends View
 
-  setup: ->
+  constructor: ->
+
+    super
 
     @viewModel.on('prefresh', @startLoading)
     @viewModel.on('refresh', @stopLoading)

@@ -3,7 +3,9 @@ $ = require('jquery')
 
 class TransactionsView extends View
 
-  load: ->
+  constructor: ->
+
+    super
 
     @viewModel.on('prefresh', @startLoading)
     @viewModel.on('refresh', @stopLoading)
@@ -23,7 +25,6 @@ class TransactionsView extends View
       $(this).closest('.transaction-row').addClass('expand')
     )
 
-
   unbind: ->
 
     @$el.off('click', '.collapse-btn')
@@ -35,7 +36,7 @@ class TransactionsView extends View
     if @loading
       return
 
-    @loading = true;
+    @loading = true
 
     @$el.css('opacity', 0.5)
 
@@ -50,4 +51,4 @@ class TransactionsView extends View
     @loading = false
 
 
-module.exports = TransactionsView;
+module.exports = TransactionsView
