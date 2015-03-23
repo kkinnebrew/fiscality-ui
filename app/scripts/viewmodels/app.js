@@ -1,5 +1,5 @@
 var ViewModel = require('../common/viewmodel');
-var auth = require('../services/auth');
+var auth = require('../services/auth.coffee');
 
 var AppViewModel = ViewModel.extend({
 
@@ -17,6 +17,7 @@ var AppViewModel = ViewModel.extend({
       window.App.goto('home.login');
     }, function() {
       console.error('Error logging out');
+      window.App.goto('home.login');
     })
 
   }

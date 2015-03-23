@@ -1,4 +1,4 @@
-var transactionsAPI = require('../../../services/transactions');
+var transactionsAPI = require('../../../services/transactions.coffee');
 var ViewModel = require('../../../common/viewmodel');
 var _ = require('underscore');
 

@@ -196,7 +196,7 @@ ul {
 
 }
 
-.sub-nav-item:hover {
+.sub-nav-item:hover, .sub-nav-item.active {
     background-color: #233542;
 }
 

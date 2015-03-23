@@ -6,6 +6,7 @@
 
 var $ = require('jquery');
 var Router = require('./common/router');
+var cache = require('./common/cache');
 var HandlebarsCompiler = require('hbsfy/runtime');
 window.jQuery = $;
 require('jquery-circle-progress');
@@ -68,7 +69,7 @@ router.register('app', {
 router.register('app.accounts', {
   url: '/app/accounts/:accountId',
   defaultParams: function() {
-    var accountId = localStorage.getItem('accountId');
+    var accountId = cache.getPersistentItem('accountId');
     if (accountId) {
       return {
         'accountId': accountId
@@ -100,13 +101,26 @@ router.register('app.accounts', {
 });
 
 router.register('app.investments', {
+  url: '/app/investments/:portfolioId',
+  defaultParams: function() {
+    var portfolioId = cache.getPersistentItem('portfolioId');
+    if (portfolioId) {
+      return {
+        'portfolioId': portfolioId
+      }
+    } else {
+      return null;
+    }
+  },
   views: {
     'subnav': {
       template: require('../templates/app/investments/subnav.hbs'),
-      view: require('./views/app/investments/subnav')
+      view: require('./views/app/investments/subnav'),
+      viewModel: require('./viewmodels/app/investments/subnav')
     },
     'content': {
-      template: require('../templates/app/investments/content.hbs')
+      template: require('../templates/app/investments/content.hbs'),
+      viewModel: require('./viewmodels/app/investments/positions')
     }
   }
 });

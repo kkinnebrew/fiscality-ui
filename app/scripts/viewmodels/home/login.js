@@ -1,11 +1,9 @@
 var ViewModel = require('../../common/viewmodel');
-var auth = require('../../services/auth');
+var auth = require('../../services/auth.coffee');
 
 var LoginViewModel = ViewModel.extend({
 
   login: function(email, password) {
-
-    console.log('logging in', email, password);
 
     if (!email || !password) {
       return console.warn('Invalid credentials');

@@ -1,7 +1,9 @@
-var transactionsAPI = require('../../../services/transactions');
-
-var ViewModel = require('../../../common/viewmodel');
+var $ = require('jquery');
 var _ = require('underscore');
+
+var transactionsAPI = require('../../../services/transactions.coffee');
+var ViewModel = require('../../../common/viewmodel');
+var cache = require('../../../common/cache');
 
 var ChartViewModel = ViewModel.extend({
 
@@ -23,23 +25,24 @@ var ChartViewModel = ViewModel.extend({
 
     if (this.accountId) {
 
-      localStorage.setItem('accountId', this.accountId);
+      var accountRequest = transactionsAPI.account(this.accountId);
+      var balanceRequest = transactionsAPI.balance(this.accountId);
 
-      transactionsAPI.account(this.accountId).then(function(account) {
+      $.when(accountRequest, balanceRequest).then(function(account, balance) {
 
-        transactionsAPI.balance(that.accountId).then(function(balance) {
+        cache.setPersistentItem('accountId', that.accountId);
 
-          that.account = account;
-          that.balance = balance || 0;
+        that.account = account;
+        that.balance = balance || 0;
 
-          ViewModel.prototype.refresh.call(that);
+        ViewModel.prototype.refresh.call(that);
 
-        }, function() {
-          console.log('Error');
-        });
+      }, function() {
 
-      }, function () {
-        console.log('Error');
+        console.log('Error loading account');
+
+        ViewModel.prototype.refresh.call(that);
+
       });
 
     } else {
