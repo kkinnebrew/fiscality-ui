@@ -1,12 +1,14 @@
 var investmentsAPI = require('../../../services/investments.coffee');
 var ViewModel = require('../../../common/viewmodel');
 var _ = require('underscore');
+var $ = require('jquery');
 
 var HoldingsViewModel = ViewModel.extend({
 
   initialize: function(params) {
 
     this.portfolioId = params.portfolioId || null;
+    this.portfolio = null;
     this.holdings = [];
 
     this._super();
@@ -21,7 +23,13 @@ var HoldingsViewModel = ViewModel.extend({
 
     if (this.portfolioId) {
 
-      investmentsAPI.holdings(this.portfolioId).then(function (data) {
+      var portfolioRequest = investmentsAPI.portfolio(this.portfolioId);
+
+      var holdingsRequest = investmentsAPI.holdings(this.portfolioId);
+
+      $.when(portfolioRequest, holdingsRequest).then(function (portfolio, data) {
+
+        that.portfolio = portfolio;
 
         that.holdings = _.sortBy(_.filter(data, function(holding) {
           return holding.marketValue !== 0 && holding.marketValue;

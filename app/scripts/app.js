@@ -24,6 +24,11 @@ HandlebarsCompiler.registerHelper('currency', function(d, sign) {
   return d >= 0 ? (sign + numberWithCommas(d.toFixed(2))) : ('-' + sign + numberWithCommas(Math.abs(d).toFixed(2)));
 });
 
+HandlebarsCompiler.registerHelper('percentage', function(d) {
+  if (d === undefined || d === null) return '';
+  return (d >= 0 ? (numberWithCommas(d.toFixed(2))) : ('-' + numberWithCommas(Math.abs(d).toFixed(2)))) + '%';
+});
+
 HandlebarsCompiler.registerHelper('dateFormat', function(d, f) {
   if (d === undefined || d === null) return '';
   return Date.parse(d).toString(f);

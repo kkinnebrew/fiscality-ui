@@ -1,6 +1,6 @@
 var cache = {};
 
-module.exports = window.cache = {
+module.exports = {
 
   hasPersistentItem: function(key) {
 
