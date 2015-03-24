@@ -1,17 +1,47 @@
-<h2 style="color: #F00">My Portfolio {{portfolioId}}</h2>
+<div id="portfolio-chart">
 
-<div>
+    <div class="portfolio-info">
+        <h2>{{portfolio.portfolioName}}</h2>
+        <div class="balance"></div>
+    </div>
+
+    <!--<ul class="range-picker">-->
+        <!--<li class="range-picker-item">1W</li>-->
+        <!--<li class="range-picker-item">2W</li>-->
+        <!--<li class="range-picker-item active">1M</li>-->
+        <!--<li class="range-picker-item">3M</li>-->
+        <!--<li class="range-picker-item">1Y</li>-->
+        <!--<li class="range-picker-item">2Y</li>-->
+        <!--<li class="range-picker-item">5Y</li>-->
+        <!--<li class="range-picker-item">All</li>-->
+    <!--</ul>-->
+
+    <div class="chart-settings-button"></div>
+
+    <div class="transaction-header">
+        <div class="transaction-header-item column-left column-first column-sm">Symbol</div>
+        <div class="transaction-header-item column-left column-lg active">Name</div>
+        <div class="transaction-header-item column-right column-sm">Gain/Loss</div>
+        <div class="transaction-header-item column-right column-sm">Market Value</div>
+        <div class="transaction-header-item column-right column-sm">Quantity</div>
+        <div class="transaction-header-item column-right column-xsm">%</div>
+        <div class="transaction-header-item column-right column-sm">Day Change</div>
+    </div>
+
+</div>
+
+<div id="holdings">
 
     {{#each holdings}}
 
     <div class="holdings-row">
-        <div class="holdings-column column-xsm column-left">{{security.symbol}}</div>
-        <div class="holdings-column column-md column-left">{{security.name}}</div>
-        <div class="holdings-column column-sm column-left">{{currency dayChange}}</div>
-        <div class="holdings-column column-sm column-left">{{dayPercentageChange}}%</div>
-        <div class="holdings-column column-sm column-left">{{unrealizedQuantity}}</div>
-        <div class="holdings-column column-sm column-left">{{currency marketValue}}</div>
-        <div class="holdings-column column-sm column-left">{{currency unrealizedGainLoss}}</div>
+        <div class="holdings-column column-sm column-left column-first">{{security.symbol}}</div>
+        <div class="holdings-column column-lg column-left">{{security.name}}</div>
+        <div class="holdings-column column-sm column-right">{{currency unrealizedGainLoss}}</div>
+        <div class="holdings-column column-sm column-right">{{currency marketValue}}</div>
+        <div class="holdings-column column-sm column-right">{{unrealizedQuantity}}</div>
+        <div class="holdings-column column-xsm column-right">{{percentage dayPercentageChange}}</div>
+        <div class="holdings-column column-sm column-right">{{currency dayChange}}</div>
     </div>
 
     {{/each}}

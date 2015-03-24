@@ -1255,6 +1255,12 @@ ul {
 .column-lg {
     height: 100%;
     min-height: 1px;
+    width: 280px;
+}
+
+.column-xlg {
+    height: 100%;
+    min-height: 1px;
     width: 400px;
 }
 
@@ -1262,9 +1268,13 @@ ul {
     float: left;
 }
 
+.column-first {
+    padding-left: 16px;
+}
+
 .column-right {
     float: right;
-    padding-right: 25px;
+    padding-right: 20px;
     text-align: right;
 }
 
@@ -1422,7 +1432,56 @@ ul {
 
 }
 
+/* portfolio chart */
+
+#portfolio-chart {
+    background: rgba(59,152,214,1);
+    background: -moz-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: linear-gradient(135deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
+    color: #FFF;
+    font-weight: 300;
+    height: 118px;
+    position: relative;
+    width: 100%;
+}
+
+.portfolio-info {
+    left: 28px;
+    position: absolute;
+    top: 24px;
+}
+
+.portfolio-info h2 {
+    font-size: 24px;
+    font-weight: 200;
+    line-height: 22px;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.portfolio-info .balance {
+    font-size: 24px;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+}
+
 /* holdings rows */
+
+#holdings {
+    background: #FFF;
+    color: #000;
+    font-weight: 300;
+    min-height: 600px;
+}
+
+#holdings h2 {
+    font-weight: inherit;
+}
 
 .holdings {
     min-height: 600px;
@@ -1432,7 +1491,9 @@ ul {
 .holdings-row {
     color: #333;
     border-bottom: 1px solid #CCC;
-    height: 60px;
+    font-size: 14px;
+    padding: 10px 0;
+    overflow: auto;
     width: 100%;
 }
 
