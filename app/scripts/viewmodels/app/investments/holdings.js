@@ -9,6 +9,7 @@ var HoldingsViewModel = ViewModel.extend({
 
     this.portfolioId = params.portfolioId || null;
     this.portfolio = null;
+    this.balance = null;
     this.holdings = [];
 
     this._super();
@@ -25,11 +26,17 @@ var HoldingsViewModel = ViewModel.extend({
 
       var portfolioRequest = investmentsAPI.portfolio(this.portfolioId);
 
+      var balanceRequest = investmentsAPI.balance(this.portfolioId);
+
       var holdingsRequest = investmentsAPI.holdings(this.portfolioId);
 
-      $.when(portfolioRequest, holdingsRequest).then(function (portfolio, data) {
+      $.when(portfolioRequest, balanceRequest, holdingsRequest).then(function (portfolio, balance, data) {
 
         that.portfolio = portfolio;
+
+        that.balance = _.reduce(data, function(memo, item) {
+          return memo + item.marketValue;
+        }, 0);
 
         that.holdings = _.sortBy(_.filter(data, function(holding) {
           return holding.marketValue !== 0 && holding.marketValue;
