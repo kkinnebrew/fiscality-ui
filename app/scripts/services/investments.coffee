@@ -21,6 +21,9 @@ class InvestmentsService extends Service
   portfolio: (portfolioId) ->
     return @cacheGet('/api/portfolios/' + portfolioId)
 
+  balance: (portfolioId) ->
+    return @cacheGet('/api/portfolios/' + portfolioId + '/balance')
+
   holdings: (portfolioId) ->
     return @cacheGet('/api/portfolios/' + portfolioId + '/holdings')
 
