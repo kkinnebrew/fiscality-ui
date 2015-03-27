@@ -21,6 +21,7 @@ ul {
 /* menu */
 
 #menu {
+    background: #262626;
     color: #FFF;
     height: 100%;
     position: absolute;
@@ -42,9 +43,9 @@ ul {
 }
 
 #header {
-    background: #274E69;
     color: #FFF;
     height: 70px;
+    margin: 10px 0;
     overflow: hidden;
     width: 100%;
 }
@@ -79,7 +80,7 @@ ul {
     background: url(../images/logout-icon.png) center center no-repeat;
     cursor: pointer;
     height: 18px;
-    top: 26px;
+    top: 36px;
     right: 16px;
     position: absolute;
     width: 18px;
@@ -223,19 +224,19 @@ ul {
 /* nav width adjustment */
 
 #app.accounts #menu {
-    width: 380px;
+    width: 190px;
 }
 
 #app.accounts #content {
-    left: 380px;
+    left: 190px;
 }
 
 #app.investments #menu {
-    width: 300px;
+    width: 190px;
 }
 
 #app.investments #content {
-    left: 300px;
+    left: 190px;
 }
 
 /* accounts page */
