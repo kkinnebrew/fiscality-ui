@@ -20,8 +20,6 @@ class ChartView extends View
 
   bind: ->
 
-    console.log('bind')
-
     that = this;
 
     @$el.on 'click', '.range-picker-item', ->
@@ -70,13 +68,9 @@ class ChartView extends View
     @$el.find('.account-selector').addClass('visible');
     @$el.find('.chart-container').addClass('blur');
 
-    console.log('show')
-
   hideSelector: =>
 
     @$el.find('.account-selector').removeClass('visible');
     @$el.find('.chart-container').removeClass('blur');
-
-    console.log('hide')
 
 module.exports = ChartView
