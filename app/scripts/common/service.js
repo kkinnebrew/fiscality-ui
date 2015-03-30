@@ -61,7 +61,7 @@ Service.prototype.ajax = function(method, url, data, cache) {
       deferred.resolve(result);
     },
     error: function(xhr) {
-      that.onError(requestUrl, xhr.status);
+      that.onError(xhr.status, requestUrl);
       deferred.reject();
     }
   });
