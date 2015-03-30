@@ -84,11 +84,6 @@ router.register('app.accounts', {
     }
   },
   views: {
-    'subnav': {
-      template: require('../templates/app/accounts/subnav.hbs'),
-      view: require('./views/app/accounts/subnav.coffee'),
-      viewModel: require('./viewmodels/app/accounts/subnav')
-    },
     'content': {
       template: require('../templates/app/accounts/content.hbs')
     },
@@ -118,11 +113,6 @@ router.register('app.investments', {
     }
   },
   views: {
-    'subnav': {
-      template: require('../templates/app/investments/subnav.hbs'),
-      view: require('./views/app/investments/subnav'),
-      viewModel: require('./viewmodels/app/investments/subnav')
-    },
     'content': {
       template: require('../templates/app/investments/content.hbs'),
       viewModel: require('./viewmodels/app/investments/holdings')

@@ -1,39 +1,97 @@
-{{#if accountId}}
+<div class="account-selector">
 
-<div class="account-info">
-    <h2>{{account.accountName}}</h2>
-    <div class="balance">{{currency balance '$'}}</div>
-</div>
+    <div class="account-selector-title">Accounts</div>
 
-<ul class="range-picker">
-    <li class="range-picker-item">1W</li>
-    <li class="range-picker-item">2W</li>
-    <li class="range-picker-item active">1M</li>
-    <li class="range-picker-item">3M</li>
-    <li class="range-picker-item">1Y</li>
-    <li class="range-picker-item">2Y</li>
-    <li class="range-picker-item">5Y</li>
-    <li class="range-picker-item">All</li>
-</ul>
+    <div class="account-lists">
 
-<div class="chart-settings-button"></div>
+        <ul class="account-list">
+            <li class="account-list-header">Banking</li>
+            {{#each accounts}}
+                <li data-link="/app/accounts/{{accountId}}" class="account-list-item"><span class="label">{{accountName}}</span></li>
+            {{/each}}
+            <li class="account-list-item"><span class="label">Bank of America Savings</span></li>
+            <li class="account-list-item"><span class="label">Schwab Investor Checking</span></li>
+            <li class="account-list-item"><span class="label">Schwab High Yield Savings</span></li>
+            <li class="account-list-item"><span class="label">Capital One 360 Savings</span></li>
+        </ul>
 
-<div class="transaction-header">
-    <div class="transaction-header-item column-left column-xsm">
-        <div class="reconciled-header-button"></div>
+        <ul class="account-list">
+            <li class="account-list-header">Credit & Loan</li>
+            <li class="account-list-item"><span data-link class="label">American Express Blue Cash</span></li>
+            <li class="account-list-item"><span class="label">Citi Double Cash</span></li>
+            <li class="account-list-item"><span class="label">Citi AAdvantage Signature</span></li>
+            <li class="account-list-item"><span class="label">Chase Freedom Rewards</span></li>
+            <li class="account-list-item"><span class="label">Chase Ink Premier</span></li>
+            <li class="account-list-item"><span class="label">Bank of America World Points</span></li>
+        </ul>
+
+        <ul class="account-list">
+            <li class="account-list-header">Investment</li>
+            <li class="account-list-item"><span class="label">Bank of America Brokerage</span></li>
+            <li class="account-list-item"><span class="label">Bank of America Roth IRA</span></li>
+            <li class="account-list-item"><span class="label">Schwab One Brokerage</span></li>
+            <li class="account-list-item"><span class="label">Principal Financial</span></li>
+        </ul>
+
     </div>
-    <div class="transaction-header-item column-left column-md active">Date</div>
-    <div class="transaction-header-item column-left column-xlg">Description</div>
-    <div class="transaction-header-item column-right column-sm">Balance</div>
-    <div class="transaction-header-item column-right column-sm">Amount</div>
+
 </div>
 
-<div class="progress"></div>
+<div class="chart-container">
 
-{{/if}}
+    <div class="chart-header">
 
-{{#unless accountId}}
+        <div class="selector-btn"></div>
 
-    <div class="no-account-label">No Accounts</div>
+        <div class="chart-header-info">
 
-{{/unless}}
+            <h2 class="account-title">{{account.accountName}}</h2>
+            <div class="account-subtitle">Last Updated May 8, 2015</div>
+
+        </div>
+
+        <div class="options-btn"></div>
+
+        <div class="chart-balance">
+            <span class="currency-prefix">$</span>
+            <span class="currency-value">{{currency balance}}</span>
+        </div>
+
+    </div>
+
+    <div class="chart-content">
+
+        <div class="date-selectors">
+            <div class="date-selector">January 1, 2015</div>
+            <div class="date-separator"></div>
+            <div class="date-selector">March 31, 2015</div>
+        </div>
+
+        <ul class="range-picker">
+            <li class="range-picker-item">1W</li>
+            <li class="range-picker-item">2W</li>
+            <li class="range-picker-item active">1M</li>
+            <li class="range-picker-item">3M</li>
+            <li class="range-picker-item">1Y</li>
+            <li class="range-picker-item">2Y</li>
+            <li class="range-picker-item">5Y</li>
+            <li class="range-picker-item">All</li>
+        </ul>
+
+    </div>
+
+    <div class="loading-indicator hidden">Loading Chart...</div>
+
+    <div class="transaction-header">
+        <div class="transaction-header-item column-left column-xsm">
+            <div class="reconciled-header-button"></div>
+        </div>
+        <div class="transaction-header-item column-left column-md active">Date</div>
+        <div class="transaction-header-item column-left column-xlg">Description</div>
+        <div class="transaction-header-item column-right column-sm">Balance</div>
+        <div class="transaction-header-item column-right column-sm">Amount</div>
+    </div>
+
+    <div class="progress"></div>
+
+</div>
