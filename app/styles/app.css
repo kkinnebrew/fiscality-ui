@@ -21,6 +21,7 @@ ul {
 /* menu */
 
 #menu {
+    background: #262626;
     color: #FFF;
     height: 100%;
     position: absolute;
@@ -42,20 +43,16 @@ ul {
 }
 
 #header {
-    background: #274E69;
     color: #FFF;
     height: 70px;
+    margin: 10px 0;
     overflow: hidden;
     width: 100%;
 }
 
 #nav {
     background: #262626;
-    bottom: 0;
-    margin: 0;
-    position: absolute;
-    top: 70px;
-    width: 70px;
+    margin: 30px 0 0 0;
 }
 
 #subnav {
@@ -71,7 +68,7 @@ ul {
 #app-logo {
     background: url(../images/app-logo.png) center center no-repeat;
     height: 29px;
-    margin: 22px;
+    margin: 22px 20px;
     width: 97px;
 }
 
@@ -79,8 +76,8 @@ ul {
     background: url(../images/logout-icon.png) center center no-repeat;
     cursor: pointer;
     height: 18px;
-    top: 26px;
-    right: 16px;
+    top: 36px;
+    right: 20px;
     position: absolute;
     width: 18px;
     -webkit-transition: opacity ease-out 100ms;
@@ -108,60 +105,162 @@ ul {
 
 }
 
+#statistics {
+    border-top: 1px solid #343434;
+    margin: 0 20px;
+    padding: 12px 0;
+    overflow: auto;
+}
+
+#statistics .balance {
+    float: left;
+}
+
+.balance .stat-value {
+    color: #FFF;
+    font-family: "Century Gothic";
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.balance .stat-label {
+    color: rgba(255, 255, 255, .4);
+    font-family: "proxima-nova";
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#statistics .change {
+    float: right;
+}
+
+.change .stat-value {
+    color: #9BBF5C;
+    font-family: "Century Gothic";
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-align: right;
+}
+
+.change .stat-label {
+    color: rgba(255, 255, 255, .4);
+    font-family: "proxima-nova";
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
 /* navigation */
 
 .nav-list-item {
-    background: url(../images/accounts-icon.png) center center no-repeat;
+    background: url(../images/accounts-icon.png) 18px center no-repeat;
+    border-left: 3px solid transparent;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
     cursor: pointer;
-    height: 68px;
-    margin: 1px;
-    width: 68px;
+    letter-spacing: 1.5px;
+    margin: 1px 0;
+    padding: 12px 0 12px 48px;
+    text-transform: uppercase;
     -webkit-transition: all ease-in-out 150ms;
 }
 
 .nav-list-item.accounts {
-    background: url(../images/accounts-icon.png) center center no-repeat;
+    background-image: url(../images/accounts-icon.png);
 }
 
 .nav-list-item.investments {
-    background: url(../images/investments-icon.png) center center no-repeat;
+    background-image: url(../images/investments-icon.png);
+}
+
+.nav-list-item.spending {
+    background-image: url(../images/spending-icon.png);
+}
+
+.nav-list-item.taxes {
+    background-image: url(../images/taxes-icon.png);
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
     .nav-list-item {
         background-image: url(../images/accounts-icon@2x.png);
-        -webkit-background-size: 19px 21px;
-        -moz-background-size: 19px 21px;
-        background-size: 19px 21px;
+        -webkit-background-size: 12px 14px;
+        -moz-background-size: 12px 14px;
+        background-size: 12px 14px;
     }
-
 
     .nav-list-item.accounts {
         background-image: url(../images/accounts-icon@2x.png);
-        -webkit-background-size: 19px 21px;
-        -moz-background-size: 19px 21px;
-        background-size: 19px 21px;
+        -webkit-background-size: 12px 14px;
+        -moz-background-size: 12px 14px;
+        background-size: 12px 14px;
     }
 
     .nav-list-item.investments {
         background-image: url(../images/investments-icon@2x.png);
-        -webkit-background-size: 19px 21px;
-        -moz-background-size: 19px 21px;
-        background-size: 19px 21px;
+        -webkit-background-size: 15px 15px;
+        -moz-background-size: 15px 15px;
+        background-size: 15px 15px;
+    }
+
+    .nav-list-item.spending {
+        background-image: url(../images/spending-icon@2x.png);
+        -webkit-background-size: 13px 15px;
+        -moz-background-size: 13px 15px;
+        background-size: 13px 15px;
+    }
+
+    .nav-list-item.taxes {
+        background-image: url(../images/taxes-icon@2x.png);
+        -webkit-background-size: 14px 13px;
+        -moz-background-size: 14px 13px;
+        background-size: 14px 13px;
     }
 
 }
 
 .nav-list-item.active {
-    background-color: #25353E;
-    width: 68px;
+    background-color: #2E2E2E;
+    border-left-color: #53B7FB;
     -webkit-transition: all ease-in-out 150ms;
 }
 
 .nav-list-item:hover {
     background-color: #303030;
     -webkit-transition: all ease-in-out 100ms;
+}
+
+/* account */
+
+#account {
+    background: url(../images/settings-arrow.png)right center no-repeat;
+    bottom: 0;
+    border-top: 1px solid #343434;
+    cursor: pointer;
+    left: 20px;
+    padding: 15px 0;
+    position: absolute;
+    right: 20px;
+}
+
+#account .account-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#account .account-name {
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
 /* subnav */
@@ -223,19 +322,19 @@ ul {
 /* nav width adjustment */
 
 #app.accounts #menu {
-    width: 380px;
+    width: 190px;
 }
 
 #app.accounts #content {
-    left: 380px;
+    left: 190px;
 }
 
 #app.investments #menu {
-    width: 300px;
+    width: 190px;
 }
 
 #app.investments #content {
-    left: 300px;
+    left: 190px;
 }
 
 /* accounts page */
