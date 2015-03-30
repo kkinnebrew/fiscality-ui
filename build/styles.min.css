@@ -757,6 +757,7 @@ ul {
     color: #FFF;
     height: 100%;
     position: absolute;
+    width: 190px;
     -webkit-user-select: none;
     user-select: none;
     -webkit-transition: all ease-out 150ms;
@@ -766,7 +767,7 @@ ul {
 #content {
     color: #FFF;
     height: 100%;
-    left: 300px;
+    left: 190px;
     overflow-y: scroll;
     position: absolute;
     right: 0;
@@ -895,7 +896,7 @@ ul {
     cursor: pointer;
     letter-spacing: 1.5px;
     margin: 1px 0;
-    padding: 12px 0 12px 48px;
+    padding: 12px 0 12px 45px;
     text-transform: uppercase;
     -webkit-transition: all ease-in-out 150ms;
 }
@@ -995,79 +996,6 @@ ul {
     letter-spacing: 0.5px;
 }
 
-/* subnav */
-
-.sub-nav-header {
-    background: #23333F;
-    color: #91999F;
-    font-size: 11px;
-    font-weight: 700;
-    height: 14px;
-    padding: 10px 0 8px 12px;
-    text-transform: uppercase;
-    -webkit-font-smoothing: antialiased;
-}
-
-.sub-nav-item {
-    background: #283947 url(../images/line-arrow.png) center right no-repeat;
-    border-bottom: 1px solid #324350;
-    cursor: pointer;
-    height: 60px;
-    -webkit-transition: all ease-in-out 100ms;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-
-    .sub-nav-item {
-        background-image: url(../images/line-arrow@2x.png);
-        -webkit-background-size: 24px 15px;
-        -moz-background-size: 24px 15px;
-        background-size: 24px 15px;
-    }
-
-}
-
-.sub-nav-item:hover, .sub-nav-item.active {
-    background-color: #233542;
-}
-
-.sub-nav-item .sub-nav-title {
-    color: #E8E8E8;
-    font-size: 13px;
-    font-weight: 600;
-    overflow: hidden;
-    padding: 15px 30px 0 18px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -webkit-font-smoothing: antialiased;
-}
-
-.sub-nav-item .sub-nav-subtitle {
-    color: #B7B7B7;
-    font-size: 9px;
-    font-weight: 600;
-    padding: 1px 0 0 18px;
-    text-transform: uppercase;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* nav width adjustment */
-
-#app.accounts #menu {
-    width: 190px;
-}
-
-#app.accounts #content {
-    left: 190px;
-}
-
-#app.investments #menu {
-    width: 190px;
-}
-
-#app.investments #content {
-    left: 190px;
-}
 
 /* accounts page */
 
@@ -1086,6 +1014,248 @@ ul {
     width: 100%;
 }
 
+.chart-container {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-container.blur {
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+.chart-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 90px;
+    left: 36px;
+    overflow: auto;
+    position: absolute;
+    right: 36px;
+    top: 0;
+}
+
+.chart-header-info {
+    float: left;
+    margin-top: 22px;
+}
+
+.selector-btn {
+    background: url(../images/accounts-selector-btn.png) center center no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 18px;
+    margin-right: 32px;
+    margin-top: 34px;
+    opacity: 1;
+    width: 18px;
+    -webkit-transition: all ease-in-out 100ms;
+}
+
+.selector-btn:hover {
+    opacity: 0.7;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .selector-btn {
+        background-image: url(../images/accounts-selector-btn@2x.png);
+        -webkit-background-size: 18px 9px;
+        -moz-background-size: 18px 9px;
+        background-size: 18px 9px;
+    }
+}
+
+.account-title {
+    font-family: "proxima-nova", sans-serif;
+    font-size: 21px;
+    font-weight: 200;
+    letter-spacing: 0.5px;
+}
+
+.account-subtitle {
+    color: #9ACAE9;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.options-btn {
+    background: url(../images/options-btn.png) center center no-repeat;
+    cursor: pointer;
+    float: right;
+    height: 17px;
+    margin-top: 37px;
+    opacity: 1;
+    width: 20px;
+    -webkit-transition: all ease-in-out 100ms;
+}
+
+.options-btn:hover {
+    opacity: 0.7;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .options-btn {
+        background-image: url(../images/options-btn@2x.png);
+        -webkit-background-size: 20px 17px;
+        -moz-background-size: 20px 17px;
+        background-size: 20px 17px;;
+    }
+}
+
+.chart-balance {
+    float: right;
+    margin-top: 30px;
+    margin-right: 32px;
+}
+
+.currency-prefix {
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: 23px;
+    vertical-align: top;
+}
+
+.currency-value {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+}
+
+.chart-content {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+}
+
+.date-selectors {
+    left: 36px;
+    overflow: auto;
+    position: absolute;
+    top: 12px;
+}
+
+.date-selector {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    float: left;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    padding: 4px 16px 2px 16px;
+    text-transform: uppercase;
+    -webkit-transition: all ease-in-out 100ms;
+}
+
+.date-selector:hover {
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    color: #FFF;
+}
+
+.date-separator {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    float: left;
+    height: 4px;
+    margin: 8px;
+    width: 4px;
+}
+
+#accounts-chart .loading-indicator {
+    font-size: 21px;
+    font-weight: 300;
+    left: 50%;
+    margin-left: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 200px;
+}
+
+/* account selector */
+
+.account-selector {
+    visibility: hidden;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    -webkit-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+    transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+}
+
+.account-selector.visible {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.account-selector-title {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 24px;
+    font-weight: 200;
+    margin: 0 36px;
+    padding: 28px 0;
+}
+
+.account-lists {
+    margin: 18px 36px;
+    overflow: auto;
+}
+
+.account-list {
+    float: left;
+    margin-right: 64px;
+    margin-bottom: 16px;
+}
+
+.account-list-header {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.account-list-item {
+    cursor: pointer;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    opacity: 1;
+    padding-right: 30px;
+}
+
+.account-list-item:hover {
+    background: url(../images/account-arrow.png) right center no-repeat;
+}
+
+.account-list-item .label {
+    opacity: 1;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+.account-list-item:hover .label {
+    opacity: 0.6;
+}
+
+/* transactions */
+
 #transactions {
     background: #FFF;
     color: #000;
@@ -1097,36 +1267,14 @@ ul {
     font-weight: inherit;
 }
 
-/* account info */
-
-.account-info {
-    left: 28px;
-    position: absolute;
-    top: 24px;
-}
-
-.account-info h2 {
-    font-size: 24px;
-    font-weight: 200;
-    line-height: 22px;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
-}
-
-.account-info .balance {
-    font-size: 24px;
-    font-weight: 600;
-    -webkit-font-smoothing: antialiased;
-}
 
 /* range picker */
 
 .range-picker {
-    right: 72px;
-    top: 25px;
-    position: absolute;
     list-style: none;
+    position: absolute;
+    right: 36px;
+    top: 12px;
 }
 
 .range-picker-item {

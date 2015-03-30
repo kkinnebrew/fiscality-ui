@@ -46,7 +46,7 @@ Service.prototype.ajax = function(method, url, data, cache) {
 
   var requestUrl = (this.config.hasOwnProperty('baseUrl') ? this.config.baseUrl : '') + url;
 
-  console.log('Request: ' + requestUrl, 'Headers: ' + JSON.stringify(this.headers(url)));
+  //console.log('Request: ' + requestUrl, 'Headers: ' + JSON.stringify(this.headers(url)));
 
   $.ajax({
     type: method,

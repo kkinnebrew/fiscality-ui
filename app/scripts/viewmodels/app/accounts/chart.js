@@ -11,6 +11,7 @@ var ChartViewModel = ViewModel.extend({
 
     this.accountId = params.accountId || null;
     this.account = null;
+    this.accounts = [];
     this.balance = null;
 
     this._super();
@@ -25,13 +26,15 @@ var ChartViewModel = ViewModel.extend({
 
     if (this.accountId) {
 
+      var accountsRequest = transactionsAPI.accounts();
       var accountRequest = transactionsAPI.account(this.accountId);
       var balanceRequest = transactionsAPI.balance(this.accountId);
 
-      $.when(accountRequest, balanceRequest).then(function(account, balance) {
+      $.when(accountsRequest, accountRequest, balanceRequest).then(function(accounts, account, balance) {
 
         cache.setPersistentItem('accountId', that.accountId);
 
+        that.accounts = accounts;
         that.account = account;
         that.balance = balance || 0;
 

@@ -20,11 +20,25 @@ class ChartView extends View
 
   bind: ->
 
+    console.log('bind')
+
     that = this;
 
-    that.$el.on 'click', '.range-picker-item', ->
+    @$el.on 'click', '.range-picker-item', ->
       that.$el.find('.range-picker-item').removeClass('active')
       $(this).addClass('active');
+
+    @$el.on('click', '.account-selector', (e) -> e.stopPropagation())
+    @$el.on('click', '.selector-btn', that.showSelector)
+    @$el.on('click', '.account-list-item', that.hideSelector)
+    @$el.on('click', '.account-selector-title', that.hideSelector)
+
+  unbind: ->
+
+    @$el.off('click', '.account-selector')
+    @$el.off('click', '.selector-btn')
+    @$el.off('click', '.account-list-item')
+    @$el.off('click', '.account-selector-title')
 
   render: ->
 
@@ -51,5 +65,18 @@ class ChartView extends View
 
     @loading = false
 
+  showSelector: =>
+
+    @$el.find('.account-selector').addClass('visible');
+    @$el.find('.chart-container').addClass('blur');
+
+    console.log('show')
+
+  hideSelector: =>
+
+    @$el.find('.account-selector').removeClass('visible');
+    @$el.find('.chart-container').removeClass('blur');
+
+    console.log('hide')
 
 module.exports = ChartView
