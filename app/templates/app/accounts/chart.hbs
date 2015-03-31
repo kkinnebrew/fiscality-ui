@@ -1,47 +1,6 @@
-<div class="account-selector">
-
-    <div class="account-selector-title">Accounts</div>
-
-    <div class="account-lists">
-
-        <ul class="account-list">
-            <li class="account-list-header">Banking</li>
-            {{#each accounts}}
-                <li data-link="/app/accounts/{{accountId}}" class="account-list-item"><span class="label">{{accountName}}</span></li>
-            {{/each}}
-            <li class="account-list-item"><span class="label">Bank of America Savings</span></li>
-            <li class="account-list-item"><span class="label">Schwab Investor Checking</span></li>
-            <li class="account-list-item"><span class="label">Schwab High Yield Savings</span></li>
-            <li class="account-list-item"><span class="label">Capital One 360 Savings</span></li>
-        </ul>
-
-        <ul class="account-list">
-            <li class="account-list-header">Credit & Loan</li>
-            <li class="account-list-item"><span data-link class="label">American Express Blue Cash</span></li>
-            <li class="account-list-item"><span class="label">Citi Double Cash</span></li>
-            <li class="account-list-item"><span class="label">Citi AAdvantage Signature</span></li>
-            <li class="account-list-item"><span class="label">Chase Freedom Rewards</span></li>
-            <li class="account-list-item"><span class="label">Chase Ink Premier</span></li>
-            <li class="account-list-item"><span class="label">Bank of America World Points</span></li>
-        </ul>
-
-        <ul class="account-list">
-            <li class="account-list-header">Investment</li>
-            <li class="account-list-item"><span class="label">Bank of America Brokerage</span></li>
-            <li class="account-list-item"><span class="label">Bank of America Roth IRA</span></li>
-            <li class="account-list-item"><span class="label">Schwab One Brokerage</span></li>
-            <li class="account-list-item"><span class="label">Principal Financial</span></li>
-        </ul>
-
-    </div>
-
-</div>
-
 <div class="chart-container">
 
     <div class="chart-header">
-
-        <div class="selector-btn"></div>
 
         <div class="chart-header-info">
 
@@ -50,7 +9,7 @@
 
         </div>
 
-        <div class="options-btn"></div>
+        <div class="options-btn" data-link="/app/accounts"></div>
 
         <div class="chart-balance">
             <span class="currency-prefix">$</span>

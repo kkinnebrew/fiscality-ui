@@ -67,12 +67,17 @@ router.register('home.reset', {
 router.register('app', {
   redirect: '/app/accounts',
   template: require('../templates/app.hbs'),
-  view: require('./views/app.js'),
+  view: require('./views/app.coffee'),
   viewModel: require('./viewmodels/app')
 });
 
 router.register('app.accounts', {
-  url: '/app/accounts/:accountId',
+  template: require('../templates/app/accounts/accounts.hbs'),
+  viewModel: require('./viewmodels/app/accounts/accounts')
+});
+
+router.register('app.account', {
+  url: '/app/account/:accountId',
   defaultParams: function() {
     var accountId = cache.getPersistentItem('accountId');
     if (accountId) {
