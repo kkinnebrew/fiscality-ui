@@ -78,7 +78,15 @@ class Router
 
   listen: ->
 
+    $(window).on('hashchange', @render);
+
+    @render()
+
     Log.info('Listening for hash changes')
+
+  render: =>
+
+    Log.info('Rendering')
 
   renderState: (state) ->
 
