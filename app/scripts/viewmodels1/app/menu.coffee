@@ -8,8 +8,6 @@ class MenuViewModel extends ViewModel
 
     # make service calls
 
-    console.log(123, @on, this)
-
     @fire('refresh')
 
   setState: (state) ->

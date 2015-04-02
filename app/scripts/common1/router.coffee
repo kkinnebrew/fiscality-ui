@@ -161,10 +161,9 @@ class Router
       if !name.match(/@/)
 
         subnode = {}
-
         subnode.primary = true if conf.primary == true
-        subnode.viewmodel = new conf.viewmodel(params) if conf.viewmodel instanceof ViewModel
-        subnode.view = if conf.view instanceof View then new conf.view(conf.template) else new View(conf.template)
+        subnode.viewmodel = new conf.viewmodel(params) if typeof conf.viewmodel == 'function'
+        subnode.view = if typeof conf.view == 'function' then new conf.view(conf.template) else new View(conf.template)
 
         if (depth == 0)
           $el = @$root.find(if name and name != 'default' then '[ui-view="' + name + '"]' else '[ui-view]')
@@ -189,9 +188,8 @@ class Router
       if name.match(/@/)
 
         subnode = {}
-
-        subnode.viewmodel = new conf.viewmodel(params) if conf.viewmodel instanceof ViewModel
-        subnode.view = if conf.view instanceof View then new conf.view(conf.template) else new View(conf.template)
+        subnode.viewmodel = new conf.viewmodel(params) if typeof conf.viewmodel == 'function'
+        subnode.view = if typeof conf.view == 'function' then new conf.view(conf.template) else new View(conf.template)
 
         parts = name.split('@')
         target = parts[0]

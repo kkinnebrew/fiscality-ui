@@ -125,13 +125,11 @@ router.register('app.investments.allocation', {
       template: require('../templates1/app/investments/allocation.hbs')
 })
 
-# router.register('app.investments.activity')
-
-# router.register('app.investments.realized')
-
-# router.register('app.investments.allocation')
-
-# router.register('app.settings')
+router.register('app.settings', {
+  views:
+    'content':
+      template: require('../templates1/app/settings.hbs')
+})
 
 # run
 
