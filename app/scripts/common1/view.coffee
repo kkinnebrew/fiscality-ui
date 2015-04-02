@@ -44,5 +44,12 @@ class View
 
   destroy: ->
 
+    return if !@rendered
+
+    @$el.empty()
+
+    @$el = null
+
+    @rendered = false
 
 module.exports = View

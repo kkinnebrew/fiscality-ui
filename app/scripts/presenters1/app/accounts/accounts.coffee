@@ -6,7 +6,13 @@ class AccountsPresenter extends Presenter
 
     @accountId = params.accountId || null
 
-    @showOverlay if !@accountId
+  load: ->
+
+    @showOverlay() if !@accountId
+
+  update: ->
+
+    @showOverlay() if !@accountId
 
   bind: ->
 
@@ -29,7 +35,7 @@ class AccountsPresenter extends Presenter
 
   showOverlay: ->
 
-    @router.renderGlobal('accounts', @overlayViewModel)
+    @router.renderGlobal('accounts')
 
   hideOverlay: ->
 

@@ -71,15 +71,14 @@ router.register('app.accounts', {
       present: 'transactions'
       template: require('../templates1/app/accounts/transactions.hbs')
       viewmodel: require('./viewmodels1/app/accounts/transactions.coffee')
-    'overlay@global':
-      present: 'overlay'
+    'accounts@global':
+      present: 'accounts'
       template: require('../templates1/app/accounts/overlay.hbs')
       view: require('./views1/app/accounts/overlay.coffee')
       viewmodel: require('./viewmodels1/app/accounts/overlay.coffee')
 })
 
 router.register('app.investments', {
-  redirect: '/app/investments/portfolioId/positions'
   presenter: require('./presenters1/app/investments/investments.coffee')
   params: ['portfolioId']
   views:
@@ -88,8 +87,8 @@ router.register('app.investments', {
       present: 'investments'
       template: require('../templates1/app/investments.hbs')
       viewmodel: require('./viewmodels1/app/investments/investments.coffee')
-    'overlay@global':
-      present: 'overlay'
+    'portfolios@global':
+      present: 'portfolios'
       template: require('../templates1/app/investments/overlay.hbs')
       viewmodel: require('./viewmodels1/app/investments/overlay.coffee')
 })

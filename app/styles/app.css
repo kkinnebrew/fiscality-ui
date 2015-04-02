@@ -276,6 +276,17 @@ ul {
     letter-spacing: 0.5px;
 }
 
+/* overlays */
+
+#accounts-overlay, #portfolios-overlay {
+    background: #FFF;
+    position: absolute;
+    left: 190px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
 
 /* accounts page */
 

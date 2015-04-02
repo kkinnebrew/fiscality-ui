@@ -6,7 +6,9 @@ class MenuViewModel extends ViewModel
 
     super
 
-    @state = params.state || 'accounts'
+    hash = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/')
+
+    @state = hash[1]
 
     # make service calls
 

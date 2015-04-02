@@ -14,6 +14,10 @@ class Router
 
     @defaultState = null
 
+    @globals = {}
+
+    @state = null
+
   register: (name, conf) ->
 
     parts = name.split('.')
@@ -108,6 +112,12 @@ class Router
     depth = 0
     params = {}
 
+    _.each @globals, (global) ->
+      if global.$el
+        global.view.destroy()
+        global.$el.remove()
+        delete global.$el
+
     while parts.length
 
       part = parts.shift()
@@ -122,11 +132,20 @@ class Router
       if config.params
         params[param] = parts.shift() for param in config.params if config.params
 
-      if !@stack[depth] || @stack[depth].state != state
+      if !@stack[depth] or @stack[depth].state != state
 
         # render the state
 
         @renderState(state, config, depth, params)
+
+      else if @stack[depth] and @stack[depth].state == state
+
+        _.each @stack[depth].views, (node) ->
+          node.viewmodel.setParams(params) if node.viewmodel
+
+        @stack[depth].presenter.setParams(params) if @stack[depth].presenter
+
+        @stack[depth].presenter.update() if @stack[depth].presenter
 
       depth++
 
@@ -204,12 +223,18 @@ class Router
 
           current.views[context].view.renderSubview(target, subnode.view)
 
-        node.views[target] = subnode
+          Log.debug('Rendering absolute state: ' + state + ' -> ' + name);
 
-        Log.debug('Rendering absolute state: ' + state + ' -> ' + name);
+        else if config.presenter
+
+          @globals[target] = subnode
+
+        node.views[target] = subnode
 
     if config.presenter
       node.presenter = new config.presenter(params)
+      node.presenter.router = this
+      node.presenter.load()
 
   destroyState: (depth) ->
 
@@ -217,10 +242,38 @@ class Router
 
     item.destroy() for item in node.views
 
+    node.presenter.destroy() if node.presenter
+
     Log.debug('Destroying state: ' + @stack[depth].state)
 
-  renderGlobal: (name, viewmodel) ->
+  renderGlobal: (name) ->
+
+    return if !@globals.hasOwnProperty(name)
+
+    Log.debug('Rendering global state "' + name + '"')
+
+    $global = $('<div data-global="' + name + '"></div>')
+
+    @$root.append($global)
+
+    node = @globals[name]
+
+    node.view.render($global)
+
+    node.$el = $global
 
   destroyGlobal: (name) ->
+
+    return if !@globals.hasOwnProperty(name)
+
+    Log.debug('Destroying global state "' + name + '"')
+
+    node = @globals[name]
+
+    node.view.destroy()
+
+    node.$el.remove()
+
+    delete node.$el
 
 module.exports = Router

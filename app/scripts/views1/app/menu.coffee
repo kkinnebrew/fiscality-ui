@@ -1,5 +1,5 @@
 $ = require('jquery')
-View = require('../../common/view')
+View = require('../../common1/view.coffee')
 
 class MenuView extends View
 

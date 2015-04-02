@@ -1,3 +1,5 @@
+_ = require('underscore')
+
 class ViewModel
 
   constructor: ->
@@ -7,6 +9,11 @@ class ViewModel
     @events = {}
 
   update: ->
+
+  setParams: (params) ->
+
+    _.each params, (value, name) =>
+      this[name] = value if this.hasOwnProperty(name)
 
   startLoading: ->
 
