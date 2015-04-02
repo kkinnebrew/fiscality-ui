@@ -1,6 +1,12 @@
-class AccountsPresenter
+Presenter = require('../../../common1/presenter.coffee')
 
-  constructor: (@chartViewModel, @transactionsViewModel, @overlayViewModel) ->
+class AccountsPresenter extends Presenter
+
+  constructor: (params, @chartViewModel, @transactionsViewModel, @overlayViewModel) ->
+
+    @accountId = params.accountId || null
+
+    @showOverlay if !@accountId
 
   bind: ->
 

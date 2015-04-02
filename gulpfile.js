@@ -92,7 +92,7 @@ gulp.task('scripts', function() {
 
     var bundler = browserify({
       basedir: './app',
-      entries: ['./scripts/app.js'],
+      entries: ['./scripts/app1.coffee'],
       debug: true
     }).on('error', gutil.log);
 

@@ -980,6 +980,18 @@ ul {
     right: 20px;
 }
 
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #account {
+        background-image: url(../images/settings-arrow@2x.png);
+        -webkit-background-size: 6px 11px;
+        -moz-background-size: 6px 11px;
+        background-size: 6px 11px;
+    }
+}
+
+
 #account .account-label {
     color: rgba(255, 255, 255, 0.5);
     font-family: "proxima-nova", sans-serif;
