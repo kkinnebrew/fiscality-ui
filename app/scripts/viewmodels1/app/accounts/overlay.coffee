@@ -4,6 +4,8 @@ class OverlayViewModel extends ViewModel
 
   constructor: (params) ->
 
+    super
+
     @accounts = []
     @selectedAccountId = params.accountId || null
 

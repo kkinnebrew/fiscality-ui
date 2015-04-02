@@ -4,6 +4,8 @@ class MenuViewModel extends ViewModel
 
   constructor: (params) ->
 
+    super
+
     @state = params.state || 'accounts'
 
     # make service calls

@@ -4,7 +4,7 @@ class ChartViewModel extends ViewModel
 
   constructor: (params) ->
 
-    console.log('Chart', params)
+    super
 
     @selectedAccountId = params.accountId || null
     @account = null

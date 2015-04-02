@@ -4,6 +4,8 @@ class InvestmentsViewModel extends ViewModel
 
   constructor: (params) ->
 
+    super
+
     @portfolioId = params.portfolioId || null
 
     @portfolio = null

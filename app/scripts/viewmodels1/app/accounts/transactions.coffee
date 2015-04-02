@@ -4,6 +4,8 @@ class TransactionsViewModel extends ViewModel
 
   constructor: (params) ->
 
+    super
+
     @selectedAccountId = params.accountId || null
     @transactions = []
     @keyword = null
