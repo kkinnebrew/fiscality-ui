@@ -18,6 +18,8 @@ class Router
 
     @state = null
 
+    @params = {}
+
   register: (name, conf) ->
 
     parts = name.split('.')
@@ -85,6 +87,8 @@ class Router
   
   goto: (state) ->
 
+    location.hash = '#' + state
+
   listen: ->
 
     $(window).on('hashchange', @render);
@@ -112,11 +116,8 @@ class Router
     depth = 0
     params = {}
 
-    _.each @globals, (global) ->
-      if global.$el
-        global.view.destroy()
-        global.$el.remove()
-        delete global.$el
+    _.each @globals, (node, name) =>
+      @destroyGlobal(name) if node.$el
 
     while parts.length
 
@@ -148,6 +149,8 @@ class Router
         @stack[depth].presenter.update() if @stack[depth].presenter
 
       depth++
+
+    @params = params
 
     # update params via event queue
 
@@ -181,8 +184,15 @@ class Router
 
         subnode = {}
         subnode.primary = true if conf.primary == true
-        subnode.viewmodel = new conf.viewmodel(params) if typeof conf.viewmodel == 'function'
-        subnode.view = if typeof conf.view == 'function' then new conf.view(conf.template) else new View(conf.template)
+
+        if typeof conf.viewmodel == 'function'
+          subnode.viewmodel = new conf.viewmodel(params)
+          subnode.viewmodel.router = this
+
+        if typeof conf.view == 'function'
+          subnode.view = new conf.view(conf.template, subnode.viewmodel or undefined)
+        else
+          subnode.view = new View(conf.template, subnode.viewmodel or undefined)
 
         if (depth == 0)
           $el = @$root.find(if name and name != 'default' then '[ui-view="' + name + '"]' else '[ui-view]')
@@ -207,8 +217,15 @@ class Router
       if name.match(/@/)
 
         subnode = {}
-        subnode.viewmodel = new conf.viewmodel(params) if typeof conf.viewmodel == 'function'
-        subnode.view = if typeof conf.view == 'function' then new conf.view(conf.template) else new View(conf.template)
+
+        if typeof conf.viewmodel == 'function'
+          subnode.viewmodel = new conf.viewmodel(params)
+          subnode.viewmodel.router = this
+
+        if typeof conf.view == 'function'
+          subnode.view = new conf.view(conf.template, subnode.viewmodel or undefined)
+        else
+          subnode.view = new View(conf.template, subnode.viewmodel or undefined)
 
         parts = name.split('@')
         target = parts[0]

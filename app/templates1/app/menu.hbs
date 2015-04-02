@@ -1,6 +1,6 @@
 <div id="header">
     <h1 id="app-logo" title="Fiscality"></h1>
-    <div class="logout-button" data-bind="click:logout()"></div>
+    <div class="logout-btn" data-bind="click:logout()"></div>
 </div>
 
 <div id="statistics">
@@ -18,13 +18,13 @@
 </div>
 
 <ul id="nav">
-    <li class="nav-list-item accounts active" onclick="location.hash='#/app/accounts'">Accounts</li>
-    <li class="nav-list-item investments" onclick="location.hash='#/app/investments'">Investments</li>
+    <li class="nav-list-item accounts" data-key="accounts">Accounts</li>
+    <li class="nav-list-item investments" data-key="investments">Investments</li>
     <li class="nav-list-item spending">Spending</li>
     <li class="nav-list-item taxes">Taxes</li>
 </ul>
 
-<div id="account">
+<div id="account" class="settings-btn">
     <div class="account-label">My Account</div>
     <div class="account-name">Kevin Kinnebrew</div>
 </div>

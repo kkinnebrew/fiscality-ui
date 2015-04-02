@@ -4,25 +4,33 @@ View = require('../../common1/view.coffee')
 class MenuView extends View
 
   bindings:
-    '.menu-item':
+    '.nav-list-item':
       'click': 'onSelect'
     '.settings-button':
       'click': 'onSettings'
     '.logout-btn':
       'click': 'onLogout'
 
-  onSelect: (e) ->
+  render: ->
+
+    super
+
+    state = @viewmodel.state
+
+    @$el.find('.nav-list-item.' + state).addClass('active')
+
+  onSelect: (e) =>
 
     key = $(e.currentTarget).attr('data-key')
 
-    @viewModel.setState(key)
+    @viewmodel.setState(key) if key
 
-  onSettings: ->
+  onSettings: =>
 
-    @viewModel.setState('settings')
+    @viewmodel.setState('settings')
 
-  onLogout: ->
+  onLogout: =>
 
-    @viewModel.logout()
+    @viewmodel.logout()
 
 module.exports = MenuView

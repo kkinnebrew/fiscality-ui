@@ -1,4 +1,5 @@
 $ = require('jquery')
+_ = require('underscore')
 Log = require('./log.coffee')
 
 class View
@@ -23,6 +24,8 @@ class View
 
     @$el.html(html)
 
+    @bind()
+
     @rendered = true
 
   getSubview: (name) ->
@@ -42,9 +45,27 @@ class View
 
     view.render($subview) if $subview
 
+  bind: ->
+
+    if @bindings
+      _.each @bindings, (events, selector) =>
+        _.each events, (callback, event) =>
+          if typeof this[callback] == 'function'
+            @$el.on(event, selector, this[callback])
+
+  unbind: ->
+
+    if @bindings
+      _.each @bindings, (events, selector) =>
+        _.each events, (callback, event) =>
+          if typeof this[callback] == 'function'
+            @$el.off(event, selector, this[callback])
+
   destroy: ->
 
     return if !@rendered
+
+    @unbind()
 
     @$el.empty()
 

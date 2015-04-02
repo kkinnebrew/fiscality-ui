@@ -20,7 +20,7 @@ class MenuViewModel extends ViewModel
 
     @state = state
 
-    @router.goto('/' + state)
+    @router.goto('/app/' + state)
 
     @fire('refresh')
 
