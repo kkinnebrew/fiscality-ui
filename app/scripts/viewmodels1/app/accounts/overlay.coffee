@@ -1,4 +1,5 @@
 ViewModel = require('../../../common1/viewmodel.coffee')
+transactionsService = require('../../../services/transactions.coffee')
 
 class OverlayViewModel extends ViewModel
 
@@ -9,15 +10,15 @@ class OverlayViewModel extends ViewModel
     @accounts = []
     @selectedAccountId = params.accountId || null
 
-    @update()
+    transactionsService.accounts().then (data) =>
+      @stopLoading()
+      @accounts = data
+      @update()
+    , ->
+      @stopLoading()
+      Log.error('Error fetching accounts')
 
   update: ->
-
-    @startLoading()
-
-    # do service calls
-
-    @stopLoading()
 
     @fire('refresh')
 

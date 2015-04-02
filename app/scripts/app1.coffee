@@ -13,6 +13,15 @@ Router = require('./common1/router.coffee')
 cache = require('./common/cache')
 HandlebarsCompiler = require('hbsfy/runtime')
 
+# helpers
+
+HandlebarsCompiler.registerHelper('currency', (d, sign) ->
+  sign = if typeof sign == 'string' then sign else ''
+  return '' if d == undefined or d == null
+  return if d >= 0 then (sign + numberWithCommas(d.toFixed(2))) else ('-' + sign + numberWithCommas(Math.abs(d).toFixed(2)))
+)
+
+
 # setup router
 
 router = new Router($('body'))

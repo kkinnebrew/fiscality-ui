@@ -55,6 +55,11 @@ class View
           if typeof this[callback] == 'function'
             @$el.on(event, selector, this[callback])
 
+    @$el.on 'click', '[data-link]', (e) =>
+      link = $(e.currentTarget).attr('data-link')
+      if link
+        @viewmodel.goto(link)
+
   unbind: ->
 
     if @bindings
@@ -62,6 +67,8 @@ class View
         _.each events, (callback, event) =>
           if typeof this[callback] == 'function'
             @$el.off(event, selector, this[callback])
+
+    @$el.off('click', '[data-link]')
 
   refresh: =>
 

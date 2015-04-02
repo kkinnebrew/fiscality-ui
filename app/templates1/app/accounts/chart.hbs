@@ -1,1 +1,56 @@
-<h1 style="color: #F00">Chart</h1>
+<div class="chart-container">
+
+    <div class="chart-header">
+
+        <div class="chart-header-info">
+
+            <h2 class="account-title"></h2>
+            <div class="account-subtitle">Last Updated May 8, 2015</div>
+
+        </div>
+
+        <div class="options-btn" data-link="/app/accounts"></div>
+
+        <div class="chart-balance">
+            <span class="currency-prefix">$</span>
+            <span class="currency-value">0.00</span>
+        </div>
+
+    </div>
+
+    <div class="chart-content">
+
+        <div class="date-selectors">
+            <div class="date-selector">January 1, 2015</div>
+            <div class="date-separator"></div>
+            <div class="date-selector">March 31, 2015</div>
+        </div>
+
+        <ul class="range-picker">
+            <li class="range-picker-item">1W</li>
+            <li class="range-picker-item">2W</li>
+            <li class="range-picker-item active">1M</li>
+            <li class="range-picker-item">3M</li>
+            <li class="range-picker-item">1Y</li>
+            <li class="range-picker-item">2Y</li>
+            <li class="range-picker-item">5Y</li>
+            <li class="range-picker-item">All</li>
+        </ul>
+
+    </div>
+
+    <div class="loading-indicator hidden">Loading Chart...</div>
+
+    <div class="transaction-header">
+        <div class="transaction-header-item column-left column-xsm">
+            <div class="reconciled-header-button"></div>
+        </div>
+        <div class="transaction-header-item column-left column-md active">Date</div>
+        <div class="transaction-header-item column-left column-xlg">Description</div>
+        <div class="transaction-header-item column-right column-sm">Balance</div>
+        <div class="transaction-header-item column-right column-sm">Amount</div>
+    </div>
+
+    <div class="progress"></div>
+
+</div>

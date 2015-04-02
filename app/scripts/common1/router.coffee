@@ -188,6 +188,9 @@ class Router
         if typeof conf.viewmodel == 'function'
           subnode.viewmodel = new conf.viewmodel(params)
           subnode.viewmodel.router = this
+        else
+          subnode.viewmodel = new ViewModel(params)
+          subnode.viewmodel.router = this
 
         if typeof conf.view == 'function'
           subnode.view = new conf.view(conf.template, subnode.viewmodel or undefined)
@@ -220,6 +223,9 @@ class Router
 
         if typeof conf.viewmodel == 'function'
           subnode.viewmodel = new conf.viewmodel(params)
+          subnode.viewmodel.router = this
+        else
+          subnode.viewmodel = new ViewModel(params)
           subnode.viewmodel.router = this
 
         if typeof conf.view == 'function'

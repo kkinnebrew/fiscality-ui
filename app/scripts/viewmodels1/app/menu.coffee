@@ -14,8 +14,6 @@ class MenuViewModel extends ViewModel
 
   setState: (state) ->
 
-    return if @state == state
-
     @state = state
 
     @router.goto('/app/' + state)

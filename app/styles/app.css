@@ -276,17 +276,6 @@ ul {
     letter-spacing: 0.5px;
 }
 
-/* overlays */
-
-#portfolios-overlay {
-    background: #FFF;
-    position: absolute;
-    left: 190px;
-    top: 0;
-    bottom: 0;
-    right: 0;
-}
-
 
 /* accounts page */
 
@@ -477,7 +466,7 @@ ul {
 
 /* account selector */
 
-#accounts-overlay {
+#accounts-overlay, #portfolios-overlay {
     background: rgba(59,152,214,1);
     background: -moz-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     background: -webkit-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
@@ -495,7 +484,7 @@ ul {
     -webkit-transition: all ease-in-out 100ms;
 }
 
-.accounts-close-btn {
+.accounts-close-btn, .portfolios-close-btn {
     background: url(../images/close-btn.png) center center no-repeat;
     cursor: pointer;
     height: 20px;
@@ -505,13 +494,13 @@ ul {
     width: 20px;
 }
 
-.accounts-close-btn:hover {
+.accounts-close-btn:hover, .portfolios-close-btn:hover {
     opacity: 0.6;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    .accounts-close-btn {
+    .accounts-close-btn, .portfolios-close-btn {
         background-image: url(../images/close-btn@2x.png);
         -webkit-background-size: 20px 20px;
         -moz-background-size: 20px 20px;
@@ -521,9 +510,7 @@ ul {
 
 }
 
-
-
-.account-selector-title {
+.account-selector-title, .portfolio-selector-title {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-family: "proxima-nova", sans-serif;
     font-size: 24px;
@@ -532,18 +519,18 @@ ul {
     padding: 28px 0;
 }
 
-.account-lists {
+.account-lists, .portfolio-lists {
     margin: 18px 36px;
     overflow: auto;
 }
 
-.account-list {
+.account-list, .portfolio-list {
     float: left;
     margin-right: 64px;
     margin-bottom: 16px;
 }
 
-.account-list-header {
+.account-list-header, .portfolio-list-header {
     color: rgba(255, 255, 255, 0.5);
     font-family: "proxima-nova", sans-serif;
     font-size: 11px;
@@ -554,7 +541,7 @@ ul {
     text-transform: uppercase;
 }
 
-.account-list-item {
+.account-list-item, .portfolio-list-item {
     cursor: pointer;
     font-family: "proxima-nova", sans-serif;
     font-size: 13px;
@@ -564,16 +551,16 @@ ul {
     padding-right: 30px;
 }
 
-.account-list-item:hover {
+.account-list-item:hover, .portfolio-list-item:hover {
     background: url(../images/account-arrow.png) right center no-repeat;
 }
 
-.account-list-item .label {
+.account-list-item .label, .portfolio-list-item .label {
     opacity: 1;
     -webkit-transition: opacity ease-in-out 100ms;
 }
 
-.account-list-item:hover .label {
+.account-list-item:hover .label, .portfolio-list-item:hover .label {
     opacity: 0.6;
 }
 

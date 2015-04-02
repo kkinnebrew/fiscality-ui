@@ -23,6 +23,9 @@ class ViewModel
 
     @loading = false
 
+  goto: (path) ->
+    @router.goto(path)
+
   on: (event, callback) ->
 
     if !@events.hasOwnProperty(event)
