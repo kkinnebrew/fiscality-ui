@@ -21,7 +21,7 @@ window.App = router
 # registrations
 
 router.register('home', {
-  redirect: 'home.login',
+  redirect: '/home/login',
   template: require('../templates1/home.hbs')
 })
 
@@ -46,7 +46,7 @@ router.register('home.reset', {
 })
 
 router.register('app', {
-  redirect: 'app.accounts',
+  redirect: '/app/accounts',
   views:
     'default':
       template: require('../templates1/app.hbs')

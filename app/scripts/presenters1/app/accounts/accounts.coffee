@@ -35,3 +35,4 @@ class AccountsPresenter extends Presenter
 
     @router.destroyGlobal('accounts')
 
+module.exports = AccountsPresenter

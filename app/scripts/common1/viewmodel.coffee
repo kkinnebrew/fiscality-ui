@@ -20,4 +20,6 @@ class ViewModel
 
   fire: (event) ->
 
+console.log('1234')
+
 module.exports = ViewModel

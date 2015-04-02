@@ -1,4 +1,6 @@
-class ChartViewModel
+ViewModel = require('../../../common1/viewmodel.coffee')
+
+class ChartViewModel extends ViewModel
 
   constructor: (params) ->
 

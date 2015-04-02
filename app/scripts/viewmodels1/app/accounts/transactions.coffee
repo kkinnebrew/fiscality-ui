@@ -1,4 +1,6 @@
-class TransactionsViewModel
+ViewModel = require('../../../common1/viewmodel.coffee')
+
+class TransactionsViewModel extends ViewModel
 
   constructor: (params) ->
 

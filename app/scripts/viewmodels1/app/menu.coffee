@@ -1,10 +1,14 @@
-class MenuViewModel
+ViewModel = require('../../common1/viewmodel.coffee')
+
+class MenuViewModel extends ViewModel
 
   constructor: (params) ->
 
     @state = params.state || 'accounts'
 
     # make service calls
+
+    console.log(123, @on, this)
 
     @fire('refresh')
 

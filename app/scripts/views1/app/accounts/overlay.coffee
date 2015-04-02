@@ -1,4 +1,4 @@
-View = require('../../../common1/view.coffee')
+View = require('../../../common/view')
 $ = require('jquery')
 
 class OverlayView extends View

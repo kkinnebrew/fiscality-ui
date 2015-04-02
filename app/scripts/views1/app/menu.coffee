@@ -1,6 +1,7 @@
 $ = require('jquery')
+View = require('../../common/view')
 
-class MenuView
+class MenuView extends View
 
   bindings:
     '.menu-item':

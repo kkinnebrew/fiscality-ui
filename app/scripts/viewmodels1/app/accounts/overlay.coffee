@@ -1,4 +1,6 @@
-class OverlayViewModel
+ViewModel = require('../../../common1/viewmodel.coffee')
+
+class OverlayViewModel extends ViewModel
 
   constructor: (params) ->
 
