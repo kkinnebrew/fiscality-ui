@@ -49,6 +49,7 @@ router.register('app', {
   redirect: '/app/accounts',
   views:
     'default':
+      primary: true
       template: require('../templates1/app.hbs')
     'menu@default':
       template: require('../templates1/app/menu.hbs')
@@ -61,7 +62,7 @@ router.register('app.accounts', {
   params: ['accountId']
   views:
     'content':
-      template: require('../templates1/app/accounts/accounts.hbs')
+      template: require('../templates1/app/accounts.hbs')
     'chart@content':
       present: 'chart'
       template: require('../templates1/app/accounts/chart.hbs')
@@ -78,13 +79,14 @@ router.register('app.accounts', {
 })
 
 router.register('app.investments', {
-  redirect: 'app.investments.positions'
+  redirect: '/app/investments/portfolioId/positions'
   presenter: require('./presenters1/app/investments/investments.coffee')
   params: ['portfolioId']
   views:
     'content':
+      primary: true
       present: 'investments'
-      template: require('../templates1/app/investments/investments.hbs')
+      template: require('../templates1/app/investments.hbs')
       viewmodel: require('./viewmodels1/app/investments/investments.coffee')
     'overlay@global':
       present: 'overlay'
@@ -94,14 +96,33 @@ router.register('app.investments', {
 
 router.register('app.investments.positions', {
   views:
-    'default':
+    'investments':
       template: require('../templates1/app/investments/positions.hbs')
-    'chart@default':
+    'chart@investments':
       template: require('../templates1/app/investments/positions/chart.hbs')
       viewmodel: require('./viewmodels1/app/investments/positions/chart.coffee')
-    'positions@default':
+    'positions@investments':
       template: require('../templates1/app/investments/positions/positions.hbs')
       viewmodel: require('./viewmodels1/app/investments/positions/positions.coffee')
+})
+
+
+router.register('app.investments.activity', {
+  views:
+    'investments':
+      template: require('../templates1/app/investments/activity.hbs')
+})
+
+router.register('app.investments.performance', {
+  views:
+    'investments':
+      template: require('../templates1/app/investments/performance.hbs')
+})
+
+router.register('app.investments.allocation', {
+  views:
+    'investments':
+      template: require('../templates1/app/investments/allocation.hbs')
 })
 
 # router.register('app.investments.activity')

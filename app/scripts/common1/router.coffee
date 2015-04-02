@@ -1,7 +1,7 @@
 $ = require('jquery')
 _ = require('underscore')
 Log = require('./log.coffee')
-View = require('../common/view')
+View = require('./view.coffee')
 ViewModel = require('./viewmodel.coffee')
 
 class Router
@@ -28,6 +28,7 @@ class Router
 
         config.views =
           'default':
+            primary: true
             template: conf.template
 
         config.views['default'].view = conf.view if conf.hasOwnProperty('view')
@@ -56,7 +57,7 @@ class Router
 
         last = last[part].children
 
-    Log.info('Registering state "' + name + '"')
+    Log.debug('Registering state "' + name + '"')
 
   getConfig: (name) ->
 
@@ -90,7 +91,6 @@ class Router
 
   render: =>
 
-
     parts = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/')
 
     if parts.length == 1 and parts[0] == ''
@@ -122,7 +122,7 @@ class Router
       if config.params
         params[param] = parts.shift() for param in config.params if config.params
 
-      if !@stack[depth] || @stack.depth.state != state
+      if !@stack[depth] || @stack[depth].state != state
 
         # render the state
 
@@ -142,12 +142,10 @@ class Router
 
     if @stack.length > depth
 
-      for i in [depth..@stack.length] by 1
+      for i in [depth...@stack.length] by 1
         @destroyState(i)
 
       @stack.splice(depth)
-
-    Log.info('Rendering')
 
   renderState: (state, config, depth, params) ->
 
@@ -164,20 +162,25 @@ class Router
 
         subnode = {}
 
+        subnode.primary = true if conf.primary == true
         subnode.viewmodel = new conf.viewmodel(params) if conf.viewmodel instanceof ViewModel
         subnode.view = if conf.view instanceof View then new conf.view(conf.template) else new View(conf.template)
 
         if (depth == 0)
-          $el = @$root.find(name ? '[ui-view="' + name + '"]' : '[ui-view]')
+          $el = @$root.find(if name and name != 'default' then '[ui-view="' + name + '"]' else '[ui-view]')
           subnode.view.render($el)
         else
           prior = @stack[depth-1]
-          prior.view.renderSubview(name, subnode.view)
+          primary = _.find prior.views, (view) ->
+            return view.hasOwnProperty('primary') and view.primary == true
+          if primary
+            primary.view.renderSubview(name, subnode.view)
+          else
+            Log.warn('No main view found for partial state: ' + state + ' -> ' + name)
 
         node.views[name] = subnode
 
-        Log.info('Rendering partial state: ' + state + ':' + name);
-
+        Log.debug('Rendering relative state: ' + state + ' -> ' + name);
 
     @stack[depth] = node
 
@@ -196,25 +199,27 @@ class Router
 
         current = @stack[depth]
 
-        console.log(@stack)
+        if context != 'global'
 
-        if !current.views.hasOwnProperty(context)
-          return Log.error('Absolute view context "' + context + '" not defined');
+          if !current.views.hasOwnProperty(context)
+            return Log.error('Absolute view context "' + context + '" not defined')
 
-        current.views[context].view.renderSubview(target, subnode.view)
+          current.views[context].view.renderSubview(target, subnode.view)
 
         node.views[target] = subnode
 
-        Log.info('Rendering absolute state: ' + state + ':' + name);
+        Log.debug('Rendering absolute state: ' + state + ' -> ' + name);
 
     if config.presenter
-      node.presenter = config.presenter(params)
-
-#    console.log('rendering state "' + depth + '"')
+      node.presenter = new config.presenter(params)
 
   destroyState: (depth) ->
 
-    console.log('destroying state ' + depth)
+    node = @stack[depth]
+
+    item.destroy() for item in node.views
+
+    Log.debug('Destroying state: ' + @stack[depth].state)
 
   renderGlobal: (name, viewmodel) ->
 
