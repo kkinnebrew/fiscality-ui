@@ -12,8 +12,6 @@ class MenuViewModel extends ViewModel
 
     # make service calls
 
-    @fire('refresh')
-
   setState: (state) ->
 
     return if @state == state
@@ -21,8 +19,6 @@ class MenuViewModel extends ViewModel
     @state = state
 
     @router.goto('/app/' + state)
-
-    @fire('refresh')
 
   logout: ->
 

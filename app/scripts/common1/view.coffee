@@ -26,6 +26,8 @@ class View
 
     @bind()
 
+    @viewmodel.on('refresh', @refresh) if @viewmodel
+
     @rendered = true
 
   getSubview: (name) ->
@@ -61,9 +63,38 @@ class View
           if typeof this[callback] == 'function'
             @$el.off(event, selector, this[callback])
 
+  refresh: =>
+
+    return Log.warn('Cannot refresh unrendered view') if !@rendered
+
+    that = this
+
+    @unbind()
+
+    $subviews = @$el.find('[ui-view]')
+
+    @$el.empty()
+
+    html = if typeof @template == 'function' then @template(@viewmodel || {}) else @template
+
+    @$el.html(html)
+
+    @bind()
+
+    $subviews.each ->
+      name = $(this).attr('ui-view')
+      if name
+        that.$el.find('[ui-view="' + name + '"]').replaceWith(this);
+      else
+        that.$el.find('[ui-view]').replaceWith(this);
+
+    Log.debug('Refreshing view')
+
   destroy: ->
 
     return if !@rendered
+
+    @viewmodel.detach('refresh', @refresh) if @viewmodel
 
     @unbind()
 

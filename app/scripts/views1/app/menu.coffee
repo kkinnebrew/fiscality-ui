@@ -23,7 +23,10 @@ class MenuView extends View
 
     key = $(e.currentTarget).attr('data-key')
 
-    @viewmodel.setState(key) if key
+    if key
+      @viewmodel.setState(key)
+      @$el.find('.nav-list-item').removeClass('active')
+      @$el.find('[data-key="' + key + '"]').addClass('active')
 
   onSettings: =>
 
