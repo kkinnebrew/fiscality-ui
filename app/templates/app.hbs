@@ -1,36 +1,3 @@
-<div id="menu">
-
-    <div id="header">
-        <h1 id="app-logo" title="Fiscality"></h1>
-        <div class="logout-button" data-bind="click:logout()"></div>
-    </div>
-
-    <div id="statistics">
-        <div class="balance">
-            <div class="stat-value">734,029.22</div>
-            <div class="stat-label">Balance</div>
-        </div>
-
-        <div class="change">
-            <div class="stat-value"><div class="up-arrow"></div>665.45</div>
-            <div class="stat-label">0.75%</div>
-
-        </div>
-
-    </div>
-
-    <ul id="nav">
-        <li class="nav-list-item accounts active" data-link="/app/accounts">Accounts</li>
-        <li class="nav-list-item investments" data-link="/app/investments">Investments</li>
-        <li class="nav-list-item spending">Spending</li>
-        <li class="nav-list-item taxes">Taxes</li>
-    </ul>
-
-    <div id="account">
-        <div class="account-label">My Account</div>
-        <div class="account-name">Kevin Kinnebrew</div>
-    </div>
-
-</div>
+<div id="menu" ui-view="menu"></div>
 
 <div id="content" ui-view="content"></div>

@@ -1,4 +1,4 @@
-View = require('../../../common/view')
+View = require('../../../common/view.coffee')
 $ = require('jquery')
 
 PROGRESS_CONFIG =
@@ -11,72 +11,18 @@ PROGRESS_CONFIG =
 
 class ChartView extends View
 
-  constructor: ->
+  bind: ->
 
     super
 
-    @viewModel.on('prefresh', @startLoading)
-    @viewModel.on('refresh', @stopLoading)
-
-  bind: ->
-
-    console.log('bind')
-
-    that = this;
+    that = this
 
     @$el.on 'click', '.range-picker-item', ->
       that.$el.find('.range-picker-item').removeClass('active')
       $(this).addClass('active');
 
-    @$el.on('click', '.account-selector', (e) -> e.stopPropagation())
-    @$el.on('click', '.selector-btn', that.showSelector)
-    @$el.on('click', '.account-list-item', that.hideSelector)
-    @$el.on('click', '.account-selector-title', that.hideSelector)
-
   unbind: ->
 
-    @$el.off('click', '.account-selector')
-    @$el.off('click', '.selector-btn')
-    @$el.off('click', '.account-list-item')
-    @$el.off('click', '.account-selector-title')
-
-  render: ->
-
-    super
-    @startLoading
-
-  startLoading: =>
-
-    if @loading
-      return
-
-    @loading = true
-
-    @$el.find('.account-info').css('opacity', 0.5)
-    @$el.find('.progress').show().circleProgress(PROGRESS_CONFIG)
-
-  stopLoading: =>
-
-    if !@loading
-      return
-
-    @$el.find('.account-info').css('opacity', 1)
-    @$el.find('.progress').hide()
-
-    @loading = false
-
-  showSelector: =>
-
-    @$el.find('.account-selector').addClass('visible');
-    @$el.find('.chart-container').addClass('blur');
-
-    console.log('show')
-
-  hideSelector: =>
-
-    @$el.find('.account-selector').removeClass('visible');
-    @$el.find('.chart-container').removeClass('blur');
-
-    console.log('hide')
+    @$el.off('click', '.range-picker-item')
 
 module.exports = ChartView

@@ -1,0 +1,40 @@
+<div id="accounts-overlay">
+
+    <div class="account-selector-title">Accounts</div>
+
+    {{#if overlayed}}
+        <div class="accounts-close-btn" data-bind="click:close()"></div>
+    {{/if}}
+
+    <div class="account-lists">
+
+        <ul class="account-list">
+            <li class="account-list-header">Banking</li>
+            {{#each accounts}}
+                <li class="account-list-item" data-key="{{accountId}}">
+                    <span class="label">{{accountName}}</span>
+                </li>
+            {{/each}}
+        </ul>
+
+        <ul class="account-list">
+            <li class="account-list-header">Credit & Loan</li>
+            <li class="account-list-item"><span data-link class="label">American Express Blue Cash</span></li>
+            <li class="account-list-item"><span class="label">Citi Double Cash</span></li>
+            <li class="account-list-item"><span class="labsel">Citi AAdvantage Signature</span></li>
+            <li class="account-list-item"><span class="label">Chase Freedom Rewards</span></li>
+            <li class="account-list-item"><span class="label">Chase Ink Premier</span></li>
+            <li class="account-list-item"><span class="label">Bank of America World Points</span></li>
+        </ul>
+
+        <ul class="account-list">
+            <li class="account-list-header">Investment</li>
+            <li class="account-list-item"><span class="label">Bank of America Brokerage</span></li>
+            <li class="account-list-item"><span class="label">Bank of America Roth IRA</span></li>
+            <li class="account-list-item"><span class="label">Schwab One Brokerage</span></li>
+            <li class="account-list-item"><span class="label">Principal Financial</span></li>
+        </ul>
+
+    </div>
+
+</div>
