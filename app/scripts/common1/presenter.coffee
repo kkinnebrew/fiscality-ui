@@ -10,8 +10,14 @@ class Presenter
 
   setParams: (params) ->
 
+    changed = false
+
     _.each params, (value, name) =>
-      this[name] = value if this.hasOwnProperty(name)
+      if this.hasOwnProperty(name) and this[name] != value
+        this[name] = value
+        changed = true
+
+    @update() if changed
 
   bind: ->
 

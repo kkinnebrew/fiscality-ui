@@ -1,4 +1,8 @@
 ViewModel = require('../../../common1/viewmodel.coffee')
+transactionsService = require('../../../services/transactions.coffee')
+$ = require('jquery')
+cache = require('../../../common/cache')
+Log = require('../../../common1/log.coffee')
 
 class ChartViewModel extends ViewModel
 
@@ -6,23 +10,31 @@ class ChartViewModel extends ViewModel
 
     super
 
-    @selectedAccountId = params.accountId || null
+    @accountId = params.accountId || null
     @account = null
     @range = '1M'
     @startDate = new Date(2015, 1, 1)
     @endDate = new Date(2015, 3, 31)
 
+    @update()
+
   update: ->
 
-    @startLoading()
+    return if !@accountId
 
-    # cancel prior requests
+    accountRequest = transactionsService.account(@accountId)
+    balanceRequest = transactionsService.balance(@accountId)
 
-    # do service calls
+    $.when(accountRequest, balanceRequest).then((account, balance) =>
 
-    @stopLoading()
+      cache.setPersistentItem('accountId', @accountId);
 
-    @fire('refresh')
+      @account = account
+      @balance = balance or 0
+
+      @fire('refresh')
+
+    , -> Log.error('Error loading account for accountId: ' + @selectedAccountId))
 
   choose: ->
 
@@ -30,7 +42,7 @@ class ChartViewModel extends ViewModel
 
   setAccount: (accountId) ->
 
-    @selectedAccountId = accountId
+    @accountId = accountId
 
     @update()
 

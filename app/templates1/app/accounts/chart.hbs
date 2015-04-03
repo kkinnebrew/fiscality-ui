@@ -4,16 +4,16 @@
 
         <div class="chart-header-info">
 
-            <h2 class="account-title"></h2>
+            <h2 class="account-title">{{account.accountName}}</h2>
             <div class="account-subtitle">Last Updated May 8, 2015</div>
 
         </div>
 
-        <div class="options-btn" data-link="/app/accounts"></div>
+        <div class="options-btn" data-bind="click:choose()"></div>
 
         <div class="chart-balance">
             <span class="currency-prefix">$</span>
-            <span class="currency-value">0.00</span>
+            <span class="currency-value">{{currency balance}}</span>
         </div>
 
     </div>

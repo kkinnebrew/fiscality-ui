@@ -15,12 +15,21 @@ HandlebarsCompiler = require('hbsfy/runtime')
 
 # helpers
 
+numberWithCommas = (x) ->
+  parts = x.toString().split(".")
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  return parts.join(".")
+
 HandlebarsCompiler.registerHelper('currency', (d, sign) ->
   sign = if typeof sign == 'string' then sign else ''
   return '' if d == undefined or d == null
   return if d >= 0 then (sign + numberWithCommas(d.toFixed(2))) else ('-' + sign + numberWithCommas(Math.abs(d).toFixed(2)))
 )
 
+HandlebarsCompiler.registerHelper('dateFormat', (d, f) ->
+  return '' if d == undefined or d == null
+  return Date.parse(d).toString(f)
+)
 
 # setup router
 

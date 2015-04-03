@@ -184,6 +184,7 @@ class Router
 
         subnode = {}
         subnode.primary = true if conf.primary == true
+        subnode.present = conf.present if conf.present
 
         if typeof conf.viewmodel == 'function'
           subnode.viewmodel = new conf.viewmodel(params)
@@ -221,6 +222,8 @@ class Router
 
         subnode = {}
 
+        subnode.present = conf.present if conf.present
+
         if typeof conf.viewmodel == 'function'
           subnode.viewmodel = new conf.viewmodel(params)
           subnode.viewmodel.router = this
@@ -255,8 +258,13 @@ class Router
         node.views[target] = subnode
 
     if config.presenter
+
       node.presenter = new config.presenter(params)
       node.presenter.router = this
+
+      _.each node.views, (subnode) ->
+        node.presenter[subnode.present + 'ViewModel'] = subnode.viewmodel if subnode.present
+
       node.presenter.load()
 
   destroyState: (depth) ->

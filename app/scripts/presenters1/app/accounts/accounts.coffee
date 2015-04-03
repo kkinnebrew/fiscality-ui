@@ -2,29 +2,31 @@ Presenter = require('../../../common1/presenter.coffee')
 
 class AccountsPresenter extends Presenter
 
-  constructor: (params, @chartViewModel, @transactionsViewModel, @overlayViewModel) ->
+  constructor: (params) ->
 
     @accountId = params.accountId || null
+
+    @chartViewModel = null
+    @transactionsViewModel = null
+    @accountsViewModel = null
 
   load: ->
 
     @showOverlay() if !@accountId
 
+    @chartViewModel.on('choose', @showOverlay)
+    @accountsViewModel.on('close', @hideOverlay)
+    @accountsViewModel.on('select', @selectAccount)
+
   update: ->
 
     @showOverlay() if !@accountId
-
-  bind: ->
-
-    @chartViewModel.on('choose', @showOverlay)
-    @overlayViewModel.on('close', @hideOverlay)
-    @overlayViewModel.on('select', @selectAccount)
 
   setAccount: (accountId) ->
 
     @chartViewModel.setAccount(accountId)
     @transactionsViewModel.setAccount(accountId)
-    @overlayViewModel.setAccount(accountId)
+    @accountsViewModel.setAccount(accountId)
 
   selectAccount: (accountId) ->
 

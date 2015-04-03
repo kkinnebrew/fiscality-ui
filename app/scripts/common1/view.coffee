@@ -60,6 +60,19 @@ class View
       if link
         @viewmodel.goto(link)
 
+    that = this
+
+    @$el.find('[data-bind]').each ->
+      bind = $(this).attr('data-bind')
+      parts = bind.match(/(.+):(.+)\((.*)\)/)
+      event = parts[1]
+      method = parts[2]
+      args = if parts[3] then parts[3].replace(/\s/g, '').split(',') else []
+
+      $(this).on event, (e) ->
+        e.preventDefault()
+        that.viewmodel.run(method)
+
   unbind: ->
 
     if @bindings
@@ -69,6 +82,13 @@ class View
             @$el.off(event, selector, this[callback])
 
     @$el.off('click', '[data-link]')
+
+    @$el.find('[data-bind]').each ->
+      bind = $(this).attr('data-bind')
+      parts = bind.match(/(.+):(.+)\((.*)\)/)
+      event = parts[1]
+
+      $(this).off(event)
 
   refresh: =>
 

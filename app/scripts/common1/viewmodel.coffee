@@ -1,4 +1,5 @@
 _ = require('underscore')
+Log = require('./log.coffee')
 
 class ViewModel
 
@@ -12,8 +13,14 @@ class ViewModel
 
   setParams: (params) ->
 
+    changed = false
+
     _.each params, (value, name) =>
-      this[name] = value if this.hasOwnProperty(name)
+      if this.hasOwnProperty(name) and this[name] != value
+        this[name] = value
+        changed = true
+
+    @update() if changed
 
   startLoading: ->
 
@@ -25,6 +32,13 @@ class ViewModel
 
   goto: (path) ->
     @router.goto(path)
+
+  run: (method) ->
+
+    if typeof this[method] != 'function'
+      return Log.error('Unknown method on viewmodel: ' + method)
+
+    this[method].apply(this)
 
   on: (event, callback) ->
 

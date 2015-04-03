@@ -1,5 +1,6 @@
 ViewModel = require('../../../common1/viewmodel.coffee')
 transactionsService = require('../../../services/transactions.coffee')
+Log = require('../../../common1/log.coffee')
 
 class OverlayViewModel extends ViewModel
 
@@ -8,7 +9,7 @@ class OverlayViewModel extends ViewModel
     super
 
     @accounts = []
-    @selectedAccountId = params.accountId || null
+    @accountId = params.accountId || null
 
     transactionsService.accounts().then (data) =>
       @stopLoading()
@@ -24,7 +25,7 @@ class OverlayViewModel extends ViewModel
 
   setAccount: (accountId) ->
 
-    @selectedAccountId = accountId
+    @accountId = accountId
 
     @fire('select', accountId)
 
