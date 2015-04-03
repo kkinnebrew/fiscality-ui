@@ -20,6 +20,10 @@ class Router
 
     @params = {}
 
+  otherwise: (state) ->
+
+    @defaultState = state.replace(/(^\/?)|(\/$)/g, '')
+
   register: (name, conf) ->
 
     parts = name.split('.')

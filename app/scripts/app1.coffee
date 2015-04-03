@@ -38,6 +38,8 @@ window.App = router
 
 # registrations
 
+router.otherwise('/home/login')
+
 router.register('home', {
   redirect: '/home/login',
   template: require('../templates1/home.hbs')
