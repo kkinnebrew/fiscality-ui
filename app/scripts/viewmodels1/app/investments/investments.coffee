@@ -1,4 +1,6 @@
 ViewModel = require('../../../common1/viewmodel.coffee')
+investmentsService = require('../../../services/investments.coffee')
+Log = require('../../../common1/log.coffee')
 
 class InvestmentsViewModel extends ViewModel
 
@@ -10,15 +12,18 @@ class InvestmentsViewModel extends ViewModel
 
     @portfolio = null
 
+    @update()
+
   update: ->
 
-    @startLoading()
+    return if !@portfolioId
 
-    # do service calls
-
-    @stopLoading()
-
-    @fire('refresh')
+    investmentsService.portfolio(@portfolioId).then (portfolio) =>
+      @portfolio = portfolio
+      console.log(portfolio)
+      @fire('refresh')
+    , ->
+      Log.error('Error loading portfolio')
 
   setPortfolio: (portfolioId) ->
 
