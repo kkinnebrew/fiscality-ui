@@ -22,9 +22,9 @@ class View
 
     html = if typeof @template == 'function' then @template(@viewmodel || {}) else @template
 
-    @$el.addClass('rendered')
-
     @$el.html(html)
+
+    @$el.addClass('rendered')
 
     @bind()
 
