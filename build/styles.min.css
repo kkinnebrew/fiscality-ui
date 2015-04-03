@@ -1206,7 +1206,7 @@ ul {
 /* account selector */
 
 #accounts-overlay, #portfolios-overlay {
-    background: rgba(59,152,214,0.75);
+    background: rgba(59,152,214,1);
     background: -moz-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
     background: -webkit-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
     background: -o-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
@@ -1214,21 +1214,13 @@ ul {
     background: linear-gradient(135deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
     color: #FFF;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
-    opacity: 0;
+    opacity: 1;
     position: absolute;
     left: 190px;
     top: 0;
     bottom: 0;
     right: 0;
     -webkit-transition: opacity ease-in-out 100ms;
-}
-
-#portfolios-overlay {
-    opacity: 1;
-}
-
-#accounts-overlay.activate {
-    opacity: 1;
 }
 
 .accounts-close-btn, .portfolios-close-btn {

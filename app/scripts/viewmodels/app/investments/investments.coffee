@@ -18,20 +18,25 @@ class InvestmentsViewModel extends ViewModel
 
     return if !@portfolioId
 
+    @startLoading()
+
     investmentsService.portfolio(@portfolioId).then (portfolio) =>
       @portfolio = portfolio
+      @stopLoading()
       @fire('refresh')
-    , ->
+    , =>
+      @stopLoading
       Log.error('Error loading portfolio')
 
   setPortfolio: (portfolioId) ->
 
     @portfolioId = portfolioId
 
-    @fire('select', portfolioId)
+    @update()
 
   setState: (state) ->
 
+    # TODO: handle this
     @router.goto('app.investments.' + state, {
       portfolioId: @portfolioId
     })

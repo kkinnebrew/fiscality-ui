@@ -28,17 +28,11 @@ class OverlayViewModel extends ViewModel
 
   setPortfolio: (portfolioId) ->
 
-    @close if @portfolioId == portfolioId
+    return @close() if @portfolioId == portfolioId
 
     @portfolioId = portfolioId
 
     @fire('select', portfolioId)
-
-  setState: (state) ->
-
-    @router.goto('app.investments.' + state, {
-      portfolioId: @portfolioId
-    })
 
   close: ->
 

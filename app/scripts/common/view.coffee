@@ -141,8 +141,6 @@ class View
 
     return if !@rendered
 
-    console.log('change received')
-
     if @viewmodel.loading
       @$el.addClass('loading')
     else
@@ -155,11 +153,7 @@ class View
 
   destroy: ->
 
-    deferred = $.Deferred()
-
-    if !@rendered
-      deferred.resolve()
-      return deferred
+    return if !@rendered
 
     @viewmodel.detach('refresh', @refresh) if @viewmodel
 
@@ -172,9 +166,5 @@ class View
     @$el = null
 
     @rendered = false
-
-    deferred.resolve()
-
-    return deferred
 
 module.exports = View

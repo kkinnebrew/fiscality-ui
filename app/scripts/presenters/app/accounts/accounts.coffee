@@ -33,8 +33,11 @@ class AccountsPresenter extends Presenter
     @chartViewModel.setAccount(accountId)
     @transactionsViewModel.setAccount(accountId)
 
-    @hideOverlay().always =>
-      @router.goto('/app/accounts/' + accountId)
+    @hideOverlay()
+
+    @router.goto('app.accounts', {
+      accountId: accountId
+    })
 
   showOverlay: =>
 
@@ -57,6 +60,6 @@ class AccountsPresenter extends Presenter
     @chartViewModel.markActive()
     @transactionsViewModel.markActive()
 
-    return @router.destroyGlobal('accounts')
+    @router.destroyGlobal('accounts')
 
 module.exports = AccountsPresenter
