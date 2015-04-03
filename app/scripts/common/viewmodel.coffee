@@ -6,6 +6,7 @@ class ViewModel
   constructor: ->
 
     @loading = false
+    @inactive = false
 
     @events = {}
 
@@ -26,9 +27,25 @@ class ViewModel
 
     @loading = true
 
+    @fire('change')
+
   stopLoading: ->
 
     @loading = false
+
+    @fire('change')
+
+  markInactive: ->
+
+    @inactive = true
+
+    @fire('change')
+
+  markActive: ->
+
+    @inactive = false
+
+    @fire('change')
 
   goto: (path) ->
     @router.goto(path)

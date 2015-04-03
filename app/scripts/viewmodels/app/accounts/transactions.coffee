@@ -20,6 +20,8 @@ class TransactionsViewModel extends ViewModel
 
     return if !@accountId
 
+    @startLoading()
+
     transactionsService.transactions(@accountId).then (data) =>
 
       balance = 0;
@@ -37,9 +39,15 @@ class TransactionsViewModel extends ViewModel
 
       @transactions.reverse();
 
+      @stopLoading()
+
       @fire('refresh')
-    , ->
+
+    , () =>
+
+      @stopLoading()
       Log.error('Unable to fetch transactions')
+
 
   sortBy: (column) ->
 

@@ -3,7 +3,7 @@ module.exports = {
     PROD: 'https://fiscality-api.herokuapp.com',
     DEV: 'http://localhost:9000'
   },
-  ENV: 'PROD',
+  ENV: 'DEV',
   getBaseUrl: function() {
     return this.BASE_URL[this.ENV];
   }

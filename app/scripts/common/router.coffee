@@ -299,7 +299,11 @@ class Router
 
   destroyGlobal: (name) ->
 
-    return if !@globals.hasOwnProperty(name)
+    deferred = $.Deferred()
+
+    if !@globals.hasOwnProperty(name)
+      deferred.resolve()
+      return deferred
 
     Log.debug('Destroying global state "' + name + '"')
 
@@ -308,5 +312,8 @@ class Router
     node.view.destroy().always ->
       node.$el.remove()
       delete node.$el
+      deferred.resolve()
+
+    return deferred
 
 module.exports = Router

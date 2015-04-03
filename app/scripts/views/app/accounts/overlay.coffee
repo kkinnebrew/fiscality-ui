@@ -43,7 +43,6 @@ class OverlayView extends View
 
     return deferred
 
-
   onSelect: (e) =>
 
     accountId = $(e.currentTarget).attr('data-key')

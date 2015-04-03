@@ -750,6 +750,14 @@ ul {
     padding: 0;
 }
 
+.loading {
+    background: #0F0 !important;
+}
+
+.inactive {
+    background: #F00 !important;
+}
+
 /* menu */
 
 #menu {
@@ -1212,10 +1220,14 @@ ul {
     top: 0;
     bottom: 0;
     right: 0;
-    -webkit-transition: all ease-in-out 100ms;
+    -webkit-transition: opacity ease-in-out 100ms;
 }
 
-#accounts-overlay.activate, #portfolios-overlay.activate {
+#portfolios-overlay {
+    opacity: 1;
+}
+
+#accounts-overlay.activate {
     opacity: 1;
 }
 

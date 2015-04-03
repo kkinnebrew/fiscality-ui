@@ -11,6 +11,8 @@ class OverlayViewModel extends ViewModel
     @accounts = []
     @accountId = params.accountId || null
 
+    @startLoading()
+
     transactionsService.accounts().then (data) =>
       @stopLoading()
       @accounts = data

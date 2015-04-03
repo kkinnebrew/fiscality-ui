@@ -22,11 +22,14 @@ class View
 
     html = if typeof @template == 'function' then @template(@viewmodel || {}) else @template
 
+    @$el.addClass('rendered')
+
     @$el.html(html)
 
     @bind()
 
-    @viewmodel.on('refresh', @refresh) if @viewmodel
+    @viewmodel.on('refresh', @refresh)
+    @viewmodel.on('change', @change)
 
     @rendered = true
 
@@ -134,6 +137,22 @@ class View
 
     Log.debug('Refreshing view')
 
+  change: =>
+
+    return if !@rendered
+
+    console.log('change received')
+
+    if @viewmodel.loading
+      @$el.addClass('loading')
+    else
+      @$el.removeClass('loading')
+
+    if @viewmodel.inactive
+      @$el.addClass('inactive')
+    else
+      @$el.removeClass('inactive')
+
   destroy: ->
 
     deferred = $.Deferred()
@@ -143,6 +162,8 @@ class View
       return deferred
 
     @viewmodel.detach('refresh', @refresh) if @viewmodel
+
+    @$el.removeClass('rendered')
 
     @unbind()
 
