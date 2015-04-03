@@ -136,7 +136,11 @@ class View
 
   destroy: ->
 
-    return if !@rendered
+    deferred = $.Deferred()
+
+    if !@rendered
+      deferred.resolve()
+      return deferred
 
     @viewmodel.detach('refresh', @refresh) if @viewmodel
 
@@ -147,5 +151,9 @@ class View
     @$el = null
 
     @rendered = false
+
+    deferred.resolve()
+
+    return deferred
 
 module.exports = View
