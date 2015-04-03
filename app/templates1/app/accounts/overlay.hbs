@@ -2,7 +2,9 @@
 
     <div class="account-selector-title">Accounts</div>
 
-    <div class="accounts-close-btn"></div>
+    {{#if overlayed}}
+        <div class="accounts-close-btn" data-bind="click:close()"></div>
+    {{/if}}
 
     <div class="account-lists">
 

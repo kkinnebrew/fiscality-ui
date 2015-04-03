@@ -38,4 +38,8 @@ class OverlayViewModel extends ViewModel
       portfolioId: @portfolioId
     })
 
+  close: ->
+
+    @fire('close')
+
 module.exports = OverlayViewModel

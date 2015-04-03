@@ -2,26 +2,32 @@ Presenter = require('../../../common1/presenter.coffee')
 
 class InvestmentsPresenter extends Presenter
 
-  constructor: (params, @portfoliosViewModel, @overlayViewModel) ->
+  constructor: (params) ->
+
+    console.log(123)
+
+    @investmentsViewModel = null
+    @portfoliosViewModel = null
 
     @portfolioId = params.portfolioId || null
 
   load: ->
 
-    @showOverlay() if !@portfolioId
+    @showFullOverlay() if !@portfolioId
+
+    @investmentsViewModel.on('choose', @showOverlay)
+    @portfoliosViewModel.on('close', @hideOverlay)
+    @portfoliosViewModel.on('select', @selectPortfolio)
 
   update: ->
 
-    @showOverlay() if !@portfolioId
+    @showFullOverlay() if !@portfolioId
 
   bind: ->
 
-    @portfoliosViewModel.on('choose', @showOverlay)
-    @overlayViewModel.on('close', @hideOverlay)
-    @overlayViewModel.on('select', @selectPortfolio)
-
   setPortfolio: (portfolioId) ->
 
+    @investmentsViewModel.setPortfolio(portfolioId)
     @portfoliosViewModel.setPortfolio(portfolioId)
 
   selectPortfolio: (portfolioId) ->
@@ -31,11 +37,21 @@ class InvestmentsPresenter extends Presenter
 
     @router.replaceParam('portfolioId', portfolioId)
 
-  showOverlay: ->
+  showOverlay: =>
 
+    console.log('arg')
+
+    @portfoliosViewModel.overlayed = true
     @router.renderGlobal('portfolios')
 
-  hideOverlay: ->
+  showFullOverlay: =>
+
+    console.log('arg1')
+
+    @portfoliosViewModel.overlayed = false
+    @router.renderGlobal('portfolios')
+
+  hideOverlay: =>
 
     @router.destroyGlobal('portfolios')
 

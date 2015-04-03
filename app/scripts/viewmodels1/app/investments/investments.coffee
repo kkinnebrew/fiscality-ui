@@ -24,12 +24,16 @@ class InvestmentsViewModel extends ViewModel
 
     @portfolioId = portfolioId
 
-    @update()
+    @fire('select', portfolioId)
 
   setState: (state) ->
 
     @router.goto('app.investments.' + state, {
       portfolioId: @portfolioId
     })
+
+  choose: ->
+
+    @fire('choose')
 
 module.exports = InvestmentsViewModel

@@ -12,7 +12,7 @@ class AccountsPresenter extends Presenter
 
   load: ->
 
-    @showOverlay() if !@accountId
+    @showFullOverlay() if !@accountId
 
     @chartViewModel.on('choose', @showOverlay)
     @accountsViewModel.on('close', @hideOverlay)
@@ -20,7 +20,7 @@ class AccountsPresenter extends Presenter
 
   update: ->
 
-    @showOverlay() if !@accountId
+    @showFullOverlay() if !@accountId
 
   setAccount: (accountId) ->
 
@@ -35,11 +35,19 @@ class AccountsPresenter extends Presenter
 
     @router.replaceState('/app/accounts/' + accountId)
 
-  showOverlay: ->
+  showOverlay: =>
 
+    console.log(this)
+
+    @accountsViewModel.overlayed = true
     @router.renderGlobal('accounts')
 
-  hideOverlay: ->
+  showFullOverlay: =>
+
+    @accountsViewModel.overlayed = false
+    @router.renderGlobal('accounts')
+
+  hideOverlay: =>
 
     @router.destroyGlobal('accounts')
 

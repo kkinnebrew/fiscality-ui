@@ -2,7 +2,9 @@
 
     <div class="portfolio-selector-title">Portfolios</div>
 
-    <div class="portfolios-close-btn"></div>
+    {{#if overlayed}}
+        <div class="portfolios-close-btn" data-bind="click:close()"></div>
+    {{/if}}
 
     <div class="portfolio-lists">
 
