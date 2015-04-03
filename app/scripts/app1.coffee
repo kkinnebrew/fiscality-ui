@@ -20,16 +20,18 @@ numberWithCommas = (x) ->
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
   return parts.join(".")
 
-HandlebarsCompiler.registerHelper('currency', (d, sign) ->
+HandlebarsCompiler.registerHelper 'currency', (d, sign) ->
   sign = if typeof sign == 'string' then sign else ''
   return '' if d == undefined or d == null
   return if d >= 0 then (sign + numberWithCommas(d.toFixed(2))) else ('-' + sign + numberWithCommas(Math.abs(d).toFixed(2)))
-)
 
-HandlebarsCompiler.registerHelper('dateFormat', (d, f) ->
+HandlebarsCompiler.registerHelper 'percentage', (d) ->
+  return '' if d == undefined or d == null
+  return if d >= 0 then (numberWithCommas(d.toFixed(2))) else '-' + numberWithCommas(Math.abs(d).toFixed(2)) + '%'
+
+HandlebarsCompiler.registerHelper 'dateFormat', (d, f) ->
   return '' if d == undefined or d == null
   return Date.parse(d).toString(f)
-)
 
 # setup router
 
@@ -90,6 +92,7 @@ router.register('app.accounts', {
     'transactions@content':
       present: 'transactions'
       template: require('../templates1/app/accounts/transactions.hbs')
+      view: require('./views/app/accounts/transactions.coffee')
       viewmodel: require('./viewmodels1/app/accounts/transactions.coffee')
     'accounts@global':
       present: 'accounts'
