@@ -73,7 +73,7 @@ ul {
     width: 97px;
 }
 
-.logout-button {
+.logout-btn {
     background: url(../images/logout-icon.png) center center no-repeat;
     cursor: pointer;
     height: 18px;
@@ -84,7 +84,7 @@ ul {
     -webkit-transition: opacity ease-out 100ms;
 }
 
-.logout-button:hover {
+.logout-btn:hover {
     opacity: 0.5;
 }
 
@@ -97,7 +97,7 @@ ul {
         background-size: 97px 29px;
     }
 
-    .logout-button {
+    .logout-btn {
         background-image: url(../images/logout-icon@2x.png);
         -webkit-background-size: 18px 18px;
         -moz-background-size: 18px 18px;

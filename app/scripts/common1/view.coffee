@@ -47,6 +47,22 @@ class View
 
     view.render($subview) if $subview
 
+  sync: ->
+
+    data = {}
+
+    @$el.find('[data-model]').each ->
+
+      model = $(this).attr('data-model')
+      tagName = $(this).prop('tagName').toLowerCase()
+
+      if tagName == 'input' or tagName == 'textarea' or tagName == 'select'
+        data[model] = $(this).val()
+      else if tagName == 'div' or tagName == 'span'
+        data[model] = $(this).text()
+
+    @viewmodel.setParams(data)
+
   bind: ->
 
     if @bindings
@@ -71,7 +87,8 @@ class View
 
       $(this).on event, (e) ->
         e.preventDefault()
-        that.viewmodel.run(method)
+        that.sync()
+        that.viewmodel.run(method, args)
 
   unbind: ->
 

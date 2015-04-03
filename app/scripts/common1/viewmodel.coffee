@@ -33,12 +33,20 @@ class ViewModel
   goto: (path) ->
     @router.goto(path)
 
-  run: (method) ->
+  run: (method, args) ->
 
     if typeof this[method] != 'function'
       return Log.error('Unknown method on viewmodel: ' + method)
 
-    this[method].apply(this)
+    values = [];
+
+    for i in [0...args.length] by 1
+      if !this.hasOwnProperty(args[i])
+        Log.warn('Unknown property on viewmodel: ' + args[i])
+      else
+        values.push(this[args[i]])
+
+    this[method].apply(this, values)
 
   on: (event, callback) ->
 
