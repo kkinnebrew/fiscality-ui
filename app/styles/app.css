@@ -33,7 +33,7 @@ ul {
 }
 
 #content {
-    color: #FFF;
+    color: #000;
     height: 100%;
     left: 190px;
     overflow-y: scroll;
@@ -73,7 +73,7 @@ ul {
     width: 97px;
 }
 
-.logout-button {
+.logout-btn {
     background: url(../images/logout-icon.png) center center no-repeat;
     cursor: pointer;
     height: 18px;
@@ -84,7 +84,7 @@ ul {
     -webkit-transition: opacity ease-out 100ms;
 }
 
-.logout-button:hover {
+.logout-btn:hover {
     opacity: 0.5;
 }
 
@@ -97,7 +97,7 @@ ul {
         background-size: 97px 29px;
     }
 
-    .logout-button {
+    .logout-btn {
         background-image: url(../images/logout-icon@2x.png);
         -webkit-background-size: 18px 18px;
         -moz-background-size: 18px 18px;
@@ -248,6 +248,18 @@ ul {
     right: 20px;
 }
 
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #account {
+        background-image: url(../images/settings-arrow@2x.png);
+        -webkit-background-size: 6px 11px;
+        -moz-background-size: 6px 11px;
+        background-size: 6px 11px;
+    }
+}
+
+
 #account .account-label {
     color: rgba(255, 255, 255, 0.5);
     font-family: "proxima-nova", sans-serif;
@@ -288,13 +300,13 @@ ul {
     width: 100%;
 }
 
+
 .chart-container.blur {
-    opacity: 0;
-    /*-webkit-filter: blur(10px);*/
-    /*-moz-filter: blur(10px);*/
-    /*-o-filter: blur(10px);*/
-    /*-ms-filter: blur(10px);*/
-    /*filter: blur(10px);*/
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
 }
 
 .chart-header {
@@ -454,23 +466,51 @@ ul {
 
 /* account selector */
 
-.account-selector {
-    visibility: hidden;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    -webkit-transition: visibility 0s linear 0.5s, opacity 0.5s linear;
-    transition: visibility 0s linear 0.5s, opacity 0.5s linear;
-}
-
-.account-selector.visible {
+#accounts-overlay, #portfolios-overlay {
+    background: rgba(59,152,214,0.5);
+    background: -moz-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
+    background: -o-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
+    background: linear-gradient(135deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
+    color: #FFF;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
     opacity: 1;
-    visibility: visible;
-    -webkit-transition-delay: 0s;
-    transition-delay: 0s;
+    position: absolute;
+    left: 190px;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    -webkit-transition: all ease-in-out 100ms;
 }
 
-.account-selector-title {
+.accounts-close-btn, .portfolios-close-btn {
+    background: url(../images/close-btn.png) center center no-repeat;
+    cursor: pointer;
+    height: 20px;
+    position: absolute;
+    right: 36px;
+    top: 35px;
+    width: 20px;
+}
+
+.accounts-close-btn:hover, .portfolios-close-btn:hover {
+    opacity: 0.6;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .accounts-close-btn, .portfolios-close-btn {
+        background-image: url(../images/close-btn@2x.png);
+        -webkit-background-size: 20px 20px;
+        -moz-background-size: 20px 20px;
+        background-size: 20px 20px;
+
+    }
+
+}
+
+.account-selector-title, .portfolio-selector-title {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-family: "proxima-nova", sans-serif;
     font-size: 24px;
@@ -479,18 +519,18 @@ ul {
     padding: 28px 0;
 }
 
-.account-lists {
+.account-lists, .portfolio-lists {
     margin: 18px 36px;
     overflow: auto;
 }
 
-.account-list {
+.account-list, .portfolio-list {
     float: left;
     margin-right: 64px;
     margin-bottom: 16px;
 }
 
-.account-list-header {
+.account-list-header, .portfolio-list-header {
     color: rgba(255, 255, 255, 0.5);
     font-family: "proxima-nova", sans-serif;
     font-size: 11px;
@@ -501,7 +541,7 @@ ul {
     text-transform: uppercase;
 }
 
-.account-list-item {
+.account-list-item, .portfolio-list-item {
     cursor: pointer;
     font-family: "proxima-nova", sans-serif;
     font-size: 13px;
@@ -511,16 +551,16 @@ ul {
     padding-right: 30px;
 }
 
-.account-list-item:hover {
+.account-list-item:hover, .portfolio-list-item:hover {
     background: url(../images/account-arrow.png) right center no-repeat;
 }
 
-.account-list-item .label {
+.account-list-item .label, .portfolio-list-item .label {
     opacity: 1;
     -webkit-transition: opacity ease-in-out 100ms;
 }
 
-.account-list-item:hover .label {
+.account-list-item:hover .label, .portfolio-list-item:hover .label {
     opacity: 0.6;
 }
 

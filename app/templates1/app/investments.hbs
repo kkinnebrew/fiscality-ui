@@ -1,0 +1,16 @@
+<header>
+
+    <h1>Portfolio Name</h1>
+
+    <ul>
+        <li onclick="location.hash='#/app/investments/12312321/positions'">Positions</li>
+        <li onclick="location.hash='#/app/investments/12312321/activity'">Activity</li>
+        <li onclick="location.hash='#/app/investments/12312321/performance'">Performance</li>
+        <li onclick="location.hash='#/app/investments/12312321/allocation'">Allocation</li>
+    </ul>
+
+    <div data-bind="click:choose()">Choose</div>
+
+</header>
+
+<div ui-view="investments"></div>
