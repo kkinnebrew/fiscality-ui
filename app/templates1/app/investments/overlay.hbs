@@ -11,7 +11,9 @@
         <ul class="portfolio-list">
             <li class="portfolio-list-header">Traditional</li>
             {{#each portfolios}}
-                <li data-link="/app/investments/{{portfolioId}}/positions" class="portfolio-list-item"><span class="label">{{portfolioName}}</span></li>
+                <li class="portfolio-list-item" data-key="{{portfolioId}}">
+                    <span class="label">{{portfolioName}}</span>
+                </li>
             {{/each}}
         </ul>
 
