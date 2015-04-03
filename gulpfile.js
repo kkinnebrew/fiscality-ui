@@ -18,6 +18,8 @@ var livereload = require('gulp-livereload');
 var stringify = require('stringify');
 var gutil = require('gulp-util');
 
+bowerResolve.offline = true;
+
 var hbsfy = require('hbsfy').configure({
   extensions: ['hbs']
 });

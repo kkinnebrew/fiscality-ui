@@ -1206,13 +1206,17 @@ ul {
     background: linear-gradient(135deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
     color: #FFF;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
-    opacity: 1;
+    opacity: 0;
     position: absolute;
     left: 190px;
     top: 0;
     bottom: 0;
     right: 0;
     -webkit-transition: all ease-in-out 100ms;
+}
+
+#accounts-overlay.activate, #portfolios-overlay.activate {
+    opacity: 1;
 }
 
 .accounts-close-btn, .portfolios-close-btn {
