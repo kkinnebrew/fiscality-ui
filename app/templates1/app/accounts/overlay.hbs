@@ -11,7 +11,9 @@
         <ul class="account-list">
             <li class="account-list-header">Banking</li>
             {{#each accounts}}
-                <li data-link="/app/accounts/{{accountId}}" class="account-list-item"><span class="label">{{accountName}}</span></li>
+                <li class="account-list-item" data-key="{{accountId}}">
+                    <span class="label">{{accountName}}</span>
+                </li>
             {{/each}}
         </ul>
 

@@ -1032,7 +1032,6 @@ ul {
     width: 100%;
 }
 
-
 .chart-container.blur {
     -webkit-filter: blur(10px);
     -moz-filter: blur(10px);
@@ -1199,12 +1198,12 @@ ul {
 /* account selector */
 
 #accounts-overlay, #portfolios-overlay {
-    background: rgba(59,152,214,0.5);
-    background: -moz-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
-    background: -webkit-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
-    background: -o-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
-    background: -ms-linear-gradient(-45deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
-    background: linear-gradient(135deg, rgba(59,152,214,0.5) 0%, rgba(35,125,185,0.5) 100%);
+    background: rgba(59,152,214,0.75);
+    background: -moz-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
+    background: -o-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
+    background: linear-gradient(135deg, rgba(59,152,214,0.75) 0%, rgba(35,125,185,0.75) 100%);
     color: #FFF;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
     opacity: 1;
