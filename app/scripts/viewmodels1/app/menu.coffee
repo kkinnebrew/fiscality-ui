@@ -8,7 +8,7 @@ class MenuViewModel extends ViewModel
 
     hash = location.hash.replace(/(^#\/?)|(\/$)/g, '').split('/')
 
-    @state = hash[1]
+    @state = hash[1] or 'accounts'
 
     # make service calls
 
