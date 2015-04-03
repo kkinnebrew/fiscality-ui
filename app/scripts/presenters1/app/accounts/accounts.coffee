@@ -39,15 +39,21 @@ class AccountsPresenter extends Presenter
 
     console.log(this)
 
+    @chartViewModel.markHidden()
+
     @accountsViewModel.overlayed = true
     @router.renderGlobal('accounts')
 
   showFullOverlay: =>
 
+    @chartViewModel.markHidden()
+
     @accountsViewModel.overlayed = false
     @router.renderGlobal('accounts')
 
   hideOverlay: =>
+
+    @chartViewModel.markVisible()
 
     @router.destroyGlobal('accounts')
 

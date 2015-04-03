@@ -1,4 +1,8 @@
-<div class="chart-container">
+{{#if isHidden}}
+    <div class="chart-container blur">
+{{else}}
+    <div class="chart-container">
+{{/if}}
 
     <div class="chart-header">
 
@@ -21,7 +25,7 @@
     <div class="chart-content">
 
         <div class="date-selectors">
-            <div class="date-selector">January 1, 2015</div>
+            <div class="date-selector">{{isHidden}}1January 1, 2015</div>
             <div class="date-separator"></div>
             <div class="date-selector">March 31, 2015</div>
         </div>

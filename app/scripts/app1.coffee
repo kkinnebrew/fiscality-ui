@@ -88,6 +88,7 @@ router.register('app.accounts', {
     'chart@content':
       present: 'chart'
       template: require('../templates1/app/accounts/chart.hbs')
+      view: require('./views1/app/accounts/chart.coffee')
       viewmodel: require('./viewmodels1/app/accounts/chart.coffee')
     'transactions@content':
       present: 'transactions'

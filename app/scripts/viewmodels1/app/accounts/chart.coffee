@@ -15,6 +15,7 @@ class ChartViewModel extends ViewModel
     @range = '1M'
     @startDate = new Date(2015, 1, 1)
     @endDate = new Date(2015, 3, 31)
+    @isHidden = false
 
     @update()
 
@@ -39,6 +40,22 @@ class ChartViewModel extends ViewModel
   choose: ->
 
     @fire('choose')
+
+  markHidden: ->
+
+    console.log('hidden')
+
+    @isHidden = true
+
+    @fire('refresh')
+
+  markVisible: ->
+
+    console.log('visible')
+
+    @isHidden = false
+
+    @fire('refresh')
 
   setAccount: (accountId) ->
 
