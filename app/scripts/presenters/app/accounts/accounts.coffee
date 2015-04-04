@@ -10,6 +10,8 @@ class AccountsPresenter extends Presenter
     @transactionsViewModel = null
     @accountsViewModel = null
 
+    @overlayed = false
+
   load: ->
 
     @showFullOverlay() if !@accountId
@@ -41,6 +43,10 @@ class AccountsPresenter extends Presenter
 
   showOverlay: =>
 
+    return if @overlayed
+
+    @overlayed = true
+
     @chartViewModel.markInactive()
     @transactionsViewModel.markInactive()
 
@@ -49,13 +55,21 @@ class AccountsPresenter extends Presenter
 
   showFullOverlay: =>
 
+    return if @overlayed
+
+    @overlayed = true
+
     @chartViewModel.markInactive()
     @transactionsViewModel.markInactive()
 
     @accountsViewModel.overlayed = false
     @router.renderGlobal('accounts')
 
-  hideOverlay: =>
+  hideOverlay: () =>
+
+    return if !@overlayed
+
+    @overlayed = false
 
     @chartViewModel.markActive()
     @transactionsViewModel.markActive()

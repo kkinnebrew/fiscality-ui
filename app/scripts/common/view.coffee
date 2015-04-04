@@ -61,16 +61,16 @@ class View
 
     @$el.html(html)
 
-    setTimeout =>
-      @$el.addClass('rendered')
-    , 0
-
     @bind()
 
     @viewmodel.on('refresh', @refresh)
     @viewmodel.on('change', @change)
 
     @rendered = true
+
+    setTimeout =>
+      @$el.addClass('rendered')
+    , 100
 
   getSubview: (name) ->
 
@@ -174,7 +174,7 @@ class View
       else
         that.$el.find('[ui-view]').replaceWith(this);
 
-    Log.debug('Refreshing view')
+    Log.debug('Refreshing view "' + @constructor.name + '"')
 
   change: =>
 

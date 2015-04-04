@@ -8,7 +8,7 @@ class Presenter
 
   update: ->
 
-  setParams: (params) ->
+  setParams: (params, ignore) ->
 
     changed = false
 
@@ -17,7 +17,7 @@ class Presenter
         this[name] = value
         changed = true
 
-    @update() if changed
+    @update() if changed && !ignore
 
   bind: ->
 

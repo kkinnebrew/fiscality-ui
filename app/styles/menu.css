@@ -1,0 +1,222 @@
+/* main menu styles */
+
+#menu {
+    background: #262626;
+    color: #FFF;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#header {
+    height: 90px;
+}
+
+#app-logo {
+    background: url(../images/app-logo.png) center center no-repeat;
+    height: 29px;
+    left: 20px;
+    position: absolute;
+    top: 31px;
+    width: 97px;
+}
+
+.logout-btn {
+    background: url(../images/logout-icon.png) center center no-repeat;
+    cursor: pointer;
+    height: 17px;
+    opacity: 0.5;
+    top: 36px;
+    right: 20px;
+    position: absolute;
+    width: 16px;
+    -webkit-transition: opacity ease-out 100ms;
+}
+
+.logout-btn:hover {
+    opacity: 0.7;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #app-logo {
+        background-image: url(../images/app-logo@2x.png);
+        -webkit-background-size: 97px 29px;
+        -moz-background-size: 97px 29px;
+        background-size: 97px 29px;
+    }
+
+    .logout-btn {
+        background-image: url(../images/logout-icon@2x.png);
+        -webkit-background-size: 16px 17px;
+        -moz-background-size: 16px 17px;
+        background-size: 16px 17px;
+    }
+
+}
+
+#statistics {
+    border-top: 1px solid #343434;
+    margin: 0 20px;
+    padding: 12px 0;
+    overflow: auto;
+}
+
+#statistics .balance {
+    float: left;
+}
+
+.balance .stat-value {
+    color: #FFF;
+    font-family: "Century Gothic";
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.balance .stat-label {
+    color: rgba(255, 255, 255, .4);
+    font-family: "proxima-nova";
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#statistics .change {
+    float: right;
+}
+
+.change .stat-value {
+    color: #9BBF5C;
+    font-family: "Century Gothic";
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-align: right;
+}
+
+.change .stat-label {
+    color: rgba(255, 255, 255, .4);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.menu-item {
+    background: url(../images/accounts-icon.png) 18px center no-repeat;
+    border-left: 3px solid transparent;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    cursor: pointer;
+    letter-spacing: 1.5px;
+    margin: 1px 0;
+    padding: 12px 0 12px 45px;
+    text-transform: uppercase;
+    -webkit-transition: all ease-in-out 150ms;
+}
+
+.menu-item.accounts {
+    background-image: url(../images/accounts-icon.png);
+}
+
+.menu-item.investments {
+    background-image: url(../images/investments-icon.png);
+}
+
+.menu-item.spending {
+    background-image: url(../images/spending-icon.png);
+}
+
+.menu-item.taxes {
+    background-image: url(../images/taxes-icon.png);
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .menu-item {
+        background-image: url(../images/accounts-icon@2x.png);
+        -webkit-background-size: 12px 14px;
+        -moz-background-size: 12px 14px;
+        background-size: 12px 14px;
+    }
+
+    .menu-item.accounts {
+        background-image: url(../images/accounts-icon@2x.png);
+        -webkit-background-size: 12px 14px;
+        -moz-background-size: 12px 14px;
+        background-size: 12px 14px;
+    }
+
+    .menu-item.investments {
+        background-image: url(../images/investments-icon@2x.png);
+        -webkit-background-size: 15px 15px;
+        -moz-background-size: 15px 15px;
+        background-size: 15px 15px;
+    }
+
+    .menu-item.spending {
+        background-image: url(../images/spending-icon@2x.png);
+        -webkit-background-size: 13px 15px;
+        -moz-background-size: 13px 15px;
+        background-size: 13px 15px;
+    }
+
+    .menu-item.taxes {
+        background-image: url(../images/taxes-icon@2x.png);
+        -webkit-background-size: 14px 13px;
+        -moz-background-size: 14px 13px;
+        background-size: 14px 13px;
+    }
+
+}
+
+.menu-item.active {
+    background-color: #2E2E2E;
+    border-left-color: #53B7FB;
+    -webkit-transition: all ease-in-out 150ms;
+}
+
+.menu-item:hover {
+    background-color: #303030;
+    -webkit-transition: all ease-in-out 100ms;
+}
+
+#settings {
+    background: url(../images/settings-arrow.png)right center no-repeat;
+    bottom: 0;
+    border-top: 1px solid #343434;
+    cursor: pointer;
+    left: 20px;
+    padding: 15px 0;
+    position: absolute;
+    right: 20px;
+}
+
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #settings {
+        background-image: url(../images/settings-arrow@2x.png);
+        -webkit-background-size: 6px 11px;
+        -moz-background-size: 6px 11px;
+        background-size: 6px 11px;
+    }
+
+}
+
+
+#settings .account-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#settings .account-name {
+    font-family: "proxima-nova", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}

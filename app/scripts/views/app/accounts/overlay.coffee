@@ -34,7 +34,7 @@ class OverlayView extends View
       if callback
         callback.call(this)
 
-    , 150
+    , 300
 
   onSelect: (e) =>
 

@@ -1,0 +1,120 @@
+#accounts-overlay {
+    background: rgba(59,152,214,1);
+    background: -moz-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    background: linear-gradient(135deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
+    bottom: 0;
+    color: #FFF;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
+    left: 190px;
+    opacity: 1;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+.overlayed > #accounts-overlay {
+    opacity: 0;
+    -webkit-transition: opacity 300ms ease-out;
+}
+
+.rendered > #accounts-overlay {
+    opacity: 1;
+}
+
+#accounts-overlay .close-btn {
+    background: url(../images/close-btn.png) center center no-repeat;
+    cursor: pointer;
+    height: 20px;
+    position: absolute;
+    right: 36px;
+    top: 35px;
+    width: 20px;
+}
+
+#accounts-overlay .accounts-close-btn:hover {
+    opacity: 0.6;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #accounts-overlay .accounts-close-btn {
+        background-image: url(../images/close-btn@2x.png);
+        -webkit-background-size: 20px 20px;
+        -moz-background-size: 20px 20px;
+        background-size: 20px 20px;
+    }
+
+}
+
+.account-selector-title {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 24px;
+    font-weight: 200;
+    margin: 0 36px;
+    padding: 28px 0;
+}
+
+#accounts-overlay .account-lists {
+    margin: 18px 36px;
+    overflow: auto;
+}
+
+#accounts-overlay .account-list {
+    float: left;
+    margin-right: 64px;
+    margin-bottom: 16px;
+}
+
+#accounts-overlay .account-list-header {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin: 0 0 8px 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+#accounts-overlay .account-list-item {
+    cursor: pointer;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    opacity: 1;
+    padding-right: 30px;
+}
+
+#accounts-overlay .account-list-item:hover {
+    background: url(../images/account-arrow.png) right center no-repeat;
+}
+
+
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #accounts-overlay .account-list-item:hover {
+        background-image: url(../images/account-arrow@2x.png);
+        -webkit-background-size: 6px 9px;
+        -moz-background-size: 6px 9px;
+        background-size: 6px 9px;
+    }
+
+}
+
+#accounts-overlay .account-list-item .label {
+    opacity: 1;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+#accounts-overlay .account-list-item:hover .label {
+    opacity: 0.6;
+}

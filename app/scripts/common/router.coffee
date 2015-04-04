@@ -145,7 +145,7 @@ class Router
     params = {}
 
     _.each @globals, (node, name) =>
-      @destroyGlobal(name) if node.$el
+      @destroyGlobal(name) if node.$el and !node.destroying
 
     while parts.length
 
@@ -172,9 +172,9 @@ class Router
         _.each @stack[depth].views, (node) ->
           node.viewmodel.setParams(params) if node.viewmodel
 
-        @stack[depth].presenter.setParams(params) if @stack[depth].presenter
-
-        @stack[depth].presenter.update() if @stack[depth].presenter
+        if @stack[depth].presenter
+          @stack[depth].presenter.setParams(params, true)
+          @stack[depth].presenter.update()
 
       depth++
 
@@ -328,6 +328,8 @@ class Router
     Log.debug('Destroying global state "' + name + '"')
 
     node = @globals[name]
+
+    node.destroying = true
 
     node.view.destroy ->
 
