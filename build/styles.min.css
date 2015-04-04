@@ -1203,6 +1203,37 @@ ul {
     width: 200px;
 }
 
+/* portfolios */
+
+.portfolio-header {
+    padding: 36px;
+}
+
+.portfolio-header h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.portfolio-header .title {
+    color: #515151;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 21px;
+    font-weight: 300;
+}
+
+.portfolio-header .subtitle {
+    color: #969696;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.portfolio-header .selector-btn {
+    float: right;
+}
+
 /* account selector */
 
 #accounts-overlay, #portfolios-overlay {

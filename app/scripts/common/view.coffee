@@ -12,7 +12,44 @@ class View
 
     @rendered = false
 
+#    @queue = []
+#    @running = false
+#    @process
+
     @viewmodel = viewmodel || null
+#
+#  add: (fn, args, wait) ->
+#
+#    @queue.push({ fn: fn, args: args, wait: wait })
+#
+#    @next() if !@running
+#
+#    return this
+#
+#  next: ->
+#
+#    @running = true
+#
+#    next = @queue.shift()
+#
+#    if next
+#      next.fn.apply(this, next.args)
+#      if next.wait and next.wait > 0
+#        @process = setTimeout =>
+#          @next()
+#        , next.wait
+#    else
+#      @running = false
+#
+#  stop: ->
+#
+#    @queue = []
+#
+#    if @process
+#      clearTimeout(@process)
+#      next()
+#
+#    return this
 
   render: ($el) ->
 
@@ -24,7 +61,9 @@ class View
 
     @$el.html(html)
 
-    @$el.addClass('rendered')
+    setTimeout =>
+      @$el.addClass('rendered')
+    , 0
 
     @bind()
 
@@ -151,7 +190,7 @@ class View
     else
       @$el.removeClass('inactive')
 
-  destroy: ->
+  destroy: (callback) ->
 
     return if !@rendered
 
@@ -166,5 +205,8 @@ class View
     @$el = null
 
     @rendered = false
+
+    if callback
+      callback.call(this)
 
 module.exports = View

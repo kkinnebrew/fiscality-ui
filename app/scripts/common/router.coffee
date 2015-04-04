@@ -329,10 +329,10 @@ class Router
 
     node = @globals[name]
 
-    node.view.destroy()
+    node.view.destroy ->
 
-    node.$el.remove()
+      node.$el.remove()
 
-    delete node.$el
+      delete node.$el
 
 module.exports = Router

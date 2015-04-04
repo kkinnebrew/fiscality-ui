@@ -1,16 +1,30 @@
-<header>
+<header class="portfolio-header">
 
-    <h1>{{portfolio.portfolioName}}</h1>
+    <h1>
+        <div class="title">{{portfolio.portfolioName}}</div>
+        <div class="subtitle">Last Updated May 8, 2015</div>
+    </h1>
 
-    <ul>
+    <div class="selector-btn" data-bind="click:choose()">Choose</div>
+
+    <div class="balance">
+        <span class="currency-prefix">$</span>
+        <span class="currency-value">{{currency balance}}</span>
+    </div>
+
+</header>
+
+<div id="investments-menu">
+
+    <input type="text" class="positions-search-field" />
+
+    <ul class="investments-menu-list">
         <li onclick="location.hash='#/app/investments/12312321/positions'">Positions</li>
         <li onclick="location.hash='#/app/investments/12312321/activity'">Activity</li>
         <li onclick="location.hash='#/app/investments/12312321/performance'">Performance</li>
         <li onclick="location.hash='#/app/investments/12312321/allocation'">Allocation</li>
     </ul>
 
-    <div data-bind="click:choose()">Choose</div>
-
-</header>
+</div>
 
 <div ui-view="investments"></div>
