@@ -311,7 +311,11 @@ class Router
 
     Log.debug('Rendering global state "' + name + '"')
 
+    count = @$root.find('[data-global]').length
+
     $global = $('<div data-global="' + name + '"></div>')
+
+    $global.css('z-index', 100 + count)
 
     @$root.append($global)
 

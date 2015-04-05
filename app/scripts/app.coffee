@@ -100,6 +100,11 @@ router.register('app.accounts', {
       template: require('../templates/app/accounts/overlay.hbs')
       view: require('./views/app/accounts/overlay.coffee')
       viewmodel: require('./viewmodels/app/accounts/overlay.coffee')
+    'connect-account@global':
+      present: 'connectAccount'
+      template: require('../templates/app/accounts/connect.hbs')
+      view: require('./views/app/accounts/connect.coffee')
+      viewmodel: require('./viewmodels/app/accounts/connect.coffee')
 })
 
 router.register('app.investments', {
