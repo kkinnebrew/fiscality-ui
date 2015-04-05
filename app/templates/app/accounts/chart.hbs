@@ -5,7 +5,12 @@
         <div class="chart-header-info">
 
             <h2 class="account-title">{{account.accountName}}</h2>
-            <div class="account-subtitle">Last Updated May 8, 2015</div>
+
+            {{#if account.updated}}
+                <div class="account-subtitle">Last Updated {{dateFormat account.updated 'MMMM d, yyyy'}}</div>
+            {{else}}
+                <div class="account-subtitle">Last Updated {{dateFormat account.created 'MMMM d, yyyy'}}</div>
+            {{/if}}
 
         </div>
 

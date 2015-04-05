@@ -4,7 +4,7 @@ $ = require('jquery')
 class OverlayView extends View
 
   bindings:
-    '.selector-list-item:not(.ignore)':
+    '.selector-list-item':
       'click': 'onSelect'
 
   render: ->
