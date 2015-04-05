@@ -17,7 +17,7 @@ class ResetViewModel extends ViewModel
       return Log.warn('Invalid password')
 
     authService.resetPassword(password, confirm).then =>
-     @router.goto('/home/login')
+     @router.goto('home.login')
     , ->
       Log.error('Error resetting password')
 

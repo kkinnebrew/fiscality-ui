@@ -10,6 +10,8 @@ class AccountsPresenter extends Presenter
     @transactionsViewModel = null
     @accountsViewModel = null
 
+    @overlayed = false
+
   load: ->
 
     @showFullOverlay() if !@accountId
@@ -35,25 +37,42 @@ class AccountsPresenter extends Presenter
 
     @hideOverlay()
 
-    @router.goto('/app/accounts/' + accountId)
+    @router.goto('app.accounts', {
+      accountId: accountId
+    })
 
   showOverlay: =>
 
-    @chartViewModel.markHidden()
+    return if @overlayed
+
+    @overlayed = true
+
+    @chartViewModel.markInactive()
+    @transactionsViewModel.markInactive()
 
     @accountsViewModel.overlayed = true
     @router.renderGlobal('accounts')
 
   showFullOverlay: =>
 
-    @chartViewModel.markHidden()
+    return if @overlayed
+
+    @overlayed = true
+
+    @chartViewModel.markInactive()
+    @transactionsViewModel.markInactive()
 
     @accountsViewModel.overlayed = false
     @router.renderGlobal('accounts')
 
-  hideOverlay: =>
+  hideOverlay: () =>
 
-    @chartViewModel.markVisible()
+    return if !@overlayed
+
+    @overlayed = false
+
+    @chartViewModel.markActive()
+    @transactionsViewModel.markActive()
 
     @router.destroyGlobal('accounts')
 

@@ -16,7 +16,7 @@ class ForgotViewModel extends ViewModel
       return Log.warn('Invalid email address')
 
     authService.forgotPassword(email).then =>
-      @router.goto('/home/login')
+      @router.goto('home.login')
     , ->
       Log.error('Unable to process request')
 

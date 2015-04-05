@@ -4,30 +4,26 @@ $ = require('jquery')
 class OverlayView extends View
 
   bindings:
-    '.account-list-item':
+    '.selector-list-item':
       'click': 'onSelect'
 
   render: ->
 
     super
 
-    setTimeout(() =>
-      @$el.find('#accounts-overlay').addClass('activate')
-    , 0)
+    @$el.addClass('overlayed') if @viewmodel.overlayed
 
-  destroy: ->
+  destroy: (callback) ->
 
-    deferred = $.Deferred()
-
-    if !@rendered
-      deferred.resolve()
-      return deferred
+    return if !@rendered
 
     @viewmodel.detach('refresh', @refresh) if @viewmodel
 
-    @unbind()
+    @$el.addClass('unrendered')
 
-    @$el.find('#accounts-overlay').removeClass('activate')
+    @$el.removeClass('rendered')
+
+    @unbind()
 
     setTimeout =>
 
@@ -37,12 +33,10 @@ class OverlayView extends View
 
       @rendered = false
 
-      deferred.resolve()
+      if callback
+        callback.call(this)
 
-    , 100
-
-    return deferred
-
+    , 150
 
   onSelect: (e) =>
 

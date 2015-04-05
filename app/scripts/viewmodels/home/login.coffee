@@ -14,7 +14,7 @@ class LoginViewModel extends ViewModel
   login: (email, password) ->
 
     authService.login(email, password).then =>
-      @router.goto('/app/accounts')
+      @router.goto('app.accounts')
     , ->
       Log.error('Unable to login to account')
 

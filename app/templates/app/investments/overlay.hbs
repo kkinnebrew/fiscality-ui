@@ -1,28 +1,28 @@
-<div id="portfolios-overlay">
+<div class="selector-overlay">
 
-    <div class="portfolio-selector-title">Portfolios</div>
+    <div class="selector-selector-title">Portfolios</div>
 
     {{#if overlayed}}
-        <div class="portfolios-close-btn" data-bind="click:close()"></div>
+        <div class="close-btn" data-bind="click:close()"></div>
     {{/if}}
 
-    <div class="portfolio-lists">
+    <div class="selector-lists">
 
-        <ul class="portfolio-list">
-            <li class="portfolio-list-header">Traditional</li>
+        <ul class="selector-list">
+            <li class="selector-list-header">Traditional</li>
             {{#each portfolios}}
-                <li class="portfolio-list-item" data-key="{{portfolioId}}">
+                <li class="selector-list-item" data-key="{{portfolioId}}">
                     <span class="label">{{portfolioName}}</span>
                 </li>
             {{/each}}
         </ul>
 
-        <ul class="portfolio-list">
-            <li class="portfolio-list-header">Retirement</li>
-            <li class="portfolio-list-item"><span data-link class="label">Merrill Lynch Roth IRA</span></li>
-            <li class="portfolio-list-item"><span class="label">Principal ESOP</span></li>
-            <li class="portfolio-list-item"><span class="label">Principal Traditional 401k</span></li>
-            <li class="portfolio-list-item"><span class="label">Principal Roth 401k</span></li>
+        <ul class="selector-list">
+            <li class="selector-list-header">Retirement</li>
+            <li class="selector-list-item"><span data-link class="label">Merrill Lynch Roth IRA</span></li>
+            <li class="selector-list-item"><span class="label">Principal ESOP</span></li>
+            <li class="selector-list-item"><span class="label">Principal Traditional 401k</span></li>
+            <li class="selector-list-item"><span class="label">Principal Roth 401k</span></li>
         </ul>
 
     </div>

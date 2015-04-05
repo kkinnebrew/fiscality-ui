@@ -19,7 +19,7 @@ class RegisterViewModel extends ViewModel
       return Log.warn('Invalid form')
 
     authService.register(firstName, lastName, email, password).then =>
-      @router.goto('/home/login');
+      @router.goto('home.login');
     , ->
       Log.error('Error registering')
 

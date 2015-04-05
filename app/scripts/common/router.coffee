@@ -89,9 +89,33 @@ class Router
 
   replaceState: (state) ->
   
-  goto: (state) ->
+  goto: (path, params) ->
 
-    location.hash = '#' + state
+    hash = '#'
+
+    parts = path.split('.')
+
+    while parts.length
+
+      part = parts.shift()
+
+      state = if state then state + '.' + part else part
+
+      config = @getConfig(state)
+
+      hash = hash + '/' + part
+
+      if !config
+        return Log.error('State not found for invalid route "' + state + '"')
+
+      if config.params
+        for i in [0...config.params.length] by 1
+          if params and params.hasOwnProperty(config.params[i])
+            hash = hash + '/' + params[config.params[i]]
+          else if parts.length
+            hash = hash + '/undefined'
+
+    location.hash = hash
 
   listen: ->
 
@@ -121,7 +145,7 @@ class Router
     params = {}
 
     _.each @globals, (node, name) =>
-      @destroyGlobal(name) if node.$el
+      @destroyGlobal(name) if node.$el and !node.destroying
 
     while parts.length
 
@@ -148,9 +172,9 @@ class Router
         _.each @stack[depth].views, (node) ->
           node.viewmodel.setParams(params) if node.viewmodel
 
-        @stack[depth].presenter.setParams(params) if @stack[depth].presenter
-
-        @stack[depth].presenter.update() if @stack[depth].presenter
+        if @stack[depth].presenter
+          @stack[depth].presenter.setParams(params, true)
+          @stack[depth].presenter.update()
 
       depth++
 
@@ -305,8 +329,12 @@ class Router
 
     node = @globals[name]
 
-    node.view.destroy().always ->
+    node.destroying = true
+
+    node.view.destroy ->
+
       node.$el.remove()
+
       delete node.$el
 
 module.exports = Router

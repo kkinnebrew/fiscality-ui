@@ -16,12 +16,12 @@ class MenuViewModel extends ViewModel
 
     @state = state
 
-    @router.goto('/app/' + state)
+    @router.goto('app.' + state)
 
   logout: ->
 
     # make service calls
 
-    @router.goto('/home/login')
+    @router.goto('home.login')
 
 module.exports = MenuViewModel

@@ -4,7 +4,7 @@ View = require('../../common/view.coffee')
 class MenuView extends View
 
   bindings:
-    '.nav-list-item':
+    '.menu-item':
       'click': 'onSelect'
     '.settings-button':
       'click': 'onSettings'
@@ -17,7 +17,7 @@ class MenuView extends View
 
     state = @viewmodel.state
 
-    @$el.find('.nav-list-item.' + state).addClass('active')
+    @$el.find('.menu-item.' + state).addClass('active')
 
   onSelect: (e) =>
 
@@ -25,7 +25,7 @@ class MenuView extends View
 
     if key
       @viewmodel.setState(key)
-      @$el.find('.nav-list-item').removeClass('active')
+      @$el.find('.menu-item').removeClass('active')
       @$el.find('[data-key="' + key + '"]').addClass('active')
 
   onSettings: =>

@@ -12,7 +12,44 @@ class View
 
     @rendered = false
 
+#    @queue = []
+#    @running = false
+#    @process
+
     @viewmodel = viewmodel || null
+#
+#  add: (fn, args, wait) ->
+#
+#    @queue.push({ fn: fn, args: args, wait: wait })
+#
+#    @next() if !@running
+#
+#    return this
+#
+#  next: ->
+#
+#    @running = true
+#
+#    next = @queue.shift()
+#
+#    if next
+#      next.fn.apply(this, next.args)
+#      if next.wait and next.wait > 0
+#        @process = setTimeout =>
+#          @next()
+#        , next.wait
+#    else
+#      @running = false
+#
+#  stop: ->
+#
+#    @queue = []
+#
+#    if @process
+#      clearTimeout(@process)
+#      next()
+#
+#    return this
 
   render: ($el) ->
 
@@ -26,9 +63,14 @@ class View
 
     @bind()
 
-    @viewmodel.on('refresh', @refresh) if @viewmodel
+    @viewmodel.on('refresh', @refresh)
+    @viewmodel.on('change', @change)
 
     @rendered = true
+
+    setTimeout =>
+      @$el.addClass('rendered')
+    , 100
 
   getSubview: (name) ->
 
@@ -132,17 +174,29 @@ class View
       else
         that.$el.find('[ui-view]').replaceWith(this);
 
-    Log.debug('Refreshing view')
+    Log.debug('Refreshing view "' + @constructor.name + '"')
 
-  destroy: ->
+  change: =>
 
-    deferred = $.Deferred()
+    return if !@rendered
 
-    if !@rendered
-      deferred.resolve()
-      return deferred
+    if @viewmodel.loading
+      @$el.addClass('loading')
+    else
+      @$el.removeClass('loading')
+
+    if @viewmodel.inactive
+      @$el.addClass('inactive')
+    else
+      @$el.removeClass('inactive')
+
+  destroy: (callback) ->
+
+    return if !@rendered
 
     @viewmodel.detach('refresh', @refresh) if @viewmodel
+
+    @$el.removeClass('rendered')
 
     @unbind()
 
@@ -152,8 +206,7 @@ class View
 
     @rendered = false
 
-    deferred.resolve()
-
-    return deferred
+    if callback
+      callback.call(this)
 
 module.exports = View

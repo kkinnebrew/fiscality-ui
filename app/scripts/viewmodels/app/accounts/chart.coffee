@@ -15,7 +15,6 @@ class ChartViewModel extends ViewModel
     @range = '1M'
     @startDate = new Date(2015, 1, 1)
     @endDate = new Date(2015, 3, 31)
-    @isHidden = false
 
     @update()
 
@@ -23,7 +22,7 @@ class ChartViewModel extends ViewModel
 
     return if !@accountId
 
-    @isHidden = false
+    @startLoading()
 
     accountRequest = transactionsService.account(@accountId)
     balanceRequest = transactionsService.balance(@accountId)
@@ -35,25 +34,19 @@ class ChartViewModel extends ViewModel
       @account = account
       @balance = balance or 0
 
-      @fire('refresh')
+      setTimeout =>
+        @stopLoading()
 
-    , -> Log.error('Error loading account for accountId: ' + @selectedAccountId))
+        @fire('refresh')
+      , 1000
+
+    , =>
+      @stopLoading()
+      Log.error('Error loading account for accountId: ' + @selectedAccountId))
 
   choose: ->
 
     @fire('choose')
-
-  markHidden: ->
-
-    @isHidden = true
-
-    @fire('refresh')
-
-  markVisible: ->
-
-    @isHidden = false
-
-    @fire('refresh')
 
   setAccount: (accountId) ->
 

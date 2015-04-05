@@ -31,7 +31,9 @@ class InvestmentsPresenter extends Presenter
     @investmentsViewModel.setPortfolio(portfolioId)
     @hideOverlay()
 
-    @router.goto('/app/investments/' + portfolioId + '/positions')
+    @router.goto('app.investments.positions', {
+      portfolioId: portfolioId
+    })
 
   showOverlay: =>
 
