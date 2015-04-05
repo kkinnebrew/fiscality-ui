@@ -9,6 +9,7 @@ class AccountsPresenter extends Presenter
     @chartViewModel = null
     @transactionsViewModel = null
     @accountsViewModel = null
+    @connectAccountViewModel = null
 
     @overlayed = false
 
@@ -19,6 +20,9 @@ class AccountsPresenter extends Presenter
     @chartViewModel.on('choose', @showOverlay)
     @accountsViewModel.on('close', @hideOverlay)
     @accountsViewModel.on('select', @selectAccount)
+    @accountsViewModel.on('connect', @showConnectAccount)
+    @connectAccountViewModel.on('close', @hideConnectAccount)
+    @connectAccountViewModel.on('done', @doneConnecting)
 
   update: ->
 
@@ -40,6 +44,27 @@ class AccountsPresenter extends Presenter
     @router.goto('app.accounts', {
       accountId: accountId
     })
+
+  showConnectAccount: =>
+
+    @chartViewModel.markInactive()
+    @transactionsViewModel.markInactive()
+    @accountsViewModel.markInactive()
+
+    @router.renderGlobal('connect-account')
+
+  hideConnectAccount: =>
+
+    @chartViewModel.markActive()
+    @transactionsViewModel.markActive()
+    @accountsViewModel.markActive()
+
+    @router.destroyGlobal('connect-account')
+
+  doneConnecting: =>
+
+    @accountsViewModel.refreshAccounts()
+    @hideConnectAccount()
 
   showOverlay: =>
 

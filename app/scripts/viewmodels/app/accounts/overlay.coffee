@@ -11,6 +11,14 @@ class OverlayViewModel extends ViewModel
     @accounts = []
     @accountId = params.accountId || null
 
+    @refreshAccounts()
+
+  update: ->
+
+    @fire('refresh')
+
+  refreshAccounts: ->
+
     @startLoading()
 
     transactionsService.accounts().then (data) =>
@@ -21,10 +29,6 @@ class OverlayViewModel extends ViewModel
       @stopLoading()
       Log.error('Error fetching accounts')
 
-  update: ->
-
-    @fire('refresh')
-
   setAccount: (accountId) ->
 
     @close if @accountId == accountId
@@ -32,6 +36,10 @@ class OverlayViewModel extends ViewModel
     @accountId = accountId
 
     @fire('select', accountId)
+
+  connect: ->
+
+    @fire('connect')
 
   close: ->
 

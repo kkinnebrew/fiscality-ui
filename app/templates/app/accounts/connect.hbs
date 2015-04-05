@@ -1,0 +1,34 @@
+<div id="connect-account">
+
+    <header>
+
+        <h1 class="title">Connect Account</h1>
+
+        <div class="close-btn" data-bind="click:close()"></div>
+
+    </header>
+
+    <div class="form form-group">
+
+        <div class="field-group">
+            <label class="field-label">Account Name</label>
+            <input class="text-field" type="text" placeholder="ex. My Bank Account" data-model="accountName" spellcheck="false" />
+        </div>
+
+        <div class="field-group">
+            <label class="field-label">Account Type</label>
+            <select class="select-field" type="text" data-model="accountType">
+                <option value="Asset">Asset</option>
+                <option value="Liability">Liability</option>
+                <option value="Income">Income</option>
+                <option value="Expense">Expense</option>
+                <option value="Equity">Equity</option>
+            </select>
+        </div>
+
+        <input class="field-btn submit-btn" type="button" data-bind="click:create(accountName, accountType)" value="Create Account" />
+
+    </div>
+
+
+</div>

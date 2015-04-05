@@ -1,11 +1,7 @@
 View = require('../../../common/view.coffee')
 $ = require('jquery')
 
-class OverlayView extends View
-
-  bindings:
-    '.selector-list-item:not(.ignore)':
-      'click': 'onSelect'
+class ConnectAccountView extends View
 
   render: ->
 
@@ -21,8 +17,6 @@ class OverlayView extends View
 
     @$el.addClass('unrendered')
 
-    @$el.removeClass('rendered')
-
     @unbind()
 
     setTimeout =>
@@ -36,12 +30,6 @@ class OverlayView extends View
       if callback
         callback.call(this)
 
-    , 150
+    , 300
 
-  onSelect: (e) =>
-
-    accountId = $(e.currentTarget).attr('data-key')
-
-    @viewmodel.setAccount(accountId)
-
-module.exports = OverlayView
+module.exports = ConnectAccountView

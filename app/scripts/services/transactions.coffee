@@ -39,6 +39,14 @@ class TransactionsService extends Service
 
     return @cacheGet('/api/accounts/' + accountId)
 
+  createAccount: (accountName, accountType) ->
+
+    return @post('/api/accounts/add', {
+      accountName: accountName,
+      accountType: accountType
+    }).then (data) =>
+      cache.clear()
+
   balance: (accountId) ->
 
     return @cacheGet('/api/accounts/' + accountId + '/balance')
