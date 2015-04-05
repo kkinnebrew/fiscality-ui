@@ -4,7 +4,7 @@ $ = require('jquery')
 class OverlayView extends View
 
   bindings:
-    '.portfolio-list-item':
+    '.selector-list-item':
       'click': 'onSelect'
 
   render: ->
@@ -18,6 +18,8 @@ class OverlayView extends View
     return if !@rendered
 
     @viewmodel.detach('refresh', @refresh) if @viewmodel
+
+    @$el.addClass('unrendered')
 
     @$el.removeClass('rendered')
 

@@ -1,4 +1,4 @@
-#accounts-overlay {
+.selector-overlay {
     background: rgba(59,152,214,1);
     background: -moz-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     background: -webkit-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
@@ -18,21 +18,21 @@
     -webkit-transform: translate3d(0, 0, 0);
 }
 
-.overlayed > #accounts-overlay {
+.overlayed > .selector-overlay {
     opacity: 0;
     -webkit-transition: opacity 300ms ease-out;
 }
 
-.rendered > #accounts-overlay {
+.rendered > .selector-overlay {
     opacity: 1;
 }
 
-.unrendered > #accounts-overlay {
+.unrendered > .selector-overlay {
     opacity: 0;
     -webkit-transition: opacity 150ms ease-out;
 }
 
-#accounts-overlay .close-btn {
+.selector-overlay .close-btn {
     background: url(../images/close-btn.png) center center no-repeat;
     cursor: pointer;
     height: 20px;
@@ -45,19 +45,19 @@
     -webkit-transition: all 100ms ease-in-out;
 }
 
-.rendered #accounts-overlay .close-btn {
+.rendered .selector-overlay .close-btn {
     opacity: 1;
     -webkit-transform: scale3d(1, 1, 1);
 }
 
-#accounts-overlay .close-btn:hover {
+.selector-overlay .close-btn:hover {
     opacity: 0.6;
     -webkit-transform: scale3d(0.8, 0.8, 1);
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    #accounts-overlay .accounts-close-btn {
+    .selector-overlay .selector-close-btn {
         background-image: url(../images/close-btn@2x.png);
         -webkit-background-size: 20px 20px;
         -moz-background-size: 20px 20px;
@@ -66,7 +66,7 @@
 
 }
 
-.account-selector-title {
+.selector-selector-title {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-family: "proxima-nova", sans-serif;
     font-size: 24px;
@@ -78,24 +78,24 @@
     -webkit-transition: -webkit-transform 300ms ease-in-out, opacity 300ms ease-out;
 }
 
-.rendered .account-selector-title {
+.rendered .selector-selector-title {
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
 }
 
-#accounts-overlay .account-lists {
+.selector-overlay .selector-lists {
     margin: 18px 36px;
     overflow: auto;
 }
 
-#accounts-overlay .account-list {
+.selector-overlay .selector-list {
     float: left;
     margin-right: 64px;
     margin-bottom: 16px;
     width: 240px;
 }
 
-#accounts-overlay .account-list-header {
+.selector-overlay .selector-list-header {
     color: rgba(255, 255, 255, 0.5);
     font-family: "proxima-nova", sans-serif;
     font-size: 11px;
@@ -106,7 +106,7 @@
     text-transform: uppercase;
 }
 
-#accounts-overlay .account-list-item {
+.selector-overlay .selector-list-item {
     cursor: pointer;
     font-family: "proxima-nova", sans-serif;
     font-size: 13px;
@@ -117,46 +117,46 @@
     -webkit-transition: opacity 100ms ease-out;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(2) {
+.selector-overlay .selector-list .selector-list-item:nth-child(2) {
     -webkit-transition-delay: 0ms;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(3) {
+.selector-overlay .selector-list .selector-list-item:nth-child(3) {
     -webkit-transition-delay: 30ms;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(4) {
+.selector-overlay .selector-list .selector-list-item:nth-child(4) {
     -webkit-transition-delay: 60ms;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(5) {
+.selector-overlay .selector-list .selector-list-item:nth-child(5) {
     -webkit-transition-delay: 90ms;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(6) {
+.selector-overlay .selector-list .selector-list-item:nth-child(6) {
     -webkit-transition-delay: 120ms;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(7) {
+.selector-overlay .selector-list .selector-list-item:nth-child(7) {
     -webkit-transition-delay: 150ms;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(8) {
+.selector-overlay .selector-list .selector-list-item:nth-child(8) {
     -webkit-transition-delay: 180ms;
 }
 
-.rendered > #accounts-overlay .account-list-item {
+.rendered > .selector-overlay .selector-list-item {
     opacity: 1;
 }
 
-#accounts-overlay .account-list-item:hover {
-    background: url(../images/account-arrow.png) right center no-repeat;
+.selector-overlay .selector-list-item:hover {
+    background: url(../images/selector-arrow.png) right center no-repeat;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    #accounts-overlay .account-list-item:hover {
-        background-image: url(../images/account-arrow@2x.png);
+    .selector-overlay .selector-list-item:hover {
+        background-image: url(../images/selector-arrow@2x.png);
         -webkit-background-size: 6px 9px;
         -moz-background-size: 6px 9px;
         background-size: 6px 9px;
@@ -164,11 +164,11 @@
 
 }
 
-#accounts-overlay .account-list-item .label {
+.selector-overlay .selector-list-item .label {
     opacity: 1;
     -webkit-transition: opacity ease-in-out 100ms;
 }
 
-#accounts-overlay .account-list-item:hover .label {
+.selector-overlay .selector-list-item:hover .label {
     opacity: 0.6;
 }
