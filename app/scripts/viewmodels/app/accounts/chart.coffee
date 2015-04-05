@@ -34,9 +34,11 @@ class ChartViewModel extends ViewModel
       @account = account
       @balance = balance or 0
 
-      @stopLoading()
+      setTimeout =>
+        @stopLoading()
 
-      @fire('refresh')
+        @fire('refresh')
+      , 1000
 
     , =>
       @stopLoading()

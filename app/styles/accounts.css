@@ -1,174 +1,533 @@
-#accounts-overlay {
+#accounts-chart {
     background: rgba(59,152,214,1);
     background: -moz-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     background: -webkit-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     background: -o-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     background: -ms-linear-gradient(-45deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
     background: linear-gradient(135deg, rgba(59,152,214,1) 0%, rgba(35,125,185,1) 100%);
-    bottom: 0;
-    color: #FFF;
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b98d6', endColorstr='#237db9', GradientType=1 );
-    left: 190px;
+    color: #FFF;
+    font-weight: 300;
+    height: 380px;
+    position: relative;
+    width: 100%;
+}
+
+.chart-container {
+    height: 100%;
     opacity: 1;
-    overflow: hidden;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 100;
-    -webkit-transform: translate3d(0, 0, 0);
+    width: 100%;
 }
 
-.overlayed > #accounts-overlay {
+#accounts-chart.inactive .chart-container {
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
     opacity: 0;
-    -webkit-transition: opacity 300ms ease-out;
+    -webkit-transition: all 150ms linear;
 }
 
-.rendered > #accounts-overlay {
+.chart-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 90px;
+    left: 36px;
     opacity: 1;
-}
-
-.unrendered > #accounts-overlay {
-    opacity: 0;
-    -webkit-transition: opacity 150ms ease-out;
-}
-
-#accounts-overlay .close-btn {
-    background: url(../images/close-btn.png) center center no-repeat;
-    cursor: pointer;
-    height: 20px;
-    opacity: 0;
+    overflow: auto;
     position: absolute;
     right: 36px;
-    top: 35px;
-    width: 20px;
-    -webkit-transform: scale3d(0, 0, 0);
-    -webkit-transition: all 100ms ease-in-out;
+    top: 0;
+    -webkit-transition: opacity 150ms ease-in-out;
 }
 
-.rendered #accounts-overlay .close-btn {
+#accounts-chart.loading .chart-header {
+    opacity: 0.3;
+}
+
+.chart-header-info {
+    float: left;
+    margin-top: 22px;
+}
+
+.selector-btn {
+    background: url(../images/accounts-selector-btn.png) center center no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 18px;
+    margin-right: 32px;
+    margin-top: 34px;
     opacity: 1;
-    -webkit-transform: scale3d(1, 1, 1);
+    width: 18px;
+    -webkit-transition: all ease-in-out 100ms;
 }
 
-#accounts-overlay .close-btn:hover {
-    opacity: 0.6;
-    -webkit-transform: scale3d(0.8, 0.8, 1);
+.selector-btn:hover {
+    opacity: 0.7;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    #accounts-overlay .accounts-close-btn {
-        background-image: url(../images/close-btn@2x.png);
-        -webkit-background-size: 20px 20px;
-        -moz-background-size: 20px 20px;
-        background-size: 20px 20px;
+    .selector-btn {
+        background-image: url(../images/accounts-selector-btn@2x.png);
+        -webkit-background-size: 18px 9px;
+        -moz-background-size: 18px 9px;
+        background-size: 18px 9px;
     }
-
 }
 
-.account-selector-title {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.account-title {
     font-family: "proxima-nova", sans-serif;
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 200;
-    margin: 0 36px;
-    opacity: 0;
-    padding: 28px 0;
-    -webkit-transform: translate3d(10px, 0, 0);
-    -webkit-transition: -webkit-transform 300ms ease-in-out, opacity 300ms ease-out;
+    letter-spacing: 0.5px;
+    height: 29px;
 }
 
-.rendered .account-selector-title {
+.account-subtitle {
+    color: #9ACAE9;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    height: 14px;
+}
+
+.options-btn {
+    background: url(../images/options-btn.png) center center no-repeat;
+    cursor: pointer;
+    float: right;
+    height: 17px;
+    margin-top: 37px;
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
+    width: 20px;
+    -webkit-transition: all ease-in-out 100ms;
 }
 
-#accounts-overlay .account-lists {
-    margin: 18px 36px;
+.options-btn:hover {
+    opacity: 0.7;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .options-btn {
+        background-image: url(../images/options-btn@2x.png);
+        -webkit-background-size: 20px 17px;
+        -moz-background-size: 20px 17px;
+        background-size: 20px 17px;;
+    }
+}
+
+.chart-balance {
+    float: right;
+    margin-top: 30px;
+    margin-right: 32px;
+}
+
+.currency-prefix {
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    line-height: 23px;
+    vertical-align: top;
+}
+
+.currency-value {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+}
+
+.chart-content {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+}
+
+.date-selectors {
+    left: 36px;
+    opacity: 1;
     overflow: auto;
+    position: absolute;
+    top: 16px;
+    -webkit-transition: opacity 150ms ease-in-out;
 }
 
-#accounts-overlay .account-list {
+#accounts-chart.loading .date-selectors {
+    opacity: 0.3;
+}
+
+.date-selector {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
     float: left;
-    margin-right: 64px;
-    margin-bottom: 16px;
-    width: 240px;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    padding: 4px 16px 2px 16px;
+    text-transform: uppercase;
+    -webkit-transition: all ease-in-out 100ms;
 }
 
-#accounts-overlay .account-list-header {
-    color: rgba(255, 255, 255, 0.5);
+.date-selector:hover {
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    color: #FFF;
+}
+
+.date-separator {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    float: left;
+    height: 4px;
+    margin: 8px;
+    width: 4px;
+}
+
+/*#accounts-chart .loading-indicator {*/
+    /*font-size: 21px;*/
+    /*font-weight: 300;*/
+    /*left: 50%;*/
+    /*margin-left: -100px;*/
+    /*position: absolute;*/
+    /*text-align: center;*/
+    /*top: 50%;*/
+    /*width: 200px;*/
+/*}*/
+
+.range-picker {
+    list-style: none;
+    opacity: 1;
+    position: absolute;
+    right: 36px;
+    top: 12px;
+    -webkit-transition: opacity 150ms ease-in-out;
+}
+
+#accounts-chart.loading .range-picker {
+    opacity: 0.3;
+}
+
+.range-picker-item {
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    margin: 0 3px 0 3px;
+    opacity: 0.5;
+    padding: 3px 5px 1px 6px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    -webkit-transition: all ease-in-out 100ms;
+    -webkit-font-smoothing: antialiased;
+}
+
+.range-picker-item:hover {
+    opacity: 1;
+}
+
+.range-picker-item.active {
+    border: 1px solid #FFF;
+    border-radius: 2px;
+    opacity: 1;
+}
+
+#transactions {
+    background: #FFF;
+    color: #000;
+    font-weight: 300;
+    min-height: 1000px;
+    opacity: 1;
+    -webkit-transition: opacity 150ms ease-in-out;
+}
+
+#transactions.loading {
+    opacity: 0.3;
+}
+
+#transactions h2 {
+    font-weight: inherit;
+}
+
+.transaction-header {
+    background: rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    height: 48px;
+    position: absolute;
+    width: 100%;
+}
+
+.transaction-header-item {
+    cursor: pointer;
+    color: #C0D7DB;
     font-family: "proxima-nova", sans-serif;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1.5px;
-    margin: 0 0 8px 0;
-    padding: 0;
+    height: 48px;
+    line-height: 50px;
     text-transform: uppercase;
 }
 
-#accounts-overlay .account-list-item {
+.transaction-header-item.active {
+    color: #FFF;
+}
+
+.transaction-row-info {
+    overflow: auto;
+}
+
+.transaction-row-details {
+    display: none;
+    overflow: auto;
+}
+
+.transaction-row .transaction-row-info {
+    margin-bottom: 0;
+}
+
+.transaction-row.expand .transaction-row-info {
+    margin-bottom: 10px;
+}
+
+.transaction-row .transaction-row-info {
+    margin-bottom: 10px;
+}
+
+.transaction-row .transaction-row-details:last-child {
+    padding-bottom: 10px;
+}
+
+.transaction-row-details .line-description {
+    border-bottom: 1px solid #EEE;
+    color: #797979;
     cursor: pointer;
     font-family: "proxima-nova", sans-serif;
-    font-size: 13px;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-    opacity: 0;
-    padding-right: 30px;
-    -webkit-transition: opacity 100ms ease-out;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 3px 0;
+    margin-left: 16px;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(2) {
-    -webkit-transition-delay: 0ms;
+.transaction-row-details .line-description:hover {
+    color: #666;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(3) {
-    -webkit-transition-delay: 30ms;
+.transaction-row-details:last-child .line-description {
+    border-bottom: none;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(4) {
-    -webkit-transition-delay: 60ms;
+.transaction-row-details .line-amount {
+    border-bottom: 1px solid #EEE;
+    color: #797979;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-right: 25px;
+    padding-right: 0;
 }
 
-#accounts-overlay .account-list .account-list-item:nth-child(5) {
-    -webkit-transition-delay: 90ms;
-}
-
-#accounts-overlay .account-list .account-list-item:nth-child(6) {
-    -webkit-transition-delay: 120ms;
-}
-
-#accounts-overlay .account-list .account-list-item:nth-child(7) {
-    -webkit-transition-delay: 150ms;
-}
-
-#accounts-overlay .account-list .account-list-item:nth-child(8) {
-    -webkit-transition-delay: 180ms;
-}
-
-.rendered > #accounts-overlay .account-list-item {
-    opacity: 1;
-}
-
-#accounts-overlay .account-list-item:hover {
-    background: url(../images/account-arrow.png) right center no-repeat;
+.transaction-row .account-names {
+    background: url(../images/transaction-line-expand-icon.png) left center no-repeat;
+    cursor: pointer;
+    display: block;
+    text-indent: 12px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    #accounts-overlay .account-list-item:hover {
-        background-image: url(../images/account-arrow@2x.png);
-        -webkit-background-size: 6px 9px;
-        -moz-background-size: 6px 9px;
-        background-size: 6px 9px;
+    .transaction-row .account-names {
+        background-image: url(../images/transaction-line-expand-icon@2x.png);
+        -webkit-background-size: 6px 7px;
+        -moz-background-size: 6px 7px;
+        background-size: 6px 7px;
+
     }
 
 }
 
-#accounts-overlay .account-list-item .label {
-    opacity: 1;
-    -webkit-transition: opacity ease-in-out 100ms;
+.transaction-row .account-names:hover {
+    color: #666;
 }
 
-#accounts-overlay .account-list-item:hover .label {
-    opacity: 0.6;
+.transaction-row .collapse-btn {
+    background: url(../images/transaction-line-collapse-icon.png) left center no-repeat;
+    color: #AAA;
+    cursor: pointer;
+    display: none;
+    text-indent: 12px;
+}
+
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .transaction-row .collapse-btn {
+        background-image: url(../images/transaction-line-collapse-icon@2x.png);
+        -webkit-background-size: 8px 7px;
+        -moz-background-size: 8px 7px;
+        background-size: 8px 7px;
+
+    }
+
+}
+
+.transaction-row .collapse-btn:hover {
+    color: #999;
+}
+
+.transaction-row-details:last-child .line-amount {
+    border-bottom: none;
+}
+
+.transaction-row.expand .transaction-row-details {
+    display: block;
+}
+
+.transaction-row.expand .account-names {
+    display: none;
+}
+
+.transaction-row.expand .collapse-btn {
+    display: block;
+}
+
+
+.column-xsm {
+    height: 100%;
+    min-height: 1px;
+    width: 56px;
+}
+
+.column-sm {
+    height: 100%;
+    min-height: 1px;
+    width: 90px;
+}
+
+.column-md {
+    height: 100%;
+    min-height: 1px;
+    width: 160px;
+}
+
+.column-lg {
+    height: 100%;
+    min-height: 1px;
+    width: 280px;
+}
+
+.column-xlg {
+    height: 100%;
+    min-height: 1px;
+    width: 400px;
+}
+
+.column-left {
+    float: left;
+}
+
+.column-first {
+    padding-left: 16px;
+}
+
+.column-right {
+    float: right;
+    padding-right: 20px;
+    text-align: right;
+}
+
+.reconciled-header-button {
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    height: 6px;
+    margin-left: 24px;
+    margin-top: 20px;
+    width: 6px;
+}
+
+.transaction-subheader {
+    background: #F7F7F7;
+    color: #8F8F8F;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    -webkit-font-smoothing: antialiased;
+}
+
+.transaction-row {
+    border-bottom: 1px solid #EDEDED;
+    min-height: 68px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.transaction-row .reconciliation {
+    border: 1px solid #1A6FAA;
+    border-radius: 10px;
+    height: 6px;
+    margin-left: 24px;
+    margin-top: 32px;
+    width: 6px;
+}
+
+.transaction-row .date {
+    color: #272727;
+    font-weight: 500;
+    font-size: 16px;
+    padding-bottom: 1px;
+    padding-top: 16px;
+}
+
+.transaction-row .transaction-type {
+    color: #797979;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.transaction-row .description-text {
+    color: #272727;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding-bottom: 0;
+    padding-top: 16px;
+    width: 100%;
+}
+
+.transaction-row .account-text {
+    color: #797979;
+    font-family: "proxima-nova", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+.transaction-row .balance {
+    color: #B8B8B8;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 26px;
+    letter-spacing: 1px;
+}
+
+.transaction-row .amount {
+    color: #494949;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 26px;
+    letter-spacing: 1px;
 }

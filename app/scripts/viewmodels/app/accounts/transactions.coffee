@@ -39,9 +39,11 @@ class TransactionsViewModel extends ViewModel
 
       @transactions.reverse();
 
-      @stopLoading()
+      setTimeout =>
+        @stopLoading()
 
-      @fire('refresh')
+        @fire('refresh')
+      , 1000
 
     , () =>
 
