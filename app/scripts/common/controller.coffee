@@ -1,6 +1,6 @@
 _ = require('underscore')
 
-class Presenter
+class Controller
 
   constructor: ->
 
@@ -25,4 +25,4 @@ class Presenter
 
   destroy: ->
 
-module.exports = Presenter
+module.exports = Controller
