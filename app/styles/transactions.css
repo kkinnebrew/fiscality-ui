@@ -96,8 +96,8 @@
 
 .transaction-viewer .row-options {
     position: absolute;
-    right: -120px;
-    width: 120px;
+    right: -180px;
+    width: 180px;
 }
 
 .transaction-viewer:hover .row-options {

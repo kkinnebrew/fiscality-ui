@@ -1,6 +1,7 @@
 View = require('../../../common/view.coffee')
 editorTemplate = require('../../../../templates/app/accounts/editor.hbs')
 addLineTemplate = require('../../../../templates/app/accounts/add-line.hbs')
+addTransactionTemplate = require('../../../../templates/app/accounts/add-transaction.hbs')
 $ = require('jquery')
 
 class TransactionsView extends View
@@ -45,14 +46,26 @@ class TransactionsView extends View
 
     @$el.on 'click', '.cancel-btn', ->
       row = $(this).closest('.transaction-group')
-      row.find('.transaction-viewer').show()
-      row.find('.transaction-editor').remove()
+      if !row.attr('data-key')
+        row.remove()
+      else
+        row.find('.transaction-viewer').show()
+        row.find('.transaction-editor').remove()
 
     @$el.on 'click', '.save-btn', ->
       row = $(this).closest('.transaction-group')
       row.find('.transaction-viewer').show()
       # get data and do stuff
       row.find('.transaction-editor').remove()
+
+    @$el.on 'click', '.insert-btn', ->
+      row = $(this).closest('.transaction-group')
+      currentDate = row.find('[data-column="transactionDate"]').text()
+      accounts = that.viewmodel.accounts
+      $(addTransactionTemplate({
+        accounts: accounts,
+        currentDate: currentDate
+      })).insertBefore(row)
 
   unbind: ->
 
@@ -63,6 +76,7 @@ class TransactionsView extends View
     @$el.off('click', '.delete-row-btn')
     @$el.off('click', '.cancel-btn')
     @$el.off('click', '.save-btn')
+    @$el.off('click', '.insert-btn')
 
     super
 

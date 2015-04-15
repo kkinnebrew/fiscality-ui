@@ -38,10 +38,10 @@ class TransactionsViewModel extends ViewModel
 
       @accounts = _.sortBy(accounts, 'accountName')
 
-      console.log(accounts)
-
       @transactions = _.sortBy(data, 'transactionDate');
       @transactions = _.map @transactions, (item) ->
+
+        item.accountNames = if item.accountNames.length > 45 then item.accountNames.substring(0, 45) + '...' else item.accountNames
 
         item.amount = item.debitAmount - item.creditAmount;
         item.balance = balance = balance + item.debitAmount - item.creditAmount;

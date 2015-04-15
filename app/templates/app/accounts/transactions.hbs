@@ -45,7 +45,7 @@
             <div class="transaction-viewer">
 
                 <div class="transaction-row list-row">
-                    <div class="list-cell cell-sm">{{dateFormat transactionDate 'M/d/yyyy'}}</div>
+                    <div class="list-cell cell-sm" data-column="transactionDate">{{dateFormat transactionDate 'M/d/yyyy'}}</div>
                     <div class="list-cell">{{transactionType}}</div>
                     <div class="list-cell cell-lg detail-btn">{{accountNames}}</div>
                     <div class="list-cell cell-lg">{{description}}</div>
@@ -54,6 +54,7 @@
                     <div class="row-options">
                         <div class="row-option edit-btn">Edit</div>
                         <div class="row-option delete-btn">Delete</div>
+                        <div class="row-option insert-btn">Insert</div>
                     </div>
                 </div>
 
