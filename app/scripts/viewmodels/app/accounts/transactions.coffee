@@ -2,6 +2,7 @@ ViewModel = require('../../../common/viewmodel.coffee')
 transactionsService = require('../../../services/transactions.coffee')
 Log = require('../../../common/log.coffee')
 _ = require('underscore')
+$ = require('jquery')
 
 class TransactionsViewModel extends ViewModel
 
@@ -11,10 +12,16 @@ class TransactionsViewModel extends ViewModel
 
     @accountId = params.accountId || null
     @transactions = []
+    @accounts = []
     @keyword = null
     @sortColumn = 'date'
 
     @update()
+
+  getTransaction: (transactionId) ->
+
+    return _.find @transactions, (transaction) ->
+      return transaction.transactionId == transactionId
 
   update: ->
 
@@ -22,9 +29,16 @@ class TransactionsViewModel extends ViewModel
 
     @startLoading()
 
-    transactionsService.transactions(@accountId).then (data) =>
+    transactionsRequest = transactionsService.transactions(@accountId)
+    accountsRequest = transactionsService.accounts()
+
+    $.when(transactionsRequest, accountsRequest).then (data, accounts) =>
 
       balance = 0;
+
+      @accounts = _.sortBy(accounts, 'accountName')
+
+      console.log(accounts)
 
       @transactions = _.sortBy(data, 'transactionDate');
       @transactions = _.map @transactions, (item) ->

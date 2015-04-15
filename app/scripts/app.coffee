@@ -33,6 +33,16 @@ HandlebarsCompiler.registerHelper 'dateFormat', (d, f) ->
   return '' if d == undefined or d == null
   return Date.parse(d).toString(f)
 
+HandlebarsCompiler.registerHelper 'select', (value, options) ->
+  $el = $('<select />').html(options.fn(this))
+  $el.find('[value="' + value + '"]').attr({'selected': 'selected'})
+  return $el.html()
+
+HandlebarsCompiler.registerHelper 'ifCond', (v1, v2, options) ->
+  if v1 == v2
+    return options.fn(this)
+  return options.inverse(this)
+
 # setup router
 
 router = new Router($('body'))

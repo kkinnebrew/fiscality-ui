@@ -1,0 +1,157 @@
+/* header */
+
+#transactions-header {
+    border-bottom: 1px solid #EEE;
+    overflow: auto;
+    padding: 20px;
+}
+
+#transactions-header .title {
+    float: left;
+}
+
+#transactions-header .info {
+    float: right;
+}
+
+/* options */
+
+#transactions-options {
+    border-bottom: 1px solid #EEE;
+    overflow: auto;
+    padding: 20px;
+}
+
+#transactions-options .date-range {
+    float: left;
+}
+
+#transactions-options .search-field {
+    float: right;
+}
+
+/* transactions */
+
+#transactions-list {
+    padding: 20px;
+}
+
+.transaction-list-header {
+
+}
+
+.transaction-list-header .header-row {
+    border-bottom: 1px solid #EEE;
+    overflow: auto;
+}
+
+.transaction-list-header .header-cell {
+    float: left;
+    padding: 5px 10px;
+    width: 150px;
+}
+
+.transaction-list-body {
+
+}
+
+
+.transaction-group .list-row {
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.transaction-group .list-cell {
+    font-size: 12px;
+    float: left;
+    padding: 4px 10px;
+    width: 150px;
+}
+
+#transactions-list .cell-sm {
+    width: 80px;
+}
+
+#transactions-list .cell-lg {
+    width: 250px;
+}
+
+/* read-only row */
+
+.transaction-viewer {
+
+}
+
+.transaction-viewer .list-row {
+    background: #F0E68C;
+}
+
+.transaction-viewer .line-row {
+    display: none;
+}
+
+.transaction-viewer.expanded .line-row {
+    display: block;
+}
+
+.transaction-viewer .row-options {
+    position: absolute;
+    right: -120px;
+    width: 120px;
+}
+
+.transaction-viewer:hover .row-options {
+    right: 0;
+}
+
+.transaction-viewer .row-option {
+    background: #F00;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    padding: 4px 10px;
+    margin-right: 1px;
+}
+
+/* editor row */
+
+.transaction-editor {
+    overflow: auto;
+}
+
+.transaction-editor .list-row {
+    background: #F08080;
+}
+
+.transaction-editor .field-input {
+    width: 100px;
+}
+
+.transaction-editor .cell-sm .field-input {
+    width: 70px;
+}
+
+.transaction-editor .cell-lg .field-input {
+    width: 240px;
+}
+
+.transaction-editor input.field-input {
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.transaction-editor .editor-options {
+    float: right;
+    overflow: hidden;
+}
+
+.transaction-editor .editor-option {
+    background: #F00;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    margin-bottom: 2px;
+    margin-right: 1px;
+    padding: 4px 10px;
+}

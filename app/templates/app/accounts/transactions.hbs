@@ -1,50 +1,81 @@
-{{#each transactions}}
+<header id="transactions-header">
 
-    <div class="transaction-row" data-id="{{transactionLineId}}">
+    <div class="title">Bank of America Checking</div>
 
-        <div class="transaction-row-info">
+    <div class="info">
+        <div class="balance">$6,302.21</div>
+        <div class="updated">Last Updated May 24, 2015</div>
+    </div>
 
-            <div class="column-xsm column-left">
-                <div class="reconciliation"></div>
-            </div>
+</header>
 
-            <div class="column-md column-left transaction-info">
-                <div class="date">{{dateFormat transactionDate 'M/d/yyyy'}}</div>
-                <div class="transaction-type">{{transactionType}}</div>
-            </div>
+<div id="transactions-options">
 
-            <div class="column-lg column-left description">
-                <div class="description-text">{{description}}</div>
-                <div class="account-text">
-                    <span class="account-names">{{accountNames}}</span>
-                    <span class="collapse-btn">Show Less</span>
-                </div>
-            </div>
+    <div class="date-range">
+        <input type="text" value="Jan 1, 2015" />
+        to
+        <input type="text" value="Dec 31, 2015" />
+    </div>
 
-            <div class="column-sm column-right balance">{{currency balance}}</div>
+    <input class="search-field" type="search" placeholder="Search" />
 
-            <div class="column-sm column-right amount">{{currency amount}}</div>
+</div>
 
+<div id="transactions-list">
+
+    <div class="transaction-list-header">
+
+        <div class="header-row">
+            <div class="header-cell cell-sm">Date</div>
+            <div class="header-cell">Transaction Type</div>
+            <div class="header-cell cell-lg">Accounts</div>
+            <div class="header-cell cell-lg">Description</div>
+            <div class="header-cell cell-sm">Amount</div>
+            <div class="header-cell cell-sm">Balance</div>
         </div>
-
-        {{#each otherLines}}
-
-            <div class="transaction-row-details">
-
-                <div class="column-xsm column-left"></div>
-
-                <div class="column-md column-left"></div>
-
-                <div class="column-xlg column-left line-description" data-link="/app/accounts/{{accountId}}">{{accountName}}</div>
-
-                <div class="column-sm column-right"></div>
-
-                <div class="column-sm column-right line-amount">{{currency amount}}</div>
-
-            </div>
-
-        {{/each}}
 
     </div>
 
-{{/each}}
+    <div class="transaction-list-body">
+
+        {{#each transactions}}
+
+        <div class="transaction-group" data-key="{{transactionId}}">
+
+            <div class="transaction-viewer">
+
+                <div class="transaction-row list-row">
+                    <div class="list-cell cell-sm">{{dateFormat transactionDate 'M/d/yyyy'}}</div>
+                    <div class="list-cell">{{transactionType}}</div>
+                    <div class="list-cell cell-lg detail-btn">{{accountNames}}</div>
+                    <div class="list-cell cell-lg">{{description}}</div>
+                    <div class="list-cell cell-sm">{{currency amount}}</div>
+                    <div class="list-cell cell-sm">10,001.23</div>
+                    <div class="row-options">
+                        <div class="row-option edit-btn">Edit</div>
+                        <div class="row-option delete-btn">Delete</div>
+                    </div>
+                </div>
+
+                <div class="line-row list-row">
+                    <div class="list-cell cell-sm"></div>
+                    <div class="list-cell"></div>
+                    <div class="list-cell cell-lg">Gift Income</div>
+                    <div class="list-cell cell-lg"></div>
+                    <div class="list-cell cell-sm">10,000</div>
+                    <div class="list-cell cell-sm"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        {{/each}}
+
+        <div class="list-row-insert">
+            <div class="insert-label"></div>
+        </div>
+
+    </div>
+
+</div>
