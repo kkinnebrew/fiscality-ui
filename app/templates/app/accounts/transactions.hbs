@@ -58,14 +58,18 @@
                     </div>
                 </div>
 
+                {{#each otherLines}}
+
                 <div class="line-row list-row">
                     <div class="list-cell cell-sm"></div>
                     <div class="list-cell"></div>
-                    <div class="list-cell cell-lg">Gift Income</div>
+                    <div class="list-cell cell-lg">{{accountName}}</div>
                     <div class="list-cell cell-lg"></div>
-                    <div class="list-cell cell-sm">10,000</div>
+                    <div class="list-cell cell-sm">{{currency amount}}</div>
                     <div class="list-cell cell-sm"></div>
                 </div>
+
+                {{/each}}
 
             </div>
 
