@@ -22,15 +22,15 @@ class ListComponent
 
     $template = $(@getTemplate())
 
+    $appendTo = if $template.find('[data-outlet]').length then $template.find('[data-outlet]') else $template
+
     name = @$el.attr('data-repeat')
 
     # be sure to read props before doing this
 
     _.each @model, (line, index) ->
 
-      $el = $('<div></div>')
-
-      component = componentFactory.getInstance(name, $el, line, self.scope)
+      component = componentFactory.getInstance(name, $('<div></div>'), line, self.scope)
 
       self.children.push({
         $el: component.$el
@@ -58,7 +58,7 @@ class ListComponent
 
         self.fire('change')
 
-      $template.find('[data-outlet]').append(component.$el)
+      $appendTo.append(component.$el)
 
     # be sure whatever instantiates this updates their reference to the new $el
 

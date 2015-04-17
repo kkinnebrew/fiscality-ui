@@ -15,6 +15,10 @@ class TransactionsService extends Service
 
     'X-Auth-Token': authToken
 
+  types: ->
+
+    @get('/api/transactions/types')
+
   transactions: (accountId) ->
 
     deferred = $.Deferred();

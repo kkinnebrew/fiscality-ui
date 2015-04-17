@@ -12,11 +12,12 @@ class TransactionsViewModel extends ViewModel
 
     @accountId = params.accountId || null
     @transactions = []
+    @transactionTypes = []
     @accounts = []
     @keyword = null
     @sortColumn = 'date'
 
-    #@update()
+    @update()
 
   getTransaction: (transactionId) ->
 
@@ -54,12 +55,17 @@ class TransactionsViewModel extends ViewModel
 
     transactionsRequest = transactionsService.transactions(@accountId)
     accountsRequest = transactionsService.accounts()
+    transactionTypesRequest = transactionsService.types()
 
-    $.when(transactionsRequest, accountsRequest).then (data, accounts) =>
+    $.when(transactionsRequest, accountsRequest, transactionTypesRequest).then (data, accounts, transactionTypes) =>
 
       balance = 0;
 
+      @transactionTypes = transactionTypes
+
       @accounts = _.sortBy(_.filter(accounts, (account) -> account.accountId != that.accountId ), 'accountName')
+
+      @accountOptions = _.map(@accounts, (account) -> { value: account.accountId, label: account.accountName })
 
       @transactions = _.sortBy(data, 'transactionDate');
       @transactions = _.map @transactions, (item) ->

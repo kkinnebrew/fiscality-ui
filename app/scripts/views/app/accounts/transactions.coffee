@@ -3,7 +3,7 @@ editorTemplate = require('../../../../templates/app/accounts/editor.hbs')
 addLineTemplate = require('../../../../templates/app/accounts/add-line.hbs')
 addTransactionTemplate = require('../../../../templates/app/accounts/add-transaction.hbs')
 Log = require('../../../common/log.coffee')
-EditorComponent = require('../../../components/app/accounts/editor.coffee')
+EditorListComponent = require('../../../components/app/accounts/editor-list.coffee')
 $ = require('jquery')
 #
 #class TransactionsView extends View
@@ -114,49 +114,12 @@ TransactionEditorComponent = require('../../../components/app/accounts/editor.co
 
 class TransactionsView extends View
 
-  render: ->
+  refresh: ->
 
     super
 
-    component = new EditorComponent(@$el.find('#editor'), {
-      transactionId: '123',
-      transactionDate: '01/01/2015',
-      transactionType: 'Buy To Open',
-      color: '$F00',
-      description: 'This is a transaction',
-      lines: [
-        {
-          amount: 100,
-          accountId: '234'
-        },
-        {
-          amount: -100,
-          accountId: '847'
-        }
-      ]
-    }, {
-      accounts: [{
-        value: '234',
-        label: 'My Account One'
-      }, {
-        value: '847',
-        label: 'Other Account'
-      }],
-      transactionTypes: [
-        'Deposit',
-        'Withdrawal',
-        'Transfer',
-        'Buy To Open',
-        'Sell To Close'
-      ]
-    })
+    component = new EditorListComponent(@$el.find('#editor-list'), @viewmodel.transactions, @viewmodel)
 
     component.render()
-
-    setInterval(->
-      console.log(component.getValue())
-    , 5000)
-
-
 
 module.exports = TransactionsView
