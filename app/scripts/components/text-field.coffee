@@ -4,6 +4,6 @@ $ = require('jquery')
 class TextFieldComponent extends ValueComponent
 
   getTemplate: ->
-    return $('<input type="text" placeholder="ex. Text" />')
+    return $('<input class="text-field" type="text" placeholder="ex. Text" />')
 
 module.exports = TextFieldComponent

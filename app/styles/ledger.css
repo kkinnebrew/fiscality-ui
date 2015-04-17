@@ -1,0 +1,76 @@
+/* common */
+
+.row {
+
+}
+
+.cell {
+
+}
+
+.field {
+
+}
+
+
+/* header */
+
+.header-row {
+    overflow: auto;
+}
+
+.header-row .cell {
+    box-sizing: border-box;
+    margin-right: 10px;
+    padding: 0 10px;
+    width: 100px; /* TEMP */
+}
+
+.header-row .cell.right-align {
+    margin-left: 10px;
+    margin-right: 0;
+    text-align: right;
+}
+
+/* transactions */
+
+.transaction-group {
+
+}
+
+.transaction-group .info-row {
+    overflow: auto;
+}
+
+.transaction-group .line-row {
+    overflow: auto;
+}
+
+.transaction-group .cell {
+    margin-right: 10px;
+    width: 100px; /* TEMP */
+}
+
+.transaction-group .cell.right-align {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.transaction-group .field {
+    padding: 0 10px;
+}
+
+.transaction-group .right-align .field {
+    clear: both;
+    float: right;
+    text-align: right;
+}
+
+/* custom cell widths */
+
+.transaction-group .row .cell:nth-child(1) { width: 100px }
+.transaction-group .row .cell:nth-child(2) { width: 100px }
+.transaction-group .row .cell:nth-child(3) { width: 100px }
+.transaction-group .row .cell:nth-child(4) { width: 100px }
+.transaction-group .row .cell:nth-child(5) { width: 100px }
+.transaction-group .row .cell:nth-child(6) { width: 100px }

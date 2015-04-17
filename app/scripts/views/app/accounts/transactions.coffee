@@ -118,7 +118,7 @@ class TransactionsView extends View
 
     super
 
-    component = new EditorListComponent(@$el.find('#editor-list'), @viewmodel.transactions, @viewmodel)
+    component = new EditorListComponent(@$el.find('.transaction-list-body'), @viewmodel.transactions, @viewmodel)
 
     component.render()
 

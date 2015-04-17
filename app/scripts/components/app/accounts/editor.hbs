@@ -1,11 +1,26 @@
-<div class="editor">
+<div class="transaction-row">
 
-    <header>
-        <div data-component="date-field" data-model="transactionDate">Date</div>
-        <div data-component="select-field" data-model="transactionType" data-source="transactionTypes">Type</div>
-        <div data-component="text-field" data-model="description">Description</div>
-        <div data-model="amount">Amount</div>
-    </header>
+    <div class="transaction-info">
+        <div class="list-cell">
+            <div data-component="date-field" data-model="transactionDate" data-format="M/d/yyyy"></div>
+        </div>
+        <div class="list-cell">
+            <div data-component="select-field" data-model="transactionType" data-source="transactionTypes"></div>
+        </div>
+        <div class="list-cell">
+            <div class="label-field" data-model="accountNames">Test</div>
+        </div>
+        <div class="list-cell">
+            <div data-component="text-field" data-model="description"></div>
+        </div>
+        <div class="list-cell cell-right">
+            <div class="label-field label-right" data-model="amount"></div>
+        </div>
+        <div class="list-cell cell-right">
+            <div class="label-field label-right">10,380.21</div>
+        </div>
+
+    </div>
 
     <div data-component="line-editor" data-model="otherLines" data-repeat="editor-line">Lines</div>
 

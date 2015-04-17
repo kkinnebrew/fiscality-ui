@@ -12,7 +12,7 @@ class SelectFieldComponent extends ValueComponent
 
   getTemplate: =>
 
-    list = $('<select></select>')
+    list = $('<select class="select-field"></select>')
 
     if @source and @scope.hasOwnProperty(@source)
       items = @scope[@source]

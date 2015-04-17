@@ -32,7 +32,7 @@ class Component
 
     @$el.find('[data-model]').each ->
       name = $(this).attr('data-model')
-      if self.model.hasOwnProperty(name)
+      if self.model.hasOwnProperty(name) and !data.hasOwnProperty(name)
         data[name] = self.model[name]
 
     @model = data
@@ -60,6 +60,8 @@ class Component
 
         value = component.getValue()
 
+        console.log('changed', value)
+
         # set new value from child
 
         self.model[model] = value
@@ -72,9 +74,18 @@ class Component
 
         self.fire('change')
 
-    # be sure whatever instantiates this updates their reference to the new $el
 
-  onChange: ->
+    # render static elements
+
+    @$el.find('[data-model]:not([data-component])').each ->
+
+      $el = $(this)
+
+      model = $el.attr('data-model')
+      tagName = $el.prop('tagName')
+
+      if tagName == 'DIV'
+        $el.text(self.model[model])
 
   getValue: ->
 
