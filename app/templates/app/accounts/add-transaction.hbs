@@ -4,10 +4,10 @@
 
         <div class="transaction-row list-row">
             <div class="list-cell cell-sm">
-                <input class="field-input" type="text" value="{{currentDate}}" />
+                <input class="field-input" name="transactionDate" type="text" value="{{currentDate}}" />
             </div>
             <div class="list-cell">
-                <select class="field-input">
+                <select class="field-input" name="transactionType">
                     <option value="Deposit">Deposit</option>
                     <option value="Buy To Open">Buy To Open</option>
                     <option value="Sell To Close">Sell To Close</option>
@@ -16,7 +16,7 @@
             </div>
             <div class="list-cell cell-lg"></div>
             <div class="list-cell cell-lg">
-                <input class="field-input" type="text" value="" />
+                <input class="field-input" name="description" type="text" value="" />
             </div>
             <div class="list-cell cell-sm">0.00</div>
             <div class="list-cell cell-sm"></div>
@@ -26,7 +26,7 @@
             <div class="list-cell cell-sm"></div>
             <div class="list-cell"></div>
             <div class="list-cell cell-lg">
-                <select class="field-input">
+                <select class="field-input" name="accountId">
                     {{#each accounts}}
                         <option value="{{accountId}}">{{accountName}}</option>
                     {{/each}}
@@ -34,7 +34,7 @@
             </div>
             <div class="list-cell cell-lg"></div>
             <div class="list-cell cell-sm">
-                <input class="field-input" type="text" value="0.00" />
+                <input class="field-input" name="amount" type="text" value="0.00" />
             </div>
             <div class="list-cell cell-sm"></div>
             <div class="row-options">

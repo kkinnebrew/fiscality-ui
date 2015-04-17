@@ -16,18 +16,41 @@ class TransactionsViewModel extends ViewModel
     @keyword = null
     @sortColumn = 'date'
 
-    @update()
+    #@update()
 
   getTransaction: (transactionId) ->
 
     return _.find @transactions, (transaction) ->
       return transaction.transactionId == transactionId
 
+  addTransaction: (data) ->
+
+    return transactionsService.addTransaction(data).then =>
+      @update()
+    , ->
+      Log.error('Error adding transaction')
+
+  saveTransaction: (transactionId, data) ->
+
+    return transactionsService.editTransaction(transactionId, data).then =>
+      @update()
+    , ->
+      Log.error('Error saving transaction')
+
+  deleteTransaction: (transactionId) ->
+
+    return transactionsService.deleteTransaction(transactionId).then =>
+      @update()
+    , ->
+      Log.error('Error deleting transaction')
+
   update: ->
 
     return if !@accountId
 
     @startLoading()
+
+    that = this
 
     transactionsRequest = transactionsService.transactions(@accountId)
     accountsRequest = transactionsService.accounts()
@@ -36,7 +59,7 @@ class TransactionsViewModel extends ViewModel
 
       balance = 0;
 
-      @accounts = _.sortBy(accounts, 'accountName')
+      @accounts = _.sortBy(_.filter(accounts, (account) -> account.accountId != that.accountId ), 'accountName')
 
       @transactions = _.sortBy(data, 'transactionDate');
       @transactions = _.map @transactions, (item) ->
