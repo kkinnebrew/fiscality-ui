@@ -2868,82 +2868,6 @@ ul {
 }
 
 
-/* common */
-
-.row {
-
-}
-
-.cell {
-
-}
-
-.field {
-
-}
-
-
-/* header */
-
-.header-row {
-    overflow: auto;
-}
-
-.header-row .cell {
-    box-sizing: border-box;
-    margin-right: 10px;
-    padding: 0 10px;
-    width: 100px; /* TEMP */
-}
-
-.header-row .cell.right-align {
-    margin-left: 10px;
-    margin-right: 0;
-    text-align: right;
-}
-
-/* transactions */
-
-.transaction-group {
-
-}
-
-.transaction-group .info-row {
-    overflow: auto;
-}
-
-.transaction-group .line-row {
-    overflow: auto;
-}
-
-.transaction-group .cell {
-    margin-right: 10px;
-    width: 100px; /* TEMP */
-}
-
-.transaction-group .cell.right-align {
-    margin-left: 10px;
-    margin-right: 0;
-}
-
-.transaction-group .field {
-    padding: 0 10px;
-}
-
-.transaction-group .right-align .field {
-    clear: both;
-    float: right;
-    text-align: right;
-}
-
-/* custom cell widths */
-
-.transaction-group .row .cell:nth-child(1) { width: 100px }
-.transaction-group .row .cell:nth-child(2) { width: 100px }
-.transaction-group .row .cell:nth-child(3) { width: 100px }
-.transaction-group .row .cell:nth-child(4) { width: 100px }
-.transaction-group .row .cell:nth-child(5) { width: 100px }
-.transaction-group .row .cell:nth-child(6) { width: 100px }
 /* main menu styles */
 
 #menu {
@@ -3376,351 +3300,228 @@ ul {
 .selector-overlay .selector-list-item:hover .label {
     opacity: 0.6;
 }
+
+/* common */
+
+.row {
+    padding: 0;
+    margin-bottom: 2px;
+    overflow: auto;
+}
+
+.cell {
+    font: 13px "proxima-nova", sans-serif;
+    float: left;
+}
+
+.field {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+input.field, select.field {
+    border: none;
+    font: 13px "proxima-nova", sans-serif;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    text-align: left;
+    width: 80px;
+    -webkit-appearance: none;
+}
+
+.field.text-field {
+    background: #FFF;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.field.text-field:hover {
+    border-color: #DDD;
+}
+
+.field.date-field {
+    background: #FFF;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.field.date-field:hover {
+    border-color: #DDD;
+}
+
+.field.select-field {
+    background: #FFF;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.field.select-field:hover {
+    background: #FFF url(../images/select-icon.png) right center no-repeat;
+    border-color: #DDD;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .field.select-field:hover {
+        background-image: url(../images/select-icon@2x.png);
+        -webkit-background-size: 17px 10px;
+        -moz-background-size: 17px 10px;
+        background-size: 17px 10px;
+    }
+
+}
+
+.field.label-field {
+
+}
+
+
+/* ledger */
+
+#ledger {
+    padding: 19px;
+}
+
 /* header */
 
-#transactions-header {
+.header-row {
     border-bottom: 1px solid #EEE;
-    overflow: auto;
-    padding: 20px;
 }
 
-#transactions-header .title {
-    float: left;
+.header-row .cell {
+    box-sizing: border-box;
+    color: #666;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-right: 10px;
+    padding: 12px 11px;
 }
 
-#transactions-header .info {
-    float: right;
-}
-
-/* options */
-
-#transactions-options {
-    border-bottom: 1px solid #EEE;
-    overflow: auto;
-    padding: 20px;
-}
-
-#transactions-options .date-range {
-    float: left;
-}
-
-#transactions-options .search-field {
-    float: right;
+.header-row .cell.right-align {
+    margin-left: 10px;
+    margin-right: 0;
+    text-align: right;
 }
 
 /* transactions */
 
-#transactions-list {
-    padding: 20px;
-}
-
-.transaction-list-header {
-
-}
-
-.transaction-list-header .header-row {
+.transaction-row {
     border-bottom: 1px solid #EEE;
-    overflow: auto;
 }
 
-.transaction-list-header .header-cell {
-    color: #555;
-    float: left;
-    font-family: "proxima-nova", sans-serif;
-    font-size: 11px;
+.transaction-row .info-subrow {
+
+}
+
+.transaction-row .line-subrow {
+
+}
+
+.transaction-row .add-subrow {
+
+}
+
+.transaction-row .cell {
+    margin-right: 10px;
+}
+
+.transaction-row .cell.right-align {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.transaction-row .field {
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    padding: 6px 10px 5px 10px;
+    width: 100%;
+}
+
+.transaction-row .right-align .field {
+    clear: both;
+    float: right;
+    text-align: right;
+}
+
+/* custom cells */
+
+.transaction-row .field.add-line-button {
+    font-size: 12px;
     font-weight: 600;
-    margin-right: 5px;
-    padding: 5px 10px;
-    text-transform: uppercase;
-    width: 150px;
+    padding-left: 15px;
 }
 
-.transaction-list-header .header-cell.cell-right {
-    text-align: right;
+.transaction-row .field.add-line-button:hover {
+    color: #777;
 }
 
 
-.transaction-list-body .list-cell.cell-right {
-    text-align: right;
-}
-
-.transaction-list-body .list-cell {
-    float: left;
-    padding: 0;
-    margin-right: 5px;
-    width: 170px;
-}
-
-.transaction-list-body .transaction-row {
-    border-bottom: 1px solid #F6F6F6;
-}
-
-.transaction-list-body .transaction-info {
-    margin: 5px 0;
-    overflow: hidden;
-}
-
-.transaction-list-header .header-row .header-cell:nth-child(1) {
-    width: 100px;
-}
-
-.transaction-list-header .header-row .header-cell:nth-child(2) {
-    width: 130px;
-}
-
-.transaction-list-header .header-row .header-cell:nth-child(3) {
-    width: 200px;
-}
-
-.transaction-list-header .header-row .header-cell:nth-child(4) {
-    width: 200px;
-}
-
-.transaction-list-header .header-row .header-cell:nth-child(5) {
-    width: 100px;
-}
-
-.transaction-list-header .header-row .header-cell:nth-child(6) {
-    width: 100px;
-}
-
-.transaction-list-body .transaction-info .list-cell:nth-child(1) {
-    width: 120px;
-}
-
-.transaction-list-body .transaction-info .list-cell:nth-child(2) {
-    width: 150px;
-}
-
-.transaction-list-body .transaction-info .list-cell:nth-child(3) {
-    width: 220px;
-}
-
-.transaction-list-body .transaction-info .list-cell:nth-child(4) {
-    width: 220px;
-}
-
-.transaction-list-body .transaction-info .list-cell:nth-child(5) {
-    width: 120px;
-}
-
-.transaction-list-body .transaction-info .list-cell:nth-child(6) {
-    width: 120px;
-}
-
-.transaction-list-body .editor-line {
-    margin: 2px 0;
-    overflow: hidden;
-}
-
-.transaction-list-body .editor-line .list-cell:nth-child(1) {
-    margin-left: 280px;
-    width: 220px;
-}
-
-.transaction-list-body .editor-line .list-cell:nth-child(2) {
-    margin-left: 225px;
-    width: 120px;
-}
-
-.transaction-list-body .editor-line .list-cell:nth-child(3) {
-    width: 120px;
-}
-
-.transaction-list-body .label-field {
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 0;
-    color: #000;
-    display: block;
-    font-family: "proxima-nova", sans-serif;
+.transaction-row .field.delete-line-button {
     font-size: 12px;
-    font-weight: 400;
-    margin: 0;
-    overflow: hidden;
-    padding: 4px 10px;
-    width: 60%;
-    -webkit-appearance: none;
+    font-weight: 600;
+    padding-left: 15px;
 }
 
-.transaction-list-body .label-field.label-right {
-    float: right;
-    clear: both;
+.transaction-row .field.delete-line-button:hover {
+    color: #777;
 }
 
-.transaction-list-body .text-field {
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 2px;
-    color: #000;
-    display: block;
-    font-family: "proxima-nova", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    margin: 0;
-    outline: none;
-    overflow: hidden;
-    padding: 4px 10px;
-    width: 60%;
-    -webkit-appearance: none;
+.field.account-name {
+    padding-left: 15px;
 }
 
-.transaction-list-body .field-right {
-    float: right;
-    clear: both;
-    text-align: right;
-}
-
-.transaction-list-body .text-field:hover {
-    background: #FCFCFC;
-    border: 1px solid #EEE;
-}
-
-.transaction-list-body .date-field {
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 2px;
-    color: #000;
-    display: block;
-    font-family: "proxima-nova", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    margin: 0;
-    outline: none;
-    overflow: hidden;
-    padding: 4px 10px;
-    width: 60%;
-    -webkit-appearance: none;
-}
-
-.transaction-list-body .date-field:hover {
-    background: #FCFCFC;
-    border: 1px solid #EEE;
-}
-
-.transaction-list-body .select-field {
-    background: none;
-    border: 1px solid transparent;
-    border-radius: 2px;
-    color: #000;
+.field.account-names {
+    background: url(../images/transaction-line-expand-icon.png) left center no-repeat;
     cursor: pointer;
-    display: block;
-    font-family: "proxima-nova", sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    margin: 0;
-    overflow: hidden;
-    padding: 4px 10px;
-    width: 60%;
-    -webkit-appearance: none;
+    padding-left: 15px;
 }
 
-.transaction-list-body .select-field:hover {
-    background: #FCFCFC;
-    border: 1px solid #EEE;
+.transaction-row.expanded .field.account-names {
+    background-image: url(../images/transaction-line-collapse-icon.png);
 }
 
-/*.transaction-list-body {*/
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-/*}*/
+    .field.account-names {
+        background-image: url(../images/transaction-line-expand-icon@2x.png);
+        -webkit-background-size: 6px 7px;
+        -moz-background-size: 6px 7px;
+        background-size: 6px 7px;
+    }
 
+    .transaction-row.expanded .field.account-names {
+        background-image: url(../images/transaction-line-collapse-icon@2x.png);
+        -webkit-background-size: 7px 6px;
+        -moz-background-size: 7px 6px;
+        background-size: 7px 6px;
+    }
 
-/*.transaction-group .list-row {*/
-    /*overflow: hidden;*/
-    /*margin-bottom: 2px;*/
-/*}*/
+}
 
-/*.transaction-group .list-cell {*/
-    /*font-size: 12px;*/
-    /*float: left;*/
-    /*padding: 4px 10px;*/
-    /*width: 150px;*/
-/*}*/
+/* custom cell widths */
 
-/*#transactions-list .cell-sm {*/
-    /*width: 80px;*/
-/*}*/
+#ledger .row .cell:nth-child(1) { width: 120px }
+#ledger .row .cell:nth-child(2) { width: 140px }
+#ledger .row .cell:nth-child(3) { width: 240px }
+#ledger .row .cell:nth-child(4) { width: 240px }
+#ledger .row .cell:nth-child(5) { width: 100px }
+#ledger .row .cell:nth-child(6) { width: 100px }
 
-/*#transactions-list .cell-lg {*/
-    /*width: 250px;*/
-/*}*/
+#ledger .line-subrow .cell:nth-child(1) { margin-left: 280px; width: 490px; }
+#ledger .line-subrow .cell:nth-child(2) { width: 100px }
+#ledger .line-subrow .cell:nth-child(3) { width: 100px }
 
-/* read-only row */
+#ledger .add-subrow .cell:nth-child(1) { margin-left: 280px; margin-right: 230px; width: 490px; }
 
-/*.transaction-viewer {*/
+/* buttons */
 
-/*}*/
+.delete-line-button {
+    cursor: pointer;
+}
 
-/*.transaction-viewer .list-row {*/
-    /*background: #F0E68C;*/
-/*}*/
-
-/*.transaction-viewer .line-row {*/
-    /*display: none;*/
-/*}*/
-
-/*.transaction-viewer.expanded .line-row {*/
-    /*display: block;*/
-/*}*/
-
-/*.transaction-viewer .row-options {*/
-    /*position: absolute;*/
-    /*right: -180px;*/
-    /*width: 180px;*/
-/*}*/
-
-/*.transaction-viewer:hover .row-options {*/
-    /*right: 0;*/
-/*}*/
-
-/*.transaction-viewer .row-option {*/
-    /*background: #F00;*/
-    /*cursor: pointer;*/
-    /*float: left;*/
-    /*font-size: 12px;*/
-    /*padding: 4px 10px;*/
-    /*margin-right: 1px;*/
-/*}*/
-
-/* editor row */
-
-/*.transaction-editor {*/
-    /*overflow: auto;*/
-/*}*/
-
-/*.transaction-editor .list-row {*/
-    /*background: #F08080;*/
-/*}*/
-
-/*.transaction-editor .field-input {*/
-    /*width: 100px;*/
-/*}*/
-
-/*.transaction-editor .cell-sm .field-input {*/
-    /*width: 70px;*/
-/*}*/
-
-/*.transaction-editor .cell-lg .field-input {*/
-    /*width: 240px;*/
-/*}*/
-
-/*.transaction-editor input.field-input {*/
-    /*border: none;*/
-    /*outline: none;*/
-    /*-webkit-appearance: none;*/
-/*}*/
-
-/*.transaction-editor .editor-options {*/
-    /*float: right;*/
-    /*overflow: hidden;*/
-/*}*/
-
-/*.transaction-editor .editor-option {*/
-    /*background: #F00;*/
-    /*cursor: pointer;*/
-    /*float: left;*/
-    /*font-size: 12px;*/
-    /*margin-bottom: 2px;*/
-    /*margin-right: 1px;*/
-    /*padding: 4px 10px;*/
-/*}*/
+.add-line-button {
+    cursor: pointer;
+}

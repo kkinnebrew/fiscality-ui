@@ -60,8 +60,6 @@ class Component
 
         value = component.getValue()
 
-        console.log('changed', value)
-
         # set new value from child
 
         self.model[model] = value

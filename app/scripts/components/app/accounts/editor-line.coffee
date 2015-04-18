@@ -5,4 +5,11 @@ class EditorLineComponent extends Component
 
   getTemplate: -> return template()
 
+  render: ->
+
+    super
+
+    @$el.on 'click', '.delete-line-button', =>
+      @fire('destroy')
+
 module.exports = EditorLineComponent

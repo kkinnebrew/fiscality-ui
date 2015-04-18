@@ -6,10 +6,13 @@ class ListComponent
 
   constructor: ($el, model, scope) ->
 
+    throw new Error('Missing element') if !$el or $el.length == 0
+
     @$el = $el
     @scope = scope
     @model = model || []
     @events = {}
+    @repeat = null
 
     @children = []
 
@@ -22,47 +25,66 @@ class ListComponent
 
     $template = $(@getTemplate())
 
-    $appendTo = if $template.find('[data-outlet]').length then $template.find('[data-outlet]') else $template
+    @$appendTo = if $template.find('[data-outlet]').length then $template.find('[data-outlet]') else $template
 
-    name = @$el.attr('data-repeat')
+    @repeat = @$el.attr('data-repeat')
 
     # be sure to read props before doing this
 
-    _.each @model, (line, index) ->
-
-      component = componentFactory.getInstance(name, $('<div></div>'), line, self.scope)
-
-      self.children.push({
-        $el: component.$el
-        component: component,
-        index: index
-      })
-
-      component.render()
-
-      component.on 'change', ->
-
-        value = component.getValue()
-
-        # set new value from child
-
-        self.model[index] = value
-
-        # update anything referencing this model, excluding the model that sent it
-
-        _.each self.children, (child) ->
-          if child.index == index and child.component != component
-            child.component.setValue(value)
-
-        # fire change up
-
-        self.fire('change')
-
-      $appendTo.append(component.$el)
+    _.each(@model, @append)
 
     # be sure whatever instantiates this updates their reference to the new $el
 
     @$el = $template.replaceAll(@$el)
+
+  append: (line, index) =>
+
+    self = this
+
+    component = componentFactory.getInstance(@repeat, $('<div></div>'), line, @scope)
+
+    @children.push({
+      $el: component.$el
+      component: component,
+      index: index
+    })
+
+    component.render()
+
+    component.on 'change', ->
+
+      value = component.getValue()
+
+      # set new value from child
+
+      self.model[index] = value
+
+      # update anything referencing this model, excluding the model that sent it
+
+      _.each self.children, (child) ->
+        if child.index == index and child.component != component
+          child.component.setValue(value)
+
+      # fire change up
+
+      self.fire('change')
+
+    component.on 'destroy', ->
+
+      component.$el.remove()
+
+      _.reject self.children, (item) ->
+        return item.index == index
+
+    @$appendTo.append(component.$el)
+
+  push: (model) =>
+
+    count = model.length
+
+    @append(model, count)
+
+    @model.push(model)
 
   getValue: ->
 

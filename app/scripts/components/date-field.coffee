@@ -1,5 +1,6 @@
 ValueComponent = require('./value-component.coffee')
 $ = require('jquery')
+_ = require('underscore')
 
 class DateFieldComponent extends ValueComponent
 
@@ -16,7 +17,12 @@ class DateFieldComponent extends ValueComponent
 
     # be sure to read props before doing this
 
+    classList = if @$el.attr('class') then @$el.attr('class').split(/\s+/) else []
+
     @$el = $(@getTemplate()).replaceAll(@$el)
+
+    _.each classList, (item) =>
+      @$el.addClass(item)
 
     # set value
 

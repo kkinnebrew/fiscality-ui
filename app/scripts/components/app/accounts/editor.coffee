@@ -13,6 +13,10 @@ class EditorComponent extends Component
 
     @$el.on 'click', '[data-model="accountNames"]', =>
       @$el.find('.line-editor').toggle()
+      if @$el.hasClass('expanded')
+        @$el.removeClass('expanded')
+      else
+        @$el.addClass('expanded')
 
 
 module.exports = EditorComponent
