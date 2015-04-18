@@ -1,5 +1,6 @@
-ListComponent = require('../../list-component.coffee')
+ListComponent = require('../../list-component1.coffee')
 template = require('./line-editor.hbs')
+_ = require('underscore')
 
 class LineEditorComponent extends ListComponent
 
@@ -10,11 +11,17 @@ class LineEditorComponent extends ListComponent
     super
 
     @$el.on 'click', '.add-line-button', =>
-      @push({
+      @append({
         transactionId: null
         accountId: null
-        amount: 0
+        amount: 0.00
       })
+
+  _onDestroy: () ->
+
+    return if @model.length < 2
+
+    super
 
 
 module.exports = LineEditorComponent

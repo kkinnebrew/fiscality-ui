@@ -1,4 +1,4 @@
-ListComponent = require('../../list-component.coffee')
+ListComponent = require('../../list-component1.coffee')
 template = require('./editor-list.hbs')
 
 class EditorListComponent extends ListComponent

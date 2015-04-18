@@ -37,6 +37,10 @@ class ValueComponent
       @model = @$el.val()
       @fire('change')
 
+  destroy: ->
+
+    @$el.remove()
+
   getValue: ->
 
     return @model
@@ -65,7 +69,8 @@ class ValueComponent
   fire: (event) ->
 
     if @events.hasOwnProperty(event)
-      _.each @events[event], (callback) ->
-        callback.call(this)
+      _.each @events[event], (callback) =>
+        e = currentTarget: this
+        callback.call(this, e)
 
 module.exports = ValueComponent

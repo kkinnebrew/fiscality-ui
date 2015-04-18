@@ -71,12 +71,20 @@ class ListComponent
 
     component.on 'destroy', ->
 
-      component.$el.remove()
+      self.onDestroy(component, index)
 
-      _.reject self.children, (item) ->
-        return item.index == index
 
     @$appendTo.append(component.$el)
+
+  onDestroy: (component, index) ->
+
+    component.$el.remove()
+
+    _.reject self.children, (item) ->
+      return item.index == index
+
+    _.each self.model, (item) ->
+      return item == component.model
 
   push: (model) =>
 
@@ -115,7 +123,10 @@ class ListComponent
 
     if @events.hasOwnProperty(event)
       _.each @events[event], (callback) ->
-        callback.call(this)
+        e = {
+          currentTarget: this
+        }
+        callback.call(this, e)
 
 module.exports = ListComponent
 

@@ -60,6 +60,8 @@ class Component
 
         value = component.getValue()
 
+        console.log('change', value)
+
         # set new value from child
 
         self.model[model] = value
@@ -84,6 +86,10 @@ class Component
 
       if tagName == 'DIV'
         $el.text(self.model[model])
+
+  destroy: ->
+
+    @$el.remove()
 
   getValue: ->
 
@@ -113,7 +119,8 @@ class Component
   fire: (event) ->
 
     if @events.hasOwnProperty(event)
-      _.each @events[event], (callback) ->
-        callback.call(this)
+      _.each @events[event], (callback) =>
+        e = currentTarget: this
+        callback.call(this, e)
 
 module.exports = Component
