@@ -72,6 +72,8 @@ class Component
           if child.model == model and child.component != component
             child.component.setValue(value)
 
+        self.onChange()
+
         self.fire('change')
 
 
@@ -86,6 +88,8 @@ class Component
 
       if tagName == 'DIV'
         $el.text(self.model[model])
+
+  onChange: ->
 
   destroy: ->
 
