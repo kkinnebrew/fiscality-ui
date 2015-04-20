@@ -33,6 +33,7 @@ input.field, select.field {
     background: #FFF;
     border: 1px solid transparent;
     border-radius: 2px;
+    color: #333;
 }
 
 .field.text-field:hover {
@@ -213,6 +214,9 @@ input.field, select.field {
 #ledger .line-subrow .cell:nth-child(3) { width: 100px }
 
 #ledger .add-subrow .cell:nth-child(1) { margin-left: 280px; margin-right: 230px; width: 490px; }
+
+#ledger .line-subrow .select-field { padding-left: 15px }
+
 
 /* buttons */
 

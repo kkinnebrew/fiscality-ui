@@ -18,6 +18,7 @@ componentFactory.registerInstance('editor-line', require('./components/app/accou
 componentFactory.registerInstance('date-field', require('./components/date-field.coffee'))
 componentFactory.registerInstance('select-field', require('./components/select-field.coffee'))
 componentFactory.registerInstance('text-field', require('./components/text-field.coffee'))
+componentFactory.registerInstance('hidden-field', require('./components/hidden-field.coffee'))
 
 # imports
 

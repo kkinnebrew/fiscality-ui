@@ -59,7 +59,7 @@ class TransactionsService extends Service
 
     return @post('/api/transactions/add', data)
 
-  updateTransaction: (transactionId, data) ->
+  editTransaction: (transactionId, data) ->
 
     return @post('/api/transactions/' + transactionId + '/edit', data)
 

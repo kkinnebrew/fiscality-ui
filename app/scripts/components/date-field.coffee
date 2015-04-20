@@ -11,7 +11,7 @@ class DateFieldComponent extends ValueComponent
     @format = $el.attr('data-format') || null
 
   getTemplate: ->
-    return $('<input class="date-field" type="text" placeholder="Date" />')
+    return $('<input class="date-field field" type="text" placeholder="Date" />')
 
   render: ->
 
@@ -25,6 +25,8 @@ class DateFieldComponent extends ValueComponent
       @$el.addClass(item)
 
     # set value
+
+    @model = new Date() if !@model
 
     if @format
       @$el.val(Date.parse(@model).toString(@format))

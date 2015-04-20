@@ -1,4 +1,4 @@
-componentFactory = require('./component-factory.coffee')
+Log = require('../common/log.coffee')
 $ = require('jquery')
 _ = require('underscore')
 
@@ -6,30 +6,40 @@ class ValueComponent
 
   constructor: ($el, model, scope) ->
 
+    # validate inputs
+
+    return Log.error('Invalid element passed to component') if !$el or !$el.length
+
+    # store references
+
     @$el = $el
-    @scope = scope
-    @model = model
+    @model = model || null
+    @scope = scope || {}
+
+    # events properties
+
     @events = {}
-
-    @children = []
-
-  getTemplate: ->
-    throw new Error('Cannot get template for abstract component')
 
   render: ->
 
-    # be sure to read props before doing this
+    # generate template
+
+    $template = $(@getTemplate())
+
+    # pass along class attributes
 
     classList = if @$el.attr('class') then @$el.attr('class').split(/\s+/) else []
-
-    @$el = $(@getTemplate()).replaceAll(@$el)
 
     _.each classList, (item) =>
       @$el.addClass(item)
 
+    # replace element
+
+    @$el = $template.replaceAll(@$el)
+
     # set value
 
-    @$el.val(@model) if @model
+    @setValue(@model)
 
     # bind events
 
@@ -45,13 +55,14 @@ class ValueComponent
 
     return @model
 
-  setValue: (name, value) ->
+  setValue: (value) ->
 
-    @model[name] = value
+    @model = value
 
-    _.each @children, (child) ->
-      if child.model == name
-        child.component.setValue(value)
+    if @model
+      @$el.val(value)
+    else
+      @$el.val('')
 
   on: (event, callback) ->
 
@@ -72,5 +83,6 @@ class ValueComponent
       _.each @events[event], (callback) =>
         e = currentTarget: this
         callback.call(this, e)
+
 
 module.exports = ValueComponent

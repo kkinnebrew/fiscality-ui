@@ -10,6 +10,8 @@ class EditorComponent extends Component
 
     @original = JSON.parse(JSON.stringify(@model))
 
+    console.log(@model)
+
   getTemplate: -> return template()
 
   render: ->
@@ -29,6 +31,29 @@ class EditorComponent extends Component
 
     @$el.on 'click', '.save-btn', =>
       # make service request
+
+      if @model.transactionId
+        @scope.saveTransaction(@model.transactionId, {
+          transactionType: @model.transactionType,
+          transactionDate: @model.transactionDate,
+          description: @model.description,
+          lines: _.map(@model.otherLines, (line) -> {
+            transactionLineId: line.transactionLineId,
+            amount: line.amount,
+            accountId: line.accountId
+          })
+        })
+      else
+        @scope.addTransaction({
+          transactionType: @model.transactionType,
+          transactionDate: @model.transactionDate,
+          description: @model.description,
+          lines: _.map(@model.otherLines, (line) -> {
+          transactionLineId: line.transactionLineId,
+          amount: line.amount,
+          accountId: line.accountId
+          })
+        })
       @original = JSON.parse(JSON.stringify(@model))
       @$el.find('.save-subrow').hide()
 

@@ -1,6 +1,9 @@
 <div class="row transaction-row">
 
+    <input type="hidden" data-component="hidden-field" data-model="transactionId" />
+
     <div class="row info-subrow">
+
         <div class="cell">
             <div class="field" data-component="date-field" data-model="transactionDate" data-format="M/d/yyyy"></div>
         </div>
@@ -8,7 +11,7 @@
             <div class="field" data-component="select-field" data-model="transactionType" data-source="transactionTypes"></div>
         </div>
         <div class="cell">
-            <div class="field account-names" data-model="accountNames"></div>
+            <div class="field account-names" data-model="accountNames" data-default="None"></div>
         </div>
         <div class="cell">
             <div class="field" data-component="text-field" data-model="description"></div>

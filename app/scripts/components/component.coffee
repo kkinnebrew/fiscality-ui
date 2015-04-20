@@ -60,8 +60,6 @@ class Component
 
         value = component.getValue()
 
-        console.log('change', value)
-
         # set new value from child
 
         self.model[model] = value
@@ -76,6 +74,7 @@ class Component
 
         self.fire('change')
 
+      self.model[model] = component.getValue()
 
     # render static elements
 
@@ -84,22 +83,26 @@ class Component
       $el = $(this)
 
       model = $el.attr('data-model')
+      defaultVal = $el.attr('data-default')
       tagName = $el.prop('tagName')
 
-      if tagName == 'DIV'
+      if tagName == 'DIV' and self.model[model]
         $el.text(self.model[model])
+      else if tagName == 'DIV'
+        $el.text(defaultVal || '')
 
   onChange: ->
 
   destroy: ->
 
     @$el.remove()
+    @children = []
 
   getValue: ->
 
     return @model
 
-  setProperty: (name, value) ->
+  _setProperty: (name, value) ->
 
     @model[name] = value
 
@@ -110,7 +113,7 @@ class Component
   setValue: (values) ->
 
     _.each values, (value, name) =>
-      @setProperty(name, value)
+      @_setProperty(name, value)
 
   on: (event, callback) ->
 

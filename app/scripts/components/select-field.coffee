@@ -12,7 +12,7 @@ class SelectFieldComponent extends ValueComponent
 
   getTemplate: =>
 
-    list = $('<select class="select-field"></select>')
+    list = $('<select class="select-field field"></select>')
 
     if @source and @scope.hasOwnProperty(@source)
       items = @scope[@source]
@@ -23,5 +23,14 @@ class SelectFieldComponent extends ValueComponent
           list.append('<option value="' + item.value + '">' + item.label + '</option>')
 
     return list
+
+  render: ->
+
+    super
+
+    if !@model
+      console.log(@$el.find('option:first').val())
+      @model = @$el.find('option:first').val()
+      @fire('change')
 
 module.exports = SelectFieldComponent

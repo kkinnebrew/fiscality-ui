@@ -26,6 +26,17 @@ class TransactionsViewModel extends ViewModel
 
   addTransaction: (data) ->
 
+    sum = _.reduce data.lines, (memo, item) ->
+      return memo + parseFloat(item.amount)
+    , 0
+
+    console.log(sum)
+
+    data.lines.push({
+      accountId: @accountId,
+      amount: sum
+    })
+
     return transactionsService.addTransaction(data).then =>
       @update()
     , ->
