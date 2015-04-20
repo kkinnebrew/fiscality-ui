@@ -223,3 +223,11 @@ input.field, select.field {
 .add-line-button {
     cursor: pointer;
 }
+
+.save-btn, .cancel-btn {
+    cursor: pointer;
+    float: right;
+    font: 13px "proxima-nova", sans-serif;
+    font-weight: 600;
+    margin: 8px 20px 8px 0;
+}

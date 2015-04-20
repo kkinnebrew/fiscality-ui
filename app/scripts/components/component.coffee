@@ -99,13 +99,18 @@ class Component
 
     return @model
 
-  setValue: (name, value) ->
+  setProperty: (name, value) ->
 
     @model[name] = value
 
     _.each @children, (child) ->
       if child.model == name
         child.component.setValue(value)
+
+  setValue: (values) ->
+
+    _.each values, (value, name) =>
+      @setProperty(name, value)
 
   on: (event, callback) ->
 

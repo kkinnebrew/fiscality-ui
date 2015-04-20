@@ -93,6 +93,22 @@ class ListComponent
 
     return @model
 
+  setValue: (value) ->
+
+    console.log('set value', value)
+
+    @children = []
+
+    @$outlet.empty()
+
+    @model = value
+
+    _.each @model, (item) =>
+
+      component = @_generate(item)
+
+      @$outlet.append(component.$el)
+
   _generate: (model) ->
 
     # create component

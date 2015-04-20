@@ -27,11 +27,21 @@ class EditorComponent extends Component
       else
         @$el.addClass('expanded')
 
+    @$el.on 'click', '.save-btn', =>
+      # make service request
+      @original = JSON.parse(JSON.stringify(@model))
+      @$el.find('.save-subrow').hide()
+
+
+    @$el.on 'click', '.cancel-btn', =>
+      @setValue(JSON.parse(JSON.stringify(@original)))
+      @$el.find('.save-subrow').hide()
+
 
   onChange: ->
 
     @changed = true
-    
+
     @$el.find('.save-subrow').show()
 
 module.exports = EditorComponent
