@@ -10,8 +10,6 @@ class EditorComponent extends Component
 
     @original = JSON.parse(JSON.stringify(@model))
 
-    console.log(@model)
-
   getTemplate: -> return template()
 
   render: ->

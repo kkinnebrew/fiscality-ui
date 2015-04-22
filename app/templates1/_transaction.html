@@ -1,0 +1,17 @@
+<li class="transaction">
+
+    <div class="header-row">
+
+        <div data-component="date-field" class="field" data-model="transactionDate" data-format="m/d/yyyy"></div>
+
+        <div data-component="select-field" class="field" data-model="transactionType" data-source="types"></div>
+
+        <div data-component="text-field" class="field" data-model="description"></div>
+
+        <div class="field balance">{currency | balance}</div>
+
+    </div>
+
+    <div data-component="transaction-lines" data-model="lines"></div>
+
+</li>

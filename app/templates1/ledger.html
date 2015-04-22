@@ -1,0 +1,59 @@
+<div id="ledger">
+
+    <header id="header"></header>
+
+    <div id="options"></div>
+
+    <div id="transactions">
+
+        <header></header>
+
+        <div class="transactions" data-model="transactions">
+
+            <div class="add-transaction-button">Add Transaction</div>
+
+            <ul class="transactions-list">
+
+                <li class="transaction-editor">
+
+                    <div class="header-row">
+
+                        <div data-component="date-field" class="field" data-model="transactionDate" data-format="m/d/yyyy"></div>
+
+                        <div data-component="select-field" class="field" data-model="transactionType" data-source="transactionTypes"></div>
+
+                        <div data-component="text-field" class="field" data-model="description"></div>
+
+                        <div class="field balance">{currency | balance}</div>
+
+                    </div>
+
+                    <div data-component="transaction-lines-list" class="transaction-lines-list" data-model="lines">
+
+                        <ul class="transactionLines" data-repeat>
+
+                            <li data-component="transaction-line" class="transaction-line">
+
+                                <div data-component="select-field" class="field" data-model="account"></div>
+
+                                <div data-component="currency-field" class="field" data-model="amount"></div>
+
+                                <div class="delete-button">Delete</div>
+
+                            </li>
+
+                        </ul>
+
+                        <div class="add-line-button">Add Line</div>
+
+                    </div>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
