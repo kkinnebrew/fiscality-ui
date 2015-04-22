@@ -15,6 +15,10 @@ class TransactionsService extends Service
 
     'X-Auth-Token': authToken
 
+  types: ->
+
+    @get('/api/transactions/types')
+
   transactions: (accountId) ->
 
     deferred = $.Deferred();
@@ -27,7 +31,7 @@ class TransactionsService extends Service
       cache.setItem('transactions:' + accountId, data);
       deferred.resolve(data)
 
-    @cacheGet('/api/accounts/' + accountId + '/transactions').then(success, -> deferred.reject())
+    @get('/api/accounts/' + accountId + '/transactions').then(success, -> deferred.reject())
 
     return deferred
 
@@ -50,6 +54,18 @@ class TransactionsService extends Service
   balance: (accountId) ->
 
     return @cacheGet('/api/accounts/' + accountId + '/balance')
+
+  addTransaction: (data) ->
+
+    return @post('/api/transactions/add', data)
+
+  editTransaction: (transactionId, data) ->
+
+    return @post('/api/transactions/' + transactionId + '/edit', data)
+
+  deleteTransaction: (transactionId) ->
+
+    return @get('/api/transactions/' + transactionId + '/remove')
 
   onError: (status) ->
 

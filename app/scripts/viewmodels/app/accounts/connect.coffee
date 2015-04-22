@@ -16,7 +16,7 @@ class ConnectAccountViewModel extends ViewModel
     return if !accountName or !accountType
 
     transactionsService.createAccount(accountName, accountType).then (data) =>
-      Log.debug('Created account "' + data.accountId + '"')
+      Log.debug('Created account')
       @fire('done')
     , =>
       Log.error('Error creating account')

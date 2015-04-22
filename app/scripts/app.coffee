@@ -7,6 +7,19 @@ $ = window.jQuery = require('jquery')
 require('jquery-circle-progress')
 require('datejs')
 
+# components
+
+componentFactory = require('./components/component-factory.coffee')
+
+componentFactory.registerInstance('editor-list', require('./components/app/accounts/editor-list.coffee'))
+componentFactory.registerInstance('editor', require('./components/app/accounts/editor.coffee'))
+componentFactory.registerInstance('line-editor', require('./components/app/accounts/line-editor.coffee'))
+componentFactory.registerInstance('editor-line', require('./components/app/accounts/editor-line.coffee'))
+componentFactory.registerInstance('date-field', require('./components/date-field.coffee'))
+componentFactory.registerInstance('select-field', require('./components/select-field.coffee'))
+componentFactory.registerInstance('text-field', require('./components/text-field.coffee'))
+componentFactory.registerInstance('hidden-field', require('./components/hidden-field.coffee'))
+
 # imports
 
 Router = require('./common/router.coffee')
@@ -32,6 +45,16 @@ HandlebarsCompiler.registerHelper 'percentage', (d) ->
 HandlebarsCompiler.registerHelper 'dateFormat', (d, f) ->
   return '' if d == undefined or d == null
   return Date.parse(d).toString(f)
+
+HandlebarsCompiler.registerHelper 'select', (value, options) ->
+  $el = $('<select />').html(options.fn(this))
+  $el.find('[value="' + value + '"]').attr({'selected': 'selected'})
+  return $el.html()
+
+HandlebarsCompiler.registerHelper 'ifCond', (v1, v2, options) ->
+  if v1 == v2
+    return options.fn(this)
+  return options.inverse(this)
 
 # setup router
 
@@ -80,44 +103,44 @@ router.register('app', {
 })
 
 router.register('app.accounts', {
-  presenter: require('./presenters/app/accounts/accounts.coffee')
+  controller: require('./controllers/app/accounts/accounts.coffee')
   params: ['accountId']
   views:
     'content':
       template: require('../templates/app/accounts.hbs')
     'chart@content':
-      present: 'chart'
+      name: 'chart'
       template: require('../templates/app/accounts/chart.hbs')
       view: require('./views/app/accounts/chart.coffee')
       viewmodel: require('./viewmodels/app/accounts/chart.coffee')
     'transactions@content':
-      present: 'transactions'
+      name: 'transactions'
       template: require('../templates/app/accounts/transactions.hbs')
       view: require('./views/app/accounts/transactions.coffee')
       viewmodel: require('./viewmodels/app/accounts/transactions.coffee')
     'accounts@global':
-      present: 'accounts'
+      name: 'accounts'
       template: require('../templates/app/accounts/overlay.hbs')
       view: require('./views/app/accounts/overlay.coffee')
       viewmodel: require('./viewmodels/app/accounts/overlay.coffee')
     'connect-account@global':
-      present: 'connectAccount'
+      name: 'connectAccount'
       template: require('../templates/app/accounts/connect.hbs')
       view: require('./views/app/accounts/connect.coffee')
       viewmodel: require('./viewmodels/app/accounts/connect.coffee')
 })
 
 router.register('app.investments', {
-  presenter: require('./presenters/app/investments/investments.coffee')
+  controller: require('./controllers/app/investments/investments.coffee')
   params: ['portfolioId']
   views:
     'content':
       primary: true
-      present: 'investments'
+      name: 'investments'
       template: require('../templates/app/investments.hbs')
       viewmodel: require('./viewmodels/app/investments/investments.coffee')
     'portfolios@global':
-      present: 'portfolios'
+      name: 'portfolios'
       template: require('../templates/app/investments/overlay.hbs')
       view: require('./views/app/investments/overlay.coffee')
       viewmodel: require('./viewmodels/app/investments/overlay.coffee')

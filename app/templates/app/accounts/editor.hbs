@@ -1,0 +1,63 @@
+<div class="transaction-editor">
+
+    <div class="transaction-row list-row">
+        <div class="list-cell cell-sm">
+            <input class="field-input" type="text" value="{{dateFormat transactionDate 'M/d/yyyy'}}" />
+        </div>
+        <div class="list-cell">
+            <select class="field-input">
+                {{#select transactionType}}
+                    <option value="Deposit">Deposit</option>
+                    <option value="Buy To Open">Buy To Open</option>
+                    <option value="Sell To Close">Sell To Close</option>
+                    <option value="Transfer">Transfer</option>
+                {{/select}}
+            </select>
+        </div>
+        <div class="list-cell cell-lg"></div>
+        <div class="list-cell cell-lg">
+            <input class="field-input" type="text" value="{{description}}" />
+        </div>
+        <div class="list-cell cell-sm">{{currency amount}}</div>
+        <div class="list-cell cell-sm"></div>
+    </div>
+
+    {{#each otherLines}}
+
+    <div class="line-row list-row" data-key="{{transactionLineId}}">
+        <div class="list-cell cell-sm"></div>
+        <div class="list-cell"></div>
+        <div class="list-cell cell-lg">
+            <select class="field-input" data-value="{{accountId}}">
+                {{#each @root.accounts}}
+                    <option value="{{accountId}}">{{accountName}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="list-cell cell-lg"></div>
+        <div class="list-cell cell-sm">
+            <input class="field-input" type="text" value="{{currency amount}}" />
+        </div>
+        <div class="list-cell cell-sm"></div>
+        <div class="row-options">
+            <div class="row-option delete-row-btn">Delete</div>
+        </div>
+    </div>
+
+    {{/each}}
+
+    <div class="add-line-row list-row">
+        <div class="list-cell cell-sm"></div>
+        <div class="list-cell"></div>
+        <div class="list-cell cell-lg add-row-btn">Add Line</div>
+        <div class="list-cell cell-lg"></div>
+        <div class="list-cell cell-sm"></div>
+        <div class="list-cell cell-sm"></div>
+    </div>
+
+    <div class="editor-options">
+        <div class="editor-option cancel-btn">Remove / Cancel</div>
+        <div class="editor-option save-btn">Save / Save & Finish</div>
+    </div>
+
+</div>

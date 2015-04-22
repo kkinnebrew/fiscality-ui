@@ -1,6 +1,6 @@
-Presenter = require('../../../common/presenter.coffee')
+Controller = require('../../../common/controller.coffee')
 
-class InvestmentsPresenter extends Presenter
+class InvestmentsController extends Controller
 
   constructor: (params) ->
 
@@ -49,4 +49,4 @@ class InvestmentsPresenter extends Presenter
 
     @router.destroyGlobal('portfolios')
 
-module.exports = InvestmentsPresenter
+module.exports = InvestmentsController

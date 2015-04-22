@@ -172,9 +172,9 @@ class Router
         _.each @stack[depth].views, (node) ->
           node.viewmodel.setParams(params) if node.viewmodel
 
-        if @stack[depth].presenter
-          @stack[depth].presenter.setParams(params, true)
-          @stack[depth].presenter.update()
+        if @stack[depth].controller
+          @stack[depth].controller.setParams(params, true)
+          @stack[depth].controller.update()
 
       depth++
 
@@ -212,7 +212,7 @@ class Router
 
         subnode = {}
         subnode.primary = true if conf.primary == true
-        subnode.present = conf.present if conf.present
+        subnode.name = conf.name if conf.name
 
         if typeof conf.viewmodel == 'function'
           subnode.viewmodel = new conf.viewmodel(params)
@@ -250,7 +250,7 @@ class Router
 
         subnode = {}
 
-        subnode.present = conf.present if conf.present
+        subnode.name = conf.name if conf.name
 
         if typeof conf.viewmodel == 'function'
           subnode.viewmodel = new conf.viewmodel(params)
@@ -279,21 +279,21 @@ class Router
 
           Log.debug('Rendering absolute state: ' + state + ' -> ' + name);
 
-        else if config.presenter
+        else if config.controller
 
           @globals[target] = subnode
 
         node.views[target] = subnode
 
-    if config.presenter
+    if config.controller
 
-      node.presenter = new config.presenter(params)
-      node.presenter.router = this
+      node.controller = new config.controller(params)
+      node.controller.router = this
 
       _.each node.views, (subnode) ->
-        node.presenter[subnode.present + 'ViewModel'] = subnode.viewmodel if subnode.present
+        node.controller[subnode.name + 'ViewModel'] = subnode.viewmodel if subnode.name
 
-      node.presenter.load()
+      node.controller.load()
 
   destroyState: (depth) ->
 
@@ -301,7 +301,7 @@ class Router
 
     item.destroy() for item in node.views
 
-    node.presenter.destroy() if node.presenter
+    node.controller.destroy() if node.controller
 
     Log.debug('Destroying state: ' + @stack[depth].state)
 
