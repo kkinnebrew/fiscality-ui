@@ -7,7 +7,6 @@ ViewModel = require('./viewmodel.coffee')
 class Router
 
   constructor: (@$root) ->
-    
 
     @stack = []
 
