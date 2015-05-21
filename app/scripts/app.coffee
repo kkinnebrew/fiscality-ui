@@ -185,4 +185,10 @@ router.register('app.settings', {
 
 # run
 
-$(document).ready(-> router.listen())
+# $(document).ready(-> router.listen())
+
+React = require('react')
+
+MyView = require('./view.jsx')
+
+React.render(React.createElement(MyView, null), document.getElementById('app'))

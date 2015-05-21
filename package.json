@@ -17,7 +17,8 @@
     "sass"
   ],
   "dependencies": {
-    "express": "~4.11.2"
+    "express": "~4.11.2",
+    "reactify": "~1.1.1"
   },
   "devDependencies": {
     "karma": "~0.10",
