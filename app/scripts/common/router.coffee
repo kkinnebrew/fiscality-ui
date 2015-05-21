@@ -3,6 +3,7 @@ _ = require('underscore')
 Log = require('./log.coffee')
 View = require('./view.coffee')
 ViewModel = require('./viewmodel.coffee')
+ReactView = require('./react-view.coffee')
 
 class Router
 
@@ -221,7 +222,9 @@ class Router
           subnode.viewmodel = new ViewModel(params)
           subnode.viewmodel.router = this
 
-        if typeof conf.view == 'function'
+        if conf.react
+          subnode.view = new ReactView(conf.view, subnode.viewmodel or undefined)
+        else if typeof conf.view == 'function'
           subnode.view = new conf.view(conf.template, subnode.viewmodel or undefined)
         else
           subnode.view = new View(conf.template, subnode.viewmodel or undefined)
@@ -259,7 +262,9 @@ class Router
           subnode.viewmodel = new ViewModel(params)
           subnode.viewmodel.router = this
 
-        if typeof conf.view == 'function'
+        if conf.react
+          subnode.view = new ReactView(conf.view, subnode.viewmodel or undefined)
+        else if typeof conf.view == 'function'
           subnode.view = new conf.view(conf.template, subnode.viewmodel or undefined)
         else
           subnode.view = new View(conf.template, subnode.viewmodel or undefined)
