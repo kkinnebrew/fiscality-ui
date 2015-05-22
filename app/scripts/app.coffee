@@ -97,9 +97,9 @@ router.register('app.accounts', {
       template: require('../templates/app/accounts.hbs')
     'chart@content':
       name: 'chart'
-      template: require('../templates/app/accounts/chart.hbs')
-      view: require('./views/app/accounts/chart.coffee')
-      viewmodel: require('./viewmodels/app/accounts/chart.coffee')
+      react: true
+      view: require('./views/app/accounts/account.jsx')
+      viewmodel: require('./viewmodels/app/accounts/account.coffee')
     'transactions@content':
       name: 'transactions'
       react: true

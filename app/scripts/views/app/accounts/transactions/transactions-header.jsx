@@ -20,8 +20,8 @@ var TransactionsHeader = React.createClass({
       'date': 'Date',
       'transactionType': 'Type',
       'description': 'Description',
-      'amount': 'Amount',
-      'balance': 'Balance'
+      'balance': 'Balance',
+      'amount': 'Amount'
     };
 
     var that = this;
@@ -29,6 +29,10 @@ var TransactionsHeader = React.createClass({
     var cells = _.map(columns, function(label, column) {
 
       var classes = (column == 'amount' || column == 'balance') ? 'column column-right' : 'column';
+
+      if (column == 'balance') {
+        classes += ' column-last';
+      }
 
       if (that.props.sort == column) {
         if (that.props.direction == 'desc') {

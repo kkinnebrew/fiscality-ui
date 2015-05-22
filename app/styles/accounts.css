@@ -1,3 +1,130 @@
+/* account header */
+
+#accounts-chart {
+    height: 190px;
+    width: 100%;
+}
+
+.account-panel {
+    background: #278fd4;
+    background: -moz-linear-gradient(-45deg,  #278fd4 0%, #2d9be3 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#278fd4), color-stop(100%,#2d9be3));
+    background: -webkit-linear-gradient(-45deg,  #278fd4 0%,#2d9be3 100%);
+    background: -o-linear-gradient(-45deg,  #278fd4 0%,#2d9be3 100%);
+    background: -ms-linear-gradient(-45deg,  #278fd4 0%,#2d9be3 100%);
+    background: linear-gradient(135deg,  #278fd4 0%,#2d9be3 100%);
+    color: #FFF;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#278fd4', endColorstr='#2d9be3',GradientType=1 );
+    height: 100%;
+    width: 100%;
+}
+
+.menu-button {
+    background: url(../images/menu-button.png) center center no-repeat;
+    cursor: pointer;
+    height: 17px;
+    position: absolute;
+    left: 30px;
+    top: 52px;
+    width: 20px;
+}
+
+.menu-button:hover {
+    opacity: 0.8;
+    -webkit-transition: opacity ease-in-out 150ms;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .menu-button {
+        background-image: url(../images/menu-button@2x.png);
+        -webkit-background-size: 20px 17px;
+        -moz-background-size: 20px 17px;
+        background-size: 20px 17px;
+    }
+
+}
+
+.account-header {
+    height: 140px;
+    width: 100%;
+}
+
+.account-header .account-info {
+    position: absolute;
+    left: 75px;
+    top: 45px;
+}
+
+.account-header .account-name {
+    font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+}
+
+.account-header .account-type {
+    font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.account-header .account-balance {
+    position: absolute;
+    right: 30px;
+    top: 45px;
+}
+
+.account-header .amount {
+    font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 100;
+    text-align: right;
+}
+
+.account-header .label {
+    font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.account-panel .nav {
+    background: #3E9DDB;
+    height: 50px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.account-panel .nav .nav-button {
+    cursor: pointer;
+    float: left;
+    font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    line-height: 54px;
+    margin-left: 40px;
+    text-transform: uppercase;
+}
+
+.account-panel .nav .nav-button:hover {
+    opacity: 0.8;
+    -webkit-transition: opacity ease-in-out 150ms;
+}
+
+.account-panel .nav .nav-button:first-child {
+    margin-left: 30px;
+}
+
+.account-panel .nav .nav-button.nav-button-right {
+    float: right;
+    margin-right: 30px;
+}
+
 /* transactions header */
 
 .transactions {
@@ -7,6 +134,7 @@
 .transaction-header {
     background: #FBFBFB;
     height: 52px;
+    overflow: hidden;
     position: absolute;
     width: 100%;
     z-index: 10;
@@ -25,18 +153,27 @@
     display: inline-block;
     height: 52px;
     line-height: 56px;
-    margin-left: 25px;
+    margin-left: 30px;
     min-width: 140px;
     text-transform: uppercase;
     -webkit-user-select: none;
 }
 
+@media (max-width: 1250px) {
+
+    .transaction-header .column {
+        min-width: 110px;
+    }
+
+}
+
 .transaction-header .column.column-right {
+    float: right;
     text-align: right;
 }
 
-.transaction-header .column:last-child {
-    margin-right: 25px;
+.transaction-header .column.column-last {
+    margin-right: 30px;
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -74,6 +211,7 @@
     background: #FFF;
     color: #646464;
     height: 40px;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -98,16 +236,31 @@
     font-weight: 400;
     letter-spacing: 0.5px;
     line-height: 40px;
-    min-width: 165px;
-    padding-left: 25px;
+    min-width: 170px;
+    padding-left: 30px;
 }
 
 .transaction-row .column.column-right {
+    float: right;
     text-align: right;
 }
 
-.transaction-row .column.column-right:first-child {
-    padding-right: 25px;
+.transaction-row .column.column-last {
+    padding-right: 30px;
+    width: 200px;
+}
+
+@media (max-width: 1250px) {
+
+    .transaction-row .column {
+        min-width: 140px;
+    }
+
+    .transaction-row .column.column-last {
+        padding-right: 30px;
+        width: 170px;
+    }
+
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -131,9 +284,21 @@
 /* column widths */
 
 .transaction-header .column:nth-child(3) {
-    width: 360px;
+    width: 320px;
 }
 
 .transaction-row .column:nth-child(3) {
-    width: 385px;
+    width: 350px;
+}
+
+@media (max-width: 1250px) {
+
+    .transaction-header .column:nth-child(3) {
+        width: 220px;
+    }
+
+    .transaction-row .column:nth-child(3) {
+        width: 250px;
+    }
+
 }

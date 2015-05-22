@@ -1,12 +1,9 @@
 var React = require('react');
-var ReactMixin = require('../../../common/react-mixin.js');
 var TransactionsHeader = require('./transactions/transactions-header.jsx');
 var TransactionsBody = require('./transactions/transactions-body.jsx');
 var _ = require('underscore');
 
 var TransactionsView = React.createClass({
-
-  mixins: [ReactMixin],
 
   getInitialState: function() {
     return {
@@ -17,7 +14,6 @@ var TransactionsView = React.createClass({
   },
 
   handleSort: function(column) {
-    console.log(this.props.viewmodel);
     this.props.viewmodel.sortBy(column);
   },
 
