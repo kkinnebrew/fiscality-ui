@@ -135,7 +135,6 @@ var TransactionsView = React.createClass({
       }
 
     } else {
-      console.log('123', _.sortBy(this.state.data, column));
       this.setState({ sort: column, direction: 'asc', data: _.sortBy(this.state.data, column) });
     }
 

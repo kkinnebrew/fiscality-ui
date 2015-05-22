@@ -764,6 +764,14 @@ th {
     -webkit-font-smoothing: antialiased;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .transaction-row .column {
+        font-weight: 700;
+    }
+
+}
+
 .transaction-header .column.active {
     border-bottom: 3px solid #278FD4;
     color: #278FD4;
@@ -807,6 +815,15 @@ th {
     line-height: 40px;
     min-width: 165px;
     padding-left: 25px;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .transaction-row .column {
+        font-weight: 400;
+    }
+
 }
 
 /* cells */
