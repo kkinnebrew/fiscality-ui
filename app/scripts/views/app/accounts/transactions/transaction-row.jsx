@@ -7,6 +7,10 @@ var Label = require('./label.jsx');
 
 var TransactionRow = React.createClass({
 
+  getInitialState: function() {
+    return { editing: false };
+  },
+
   handleChange: function() {
 
     // make service call
@@ -15,10 +19,19 @@ var TransactionRow = React.createClass({
 
   },
 
+  handleClick: function() {
+    this.setState({ editing: !this.state.editing });
+    console.log('ar')
+  },
+
   render: function() {
     var data = this.props.data;
+    var classes = 'transaction-row';
+    if (this.state.editing) {
+      classes += ' selected';
+    }
     return (
-      <div className="transaction-row">
+      <div className={classes} onClick={this.handleClick}>
         <DateField className="column" value={data.date} onChange={this.handleChange} />
         <SelectField className="column" value={data.transactionType} onChange={this.handleChange} />
         <TextField className="column" value={data.description} onChange={this.handleChange} />

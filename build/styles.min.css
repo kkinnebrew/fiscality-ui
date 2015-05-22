@@ -813,7 +813,7 @@ th {
     background: #FAFAFA;
 }
 
-.transaction-row:hover, .transaciton-row.selected {
+.transaction-row.selected {
     background: #2A95DC;
     color: #FFF;
     cursor: pointer;
@@ -845,7 +845,7 @@ th {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
     .transaction-row .column {
-        font-weight: 300;
+        font-weight: 400;
         -webkit-font-smoothing: antialiased;
     }
 
