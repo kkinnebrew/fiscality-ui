@@ -233,6 +233,7 @@
     height: 40px;
     overflow: hidden;
     width: 100%;
+    -webkit-transition: all ease-out 150ms;
 }
 
 .transaction-row:nth-child(even) {
@@ -243,7 +244,6 @@
     background: #2A95DC;
     color: #FFF;
     cursor: pointer;
-    -webkit-transition: all ease-in-out 200ms;
 }
 
 .transaction-row .column {
