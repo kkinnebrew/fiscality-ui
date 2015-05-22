@@ -965,6 +965,7 @@ th {
     height: 40px;
     overflow: hidden;
     width: 100%;
+    -webkit-transition: all ease-out 150ms;
 }
 
 .transaction-row:nth-child(even) {
@@ -975,7 +976,6 @@ th {
     background: #2A95DC;
     color: #FFF;
     cursor: pointer;
-    -webkit-transition: all ease-in-out 200ms;
 }
 
 .transaction-row .column {
@@ -1885,7 +1885,7 @@ ul {
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    .selector-overlay .selector-close-btn {
+    .selector-overlay .close-btn {
         background-image: url(../images/close-btn@2x.png);
         -webkit-background-size: 20px 20px;
         -moz-background-size: 20px 20px;
