@@ -1,14 +1,17 @@
 var React = require('react');
+var DateField = require('./date-field.jsx');
+var TextField = require('./text-field.jsx');
+var SelectField = require('./select-field.jsx');
+var CurrencyField = require('./currency-field.jsx');
+var Label = require('./label.jsx');
 
 var TransactionRow = React.createClass({
-
-  getInitialState: function() {
-    return { data: this.props.data };
-  },
 
   handleChange: function() {
 
     // make service call
+
+    console.log('something changed');
 
   },
 

@@ -4,13 +4,6 @@ var _ = require('underscore');
 
 var TransactionsHeader = React.createClass({
 
-  getDefaultProps: function() {
-    return {
-      sort: 'date',
-      direction: 'asc'
-    };
-  },
-
   handleClick: function(e) {
 
     var column = $(e.currentTarget).attr('data-column');
@@ -23,17 +16,24 @@ var TransactionsHeader = React.createClass({
 
   render: function() {
 
-    var columns = ['Date', 'Type', 'Description', 'Amount', 'Balance'], that = this;
+    var columns = {
+      'date': 'Date',
+      'transactionType': 'Type',
+      'description': 'Description',
+      'amount': 'Amount',
+      'balance': 'Balance'
+    };
 
-    var cells = _.map(columns, function(label) {
+    var that = this;
 
-      var column = label.toLowerCase();
-
+    var cells = _.map(columns, function(label, column) {
+      
       if (that.props.sort == column) {
-        if (that.props.direction == 'asc') {
-          return <div className="column active asc" onClick={that.handleClick} data-column={column}>{label}</div>;
-        } else {
+        if (that.props.direction == 'desc') {
           return <div className="column active desc" onClick={that.handleClick} data-column={column}>{label}</div>;
+        } else {
+
+          return <div className="column active asc" onClick={that.handleClick} data-column={column}>{label}</div>;
         }
       } else {
         return <div className="column" onClick={that.handleClick} data-column={column}>{label}</div>;

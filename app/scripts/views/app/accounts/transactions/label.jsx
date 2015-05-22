@@ -1,6 +1,6 @@
 var React = require('react');
 
-var SelectField = React.createClass({
+var Label = React.createClass({
 
   getInitialState: function() {
     return { value: '' };
@@ -17,4 +17,4 @@ var SelectField = React.createClass({
 
 });
 
-module.exports = SelectField;
+module.exports = Label;
