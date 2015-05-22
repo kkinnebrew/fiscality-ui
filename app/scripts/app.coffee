@@ -7,19 +7,6 @@ $ = window.jQuery = require('jquery')
 require('jquery-circle-progress')
 require('datejs')
 
-# components
-
-componentFactory = require('./components/component-factory.coffee')
-
-componentFactory.registerInstance('editor-list', require('./components/app/accounts/editor-list.coffee'))
-componentFactory.registerInstance('editor', require('./components/app/accounts/editor.coffee'))
-componentFactory.registerInstance('line-editor', require('./components/app/accounts/line-editor.coffee'))
-componentFactory.registerInstance('editor-line', require('./components/app/accounts/editor-line.coffee'))
-componentFactory.registerInstance('date-field', require('./components/date-field.coffee'))
-componentFactory.registerInstance('select-field', require('./components/select-field.coffee'))
-componentFactory.registerInstance('text-field', require('./components/text-field.coffee'))
-componentFactory.registerInstance('hidden-field', require('./components/hidden-field.coffee'))
-
 # imports
 
 Router = require('./common/router.coffee')
