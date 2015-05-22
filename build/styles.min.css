@@ -1885,7 +1885,7 @@ ul {
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    .selector-overlay .selector-close-btn {
+    .selector-overlay .close-btn {
         background-image: url(../images/close-btn@2x.png);
         -webkit-background-size: 20px 20px;
         -moz-background-size: 20px 20px;
