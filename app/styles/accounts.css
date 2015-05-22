@@ -53,13 +53,14 @@
 .account-header .account-info {
     position: absolute;
     left: 75px;
-    top: 45px;
+    top: 46px;
 }
 
 .account-header .account-name {
     font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 100;
+    line-height: 32px;
 }
 
 .account-header .account-type {
@@ -67,19 +68,21 @@
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
+    padding-left: 2px;
     text-transform: uppercase;
 }
 
 .account-header .account-balance {
     position: absolute;
     right: 30px;
-    top: 45px;
+    top: 46px;
 }
 
 .account-header .amount {
     font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 100;
+    line-height: 32px;
     text-align: right;
 }
 
