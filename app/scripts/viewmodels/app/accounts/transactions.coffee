@@ -12,10 +12,11 @@ class TransactionsViewModel extends ViewModel
 
     @accountId = params.accountId || null
 
-    console.log(params.accountId)
-
     @account = null
     @transactions = []
+
+    @sort = 'date'
+    @direction = 'asc'
 
     @update()
 
@@ -33,11 +34,8 @@ class TransactionsViewModel extends ViewModel
       balance: 1000.00
 
     $.when(transactionsRequest).then (transactions) =>
-      @transactions = transactions
-      console.log(transactions)
-      @fire('refresh', {
-          transactions: _.map(transactions, map)
-      })
+      @transactions = _.sortBy(_.map(transactions, map), 'date').reverse()
+      @fire('refresh', transactions: @transactions)
     , () ->
       console.log('Error fetching transactions')
 
@@ -46,6 +44,27 @@ class TransactionsViewModel extends ViewModel
     @accountId = accountId
 
     @update()
+
+
+  sortBy: (column) ->
+
+    if @sort == column
+      if @direction == 'asc'
+        @direction = 'desc'
+        @transactions.reverse()
+        console.log('arg1')
+        @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
+      else
+        @direction = 'asc'
+        @transactions.reverse()
+        console.log('arg2')
+        @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
+    else
+      @sort = column
+      @direction = 'asc'
+      @transactions = _.sortBy(@transactions, column)
+      console.log('arg3')
+      @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
 
 #class TransactionsViewModel extends ViewModel
 #

@@ -17,19 +17,8 @@ var TransactionsView = React.createClass({
   },
 
   handleSort: function(column) {
-
-    if (this.state.sort == column) {
-
-      if (this.state.direction == 'asc') {
-        this.setState({ direction: 'desc', data: this.state.transactions.reverse() });
-      } else {
-        this.setState({ direction: 'asc', data: this.state.transactions.reverse() });
-      }
-
-    } else {
-      this.setState({ sort: column, direction: 'asc', data: _.sortBy(this.state.transactions, column) });
-    }
-
+    console.log(this.props.viewmodel);
+    this.props.viewmodel.sortBy(column);
   },
 
   render: function() {
