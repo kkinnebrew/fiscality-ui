@@ -72,6 +72,7 @@
 
 .transaction-row {
     background: #FFF;
+    color: #646464;
     height: 40px;
     width: 100%;
 }
@@ -80,9 +81,17 @@
     background: #FAFAFA;
 }
 
+.transaction-row:hover, .transaciton-row.selected {
+    background: #2A95DC;
+    color: #FFF;
+    cursor: pointer;
+    -webkit-transition: all ease-in-out 200ms;
+}
+
 .transaction-row .column {
     box-sizing: border-box;
-    color: #646464;
+    color: inherit;
+    cursor: pointer;
     display: inline-block;
     font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 11px;
@@ -115,6 +124,7 @@
 .transaction-row input {
     background: none;
     border: none;
+    outline: none;
     -webkit-appearance: none;
 }
 
