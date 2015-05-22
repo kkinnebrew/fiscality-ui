@@ -113,13 +113,11 @@ class TransactionsViewModel extends ViewModel
 
     transactionsRequest = transactionsService.transactions(@accountId)
     accountsRequest = transactionsService.accounts()
-    transactionTypesRequest = transactionsService.types()
 
-    $.when(transactionsRequest, accountsRequest, transactionTypesRequest).then (data, accounts, transactionTypes) =>
+    $.when(transactionsRequest, accountsRequest).then (data, accounts) =>
 
       balance = 0;
 
-      @transactionTypes = transactionTypes
 
       @accounts = _.sortBy(_.filter(accounts, (account) -> account.accountId != that.accountId ), 'accountName')
 

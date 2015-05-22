@@ -17,6 +17,7 @@ var rimraf = require('gulp-rimraf');
 var livereload = require('gulp-livereload');
 var stringify = require('stringify');
 var gutil = require('gulp-util');
+var reactify = require('reactify');
 
 bowerResolve.offline = true;
 
@@ -105,6 +106,7 @@ gulp.task('scripts', function() {
     bundler
       .transform(coffeeify)
       .transform(hbsfy)
+      .transform(reactify)
       .transform(stringify(['.html']))
       .bundle()
       .pipe(source('app.min.js'))
