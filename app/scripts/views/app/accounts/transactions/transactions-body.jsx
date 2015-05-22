@@ -19,7 +19,7 @@ var TransactionsTable = React.createClass({
     });
 
     return (
-      <div className="transaction-table">
+      <div className="transactions-body">
           {transactionRows}
       </div>
     )

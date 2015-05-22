@@ -25,6 +25,90 @@ var data = [
     description: 'West Monroe Partners',
     amount: '2',
     balance: '$2,390.01'
+  },
+  {
+    date: '8/11/2014',
+    transactionType: 'Direct Deposit',
+    description: 'West Monroe Partners',
+    amount: '1',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/12/2014',
+    transactionType: 'Bill Pay',
+    description: 'West Monroe Partners',
+    amount: '4',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/13/2014',
+    transactionType: 'Transfer',
+    description: 'West Monroe Partners',
+    amount: '2',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/11/2014',
+    transactionType: 'Direct Deposit',
+    description: 'West Monroe Partners',
+    amount: '1',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/12/2014',
+    transactionType: 'Bill Pay',
+    description: 'West Monroe Partners',
+    amount: '4',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/13/2014',
+    transactionType: 'Transfer',
+    description: 'West Monroe Partners',
+    amount: '2',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/11/2014',
+    transactionType: 'Direct Deposit',
+    description: 'West Monroe Partners',
+    amount: '1',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/12/2014',
+    transactionType: 'Bill Pay',
+    description: 'West Monroe Partners',
+    amount: '4',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/13/2014',
+    transactionType: 'Transfer',
+    description: 'West Monroe Partners',
+    amount: '2',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/11/2014',
+    transactionType: 'Direct Deposit',
+    description: 'West Monroe Partners',
+    amount: '1',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/12/2014',
+    transactionType: 'Bill Pay',
+    description: 'West Monroe Partners',
+    amount: '4',
+    balance: '$2,390.01'
+  },
+  {
+    date: '8/13/2014',
+    transactionType: 'Transfer',
+    description: 'West Monroe Partners',
+    amount: '2',
+    balance: '$2,390.01'
   }
 ];
 
@@ -60,7 +144,7 @@ var TransactionsView = React.createClass({
   render: function() {
 
     return (
-      <div>
+      <div className="transactions">
         <TransactionsHeader onSort={this.handleSort} sort={this.state.sort} direction={this.state.direction} />
         <TransactionsBody data={this.state.data} />
       </div>
