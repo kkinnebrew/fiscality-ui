@@ -11,8 +11,9 @@ var DateField = React.createClass({
   },
 
   render: function() {
-    var value = this.props.value;
-    return <input className={this.props.className} type="text" value={value} onChange={this.handleChange} />;
+    var date = new Date(this.props.value);
+    var str = date.toString(this.props.format || 'MMM dd, yyyy');
+    return <input className={this.props.className} type="text" value={str} onChange={this.handleChange} />;
   }
 
 });

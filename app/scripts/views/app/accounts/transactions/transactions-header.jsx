@@ -28,15 +28,18 @@ var TransactionsHeader = React.createClass({
 
     var cells = _.map(columns, function(label, column) {
 
+      var classes = (column == 'amount' || column == 'balance') ? 'column column-right' : 'column';
+
       if (that.props.sort == column) {
         if (that.props.direction == 'desc') {
-          return <div className="column active desc" onClick={that.handleClick} data-column={column}>{label}</div>;
+          classes += ' active desc';
+          return <div className={classes} onClick={that.handleClick} data-column={column}>{label}</div>;
         } else {
-
-          return <div className="column active asc" onClick={that.handleClick} data-column={column}>{label}</div>;
+          classes += ' active asc';
+          return <div className={classes} onClick={that.handleClick} data-column={column}>{label}</div>;
         }
       } else {
-        return <div className="column" onClick={that.handleClick} data-column={column}>{label}</div>;
+        return <div className={classes} onClick={that.handleClick} data-column={column}>{label}</div>;
       }
 
     });
