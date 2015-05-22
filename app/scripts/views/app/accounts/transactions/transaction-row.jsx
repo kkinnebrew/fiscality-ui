@@ -22,8 +22,8 @@ var TransactionRow = React.createClass({
         <DateField className="column" value={data.date} onChange={this.handleChange} />
         <SelectField className="column" value={data.transactionType} onChange={this.handleChange} />
         <TextField className="column" value={data.description} onChange={this.handleChange} />
-        <CurrencyField className="column" value={data.amount} onChange={this.handleChange} />
-        <Label className="column" value={data.balance} />
+        <CurrencyField className="column column-right" value={data.amount} onChange={this.handleChange} />
+        <Label className="column column-right" value={data.balance} />
       </div>
     )
   }

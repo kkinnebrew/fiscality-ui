@@ -25,10 +25,19 @@ class TransactionsViewModel extends ViewModel
 
     transactionsRequest = transactionsService.transactions(@accountId)
 
+    map = (transaction) =>
+      date: transaction.transactionDate
+      transactionType: transaction.transactionType
+      description: transaction.description
+      amount: transaction.debitAmount - transaction.creditAmount,
+      balance: 1000.00
+
     $.when(transactionsRequest).then (transactions) =>
       @transactions = transactions
       console.log(transactions)
-      @fire('refresh', { transactions: transactions })
+      @fire('refresh', {
+          transactions: _.map(transactions, map)
+      })
     , () ->
       console.log('Error fetching transactions')
 

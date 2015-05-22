@@ -33,9 +33,11 @@ class ReactView
 
     @rendered = true
 
-  refresh: (state)=>
+  refresh: (state) =>
 
     return Log.warn('Cannot refresh unrendered view') if !@rendered
+
+    console.log('refresh', state)
 
     @react.setState(state)
 
