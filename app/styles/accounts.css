@@ -25,7 +25,7 @@
     height: 17px;
     position: absolute;
     left: 30px;
-    top: 52px;
+    top: 53px;
     width: 20px;
 }
 
@@ -92,8 +92,28 @@
     text-transform: uppercase;
 }
 
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .account-header .account-name {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .account-header .account-type {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .account-header .amount {
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .account-header .label {
+        -webkit-font-smoothing: antialiased;
+    }
+
+}
+
 .account-panel .nav {
-    background: #3E9DDB;
+    background: #48A1DC;
     height: 50px;
     overflow: hidden;
     width: 100%;
@@ -149,7 +169,7 @@
     cursor: pointer;
     font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     display: inline-block;
     height: 52px;
     line-height: 56px;
