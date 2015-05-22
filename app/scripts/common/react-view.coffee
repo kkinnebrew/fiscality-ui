@@ -37,8 +37,6 @@ class ReactView
 
     return Log.warn('Cannot refresh unrendered view') if !@rendered
 
-    console.log('refresh', state)
-
     @react.setState(state)
 
     Log.debug('Refreshing view "' + @constructor.name + '"')
