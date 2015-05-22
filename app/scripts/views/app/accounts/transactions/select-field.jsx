@@ -7,12 +7,16 @@ var SelectField = React.createClass({
   },
 
   handleChange: function(event) {
-    //this.setState({ value: event.target.value });
+
+    if (this.props.onChange) {
+      this.props.onChange(event);
+    }
+
   },
 
   render: function() {
     var value = this.props.value;
-    return <input type="text" value={value} onChange={this.handleChange} />;
+    return <input className={this.props.className} type="text" value={value} onChange={this.handleChange} />;
   }
 
 });

@@ -27,7 +27,7 @@ var TransactionsHeader = React.createClass({
     var that = this;
 
     var cells = _.map(columns, function(label, column) {
-      
+
       if (that.props.sort == column) {
         if (that.props.direction == 'desc') {
           return <div className="column active desc" onClick={that.handleClick} data-column={column}>{label}</div>;

@@ -18,12 +18,12 @@ var TransactionRow = React.createClass({
   render: function() {
     var data = this.props.data;
     return (
-      <div class="transaction-row">
-        <DateField value={data.date} onChange={this.handleChange} />
-        <SelectField value={data.transactionType} onChange={this.handleChange} />
-        <TextField value={data.description} onChange={this.handleChange} />
-        <CurrencyField value={data.amount} onChange={this.handleChange} />
-        <Label value={data.balance} />
+      <div className="transaction-row">
+        <DateField className="column" value={data.date} onChange={this.handleChange} />
+        <SelectField className="column" value={data.transactionType} onChange={this.handleChange} />
+        <TextField className="column" value={data.description} onChange={this.handleChange} />
+        <CurrencyField className="column" value={data.amount} onChange={this.handleChange} />
+        <Label className="column" value={data.balance} />
       </div>
     )
   }
