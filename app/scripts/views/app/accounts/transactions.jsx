@@ -21,7 +21,6 @@ var TransactionsView = React.createClass({
 
     return (
       <div className="transactions">
-        <input type="text" value="123.00" />
         <TransactionsHeader onSort={this.handleSort} sort={this.state.sort} direction={this.state.direction} />
         <TransactionsBody data={this.state.transactions} />
       </div>

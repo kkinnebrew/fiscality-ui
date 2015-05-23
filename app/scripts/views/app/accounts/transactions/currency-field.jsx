@@ -8,6 +8,12 @@ function numberWithCommas(x) {
 
 var CurrencyField = React.createClass({
 
+  getDefaultProps: function() {
+    return {
+      editable: 'true'
+    };
+  },
+
   getInitialState: function() {
     return { value: this.props.value, editing: false };
   },
@@ -16,14 +22,18 @@ var CurrencyField = React.createClass({
     this.setState({ value: event.target.value });
   },
 
-  handleFocus: function(event) {
-    var unformatted = this.state.value + '';
-    this.setState({ value: unformatted.replace(/[$,]/g, ''), editing: true });
+  handleFocus: function() {
+    if (this.props.editable == 'true') {
+      var unformatted = this.state.value + '';
+      this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
+    }
   },
 
-  handleBlur: function(event) {
-    var unformatted = this.state.value + '';
-    this.setState({ value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false });
+  handleBlur: function() {
+    if (this.props.editable == 'true') {
+      var unformatted = this.state.value + '';
+      this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
+    }
   },
 
   render: function() {
@@ -36,7 +46,11 @@ var CurrencyField = React.createClass({
     } else {
       classes += ' editing';
     }
-    return <input className={classes} type="text" value={formatted} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
+    if (this.props.editable == 'true') {
+      return <input className={classes} type="text" value={formatted} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
+    } else {
+      return <div className={classes}>{formatted}</div>;
+    }
   }
 
 });
