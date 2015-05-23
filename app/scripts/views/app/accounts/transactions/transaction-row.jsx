@@ -15,13 +15,14 @@ var TransactionRow = React.createClass({
 
     // make service call
 
-    console.log('something changed');
+    // console.log('something changed');
+
+    console.log('1234');
 
   },
 
   handleClick: function() {
     this.setState({ editing: !this.state.editing });
-    console.log('ar')
   },
 
   render: function() {
@@ -31,7 +32,7 @@ var TransactionRow = React.createClass({
       classes += ' selected';
     }
     return (
-      <div className={classes} onClick={this.handleClick}>
+      <div className={classes}>
         <DateField className="column" value={data.date} onChange={this.handleChange} />
         <SelectField className="column" value={data.transactionType} onChange={this.handleChange} />
         <TextField className="column" value={data.description} onChange={this.handleChange} />
