@@ -16,6 +16,8 @@ var TransactionsTable = React.createClass({
 
   render: function() {
 
+
+
     var transactionRows = this.props.data.map(function(transaction) {
       return (
         <TransactionRow data={transaction} onSelect={this.handleSelect} />
