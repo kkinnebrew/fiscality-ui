@@ -28,7 +28,7 @@ var SelectField = React.createClass({
 
   render: function() {
     var value = this.props.value;
-    var classes = this.props.className;
+    var classes = 'select-field ' + this.props.className;
     if (this.state.editing) {
       classes += ' editing';
     }

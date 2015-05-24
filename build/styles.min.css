@@ -1042,7 +1042,7 @@ th {
 }
 
 .transaction-row .column.editing {
-    background: #257EB9;
+    background-color: #257EB9;
     color: #FFF;
 }
 
@@ -1095,6 +1095,23 @@ th {
 
     .transaction-row .column:nth-child(3) {
         width: 250px;
+    }
+
+}
+
+/* fields */
+
+.transaction-row .select-field {
+    background: url(../images/select-icon.png) center right no-repeat;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    .transaction-row .select-field {
+        background-image: url(../images/select-icon@2x.png);
+        -webkit-background-size: 20px 10px;
+        -moz-background-size: 20px 10px;
+        background-size: 20px 10px;
     }
 
 }
@@ -1192,7 +1209,7 @@ ul {
     top: 136px;
 }
 
-.select-field {
+.form .select-field {
     border: 1px solid #EEE;
     background: #FFF url(../images/select-icon.png) right center no-repeat;
     border-radius: 3px;
@@ -1208,7 +1225,7 @@ ul {
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    .select-field {
+    .form .select-field {
         background-image: url(../images/select-icon@2x.png);
         -webkit-background-size: 17px 10px;
         -moz-background-size: 17px 10px;
