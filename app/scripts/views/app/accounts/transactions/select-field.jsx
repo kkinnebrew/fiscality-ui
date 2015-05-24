@@ -3,7 +3,7 @@ var React = require('react');
 var SelectField = React.createClass({
 
   getInitialState: function() {
-    return { value: '', editing: false };
+    return { value: this.props.value, editing: false };
   },
 
   handleChange: function(event) {
@@ -14,20 +14,18 @@ var SelectField = React.createClass({
     if (this.props.onFocus) {
       this.props.onFocus();
     }
-    var unformatted = this.state.value + '';
-    this.setState({ value: unformatted.replace(/[$,]/g, ''), editing: true });
+    this.setState({ editing: true });
   },
 
   handleBlur: function() {
     if (this.props.onBlur) {
       this.props.onBlur();
     }
-    var unformatted = this.state.value + '';
-    this.setState({ value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false });
+    this.setState({ editing: false });
   },
 
   render: function() {
-    var value = this.props.value;
+    var value = this.state.value;
     var classes = 'select-field ' + this.props.className;
     if (this.state.editing) {
       classes += ' editing';
