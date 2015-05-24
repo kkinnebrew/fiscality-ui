@@ -3,7 +3,7 @@ var React = require('react');
 var DateField = React.createClass({
 
   getInitialState: function() {
-    return { value: '', editing: false };
+    return { value: this.props.value, editing: false };
   },
 
   handleChange: function(event) {
@@ -14,24 +14,27 @@ var DateField = React.createClass({
     if (this.props.onFocus) {
       this.props.onFocus();
     }
-    var unformatted = this.state.value + '';
-    this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
+    var date = new Date(this.state.value);
+    var value = date.toString(this.props.format || 'M/d/yyyy');
+    this.setState({ value: value, editing: true });
   },
 
   handleBlur: function() {
     if (this.props.onBlur) {
       this.props.onBlur();
     }
-    var unformatted = this.state.value + '';
-    this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
+    this.setState({ editing: false });
   },
 
   render: function() {
-    var date = new Date(this.props.value);
-    var str = date.toString(this.props.format || 'MMM dd, yyyy');
+    var str = '';
     var classes = this.props.className;
     if (this.state.editing) {
       classes += ' editing';
+      str = this.state.value;
+    } else {
+      var date = new Date(this.state.value);
+      str = date.toString(this.props.format || 'MMM dd, yyyy');
     }
     return <input className={classes} type="text" value={str} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
   }
