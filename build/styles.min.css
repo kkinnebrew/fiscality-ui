@@ -924,6 +924,8 @@ th {
 
 .transaction-header .column.column-right {
     float: right;
+    margin-left: 15px;
+    margin-right: 30px;
     text-align: right;
 }
 
@@ -931,12 +933,36 @@ th {
     margin-right: 30px;
 }
 
+.transaction-header .column.active.desc {
+    background: url(../images/sort-arrow-down.png) right 23px no-repeat;
+}
+
+.transaction-header .column.active.asc {
+    background: url(../images/sort-arrow-up.png) right 23px no-repeat;
+}
+
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
     .transaction-row .column {
         font-weight: 600;
         -webkit-font-smoothing: antialiased;
     }
+
+    .transaction-header .column.active.desc {
+        background-image: url(../images/sort-arrow-down@2x.png);
+        -webkit-background-size: 11px 7px;
+        -moz-background-size: 11px 7px;
+        background-size: 11px 7px;
+    }
+
+    .transaction-header .column.active.asc {
+        background-image: url(../images/sort-arrow-up@2x.png);
+        -webkit-background-size: 11px 7px;
+        -moz-background-size: 11px 7px;
+        background-size: 11px 7px;
+    }
+
 
 }
 
@@ -997,12 +1023,20 @@ th {
 
 .transaction-row .column.column-right {
     float: right;
+    min-width: 165px    ;
+    padding-left: 15px;
+    padding-right: 15px;
     text-align: right;
 }
 
 .transaction-row .column.column-last {
     padding-right: 30px;
     width: 200px;
+}
+
+.transaction-row .column.editing {
+    background: #257EB9;
+    color: #FFF;
 }
 
 @media (max-width: 1250px) {

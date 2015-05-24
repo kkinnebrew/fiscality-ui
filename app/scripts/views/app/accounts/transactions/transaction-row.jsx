@@ -11,18 +11,19 @@ var TransactionRow = React.createClass({
     return { editing: false };
   },
 
-  handleChange: function() {
+  handleChange: function() {},
 
-    // make service call
-
-    // console.log('something changed');
-
-    console.log('1234');
-
+  handleFocus: function() {
+    if (!this.state.editing) {
+      this.setState({ editing: true });
+      if (this.props.onSelect) {
+        this.props.onSelect();
+      }
+    }
   },
 
-  handleClick: function() {
-    this.setState({ editing: !this.state.editing });
+  handleBlur: function() {
+    this.setState({ editing: false })
   },
 
   render: function() {
@@ -33,11 +34,11 @@ var TransactionRow = React.createClass({
     }
     return (
       <div className={classes}>
-        <DateField className="column" value={data.date} onChange={this.handleChange} />
-        <SelectField className="column" value={data.transactionType} onChange={this.handleChange} />
-        <TextField className="column" value={data.description} onChange={this.handleChange} />
+        <DateField className="column" value={data.date} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />
+        <SelectField className="column" value={data.transactionType} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />
+        <TextField className="column" value={data.description} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />
         <CurrencyField className="column column-right column-last" value={data.balance} editable="false" />
-        <CurrencyField className="column column-right" value={data.amount} onChange={this.handleChange} />
+        <CurrencyField className="column column-right" value={data.amount} onFocus={this.handleFocus} onBlur={this.handleBlur} onChange={this.handleChange} />
       </div>
     )
   }

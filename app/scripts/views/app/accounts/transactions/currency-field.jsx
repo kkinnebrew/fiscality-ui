@@ -24,6 +24,9 @@ var CurrencyField = React.createClass({
 
   handleFocus: function() {
     if (this.props.editable == 'true') {
+      if (this.props.onFocus) {
+        this.props.onFocus();
+      }
       var unformatted = this.state.value + '';
       this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
     }
@@ -31,6 +34,9 @@ var CurrencyField = React.createClass({
 
   handleBlur: function() {
     if (this.props.editable == 'true') {
+      if (this.props.onBlur) {
+        this.props.onBlur();
+      }
       var unformatted = this.state.value + '';
       this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
     }
