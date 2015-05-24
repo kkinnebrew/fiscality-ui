@@ -205,10 +205,17 @@
     background: url(../images/sort-arrow-down.png) right 23px no-repeat;
 }
 
+.transaction-header .column.column-right.active.desc {
+    background-position: left 23px;
+}
+
 .transaction-header .column.active.asc {
     background: url(../images/sort-arrow-up.png) right 23px no-repeat;
 }
 
+.transaction-header .column.column-right.active.asc {
+    background-position: left 23px;
+}
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
