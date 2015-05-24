@@ -899,34 +899,38 @@ th {
 }
 
 .transaction-header .column {
+    border-bottom: 3px solid transparent;
     box-sizing: border-box;
     color: #6D6D6D;
     cursor: pointer;
+    float: left;
     font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 11px;
     font-weight: 600;
-    display: inline-block;
     height: 52px;
     line-height: 56px;
     margin-left: 30px;
-    min-width: 140px;
     text-transform: uppercase;
+    width: 140px;
     -webkit-user-select: none;
+    -webkit-transition: color ease-in-out 100ms, border-color ease-in-out 100ms, background-image ease-in-out 100ms;
 }
 
 @media (max-width: 1250px) {
 
     .transaction-header .column {
-        min-width: 110px;
+        /*min-width: 110px;*/
     }
 
 }
 
 .transaction-header .column.column-right {
     float: right;
-    margin-left: 15px;
-    margin-right: 30px;
     text-align: right;
+    /*float: right;*/
+    /*margin-left: 15px;*/
+    /*margin-right: 30px;*/
+    /*text-align: right;*/
 }
 
 .transaction-header .column.column-last {
@@ -1016,45 +1020,61 @@ th {
 
 .transaction-row .column {
     box-sizing: border-box;
-    color: inherit;
     cursor: pointer;
-    display: inline-block;
+    float: left;
     font-family: "proxima-nova", Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 11px;
     font-weight: 400;
+    height: 40px;
     letter-spacing: 0.5px;
     line-height: 40px;
-    min-width: 170px;
-    padding-left: 30px;
+    margin-left: 30px;
+
+    width: 140px;
+    /*box-sizing: border-box;*/
+    /*color: inherit;*/
+    /*cursor: pointer;*/
+    /*display: inline-block;*/
+
+    /*margin-left: 30px;*/
+    /*min-width: 140px;*/
+    /*padding-left: 0;*/
+    -webkit-transition: padding ease-out 100ms;
 }
 
 .transaction-row .column.column-right {
     float: right;
-    min-width: 165px    ;
-    padding-left: 15px;
-    padding-right: 15px;
     text-align: right;
+    /*float: right;*/
+    /*min-width: 165px;*/
+    /*padding-left: 15px;*/
+    /*padding-right: 15px;*/
+    /*text-align: right;*/
 }
 
 .transaction-row .column.column-last {
-    padding-right: 30px;
-    width: 200px;
+    margin-right: 30px;
+    /*padding-right: 30px;*/
+    /*width: 200px;*/
 }
 
 .transaction-row .column.editing {
     background-color: #257EB9;
     color: #FFF;
+    padding: 0 15px;
+    /*min-width: 140px;*/
+    /*padding-left: 15px;*/
 }
 
 @media (max-width: 1250px) {
 
     .transaction-row .column {
-        min-width: 140px;
+        /*min-width: 140px;*/
     }
 
     .transaction-row .column.column-last {
-        padding-right: 30px;
-        width: 170px;
+        /*padding-right: 30px;*/
+        /*width: 170px;*/
     }
 
 }
@@ -1062,8 +1082,8 @@ th {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
     .transaction-row .column {
-        font-weight: 400;
-        -webkit-font-smoothing: antialiased;
+        /*font-weight: 400;*/
+        /*-webkit-font-smoothing: antialiased;*/
     }
 
 }
@@ -1084,19 +1104,7 @@ th {
 }
 
 .transaction-row .column:nth-child(3) {
-    width: 350px;
-}
-
-@media (max-width: 1250px) {
-
-    .transaction-header .column:nth-child(3) {
-        width: 220px;
-    }
-
-    .transaction-row .column:nth-child(3) {
-        width: 250px;
-    }
-
+    width: 320px;
 }
 
 /* fields */

@@ -15,9 +15,12 @@ var TransactionsView = React.createClass({
 
   handleSort: function(column) {
     this.props.viewmodel.sortBy(column);
+    console.log('arg', column)
   },
 
   render: function() {
+
+    console.log('render1');
 
     return (
       <div className="transactions">
