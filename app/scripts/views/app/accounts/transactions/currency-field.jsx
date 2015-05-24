@@ -8,19 +8,55 @@ function numberWithCommas(x) {
 
 var CurrencyField = React.createClass({
 
+  getDefaultProps: function() {
+    return {
+      editable: 'true'
+    };
+  },
+
   getInitialState: function() {
-    return { value: '' };
+    return { value: this.props.value, editing: false };
   },
 
   handleChange: function(event) {
-    //this.setState({ value: event.target.value });
+    this.setState({ value: event.target.value });
+  },
+
+  handleFocus: function() {
+    if (this.props.editable == 'true') {
+      if (this.props.onFocus) {
+        this.props.onFocus();
+      }
+      var unformatted = this.state.value + '';
+      this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
+    }
+  },
+
+  handleBlur: function() {
+    if (this.props.editable == 'true') {
+      if (this.props.onBlur) {
+        this.props.onBlur();
+      }
+      var unformatted = this.state.value + '';
+      this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
+    }
   },
 
   render: function() {
-    var symbol = this.props.symbol || '$';
-    var value = isNaN ? parseFloat(this.props.value) : this.props.value;
-    var formatted = value >= 0 ? (symbol + numberWithCommas(value.toFixed(2))) : ('-' + symbol + numberWithCommas(Math.abs(value).toFixed(2)));
-    return <input className={this.props.className} type="text" value={formatted} onChange={this.handleChange} />;
+    var formatted = this.state.value;
+    var classes = this.props.className;
+    if (!this.state.editing) {
+      var symbol = this.props.symbol || '$';
+      var value = isNaN ? parseFloat(this.state.value) : this.state.value;
+      formatted = value >= 0 ? (symbol + numberWithCommas(value.toFixed(2))) : ('-' + symbol + numberWithCommas(Math.abs(value).toFixed(2)));
+    } else {
+      classes += ' editing';
+    }
+    if (this.props.editable == 'true') {
+      return <input className={classes} type="text" value={formatted} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
+    } else {
+      return <div className={classes}>{formatted}</div>;
+    }
   }
 
 });
