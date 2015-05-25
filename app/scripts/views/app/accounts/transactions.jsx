@@ -15,17 +15,14 @@ var TransactionsView = React.createClass({
 
   handleSort: function(column) {
     this.props.viewmodel.sortBy(column);
-    console.log('arg', column)
   },
 
   render: function() {
 
-    console.log('render1');
-
     return (
       <div className="transactions">
         <TransactionsHeader onSort={this.handleSort} sort={this.state.sort} direction={this.state.direction} />
-        <TransactionsBody data={this.state.transactions} />
+        <TransactionsBody sort={this.state.sort} data={this.state.transactions} />
       </div>
     )
 

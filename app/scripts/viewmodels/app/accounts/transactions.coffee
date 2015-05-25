@@ -48,19 +48,15 @@ class TransactionsViewModel extends ViewModel
 
   sortBy: (column) ->
 
-    if @sort == column
-      if @direction == 'asc'
-        @direction = 'desc'
-        @transactions.reverse()
-        @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
-      else
-        @direction = 'asc'
-        @transactions.reverse()
-        @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
+    @transactions = _.sortBy(@transactions, column)
+    @sort = column
+
+    if @direction == 'asc'
+      @direction = 'desc'
     else
-      @sort = column
       @direction = 'asc'
-      @transactions = _.sortBy(@transactions, column)
-      @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
+      @transactions.reverse()
+
+    @fire('refresh', { transactions: @transactions, direction: @direction, sort: @sort })
 
 module.exports = TransactionsViewModel
