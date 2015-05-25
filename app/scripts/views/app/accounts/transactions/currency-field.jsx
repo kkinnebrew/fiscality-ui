@@ -22,6 +22,10 @@ var CurrencyField = React.createClass({
     this.setState({ value: event.target.value });
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({ value: nextProps.value });
+  },
+
   handleFocus: function() {
     if (this.props.editable == 'true') {
       if (this.props.onFocus) {
