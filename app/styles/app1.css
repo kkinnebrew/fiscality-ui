@@ -1,0 +1,363 @@
+/* page */
+
+html, body {
+
+}
+
+ul {
+
+}
+
+li {
+
+}
+
+h1, h2, h3 {
+
+}
+
+input {
+
+}
+
+select {
+
+}
+
+
+/* tables */
+
+.table {
+
+}
+
+.table .header-row {
+
+}
+
+.table .header-column {
+
+}
+
+.table .header-column.selected {
+
+}
+
+.table .header-column.descending {
+
+}
+
+.table .row {
+
+}
+
+.table .column {
+
+}
+
+.table .label {
+
+}
+
+
+/* navigation bar */
+
+#nav {
+
+}
+
+#logo {
+
+}
+
+#nav .menu {
+
+}
+
+#nav .menu-option {
+
+}
+
+#nav .menu-option.selected {
+
+}
+
+#profile {
+
+}
+
+#profile .badge {
+
+}
+
+#profile .label {
+
+}
+
+
+/* banking */
+
+#banking {
+
+}
+
+
+/* banking > toolbar */
+
+#banking > .toolbar {
+
+}
+
+#banking > .toolbar .menu-button {
+
+}
+
+#banking > .toolbar .label {
+
+}
+
+#banking > .toolbar .info {
+
+}
+
+#banking > .toolbar .balance {
+
+}
+
+#banking > .toolbar .updated {
+
+}
+
+#banking > .toolbar .add-transaction-button {
+
+}
+
+
+/* banking > transaction-table */
+
+#transaction-table {
+
+}
+
+#transaction-table .header-row {
+
+}
+
+#transaction-table .header-column {
+
+}
+
+#transaction-table .header-column.selected {
+
+}
+
+#transaction-table .header-column.descending {
+
+}
+
+#transaction-table .row {
+
+}
+
+#transaction-table .row.selected {
+
+}
+
+#transaction-table .column {
+
+}
+
+#transaction-table .label {
+
+}
+
+#transaction-table .tag {
+
+}
+
+
+/* banking > transaction-detail */
+
+#transaction-detail {
+
+}
+
+#transaction-detail > .actions {
+
+}
+
+#transaction-detail .modify-button {
+
+}
+
+#transaction-detail .delete-button {
+
+}
+
+#transaction-detail > .section {
+
+}
+
+#transaction-detail > .section .title {
+
+}
+
+#transaction-detail > .lines {
+
+}
+
+#transaction-detail > .lines .line-group {
+
+}
+
+#transaction-detail > .lines .line {
+
+}
+
+#transaction-detail > .lines .account {
+
+}
+
+#transaction-detail > .lines .amount {
+
+}
+
+#transaction-detail .line-editor-button {
+
+}
+
+#transaction-detail > .comments {
+
+}
+
+#transaction-detail > .comments .comment {
+
+}
+
+#transaction-detail > .controls {
+
+}
+
+#transaction-detail .previous-button {
+
+}
+
+#transaction-detail .next-button {
+
+}
+
+
+/* investments */
+
+#investments {
+
+}
+
+
+/* investments > toolbar */
+
+#banking > .toolbar {
+
+}
+
+#banking > .toolbar .menu-button {
+
+}
+
+#banking > .toolbar .label {
+
+}
+
+#banking > .toolbar .info {
+
+}
+
+#banking > .toolbar .balance {
+
+}
+
+#banking > .toolbar .updated {
+
+}
+
+#banking > .toolbar .trade-button {
+
+}
+
+
+/* investments > investment-chart */
+
+#investments-chart {
+
+}
+
+#investments-chart .controls {
+
+}
+
+#investments-chart .views {
+
+}
+
+#investments-chart .view-option {
+
+}
+
+#investments-chart .view-option.selected {
+
+}
+
+#investments-chart .date-range {
+
+}
+
+#investments-chart .date-range-option {
+
+}
+
+#investments-chart .date-range-option.selected {
+
+}
+
+#investments-chart .chart {
+
+}
+
+
+/* banking > holdings-table */
+
+#holdings-table {
+
+}
+
+#holdings-table .header-row {
+
+}
+
+#holdings-table .header-column {
+
+}
+
+#holdings-table .header-column.selected {
+
+}
+
+#holdings-table .header-column.descending {
+
+}
+
+#holdings-table .row {
+
+}
+
+#holdings-table .column {
+
+}
+
+#holdings-table .label {
+
+}
+
+#holdings-table .details-button {
+
+}
