@@ -1,27 +1,46 @@
 /* page */
 
 html, body {
-
+    font: normal 16px "proxima-nova";
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 ul {
-
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 li {
-
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3 {
-
+    margin: 0;
 }
 
 input {
-
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 select {
 
+}
+
+
+/* app */
+
+#app {
+    height: 100%;
+    width: 100%;
+    -webkit-transform: translate3d(0, 0, 0);
 }
 
 
@@ -324,7 +343,7 @@ select {
 }
 
 
-/* banking > holdings-table */
+/* investments > holdings-table */
 
 #holdings-table {
 

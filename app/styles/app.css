@@ -1,45 +1,45 @@
 /* app css stylesheet */
 
-html, body, #app {
-    font-family: "proxima-nova";
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    -webkit-transform: translate3d(0, 0, 0);
-}
+/*html, body, #app {*/
+    /*font-family: "proxima-nova";*/
+    /*height: 100%;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*width: 100%;*/
+    /*-webkit-transform: translate3d(0, 0, 0);*/
+/*}*/
 
-h1, h2 {
-    margin: 0;
-}
+/*h1, h2 {*/
+    /*margin: 0;*/
+/*}*/
 
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
+/*ul {*/
+    /*list-style: none;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+/*}*/
 
 /* layout */
 
-#menu {
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    width: 190px;
-    z-index: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-}
+/*#menu {*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*overflow: hidden;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: 190px;*/
+    /*z-index: 1;*/
+    /*-webkit-transform: translate3d(0, 0, 0);*/
+/*}*/
 
-#content {
-    bottom: 0;
-    left: 190px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    -webkit-transform: translate3d(0, 0, 0);
-}
+/*#content {*/
+    /*bottom: 0;*/
+    /*left: 190px;*/
+    /*overflow-x: hidden;*/
+    /*overflow-y: scroll;*/
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*z-index: 2;*/
+    /*-webkit-transform: translate3d(0, 0, 0);*/
+/*}*/
