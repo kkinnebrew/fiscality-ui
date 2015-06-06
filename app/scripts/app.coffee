@@ -87,6 +87,7 @@ router.register('app', {
       name: 'navigation'
       react: true
       view: require('./views/app1/navigation.jsx')
+      viewmodel: require('./viewmodels/app1/navigation.coffee')
 })
 
 router.register('app.accounts', {

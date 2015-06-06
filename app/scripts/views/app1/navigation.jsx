@@ -2,6 +2,10 @@ var React = require('react');
 
 var NavigationBar = React.createClass({
 
+  handleLogout: function() {
+    this.props.viewmodel.logout();
+  },
+
   render: function() {
     return (
       <nav id="nav">
@@ -12,7 +16,7 @@ var NavigationBar = React.createClass({
           <li className="menu-option">Investments</li>
           <li className="menu-option">Budgets</li>
         </ul>
-        <div id="profile">
+        <div id="profile" onClick={this.handleLogout}>
           <div className="badge"></div>
           <div className="label">Kevin Kinnebrew</div>
         </div>
