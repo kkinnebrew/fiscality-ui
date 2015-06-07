@@ -1199,34 +1199,86 @@ select {
 /* navigation bar */
 
 #nav {
-
+    background: #27272C;
+    height: 70px;
+    overflow: hidden;
+    width: 100%;
 }
 
 #logo {
-
+    background: url(../images/app-logo.png) center center no-repeat;
+    float: left;
+    height: 30px;
+    margin: 22px 30px 0 30px;
+    width: 90px;
 }
 
 #nav .menu {
+    border-left: 1px solid #525256;
+    float: left;
+    height: 33px;
+    margin: 19px 0 0 0;
+    padding-left: 10px;
+    overflow: hidden;
 
 }
 
 #nav .menu-option {
-
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin: 4px 10px;
+    padding: 6px 14px;
+    text-transform: uppercase;
 }
 
 #nav .menu-option.selected {
-
+    background: #3D3D41;
 }
 
 #profile {
-
+    cursor: pointer;
+    float: right;
+    margin: 17px 30px 16px 0;
+    overflow: hidden;
 }
 
 #profile .badge {
-
+    background: url(../images/badge.png) center center no-repeat;
+    float: left;
+    height: 38px;
+    margin-right: 16px;
+    width: 38px;
 }
 
 #profile .label {
+    color: #FFF;
+    float: left;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 36px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #logo {
+        background-image: url(../images/app-logo@2x.png);
+        -webkit-background-size: 90px 30px;
+        -moz-background-size: 90px 30px;
+        background-size: 90px 30px;
+    }
+
+    #badge {
+        background-image: url(../images/badge@2x.png);
+        -webkit-background-size: 38px 38px;
+        -moz-background-size: 38px 38px;
+        background-size: 38px 38px;
+    }
 
 }
 
@@ -1234,37 +1286,83 @@ select {
 /* banking */
 
 #banking {
-
+    bottom: 0;
+    position: absolute;
+    top: 70px;
+    width: 100%;
 }
 
 
 /* banking > toolbar */
 
 #banking > .toolbar {
-
+    background: #32353D;
+    height: 70px;
+    overflow: auto;
+    position: absolute;
+    width: 100%;
 }
 
 #banking > .toolbar .menu-button {
-
+    background: url(../images/menu-button.png) center center no-repeat;
+    float: left;
+    height: 17px;
+    margin: 26px 30px;
+    width: 20px;
 }
 
 #banking > .toolbar .label {
-
+    color: #FFF;
+    float: left;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 70px;
 }
 
 #banking > .toolbar .info {
-
+    border-right: 1px solid #5B5D63;
+    float: right;
+    margin: 17px 20px 0 0;
+    padding-right: 20px;
 }
 
 #banking > .toolbar .balance {
-
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    text-align: right;
 }
 
 #banking > .toolbar .updated {
-
+    color: #D6D7D8;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: right;
 }
 
 #banking > .toolbar .add-transaction-button {
+    background: #DFAD53;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 18px 30px 10px 0;
+    padding: 10px 20px 9px 20px;
+    text-transform: uppercase;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #banking > .toolbar .menu-button {
+        background-image: url(../images/menu-button@2x.png);
+        -webkit-background-size: 20px 17px;
+        -moz-background-size: 20px 17px;
+        background-size: 20px 17px;
+    }
 
 }
 
@@ -1272,19 +1370,45 @@ select {
 /* banking > transaction-table */
 
 #transaction-table {
-
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 360px;
+    top: 70px;
+    z-index: 2;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
 }
 
 #transaction-table .header-row {
-
+    background: #F2F5F7;
+    border-bottom: 1px solid #DEE4E8;
+    height: 60px;
+    overflow: hidden;
 }
 
 #transaction-table .header-column {
+    color: #7B8A95;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 24px 0 0 15px;
+    text-transform: uppercase;
+    width: 120px;
+}
 
+#transaction-table .header-column.xl {
+    width: 280px;
+}
+
+#transaction-table .header-column:first-child {
+    padding-left: 30px;
 }
 
 #transaction-table .header-column.selected {
-
+    color: #53A7DF;
 }
 
 #transaction-table .header-column.descending {
@@ -1292,73 +1416,170 @@ select {
 }
 
 #transaction-table .row {
-
+    background: #F8FAFB;
+    border-bottom: 1px solid #DEE4E8;
+    height: 50px;
+    overflow: hidden;
 }
 
 #transaction-table .row.selected {
-
+    background: #ECF2F6;
 }
 
 #transaction-table .column {
+    float: left;
+    padding-left: 15px;
+    width: 120px;
+}
 
+#transaction-table .column.xl {
+    width: 280px;
+}
+
+#transaction-table .row .column:first-child {
+    padding-left: 30px;
 }
 
 #transaction-table .label {
+    color: #646464;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 52px;
+}
 
+#transaction-table .tags {
+    display: inline-block;
+    margin-left: 10px;
 }
 
 #transaction-table .tag {
-
+    background: #B0C2CF;
+    border-radius: 2px;
+    color: #FFF;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    margin-left: 4px;
 }
 
 
 /* banking > transaction-detail */
 
 #transaction-detail {
-
+    background: #F2F5F7;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    top: 70px;
+    width: 360px;
+    z-index: 1;
 }
 
 #transaction-detail > .actions {
-
+    margin: 18px 18px 0 18px;
+    overflow: hidden;
 }
 
 #transaction-detail .modify-button {
+    background: #FFF;
+    border: 1px solid #D4D9DC;
+    border-radius: 3px;
+    color: #7B8A95;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 12px;
+    padding: 10px 10px 9px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 150px;
+}
 
+#transaction-detail .modify-button.selected {
+    background: #F2F5F7;
+    -webkit-box-shadow: inset 0 0 3px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 0 3px 0 rgba(0,0,0,0.1);
+    box-shadow: inset 0 0 3px 0 rgba(0,0,0,0.1);
 }
 
 #transaction-detail .delete-button {
-
+    background: #FFF;
+    border: 1px solid #D4D9DC;
+    border-radius: 3px;
+    color: #7B8A95;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 10px 9px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 118px;
 }
 
 #transaction-detail > .section {
-
+    margin: 18px 18px 0 18px;
 }
 
 #transaction-detail > .section .title {
-
+    color: #7B8A95;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
 #transaction-detail > .lines {
-
+    color: #646464;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 #transaction-detail > .lines .line-group {
-
+    margin-bottom: 15px;
 }
 
 #transaction-detail > .lines .line {
-
+    overflow: hidden;
+    margin-bottom: 4px;
 }
 
 #transaction-detail > .lines .account {
-
+    float: left;
 }
 
 #transaction-detail > .lines .amount {
-
+    float: right;
 }
 
 #transaction-detail .line-editor-button {
+    background: #FFF;
+    border: 1px solid #D4D9DC;
+    border-radius: 3px;
+    color: #7B8A95;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 10px 6px 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#transaction-detail .tag {
+    background: #B0C2CF;
+    border-radius: 2px;
+    color: #FFF;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    margin-left: 4px;
+}
+
+#transaction-detail .add-tag-button {
 
 }
 
@@ -1367,19 +1588,43 @@ select {
 }
 
 #transaction-detail > .comments .comment {
-
+    color: #646464;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 #transaction-detail > .controls {
-
+    bottom: 0;
+    border-top: 1px solid #D4D9DC;
+    position: absolute;
+    width: 360px;
 }
 
 #transaction-detail .previous-button {
-
+    background: #FFF;
+    border-right: 1px solid #D4D9DC;
+    color: #7B8A95;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 14px 10px 13px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 159px;
 }
 
 #transaction-detail .next-button {
-
+    background: #FFF;
+    color: #7B8A95;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 14px 10px 13px 10px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 160px;
 }
 
 

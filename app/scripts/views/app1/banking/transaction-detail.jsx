@@ -6,7 +6,7 @@ var TransactionDetail = React.createClass({
     return (
       <div id="transaction-detail">
         <div className="actions">
-          <div className="modify-button">Modify</div>
+          <div className="modify-button selected">Modify</div>
           <div className="delete-button">Delete</div>
         </div>
         <div className="section lines">
@@ -32,7 +32,7 @@ var TransactionDetail = React.createClass({
           </ul>
         </div>
         <div className="section comments">
-          <h3 className="title">Tags</h3>
+          <h3 className="title">Comments</h3>
           <div className="comment">Bill Pay was sent automatically on 8/8/14.</div>
         </div>
         <div className="controls">
