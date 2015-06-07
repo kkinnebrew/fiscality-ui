@@ -1231,9 +1231,13 @@ select {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 1px;
-    margin: 4px 10px;
+    margin: 4px 4px;
     padding: 6px 14px;
     text-transform: uppercase;
+}
+
+#nav .menu-option:first-child {
+    margin-left: 10px;
 }
 
 #nav .menu-option.selected {
@@ -1305,6 +1309,7 @@ select {
 
 #banking > .toolbar .menu-button {
     background: url(../images/menu-button.png) center center no-repeat;
+    cursor: pointer;
     float: left;
     height: 17px;
     margin: 26px 30px;
@@ -1396,7 +1401,21 @@ select {
     font-weight: 600;
     padding: 24px 0 0 15px;
     text-transform: uppercase;
+    width: 100px;
+}
+
+#transaction-table .header-column.right {
+    float: right;
+    padding: 24px 15px 0 0;
+    text-align: right;
+}
+
+#transaction-table .header-column.md {
     width: 120px;
+}
+
+#transaction-table .header-column.lg {
+    width: 180px;
 }
 
 #transaction-table .header-column.xl {
@@ -1405,6 +1424,10 @@ select {
 
 #transaction-table .header-column:first-child {
     padding-left: 30px;
+}
+
+#transaction-table .header-column.last {
+    padding-right: 30px;
 }
 
 #transaction-table .header-column.selected {
@@ -1428,8 +1451,22 @@ select {
 
 #transaction-table .column {
     float: left;
-    padding-left: 15px;
+    padding: 0 0 0 15px;
+    width: 100px;
+}
+
+#transaction-table .column.right {
+    float: right;
+    padding: 0 15px 0 0;
+    text-align: right;
+}
+
+#transaction-table .column.md {
     width: 120px;
+}
+
+#transaction-table .column.lg {
+    width: 180px;
 }
 
 #transaction-table .column.xl {
@@ -1438,6 +1475,10 @@ select {
 
 #transaction-table .row .column:first-child {
     padding-left: 30px;
+}
+
+#transaction-table .row .column.last {
+    padding-right: 30px;
 }
 
 #transaction-table .label {
