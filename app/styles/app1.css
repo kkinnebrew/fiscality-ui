@@ -729,7 +729,7 @@ select {
     bottom: 0;
     overflow-x: hidden;
     overflow-y: scroll;
-    min-width: 1110px;
+    min-width: 1170px;
     position: absolute;
     top: 370px;
     width: 100%;
@@ -868,7 +868,7 @@ select {
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 
-    #investments > .toolbar .menu-button {
+    #holdings-table .details-button {
         background-image: url(../images/position-detail-button@2x.png);
         -webkit-background-size: 14px 14px;
         -moz-background-size: 14px 14px;
