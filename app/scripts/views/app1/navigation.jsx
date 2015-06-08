@@ -4,6 +4,8 @@ var NavigationBar = React.createClass({
 
   handleSummary: function() {
 
+    if (React.findDOMNode(this.refs.summary).classList.contains('selected')) return;
+
     React.findDOMNode(this.refs.summary).classList.add('selected');
     React.findDOMNode(this.refs.banking).classList.remove('selected');
     React.findDOMNode(this.refs.investments).classList.remove('selected');
@@ -12,6 +14,8 @@ var NavigationBar = React.createClass({
   },
 
   handleBanking: function() {
+
+    if (React.findDOMNode(this.refs.banking).classList.contains('selected')) return;
 
     React.findDOMNode(this.refs.summary).classList.remove('selected');
     React.findDOMNode(this.refs.banking).classList.add('selected');
@@ -24,6 +28,8 @@ var NavigationBar = React.createClass({
 
   handleInvestments: function() {
 
+    if (React.findDOMNode(this.refs.investments).classList.contains('selected')) return;
+
     React.findDOMNode(this.refs.summary).classList.remove('selected');
     React.findDOMNode(this.refs.banking).classList.remove('selected');
     React.findDOMNode(this.refs.investments).classList.add('selected');
@@ -34,6 +40,8 @@ var NavigationBar = React.createClass({
   },
 
   handleBudgets: function() {
+
+    if (React.findDOMNode(this.refs.budgets).classList.contains('selected')) return;
 
     React.findDOMNode(this.refs.summary).classList.remove('selected');
     React.findDOMNode(this.refs.banking).classList.remove('selected');

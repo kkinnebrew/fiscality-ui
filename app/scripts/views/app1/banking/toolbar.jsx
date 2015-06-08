@@ -1,8 +1,10 @@
 var React = require('react');
+var $ = require('jquery');
 
 var BankingToolbar = React.createClass({
 
   handleClick: function() {
+
     if (typeof this.props.onClick == 'function') {
       this.props.onClick.call(this);
     }

@@ -23,7 +23,13 @@ class BankingViewModel extends ViewModel
 
     # make service calls
 
-    @update() if @accountId
+    if !@accountId
+      @getAccounts().then () =>
+        if @accounts && @accounts.length > 0
+          @accountId = @accounts[0].accountId
+          @update()
+    else
+      @update()
 
   update: () ->
 
@@ -56,7 +62,7 @@ class BankingViewModel extends ViewModel
 
   getAccounts: () ->
 
-    transactionsService.accounts().then (data) =>
+    return transactionsService.accounts().then (data) =>
       @accounts = data
       @fire('refresh', { accounts: data })
     , ->
