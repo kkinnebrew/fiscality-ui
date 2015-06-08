@@ -2,10 +2,16 @@ var React = require('react');
 
 var BankingToolbar = React.createClass({
 
+  handleClick: function() {
+    if (typeof this.props.onClick == 'function') {
+      this.props.onClick.call(this);
+    }
+  },
+
   render: function() {
     return (
       <div className="toolbar">
-        <div className="menu-button"></div>
+        <div className="menu-button" onClick={this.handleClick}></div>
         <h2 className="label">Bank of America Checking</h2>
         <div className="add-transaction-button">Add Transaction</div>
         <div className="info">
