@@ -862,10 +862,9 @@ select {
     -webkit-transition: opacity ease-in-out 100ms;
 }
 
-#portfolios-menu .section .item:hover {
+#accounts-menu .section .item:hover {
     opacity: 0.7;
 }
-
 
 /* investments > investment-chart */
 
@@ -936,11 +935,10 @@ select {
 
 #holdings-table {
     bottom: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
     min-width: 1170px;
     position: absolute;
-    top: 370px;
+    top: 70px;
     width: 100%;
     z-index: 3;
     -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
@@ -1006,6 +1004,15 @@ select {
 
 #holdings-table .header-column.descending {
 
+}
+
+#holdings-table .table-body {
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 61px;
+    width: 100%;
 }
 
 #holdings-table .row {
