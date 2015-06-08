@@ -84,84 +84,29 @@ router.register('app', {
       primary: true
       template: require('../templates/app.hbs')
     'menu@default':
-      template: require('../templates/app/menu.hbs')
-      view: require('./views/app/menu.coffee')
-      viewmodel: require('./viewmodels/app/menu.coffee')
+      name: 'navigation'
+      react: true
+      view: require('./views/app1/navigation.jsx')
+      viewmodel: require('./viewmodels/app1/navigation.coffee')
 })
 
 router.register('app.accounts', {
-  controller: require('./controllers/app/accounts/accounts.coffee')
   params: ['accountId']
   views:
     'content':
-      template: require('../templates/app/accounts.hbs')
-    'chart@content':
-      name: 'chart'
+      name: 'banking'
       react: true
-      view: require('./views/app/accounts/account.jsx')
-      viewmodel: require('./viewmodels/app/accounts/account.coffee')
-    'transactions@content':
-      name: 'transactions'
-      react: true
-      view: require('./views/app/accounts/transactions.jsx')
-      viewmodel: require('./viewmodels/app/accounts/transactions.coffee')
-    'accounts@global':
-      name: 'accounts'
-      template: require('../templates/app/accounts/overlay.hbs')
-      view: require('./views/app/accounts/overlay.coffee')
-      viewmodel: require('./viewmodels/app/accounts/overlay.coffee')
-    'connect-account@global':
-      name: 'connectAccount'
-      template: require('../templates/app/accounts/connect.hbs')
-      view: require('./views/app/accounts/connect.coffee')
-      viewmodel: require('./viewmodels/app/accounts/connect.coffee')
+      view: require('./views/app1/banking.jsx'),
+      viewmodel: require('./viewmodels/app1/banking.coffee')
 })
 
 router.register('app.investments', {
-  controller: require('./controllers/app/investments/investments.coffee')
   params: ['portfolioId']
   views:
     'content':
-      primary: true
       name: 'investments'
-      template: require('../templates/app/investments.hbs')
-      viewmodel: require('./viewmodels/app/investments/investments.coffee')
-    'portfolios@global':
-      name: 'portfolios'
-      template: require('../templates/app/investments/overlay.hbs')
-      view: require('./views/app/investments/overlay.coffee')
-      viewmodel: require('./viewmodels/app/investments/overlay.coffee')
-})
-
-router.register('app.investments.positions', {
-  views:
-    'investments':
-      template: require('../templates/app/investments/positions.hbs')
-    'chart@investments':
-      template: require('../templates/app/investments/positions/chart.hbs')
-      viewmodel: require('./viewmodels/app/investments/positions/chart.coffee')
-    'positions@investments':
-      template: require('../templates/app/investments/positions/positions.hbs')
-      viewmodel: require('./viewmodels/app/investments/positions/positions.coffee')
-})
-
-
-router.register('app.investments.activity', {
-  views:
-    'investments':
-      template: require('../templates/app/investments/activity.hbs')
-})
-
-router.register('app.investments.performance', {
-  views:
-    'investments':
-      template: require('../templates/app/investments/performance.hbs')
-})
-
-router.register('app.investments.allocation', {
-  views:
-    'investments':
-      template: require('../templates/app/investments/allocation.hbs')
+      react: true
+      view: require('./views/app1/investments.jsx')
 })
 
 router.register('app.settings', {
