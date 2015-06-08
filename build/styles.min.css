@@ -1278,9 +1278,9 @@ select {
 
     #logo {
         background-image: url(../images/app-logo@2x.png);
-        -webkit-background-size: 90px 30px;
-        -moz-background-size: 90px 30px;
-        background-size: 90px 30px;
+        -webkit-background-size: 90px 26px;
+        -moz-background-size: 90px 26px;
+        background-size: 90px 26px;
     }
 
     #badge {
