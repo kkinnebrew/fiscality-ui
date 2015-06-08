@@ -2,7 +2,42 @@ var React = require('react');
 
 var TransactionTable = React.createClass({
 
+  getDefaultProps: function() {
+    return {
+      transactions: []
+    };
+  },
+
   render: function() {
+
+    var that = this;
+
+    var transactionRows = this.props.transactions.map(function(transaction) {
+      return (
+        <div className="row">
+          <div className="column">
+            <div className="label">{transaction.date}</div>
+          </div>
+          <div className="column md">
+            <div className="label">{transaction.transactionType}</div>
+          </div>
+          <div className="column xl">
+            <div className="label">{transaction.description}</div>
+            <div className="tags">
+              <div className="tag">Interest</div>
+              <div className="tag">Taxable</div>
+            </div>
+          </div>
+          <div className="column right last">
+            <div className="label">{transaction.balance}</div>
+          </div>
+          <div className="column right">
+            <div className="label">{transaction.amount}</div>
+          </div>
+        </div>
+      )
+    });
+
     return (
       <div id="transaction-table">
         <div className="table-head">
@@ -15,27 +50,7 @@ var TransactionTable = React.createClass({
           </div>
         </div>
         <div className="table-body">
-          <div className="row">
-            <div className="column">
-              <div className="label">8/19/2014</div>
-            </div>
-            <div className="column md">
-              <div className="label">Paycheck Deposit</div>
-            </div>
-            <div className="column xl">
-              <div className="label">Web Design Agency</div>
-              <div className="tags">
-                <div className="tag">Interest</div>
-                <div className="tag">Taxable</div>
-              </div>
-            </div>
-            <div className="column right last">
-              <div className="label">$3,912.61</div>
-            </div>
-            <div className="column right">
-              <div className="label">1,503.21</div>
-            </div>
-          </div>
+        {transactionRows}
         </div>
       </div>
     )

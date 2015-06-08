@@ -6,21 +6,41 @@ var AccountsMenu = require('./banking/menu.jsx');
 
 var BankingView = React.createClass({
 
-  handleMenu: function() {
+  getInitialState: function() {
+    return {
+      accounts: [],
+      transactions: [],
+      account: {},
+      balance: 0
+    }
+  },
+
+  componentDidMount: function() {
+
+    this.props.viewmodel.getAccounts();
+
+  },
+
+  handleMenuClose: function() {
     React.findDOMNode(this.refs.menu).classList.add('visible');
   },
 
-  handleSelect: function() {
+  handleMenuOpen: function() {
+    React.findDOMNode(this.refs.menu).classList.remove('visible');
+  },
+
+  handleSelect: function(key) {
+    this.props.viewmodel.setAccount(key);
     React.findDOMNode(this.refs.menu).classList.remove('visible');
   },
 
   render: function() {
     return (
       <div id="banking">
-        <BankingToolbar onClick={this.handleMenu} />
-        <TransactionTable />
+        <BankingToolbar account={this.state.account} balance={this.state.balance} onClick={this.handleMenuClose} />
+        <TransactionTable transactions={this.state.transactions} />
         <TransactionDetail />
-        <AccountsMenu ref="menu" onClick={this.handleSelect} />
+        <AccountsMenu ref="menu" accounts={this.state.accounts} onSelect={this.handleSelect} onClick={this.handleMenuOpen} />
       </div>
     )
   }

@@ -1,6 +1,13 @@
 var React = require('react');
+var $ = require('jquery');
 
 var AccountsMenu = React.createClass({
+
+  getDefaultProps: function() {
+    return {
+      accounts: []
+    };
+  },
 
   handleClick: function() {
     if (typeof this.props.onClick == 'function') {
@@ -8,7 +15,26 @@ var AccountsMenu = React.createClass({
     }
   },
 
+  handleSelect: function(e) {
+
+    var key = $(e.currentTarget).attr('data-key');
+
+    if (typeof this.props.onSelect == 'function') {
+      this.props.onSelect.call(this, key);
+    }
+
+  },
+
   render: function() {
+
+    var that = this;
+
+    var accountRows = this.props.accounts.map(function(account) {
+      return (
+        <div className="item" onClick={that.handleSelect} data-key={account.accountId}>{account.accountName}</div>
+      )
+    });
+
     return (
       <div id="accounts-menu">
         <div className="header">
@@ -18,11 +44,7 @@ var AccountsMenu = React.createClass({
         </div>
         <div className="section">
           <div className="title">Banking</div>
-          <div className="item">Merrill Lynch - Long Term Gain</div>
-          <div className="item">Merrill Lynch - Cost</div>
-          <div className="item">Merrill Lynch - Cash</div>
-          <div className="item">Merrill Lynch - Lost</div>
-          <div className="item">Merrill Lynch - Short Term Gain</div>
+          {accountRows}
         </div>
         <div className="section">
           <div className="title">Credit &amp; Loan</div>
