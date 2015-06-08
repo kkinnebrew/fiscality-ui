@@ -10,8 +10,6 @@ var TransactionTable = React.createClass({
 
   render: function() {
 
-    var that = this;
-
     var transactionRows = this.props.transactions.map(function(transaction) {
       return (
         <div className="row">

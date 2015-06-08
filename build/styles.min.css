@@ -1886,6 +1886,103 @@ select {
 
 }
 
+/* portfolios-menu */
+
+#portfolios-menu {
+    background: #4F545F;
+    bottom: 0;
+    left: -320px;
+    padding: 20px 28px;
+    position: absolute;
+    top: 5px;
+    z-index: 100;
+    width: 260px;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -webkit-transition: left ease-out 100ms;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+#portfolios-menu.visible {
+    left: 0;
+}
+
+#portfolios-menu .header {
+    border-bottom: 1px solid #60656F;
+    overflow: hidden;
+    margin-bottom: 30px;
+    padding-bottom: 16px;
+}
+
+#portfolios-menu .back-button {
+    background: url(../images/back-button.png) center center no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    margin: 12px 0 5px 0;
+    padding-right: 16px;
+    opacity: 1;
+    width: 16px;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+#portfolios-menu .back-button:hover {
+    opacity: 0.8;
+}
+
+#portfolios-menu .header .title {
+    color: #FFF;
+    float: left;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 9px 0 0 0;
+}
+
+#portfolios-menu .add-portfolio-button {
+    background: #DFAD53;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 5px 0;
+    padding: 7px 16px 6px 16px;
+    text-transform: uppercase;
+    -webkit-transition: background ease-in-out 100ms;
+}
+
+#portfolios-menu .add-account-button:hover {
+    background: #D09222;
+}
+
+#portfolios-menu .section {
+    margin-bottom: 20px;
+}
+
+#portfolios-menu .section .title {
+    color: #A7AAAF;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#portfolios-menu .section .item {
+    color: #FFF;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+#portfolios-menu .section .item:hover {
+    opacity: 0.7;
+}
+
 
 /* investments > investment-chart */
 
