@@ -415,7 +415,7 @@ select {
 }
 
 #transaction-table .header-column.xl {
-    width: 280px;
+    width: 320px;
 }
 
 #transaction-table .header-column:first-child {
@@ -476,7 +476,7 @@ select {
 }
 
 #transaction-table .column.xl {
-    width: 280px;
+    width: 320px;
 }
 
 #transaction-table .row .column:first-child {
