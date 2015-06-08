@@ -7,7 +7,7 @@ var InvestmentsChart = React.createClass({
       <div id="investments-chart">
         <div className="controls">
           <ul className="views">
-            <li className="view-option">Performance</li>
+            <li className="view-option selected">Performance</li>
             <li className="view-option">Return</li>
           </ul>
           <ul className="date-range">

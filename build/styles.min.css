@@ -1778,35 +1778,61 @@ select {
 /* investments > investment-chart */
 
 #investments-chart {
-
+    background: #F2F5F7;
+    height: 300px;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    z-index: 2;
 }
 
 #investments-chart .controls {
-
+    margin: 20px 30px;
+    overflow: auto;
 }
 
 #investments-chart .views {
-
+    float: left;
 }
 
 #investments-chart .view-option {
-
+    background: transparent;
+    border-radius: 2px;
+    color: #778894;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px 3px 8px;
+    margin-right: 10px;
+    text-transform: uppercase;
 }
 
 #investments-chart .view-option.selected {
-
+    background: #B0C2CF;
+    color: #FFF;
 }
 
 #investments-chart .date-range {
-
+    float: right;
 }
 
 #investments-chart .date-range-option {
-
+    background: transparent;
+    border-radius: 2px;
+    color: #778894;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px 3px 8px;
+    margin-left: 8px;
+    text-transform: uppercase;
 }
 
 #investments-chart .date-range-option.selected {
-
+    background: #B0C2CF;
+    color: #FFF;
 }
 
 #investments-chart .chart {
@@ -1817,19 +1843,73 @@ select {
 /* investments > holdings-table */
 
 #holdings-table {
-
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    min-width: 1110px;
+    position: absolute;
+    top: 370px;
+    width: 100%;
+    z-index: 3;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
 }
 
 #holdings-table .header-row {
-
+    background: #FDFEFE;
+    border-bottom: 1px solid #DEE4E8;
+    height: 60px;
+    overflow: hidden;
 }
 
 #holdings-table .header-column {
+    color: #7B8A95;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 24px 0 0 15px;
+    text-transform: uppercase;
+    width: 100px;
+}
 
+#holdings-table .header-column.right {
+    float: right;
+    padding: 24px 15px 0 0;
+    text-align: right;
+}
+
+#holdings-table .header-column.align-right {
+    text-align: right;
+}
+
+#holdings-table .header-column.xsml {
+    width: 40px;
+}
+
+#holdings-table .header-column.md {
+    width: 100px;
+}
+
+#holdings-table .header-column.lg {
+    width: 160px;
+}
+
+#holdings-table .header-column.xl {
+    width: 240px;
+}
+
+#holdings-table .header-column:first-child {
+    padding-left: 30px;
+}
+
+#holdings-table .header-column.last {
+    padding-right: 30px;
 }
 
 #holdings-table .header-column.selected {
-
+    color: #53A7DF;
 }
 
 #holdings-table .header-column.descending {
@@ -1837,18 +1917,80 @@ select {
 }
 
 #holdings-table .row {
-
+    background: #F8FAFB;
+    border-bottom: 1px solid #DEE4E8;
+    height: 50px;
+    overflow: hidden;
 }
 
 #holdings-table .column {
+    float: left;
+    padding: 0 0 0 15px;
+    width: 100px;
+}
 
+#holdings-table .column.right {
+    float: right;
+    padding: 0 15px 0 0;
+    text-align: right;
+}
+
+#holdings-table .column.align-right {
+    text-align: right;
+}
+
+#holdings-table .column.xsm {
+    width: 40px;
+}
+
+#holdings-table .column.md {
+    width: 100px;
+}
+
+#holdings-table .column.lg {
+    width: 160px;
+}
+
+#holdings-table .column.xl {
+    width: 240px;
+}
+
+#holdings-table .row .column:first-child {
+    padding-left: 30px;
+}
+
+#holdings-table .row .column.last {
+    padding-right: 30px;
 }
 
 #holdings-table .label {
+    color: #646464;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 52px;
+    margin: 0 8px 0 0;
+}
 
+#holdings-table .column.align-right .label {
+    margin: 0 0 0 8px;
 }
 
 #holdings-table .details-button {
+    background: url(../images/position-detail-button.png) center center no-repeat;
+    height: 14px;
+    margin: 18px 0;
+    width: 14px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+
+    #investments > .toolbar .menu-button {
+        background-image: url(../images/position-detail-button@2x.png);
+        -webkit-background-size: 14px 14px;
+        -moz-background-size: 14px 14px;
+        background-size: 14px 14px;
+    }
 
 }
 /*#connect-account {*/
