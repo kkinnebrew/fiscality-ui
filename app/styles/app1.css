@@ -107,6 +107,7 @@ select {
 }
 
 #nav .menu-option {
+    background: transparent;
     border-radius: 2px;
     color: #FFF;
     cursor: pointer;
@@ -117,10 +118,15 @@ select {
     margin: 4px 4px;
     padding: 6px 14px;
     text-transform: uppercase;
+    -webkit-transition: background ease-in-out 100ms;
 }
 
 #nav .menu-option:first-child {
     margin-left: 10px;
+}
+
+#nav .menu-option:hover {
+    background: #323236;
 }
 
 #nav .menu-option.selected {
