@@ -154,6 +154,8 @@ class BankingViewModel extends ViewModel
       if (transaction.saved)
         transactions.push(transaction)
 
-    @fire('refresh', transactions: transactions)
+    @transactions = transactions
+
+    @fire('refresh', transactions: @transactions)
 
 module.exports = BankingViewModel
