@@ -1387,6 +1387,44 @@ select {
 
 }
 
+/* transaction menu */
+
+#add-transaction-menu {
+    background: #FFF;
+    border-radius: 2px;
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    width: 170px;
+    z-index: 10;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+}
+
+#add-transaction-menu.visible {
+    display: block;
+}
+
+#add-transaction-menu .menu-option {
+    border-bottom: 1px solid #F2F2F2;
+    color: #7B8A95;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 16px;
+    user-select: none;
+}
+
+#add-transaction-menu .menu-option:hover {
+    background: #F8F8F8;
+}
+
+#add-transaction-menu .menu-option:last-child {
+    border-bottom-color: transparent;
+}
 
 /* accounts-menu */
 
