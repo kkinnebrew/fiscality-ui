@@ -42,17 +42,28 @@ var BankingView = React.createClass({
   handleAddSelect: function(key) {
     this.props.viewmodel.addTransaction();
     React.findDOMNode(this.refs.addMenu).classList.remove('visible');
+  },
 
+  handleEdit: function(key) {
+    this.props.viewmodel.markEditing(key);
+  },
+
+  handleCancel: function(key) {
+    this.props.viewmodel.clearEditing();
+  },
+
+  handleSave: function(transaction) {
+    this.props.viewmodel.editTransaction(transaction);
   },
 
   render: function() {
     return (
       <div id="banking">
-        <BankingToolbar account={this.state.account} balance={this.state.balance} onClick={this.handleMenuClose} onAdd={this.handleAdd} />
-        <PopupMenu ref="addMenu" onSelect={this.handleAddSelect}></PopupMenu>
-        <TransactionTable transactions={this.state.transactions} />
-        <TransactionDetail />
-        <AccountsMenu ref="menu" accounts={this.state.accounts} onSelect={this.handleSelect} onClick={this.handleMenuOpen} />
+        <BankingToolbar key="toolbar" account={this.state.account} balance={this.state.balance} onClick={this.handleMenuClose} onAdd={this.handleAdd} />
+        <PopupMenu key="menu" ref="addMenu" onSelect={this.handleAddSelect}></PopupMenu>
+        <TransactionTable key="transaction-table" transactions={this.state.transactions} onCancel={this.handleCancel} onSave={this.handleSave} onEdit={this.handleEdit} />
+        <TransactionDetail key="detail" />
+        <AccountsMenu ref="menu" key="accounts" accounts={this.state.accounts} onSelect={this.handleSelect} onClick={this.handleMenuOpen} />
       </div>
     )
   }

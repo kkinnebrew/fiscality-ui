@@ -28,6 +28,10 @@ var SelectField = React.createClass({
     this.setState({ editing: false });
   },
 
+  getValue: function() {
+    return this.state.value;
+  },
+
   render: function() {
     var value = this.state.value;
     var classes = 'select-field ' + this.props.className;

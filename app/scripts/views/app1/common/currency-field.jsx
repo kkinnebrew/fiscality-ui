@@ -26,38 +26,38 @@ var CurrencyField = React.createClass({
     this.setState({ value: nextProps.value });
   },
 
-  handleFocus: function() {
-    if (this.props.editable == 'true') {
-      if (this.props.onFocus) {
-        this.props.onFocus();
-      }
-      var unformatted = this.state.value + '';
-      this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
-    }
-  },
+  //handleFocus: function() {
+  //  if (this.props.editable == 'true') {
+  //    if (this.props.onFocus) {
+  //      this.props.onFocus();
+  //    }
+  //    var unformatted = this.state.value + '';
+  //    this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
+  //  }
+  //},
+  //
+  //handleBlur: function() {
+  //  if (this.props.editable == 'true') {
+  //    if (this.props.onBlur) {
+  //      this.props.onBlur();
+  //    }
+  //    var unformatted = this.state.value + '';
+  //    this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
+  //  }
+  //},
 
-  handleBlur: function() {
-    if (this.props.editable == 'true') {
-      if (this.props.onBlur) {
-        this.props.onBlur();
-      }
-      var unformatted = this.state.value + '';
-      this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
-    }
+  getValue: function() {
+    return this.state.value;
   },
 
   render: function() {
-    var formatted = this.state.value;
+    var formatted = this.state.value ? this.state.value.replace(',', '') : '0';
     var classes = this.props.className;
-    if (!this.state.editing) {
-      var symbol = this.props.symbol || '$';
-      var value = isNaN ? parseFloat(this.state.value) : this.state.value;
-      formatted = value >= 0 ? (symbol + numberWithCommas(value.toFixed(2))) : ('-' + symbol + numberWithCommas(Math.abs(value).toFixed(2)));
-    } else {
+    if (this.state.editing) {
       classes += ' editing';
     }
     if (this.props.editable == 'true') {
-      return <input className={classes} type="text" value={formatted} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
+      return <input className={classes} type="text" value={formatted} onChange={this.handleChange} />;
     } else {
       return <div className={classes}>{formatted}</div>;
     }

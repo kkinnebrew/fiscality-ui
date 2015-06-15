@@ -10,16 +10,36 @@ var TransactionTable = React.createClass({
     };
   },
 
+  handleEdit: function(key) {
+    if (this.props.onEdit && typeof this.props.onEdit == 'function') {
+      this.props.onEdit.call(this, key);
+    }
+  },
+
+  handleSave: function(transaction) {
+    if (this.props.onSave && typeof this.props.onSave == 'function') {
+      this.props.onSave.call(this, transaction);
+    }
+  },
+
+  handleCancel: function(key) {
+    if (this.props.onCancel && typeof this.props.onCancel == 'function') {
+      this.props.onCancel.call(this, key);
+    }
+  },
+
   render: function() {
+
+    var that = this;
 
     var transactionRows = this.props.transactions.map(function(transaction) {
       if (transaction.editing) {
         return (
-          <TransactionEditRow transaction={transaction} />
+          <TransactionEditRow transaction={transaction} onSave={that.handleSave} onCancel={that.handleCancel} key={transaction.transactionId} />
         )
       } else {
         return (
-          <TransactionRow transaction={transaction} />
+          <TransactionRow onClick={that.handleEdit} transaction={transaction} key={transaction.transactionId} />
         )
       }
     });
@@ -31,7 +51,7 @@ var TransactionTable = React.createClass({
             <div className="header-column selected ascending">Date</div>
             <div className="header-column md">Type</div>
             <div className="header-column xl">Description</div>
-            <div className="header-column right last">Balance</div>
+            <div className="header-column lg right last">Balance</div>
             <div className="header-column right">Amount</div>
           </div>
         </div>

@@ -30,6 +30,10 @@ var DateField = React.createClass({
     this.setState({ editing: false });
   },
 
+  getValue: function() {
+    return this.state.value;
+  },
+
   render: function() {
     var str = '';
     var classes = this.props.className;

@@ -9,10 +9,17 @@ var TransactionRow = React.createClass({
     };
   },
 
+  handleClick: function(e) {
+    if (this.props.onClick && typeof this.props.onClick == 'function') {
+      var key = $(e.currentTarget).attr('data-key');
+      this.props.onClick.call(this, key);
+    }
+  },
+
   render: function() {
     var transaction = this.props.transaction;
     return (
-      <div className="row">
+      <div className="row" onClick={this.handleClick} data-key={transaction.transactionId}>
         <div className="column">
           <div className="label">{transaction.date}</div>
         </div>
@@ -26,7 +33,7 @@ var TransactionRow = React.createClass({
             <div className="tag">Taxable</div>
           </div>
         </div>
-        <div className="column right last">
+        <div className="column lg right last">
           <div className="label">{transaction.balance}</div>
         </div>
         <div className="column right">

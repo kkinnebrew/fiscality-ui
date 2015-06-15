@@ -589,6 +589,28 @@ select {
     width: 170px;
 }
 
+#transaction-table .save-button {
+    background: #DFAD53;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 15px;
+    padding: 4px 10px;
+}
+
+#transaction-table .cancel-button {
+    color: #7B8A95;
+    cursor: pointer;
+    float: right;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-top: 15px;
+    padding: 4px 10px;
+}
 
 /* banking > transaction-detail */
 

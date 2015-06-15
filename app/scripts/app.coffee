@@ -96,7 +96,7 @@ router.register('app.accounts', {
     'content':
       name: 'banking'
       react: true
-      view: require('./views/app1/banking.jsx'),
+      view: require('./views/app1/banking.jsx')
       viewmodel: require('./viewmodels/app1/banking.coffee')
 })
 
