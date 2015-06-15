@@ -31,7 +31,7 @@ var AccountsMenu = React.createClass({
 
     var accountRows = this.props.accounts.map(function(account) {
       return (
-        <div className="item" onClick={that.handleSelect} data-key={account.accountId}>{account.accountName}</div>
+        <div className="item" onClick={that.handleSelect} data-key={account.accountId} key={account.accountId}>{account.accountName}</div>
       )
     });
 

@@ -1387,6 +1387,44 @@ select {
 
 }
 
+/* transaction menu */
+
+#add-transaction-menu {
+    background: #FFF;
+    border-radius: 2px;
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    width: 170px;
+    z-index: 10;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+}
+
+#add-transaction-menu.visible {
+    display: block;
+}
+
+#add-transaction-menu .menu-option {
+    border-bottom: 1px solid #F2F2F2;
+    color: #7B8A95;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 16px;
+    user-select: none;
+}
+
+#add-transaction-menu .menu-option:hover {
+    background: #F8F8F8;
+}
+
+#add-transaction-menu .menu-option:last-child {
+    border-bottom-color: transparent;
+}
 
 /* accounts-menu */
 
@@ -1572,6 +1610,10 @@ select {
     background: #ECF2F6;
 }
 
+#transaction-table .row.editing {
+    background: #ECF2F6;
+}
+
 #transaction-table .column {
     float: left;
     padding: 0 0 0 15px;
@@ -1580,7 +1622,7 @@ select {
 
 #transaction-table .column.right {
     float: right;
-    padding: 0 15px 0 0;
+    padding: 0 5px 0 0;
     text-align: right;
 }
 
@@ -1597,7 +1639,7 @@ select {
 }
 
 #transaction-table .row .column:first-child {
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
 #transaction-table .row .column.last {
@@ -1610,6 +1652,11 @@ select {
     font-size: 12px;
     font-weight: 500;
     line-height: 52px;
+    margin-left: 10px;
+}
+
+#transaction-table .column.right .label {
+    margin-right: 10px;
 }
 
 #transaction-table .tags {
@@ -1628,6 +1675,59 @@ select {
     margin-left: 4px;
 }
 
+/* input designs */
+
+.column .field {
+    background: #FFF;
+    border: 1px solid #DEE4E8;
+    border-radius: 2px;
+    color: #646464;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 10px 5px 10px;
+    margin: 11px 0 0 0;
+    width: 70px;
+}
+
+.column.right .field {
+    text-align: right;
+}
+
+.column.md .field {
+    width: 90px;
+}
+
+.column.lg .field {
+    width: 160px;
+}
+
+.column.xl .field {
+    width: 170px;
+}
+
+#transaction-table .save-button {
+    background: #DFAD53;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 15px;
+    padding: 4px 10px;
+}
+
+#transaction-table .cancel-button {
+    color: #7B8A95;
+    cursor: pointer;
+    float: right;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 5px;
+    margin-top: 15px;
+    padding: 4px 10px;
+}
 
 /* banking > transaction-detail */
 
@@ -1886,6 +1986,102 @@ select {
 
 }
 
+/* portfolios-menu */
+
+#portfolios-menu {
+    background: #4F545F;
+    bottom: 0;
+    left: -320px;
+    padding: 20px 28px;
+    position: absolute;
+    top: 5px;
+    z-index: 100;
+    width: 260px;
+    -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+    -webkit-transition: left ease-out 100ms;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+#portfolios-menu.visible {
+    left: 0;
+}
+
+#portfolios-menu .header {
+    border-bottom: 1px solid #60656F;
+    overflow: hidden;
+    margin-bottom: 30px;
+    padding-bottom: 16px;
+}
+
+#portfolios-menu .back-button {
+    background: url(../images/back-button.png) center center no-repeat;
+    cursor: pointer;
+    float: left;
+    height: 16px;
+    margin: 12px 0 5px 0;
+    padding-right: 16px;
+    opacity: 1;
+    width: 16px;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+#portfolios-menu .back-button:hover {
+    opacity: 0.8;
+}
+
+#portfolios-menu .header .title {
+    color: #FFF;
+    float: left;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 9px 0 0 0;
+}
+
+#portfolios-menu .add-portfolio-button {
+    background: #DFAD53;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 5px 0;
+    padding: 7px 16px 6px 16px;
+    text-transform: uppercase;
+    -webkit-transition: background ease-in-out 100ms;
+}
+
+#portfolios-menu .add-account-button:hover {
+    background: #D09222;
+}
+
+#portfolios-menu .section {
+    margin-bottom: 20px;
+}
+
+#portfolios-menu .section .title {
+    color: #A7AAAF;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+#portfolios-menu .section .item {
+    color: #FFF;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    -webkit-transition: opacity ease-in-out 100ms;
+}
+
+#accounts-menu .section .item:hover {
+    opacity: 0.7;
+}
 
 /* investments > investment-chart */
 
@@ -1956,11 +2152,10 @@ select {
 
 #holdings-table {
     bottom: 0;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
     min-width: 1170px;
     position: absolute;
-    top: 370px;
+    top: 70px;
     width: 100%;
     z-index: 3;
     -webkit-box-shadow: 0 0 3px 0 rgba(0,0,0,0.2);
@@ -2026,6 +2221,15 @@ select {
 
 #holdings-table .header-column.descending {
 
+}
+
+#holdings-table .table-body {
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 61px;
+    width: 100%;
 }
 
 #holdings-table .row {

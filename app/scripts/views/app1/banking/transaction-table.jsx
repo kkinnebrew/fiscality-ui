@@ -1,4 +1,6 @@
 var React = require('react');
+var TransactionRow = require('./transaction-row.jsx')
+var TransactionEditRow = require('./transaction-edit-row.jsx')
 
 var TransactionTable = React.createClass({
 
@@ -8,34 +10,38 @@ var TransactionTable = React.createClass({
     };
   },
 
+  handleEdit: function(key) {
+    if (this.props.onEdit && typeof this.props.onEdit == 'function') {
+      this.props.onEdit.call(this, key);
+    }
+  },
+
+  handleSave: function(transaction) {
+    if (this.props.onSave && typeof this.props.onSave == 'function') {
+      this.props.onSave.call(this, transaction);
+    }
+  },
+
+  handleCancel: function(key) {
+    if (this.props.onCancel && typeof this.props.onCancel == 'function') {
+      this.props.onCancel.call(this, key);
+    }
+  },
+
   render: function() {
 
     var that = this;
 
     var transactionRows = this.props.transactions.map(function(transaction) {
-      return (
-        <div className="row">
-          <div className="column">
-            <div className="label">{transaction.date}</div>
-          </div>
-          <div className="column md">
-            <div className="label">{transaction.transactionType}</div>
-          </div>
-          <div className="column xl">
-            <div className="label">{transaction.description}</div>
-            <div className="tags">
-              <div className="tag">Interest</div>
-              <div className="tag">Taxable</div>
-            </div>
-          </div>
-          <div className="column right last">
-            <div className="label">{transaction.balance}</div>
-          </div>
-          <div className="column right">
-            <div className="label">{transaction.amount}</div>
-          </div>
-        </div>
-      )
+      if (transaction.editing) {
+        return (
+          <TransactionEditRow transaction={transaction} onSave={that.handleSave} onCancel={that.handleCancel} key={transaction.transactionId} />
+        )
+      } else {
+        return (
+          <TransactionRow onClick={that.handleEdit} transaction={transaction} key={transaction.transactionId} />
+        )
+      }
     });
 
     return (
@@ -45,7 +51,7 @@ var TransactionTable = React.createClass({
             <div className="header-column selected ascending">Date</div>
             <div className="header-column md">Type</div>
             <div className="header-column xl">Description</div>
-            <div className="header-column right last">Balance</div>
+            <div className="header-column lg right last">Balance</div>
             <div className="header-column right">Amount</div>
           </div>
         </div>

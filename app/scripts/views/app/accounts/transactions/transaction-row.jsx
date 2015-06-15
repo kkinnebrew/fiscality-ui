@@ -1,8 +1,8 @@
 var React = require('react');
-var DateField = require('./date-field.jsx');
-var TextField = require('./text-field.jsx');
-var SelectField = require('./select-field.jsx');
-var CurrencyField = require('./currency-field.jsx');
+var DateField = require('../../../app1/common/date-field.jsx');
+var TextField = require('../../../app1/common/text-field.jsx');
+var SelectField = require('../../../app1/common/select-field.jsx');
+var CurrencyField = require('../../../app1/common/currency-field.jsx');
 var Label = require('./label.jsx');
 
 var TransactionRow = React.createClass({

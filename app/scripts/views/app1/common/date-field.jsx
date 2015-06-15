@@ -1,6 +1,6 @@
 var React = require('react');
 
-var SelectField = React.createClass({
+var DateField = React.createClass({
 
   getInitialState: function() {
     return { value: this.props.value, editing: false };
@@ -18,7 +18,9 @@ var SelectField = React.createClass({
     if (this.props.onFocus) {
       this.props.onFocus();
     }
-    this.setState({ editing: true });
+    var date = new Date(this.state.value);
+    var value = date.toString(this.props.format || 'M/d/yyyy');
+    this.setState({ value: value, editing: true });
   },
 
   handleBlur: function() {
@@ -28,15 +30,23 @@ var SelectField = React.createClass({
     this.setState({ editing: false });
   },
 
+  getValue: function() {
+    return this.state.value;
+  },
+
   render: function() {
-    var value = this.state.value;
-    var classes = 'select-field ' + this.props.className;
+    var str = '';
+    var classes = this.props.className;
     if (this.state.editing) {
       classes += ' editing';
+      str = this.state.value;
+    } else {
+      var date = new Date(this.state.value);
+      str = date.toString(this.props.format || 'MMM dd, yyyy');
     }
-    return <input className={classes} type="text" value={value} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
+    return <input className={classes} type="text" value={str} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
   }
 
 });
 
-module.exports = SelectField;
+module.exports = DateField;

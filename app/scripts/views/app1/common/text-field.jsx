@@ -28,6 +28,10 @@ var TextField = React.createClass({
     this.setState({ editing: false });
   },
 
+  getValue: function() {
+    return this.state.value;
+  },
+
   render: function() {
     var value = this.state.value;
     var classes = this.props.className;
