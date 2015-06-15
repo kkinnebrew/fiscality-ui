@@ -1647,11 +1647,12 @@ select {
 }
 
 #transaction-table .label {
+    border: 1px solid transparent;
     color: #646464;
     display: inline-block;
     font-size: 12px;
     font-weight: 500;
-    line-height: 52px;
+    line-height: 50px;
     margin-left: 10px;
 }
 
@@ -1703,7 +1704,7 @@ select {
 }
 
 .column.xl .field {
-    width: 170px;
+    width: 154px;
 }
 
 #transaction-table .save-button {
