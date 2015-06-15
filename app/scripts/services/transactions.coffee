@@ -31,7 +31,7 @@ class TransactionsService extends Service
       cache.setItem('transactions:' + accountId, data);
       deferred.resolve(data)
 
-    @get('/api/accounts/' + accountId + '/transactions').then(success, -> deferred.reject())
+    @get('/api/accounts/' + accountId + '/transactions?startDate=2015-01-01').then(success, -> deferred.reject())
 
     return deferred
 

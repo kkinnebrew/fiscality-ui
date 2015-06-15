@@ -12,7 +12,7 @@ var BankingView = React.createClass({
       accounts: [],
       transactions: [],
       account: {},
-      balance: 0
+      balance: '$0.00'
     }
   },
 

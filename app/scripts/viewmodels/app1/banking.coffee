@@ -23,7 +23,7 @@ class BankingViewModel extends ViewModel
     @accountId = params.accountId || null
     @accounts = []
     @account = null
-    @balance = 0
+    @balance = '$0.00'
     @transactions = []
 
     # make service calls
@@ -43,8 +43,8 @@ class BankingViewModel extends ViewModel
 
     $.when(accountRequest, balanceRequest).then((account, balance) =>
       @account = account
-      @balance = balance
-      @fire('refresh', { account: account, balance: numberWithCommas(balance) })
+      @balance = numberWithSymbolAndCommas(balance)
+      @fire('refresh', { account: account, balance: numberWithSymbolAndCommas(balance) })
     )
 
     transactionsRequest = transactionsService.transactions(@accountId)
@@ -58,7 +58,8 @@ class BankingViewModel extends ViewModel
         description: transaction.description
         amount: numberWithCommas(transaction.amount),
         balance: numberWithSymbolAndCommas(transaction.balance),
-        editing: false
+        editing: false,
+        saved: true
       }
 
     $.when(transactionsRequest).then (transactions) =>
@@ -94,7 +95,8 @@ class BankingViewModel extends ViewModel
       description: 'Test'
       amount: 0,
       balance: '0',
-      editing: true
+      editing: true,
+      saved: false
     })
 
     @fire('refresh', transactions: @transactions)
@@ -145,10 +147,13 @@ class BankingViewModel extends ViewModel
 
   clearEditing: (transactionId) ->
 
-    @transactions = _.map @transactions, (transaction) =>
-      transaction.editing = false
-      return transaction
+    transactions = []
 
-    @fire('refresh', transactions: @transactions)
+    _.each @transactions, (transaction) =>
+      transaction.editing = false
+      if (transaction.saved)
+        transactions.push(transaction)
+
+    @fire('refresh', transactions: transactions)
 
 module.exports = BankingViewModel
