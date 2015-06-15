@@ -493,6 +493,10 @@ select {
     background: #ECF2F6;
 }
 
+#transaction-table .row.editing {
+    background: #ECF2F6;
+}
+
 #transaction-table .column {
     float: left;
     padding: 0 0 0 15px;
@@ -501,7 +505,7 @@ select {
 
 #transaction-table .column.right {
     float: right;
-    padding: 0 15px 0 0;
+    padding: 0 5px 0 0;
     text-align: right;
 }
 
@@ -518,7 +522,7 @@ select {
 }
 
 #transaction-table .row .column:first-child {
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
 #transaction-table .row .column.last {
@@ -531,6 +535,11 @@ select {
     font-size: 12px;
     font-weight: 500;
     line-height: 52px;
+    margin-left: 10px;
+}
+
+#transaction-table .column.right .label {
+    margin-right: 10px;
 }
 
 #transaction-table .tags {
@@ -547,6 +556,37 @@ select {
     font-weight: 600;
     padding: 3px 8px;
     margin-left: 4px;
+}
+
+/* input designs */
+
+.column .field {
+    background: #FFF;
+    border: 1px solid #DEE4E8;
+    border-radius: 2px;
+    color: #646464;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 10px 5px 10px;
+    margin: 11px 0 0 0;
+    width: 70px;
+}
+
+.column.right .field {
+    text-align: right;
+}
+
+.column.md .field {
+    width: 90px;
+}
+
+.column.lg .field {
+    width: 160px;
+}
+
+.column.xl .field {
+    width: 170px;
 }
 
 

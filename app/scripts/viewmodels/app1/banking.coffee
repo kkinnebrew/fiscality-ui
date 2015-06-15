@@ -83,10 +83,10 @@ class BankingViewModel extends ViewModel
 
     @transactions.unshift({
       date: dateString
-      transactionType: ''
-      description: ''
+      transactionType: 'Test'
+      description: 'Test'
       amount: 0,
-      balance: '',
+      balance: '0',
       editing: true
     })
 

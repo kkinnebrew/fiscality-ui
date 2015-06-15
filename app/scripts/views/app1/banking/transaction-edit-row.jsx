@@ -16,7 +16,7 @@ var TransactionEditRow = React.createClass({
   render: function() {
     var transaction = this.props.transaction;
     return (
-      <div className="row">
+      <div className="row editing">
         <div className="column">
           <DateField className="field" value={transaction.date} />
         </div>
