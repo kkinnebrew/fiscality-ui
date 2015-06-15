@@ -40,7 +40,7 @@ var BankingView = React.createClass({
   },
 
   handleAddSelect: function(key) {
-    console.log(key);
+    this.props.viewmodel.addTransaction();
     React.findDOMNode(this.refs.addMenu).classList.remove('visible');
 
   },

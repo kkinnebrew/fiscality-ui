@@ -51,7 +51,8 @@ class BankingViewModel extends ViewModel
         transactionType: transaction.transactionType
         description: transaction.description
         amount: numberWithCommas(transaction.debitAmount - transaction.creditAmount),
-        balance: '$1,000.00'
+        balance: '$1,000.00',
+        editing: false
       }
 
     $.when(transactionsRequest).then (transactions) =>
@@ -73,5 +74,22 @@ class BankingViewModel extends ViewModel
     @router.goto('app.accounts', {
       accountId: accountId
     })
+
+  addTransaction: () ->
+
+    date = new Date()
+
+    dateString = date.toString('M/d/yyyy')
+
+    @transactions.unshift({
+      date: dateString
+      transactionType: ''
+      description: ''
+      amount: 0,
+      balance: '',
+      editing: true
+    })
+
+    @fire('refresh', transactions: @transactions)
 
 module.exports = BankingViewModel
