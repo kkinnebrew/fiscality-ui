@@ -31,7 +31,7 @@ class TransactionsService extends Service
       cache.setItem('transactions:' + accountId, data);
       deferred.resolve(data)
 
-    @get('/api/accounts/' + accountId + '/transactions?startDate=2015-01-01').then(success, -> deferred.reject())
+    @get('/api/accounts/' + accountId + '/transactions').then(success, -> deferred.reject())
 
     return deferred
 
@@ -53,7 +53,7 @@ class TransactionsService extends Service
 
   balance: (accountId) ->
 
-    return @cacheGet('/api/accounts/' + accountId + '/balance')
+    return @get('/api/accounts/' + accountId + '/balance')
 
   addTransaction: (data) ->
 
@@ -63,7 +63,7 @@ class TransactionsService extends Service
 
     return @post('/api/transactions/' + transactionId + '/edit', data)
 
-  deleteTransaction: (transactionId) ->
+  removeTransaction: (transactionId) ->
 
     return @get('/api/transactions/' + transactionId + '/remove')
 

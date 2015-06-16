@@ -9,7 +9,9 @@ var TransactionEditRow = React.createClass({
 
   getDefaultProps: function() {
     return {
-      transaction: {}
+      transaction: {},
+      types: [],
+      accounts: []
     };
   },
 
@@ -20,37 +22,45 @@ var TransactionEditRow = React.createClass({
         date: this.refs.date.getValue(),
         transactionType: this.refs.type.getValue(),
         description: this.refs.description.getValue(),
-        amount: this.refs.amount.getValue()
+        amount: this.refs.amount.getValue(),
+        toAccountId: this.refs.account ? this.refs.account.getValue() : undefined
       });
     }
   },
 
-  handleCancel: function(e) {
+  handleCancel: function() {
     if (this.props.onCancel && typeof this.props.onCancel == 'function') {
-      var key = $(e.currentTarget).attr('data-key');
-      this.props.onCancel.call(this, key);
+      this.props.onCancel.call(this, this.props.transaction.transactionId);
+    }
+  },
+
+  handleRemove: function() {
+    if (this.props.onRemove && typeof this.props.onRemove == 'function') {
+      this.props.onRemove.call(this, this.props.transaction.transactionId);
     }
   },
 
   render: function() {
     var transaction = this.props.transaction;
+    var accountSelector = '';
+    if (!transaction.transactionId) {
+      accountSelector = <SelectField className="field" options={this.props.accounts} ref="account" value={transaction.toAccountId} />;
+    }
     return (
       <div className="row editing" data-key={transaction.transactionId}>
         <div className="column">
           <DateField className="field" ref="date" value={transaction.date} />
         </div>
         <div className="column md">
-          <SelectField className="field" ref="type" value={transaction.transactionType} />
+          <SelectField className="field" ref="type" options={this.props.types} value={transaction.transactionType} />
         </div>
         <div className="column xl">
           <TextField className="field" ref="description" value={transaction.description} />
-          <div className="tags">
-            <div className="tag">Interest</div>
-            <div className="tag">Taxable</div>
-          </div>
+          {accountSelector}
         </div>
         <div className="column lg right last">
           <div className="save-button" onClick={this.handleSave}>Save</div>
+          <div className="remove-button" onClick={this.handleRemove}>Remove</div>
           <div className="cancel-button" onClick={this.handleCancel}>Cancel</div>
         </div>
         <div className="column right">

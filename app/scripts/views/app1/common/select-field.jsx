@@ -2,6 +2,12 @@ var React = require('react');
 
 var SelectField = React.createClass({
 
+  getDefaultProps: function() {
+    return {
+      options: []
+    };
+  },
+
   getInitialState: function() {
     return { value: this.props.value, editing: false };
   },
@@ -33,12 +39,26 @@ var SelectField = React.createClass({
   },
 
   render: function() {
+
     var value = this.state.value;
     var classes = 'select-field ' + this.props.className;
     if (this.state.editing) {
       classes += ' editing';
     }
-    return <input className={classes} type="text" value={value} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
+
+    var options = this.props.options.map(function(option) {
+      if (typeof option === 'string') {
+        return <option value={option} key={option}>{option}</option>
+      } else {
+        return <option value={option.value} key={option.value}>{option.label}</option>
+      }
+    });
+
+    return (
+      <select className={classes} type="text" value={value} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange}>
+      {options}
+      </select>
+    )
   }
 
 });

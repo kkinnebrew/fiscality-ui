@@ -22,9 +22,11 @@ class BankingViewModel extends ViewModel
 
     @accountId = params.accountId || null
     @accounts = []
+    @accountOptions = []
     @account = null
     @balance = '$0.00'
     @transactions = []
+    @types = []
 
     # make service calls
 
@@ -40,11 +42,20 @@ class BankingViewModel extends ViewModel
 
     accountRequest = transactionsService.account(@accountId)
     balanceRequest = transactionsService.balance(@accountId)
+    typesRequest = transactionsService.types()
+    accountsRequest = transactionsService.accounts()
 
-    $.when(accountRequest, balanceRequest).then((account, balance) =>
+    $.when(accountRequest, balanceRequest, typesRequest, accountsRequest).then((account, balance, types, accounts) =>
       @account = account
+      @types = types
       @balance = numberWithSymbolAndCommas(balance)
-      @fire('refresh', { account: account, balance: numberWithSymbolAndCommas(balance) })
+      @accountOptions = _.map(_.filter(accounts, (account) => account.accountId != @accountId), (account) ->
+        return {
+          value: account.accountId,
+          label: account.accountName
+        }
+      )
+      @fire('refresh', { account: account, balance: @balance, types: types, accountOptions: @accountOptions })
     )
 
     transactionsRequest = transactionsService.transactions(@accountId)
@@ -56,7 +67,7 @@ class BankingViewModel extends ViewModel
         date: date.toString('M/d/yyyy')
         transactionType: transaction.transactionType
         description: transaction.description
-        amount: numberWithCommas(transaction.amount),
+        amount: numberWithCommas(transaction.amount.toFixed(2)),
         balance: numberWithSymbolAndCommas(transaction.balance),
         editing: false,
         saved: true
@@ -88,51 +99,62 @@ class BankingViewModel extends ViewModel
 
     dateString = date.toString('M/d/yyyy')
 
+    _.each @transactions, (transaction) =>
+      transaction.editing = false
+
     @transactions.unshift({
-      transactionId: '-1'
+      transactionId: null
       date: dateString
       transactionType: 'Test'
       description: 'Test'
       amount: 0,
-      balance: '0',
+      balance: '0.00',
       editing: true,
       saved: false
     })
 
     @fire('refresh', transactions: @transactions)
 
+  saveTransaction: (transaction) ->
+
+    date = new Date(transaction.date)
+
+    request = {
+      transactionDate: date.toString('yyyy-MM-dd'),
+      transactionType: transaction.transactionType,
+      description: transaction.description,
+      amount: parseFloat(transaction.amount),
+      fromAccountId: @accountId,
+      toAccountId: transaction.toAccountId
+    }
+
+    return transactionsService.addTransaction(request).then () =>
+      @update();
+    , ->
+      Log.error('Error saving transaction')
 
   editTransaction: (transaction) ->
 
-#    console.log(transaction)
-#
-#    request = {
-#      transactionDate: transaction.date,
-#      transactionType: transaction.transactionType,
-#      description: transaction.description,
-#      lines: [
-#        { accountId: '', amount: '' },
-#        { accountId: '', amount: '' }
-#      ]
-#    }
-#
-#    transactionsService.editTransaction(transaction.transactionId, request).then () =>
-#
-#      console.log('successfully saved')
-#
-#      el = _.find(@transactions, (item) ->
-#        return item.transactionId == transaction.transactionId
-#      )
-#
-#      el.date = transaction.date;
-#      el.transactionType = transaction.transactionType;
-#      el.description = transaction.description;
-#      el.amount = transaction.amount;
-#
-#    , () =>
-#      console.log('Error saving edit')
+    date = new Date(transaction.date)
 
-    @clearEditing()
+    request = {
+      transactionDate: date.toString('yyyy-MM-dd'),
+      transactionType: transaction.transactionType,
+      description: transaction.description,
+      amount: parseFloat(transaction.amount)
+    }
+
+    return transactionsService.editTransaction(transaction.transactionId, request).then () =>
+      @update();
+    , ->
+      Log.error('Error saving transaction')
+
+  removeTransaction: (transactionId) ->
+
+    return transactionsService.removeTransaction(transactionId).then () =>
+      @update();
+    , ->
+      Log.error('Error deleting transaction')
 
   markEditing: (transactionId) ->
 
