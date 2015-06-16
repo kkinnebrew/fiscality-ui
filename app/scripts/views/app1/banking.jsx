@@ -10,16 +10,16 @@ var BankingView = React.createClass({
   getInitialState: function() {
     return {
       accounts: [],
+      accountOptions: [],
       transactions: [],
       account: {},
-      balance: '$0.00'
+      balance: '$0.00',
+      types: []
     }
   },
 
   componentDidMount: function() {
-
     this.props.viewmodel.getAccounts();
-
   },
 
   handleMenuClose: function() {
@@ -52,8 +52,16 @@ var BankingView = React.createClass({
     this.props.viewmodel.clearEditing();
   },
 
+  handleRemove: function(key) {
+    this.props.viewmodel.removeTransaction(key);
+  },
+
   handleSave: function(transaction) {
-    this.props.viewmodel.editTransaction(transaction);
+    if (transaction.transactionId == null) {
+      this.props.viewmodel.saveTransaction(transaction);
+    } else {
+      this.props.viewmodel.editTransaction(transaction);
+    }
   },
 
   render: function() {
@@ -61,7 +69,7 @@ var BankingView = React.createClass({
       <div id="banking">
         <BankingToolbar key="toolbar" account={this.state.account} balance={this.state.balance} onClick={this.handleMenuClose} onAdd={this.handleAdd} />
         <PopupMenu key="menu" ref="addMenu" onSelect={this.handleAddSelect}></PopupMenu>
-        <TransactionTable key="transaction-table" transactions={this.state.transactions} onCancel={this.handleCancel} onSave={this.handleSave} onEdit={this.handleEdit} />
+        <TransactionTable key="transaction-table" accounts={this.state.accountOptions} types={this.state.types} transactions={this.state.transactions} onCancel={this.handleCancel} onSave={this.handleSave} onRemove={this.handleRemove} onEdit={this.handleEdit} />
         <TransactionDetail key="detail" />
         <AccountsMenu ref="menu" key="accounts" accounts={this.state.accounts} onSelect={this.handleSelect} onClick={this.handleMenuOpen} />
       </div>

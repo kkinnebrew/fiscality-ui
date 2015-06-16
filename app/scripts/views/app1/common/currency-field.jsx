@@ -8,14 +8,8 @@ function numberWithCommas(x) {
 
 var CurrencyField = React.createClass({
 
-  getDefaultProps: function() {
-    return {
-      editable: 'true'
-    };
-  },
-
   getInitialState: function() {
-    return { value: this.props.value, editing: false };
+    return { value: this.props.value || '0', editing: false };
   },
 
   handleChange: function(event) {
@@ -26,41 +20,25 @@ var CurrencyField = React.createClass({
     this.setState({ value: nextProps.value });
   },
 
-  //handleFocus: function() {
-  //  if (this.props.editable == 'true') {
-  //    if (this.props.onFocus) {
-  //      this.props.onFocus();
-  //    }
-  //    var unformatted = this.state.value + '';
-  //    this.setState({value: unformatted.replace(/[$,]/g, ''), editing: true});
-  //  }
-  //},
-  //
-  //handleBlur: function() {
-  //  if (this.props.editable == 'true') {
-  //    if (this.props.onBlur) {
-  //      this.props.onBlur();
-  //    }
-  //    var unformatted = this.state.value + '';
-  //    this.setState({value: unformatted.replace(/[$,A-Za-z_-]/g, ''), editing: false});
-  //  }
-  //},
+  handleFocus: function() {
+    this.setState({ value: this.state.value.replace(',', ''), editing: true });
+  },
+
+  handleBlur: function() {
+    this.setState({ editing: false });
+  },
 
   getValue: function() {
     return this.state.value;
   },
 
   render: function() {
-    var formatted = this.state.value ? this.state.value.replace(',', '') : '0';
+    var formatted = this.state.value;
     var classes = this.props.className;
-    if (this.state.editing) {
-      classes += ' editing';
+    if (!this.state.editing) {
+      formatted = numberWithCommas(this.state.value);
     }
-    if (this.props.editable == 'true') {
-      return <input className={classes} type="text" value={formatted} onChange={this.handleChange} />;
-    } else {
-      return <div className={classes}>{formatted}</div>;
-    }
+    return <input className={classes} type="text" value={formatted} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
   }
 
 });

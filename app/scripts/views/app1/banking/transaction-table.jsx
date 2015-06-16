@@ -6,7 +6,9 @@ var TransactionTable = React.createClass({
 
   getDefaultProps: function() {
     return {
-      transactions: []
+      transactions: [],
+      types: [],
+      accounts: []
     };
   },
 
@@ -28,6 +30,12 @@ var TransactionTable = React.createClass({
     }
   },
 
+  handleRemove: function(key) {
+    if (this.props.onRemove && typeof this.props.onRemove == 'function') {
+      this.props.onRemove.call(this, key);
+    }
+  },
+
   render: function() {
 
     var that = this;
@@ -35,7 +43,13 @@ var TransactionTable = React.createClass({
     var transactionRows = this.props.transactions.map(function(transaction) {
       if (transaction.editing) {
         return (
-          <TransactionEditRow transaction={transaction} onSave={that.handleSave} onCancel={that.handleCancel} key={transaction.transactionId} />
+          <TransactionEditRow types={that.props.types}
+                              accounts={that.props.accounts}
+                              transaction={transaction}
+                              onSave={that.handleSave}
+                              onCancel={that.handleCancel}
+                              onRemove={that.handleRemove}
+                              key={transaction.transactionId} />
         )
       } else {
         return (

@@ -15,18 +15,10 @@ var DateField = React.createClass({
   },
 
   handleFocus: function() {
-    if (this.props.onFocus) {
-      this.props.onFocus();
-    }
-    var date = new Date(this.state.value);
-    var value = date.toString(this.props.format || 'M/d/yyyy');
-    this.setState({ value: value, editing: true });
+    this.setState({ editing: true });
   },
 
   handleBlur: function() {
-    if (this.props.onBlur) {
-      this.props.onBlur();
-    }
     this.setState({ editing: false });
   },
 
@@ -42,7 +34,7 @@ var DateField = React.createClass({
       str = this.state.value;
     } else {
       var date = new Date(this.state.value);
-      str = date.toString(this.props.format || 'MMM dd, yyyy');
+      str = date.toString(this.props.format || 'M/d/yyyy');
     }
     return <input className={classes} type="text" value={str} onBlur={this.handleBlur} onFocus={this.handleFocus} onChange={this.handleChange} />;
   }

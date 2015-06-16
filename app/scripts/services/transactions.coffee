@@ -53,7 +53,7 @@ class TransactionsService extends Service
 
   balance: (accountId) ->
 
-    return @cacheGet('/api/accounts/' + accountId + '/balance')
+    return @get('/api/accounts/' + accountId + '/balance')
 
   addTransaction: (data) ->
 
@@ -63,7 +63,7 @@ class TransactionsService extends Service
 
     return @post('/api/transactions/' + transactionId + '/edit', data)
 
-  deleteTransaction: (transactionId) ->
+  removeTransaction: (transactionId) ->
 
     return @get('/api/transactions/' + transactionId + '/remove')
 
