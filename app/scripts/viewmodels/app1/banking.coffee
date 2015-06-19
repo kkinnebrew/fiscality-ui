@@ -93,6 +93,14 @@ class BankingViewModel extends ViewModel
       accountId: accountId
     })
 
+  createAccount: (account) ->
+
+    return transactionsService.createAccount(account.accountName, account.accountType).then (data) =>
+      console.log(data)
+      @getAccounts()
+    , () =>
+      console.log('Error creating account')
+
   addTransaction: () ->
 
     date = new Date()
@@ -141,7 +149,9 @@ class BankingViewModel extends ViewModel
       transactionDate: date.toString('yyyy-MM-dd'),
       transactionType: transaction.transactionType,
       description: transaction.description,
-      amount: parseFloat(transaction.amount)
+      amount: parseFloat(transaction.amount),
+      fromAccountId: @accountId,
+      toAccountId: transaction.toAccountId
     }
 
     return transactionsService.editTransaction(transaction.transactionId, request).then () =>

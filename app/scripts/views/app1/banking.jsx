@@ -64,6 +64,10 @@ var BankingView = React.createClass({
     }
   },
 
+  handleCreate: function(account, callback) {
+    this.props.viewmodel.createAccount(account).then(callback);
+  },
+
   render: function() {
     return (
       <div id="banking">
@@ -71,7 +75,7 @@ var BankingView = React.createClass({
         <PopupMenu key="menu" ref="addMenu" onSelect={this.handleAddSelect}></PopupMenu>
         <TransactionTable key="transaction-table" accounts={this.state.accountOptions} types={this.state.types} transactions={this.state.transactions} onCancel={this.handleCancel} onSave={this.handleSave} onRemove={this.handleRemove} onEdit={this.handleEdit} />
         <TransactionDetail key="detail" />
-        <AccountsMenu ref="menu" key="accounts" accounts={this.state.accounts} onSelect={this.handleSelect} onClick={this.handleMenuOpen} />
+        <AccountsMenu ref="menu" key="accounts" accounts={this.state.accounts} onCreate={this.handleCreate} onSelect={this.handleSelect} onClick={this.handleMenuOpen} />
       </div>
     )
   }

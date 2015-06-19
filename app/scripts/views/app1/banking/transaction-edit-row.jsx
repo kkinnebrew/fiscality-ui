@@ -22,7 +22,7 @@ var TransactionEditRow = React.createClass({
         date: this.refs.date.getValue(),
         transactionType: this.refs.type.getValue(),
         description: this.refs.description.getValue(),
-        amount: this.refs.amount.getValue(),
+        amount: this.refs.account ? this.refs.amount.getValue() : this.props.transaction.amount,
         toAccountId: this.refs.account ? this.refs.account.getValue() : undefined
       });
     }
@@ -43,8 +43,12 @@ var TransactionEditRow = React.createClass({
   render: function() {
     var transaction = this.props.transaction;
     var accountSelector = '';
+    var amountSelector = '';
     if (!transaction.transactionId) {
       accountSelector = <SelectField className="field" options={this.props.accounts} ref="account" value={transaction.toAccountId} />;
+      amountSelector = <CurrencyField className="field" ref="amount" value={transaction.amount} />;
+    } else {
+      amountSelector = <div className="label" ref="amount">{transaction.amount}</div>
     }
     return (
       <div className="row editing" data-key={transaction.transactionId}>
@@ -64,7 +68,7 @@ var TransactionEditRow = React.createClass({
           <div className="cancel-button" onClick={this.handleCancel}>Cancel</div>
         </div>
         <div className="column right">
-          <CurrencyField className="field" ref="amount" value={transaction.amount} />
+          {amountSelector}
         </div>
       </div>
     )
