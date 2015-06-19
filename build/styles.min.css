@@ -1523,6 +1523,67 @@ select {
     opacity: 0.7;
 }
 
+/* banking create account */
+
+#create-account-form {
+    border-bottom: 1px solid #60656F;
+    display: none;
+    overflow: hidden;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+
+#create-account-form.visible {
+    display: block;
+}
+
+#create-account-form .field {
+    border: none;
+    background: none;
+    display: block;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+#create-account-form .field[type="text"] {
+    background: #FFF;
+    border: 1px solid #60656F;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #666;
+    font-size: 13px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#create-account-form select.field {
+    background: #FFF;
+    border: 1px solid #60656F;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: #666;
+    font-size: 13px;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+#create-account-form .create-button {
+    background: #DFAD53;
+    border-radius: 2px;
+    color: #FFF;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 5px 0;
+    padding: 7px 16px 6px 16px;
+    text-transform: uppercase;
+    -webkit-transition: background ease-in-out 100ms;
+}
+
+
 /* banking > transaction-table */
 
 #transaction-table {
