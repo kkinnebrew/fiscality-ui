@@ -86,8 +86,8 @@ router.register('app', {
     'menu@default':
       name: 'navigation'
       react: true
-      view: require('./views/app1/navigation.jsx')
-      viewmodel: require('./viewmodels/app1/navigation.coffee')
+      view: require('./views/app/navigation.jsx')
+      viewmodel: require('./viewmodels/app/navigation.coffee')
 })
 
 router.register('app.accounts', {
@@ -96,8 +96,8 @@ router.register('app.accounts', {
     'content':
       name: 'banking'
       react: true
-      view: require('./views/app1/banking.jsx')
-      viewmodel: require('./viewmodels/app1/banking.coffee')
+      view: require('./views/app/banking.jsx')
+      viewmodel: require('./viewmodels/app/banking.coffee')
 })
 
 router.register('app.investments', {
@@ -106,14 +106,8 @@ router.register('app.investments', {
     'content':
       name: 'investments'
       react: true
-      view: require('./views/app1/investments.jsx')
-      viewmodel: require('./viewmodels/app1/investments.coffee')
-})
-
-router.register('app.settings', {
-  views:
-    'content':
-      template: require('../templates/app/settings.hbs')
+      view: require('./views/app/investments.jsx')
+      viewmodel: require('./viewmodels/app/investments.coffee')
 })
 
 # run
